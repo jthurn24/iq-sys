@@ -1,0 +1,294 @@
+﻿@model IQI.Intuition.Web.Models.Infection.InfectionForm
+@{
+    ViewBag.Layout_ContentTitle = (Model.IsUpdateMode ? "Edit" : "Track New") + " Infection";
+
+    ViewBag.AuditRequest = Model.IsUpdateMode ? new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+         AuditDescription = string.Concat("Infection - ",Model.Patient.FullName),
+         ComponentId = Model.Guid,
+         PatientId = Model.Patient.Guid
+    } : null;
+}
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.IsUpdateMode)
+    @Html.EditorFor(model => model.InfectionVerificationId)
+    <h4 class="grid_16 patient">
+        Patient: <strong>@Model.Patient.FullName</strong> 
+        <span class="patientlocation">
+            Type: <strong id="InfectionTypeName"></strong> Site: <strong id="InfectionSiteName"></strong>
+        </span>
+    </h4>
+    @Html.HiddenFor(model => model.Patient.Guid)
+    @Html.HiddenFor(model => model.Guid)
+    @Html.HiddenFor(model => model.DefaultMD)
+    <div class="clear"></div>
+    
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    <section class="grid_6 box">
+        <h3>Location Information</h3>
+        <div class="actions">
+        @if (Model.IsUpdateMode && ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveInfections))
+        {
+            @Html.SmartButton(Url.Action("Remove", "Infection", new { id = Model.InfectionVerificationId }),"Remove", "Are you sure you want to remove this infection permanently?");
+        }
+        </div>
+        <div class="inside">
+            <p class="indent">@Html.EditorFor(model => model.Floor)</p>
+            <p class="indent">@Html.EditorFor(model => model.Wing)</p>
+            <p class="indent">@Html.EditorFor(model => model.Room)</p>
+        </div>
+    </section>
+    <section class="grid_5 box">
+        <h3>Date &amp; Status</h3>
+        <div class="inside">
+
+            <p>
+                @Html.EditorFor(model => model.FirstNotedOn)
+            </p>
+            <div class="checktoggle">
+                <p>
+                    @Html.EditorFor(model => model.IsResolved,
+                    new { HtmlAttributes = new { @class = "trigger" } })
+                </p>
+                <p class="toggle">
+                    @Html.EditorFor(model => model.ResolvedOn)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid_5 box">
+        <h3>Additional Information</h3>
+        <div class="inside">
+
+
+            <p>
+                @Html.EditorFor(model => model.PatientWasHospitalized)
+            </p>
+
+            <p>
+                @Html.EditorFor(model => model.NursePractitioner)
+            </p>
+            
+        </div>
+    </section>
+
+    <div style="clear:both;"></div>
+    <section class="grid_16 box">
+        <h3></h3>
+        <ul class="boxtabs">
+            <li><a href="#">Criteria</a></li>
+            <li><a href="#">Risk Factors</a></li>
+            <li><a href="#">Treatment</a></li>
+            <li><a href="#">Preventions</a></li>
+            <li><a href="#">Labs</a></li>
+            <li><a href="#">X-ray</a></li>
+            <li><a href="#">Notes</a></li>
+        </ul>
+        <div class="inside panes">
+            <div class="criteria" >
+                <h3>Criteria - <span style="font-style:italic;color:black;font-size:18px;font-weight:bold;">@Model.CriteriaDefinition</span></h3>
+                @Html.HiddenFor(model => model.CriteriaLocked)
+
+                @if (Model.CriteriaLocked)
+                {
+                    @Html.HiddenFor(model => model.InfectionType)
+                    @Html.HiddenFor(model => model.InfectionSite)
+                    @Html.HiddenFor(model => model.InfectionSiteDetail)
+                    @Html.HiddenFor(model => model.Classification)
+
+                    foreach (var criteria in Model.SelectedCriteria)
+                    {
+                         <input name="SelectedCriteria" type="checkbox" value="@criteria" checked="true" style="display:none" />
+                    }
+                    
+                    <div style="font-weight:bold;font-size:14px;text-align:center;padding-top:20px;padding-bottom:100px;">
+                    Criteria cannot be modified: Criteria is no longer current.
+                    </div>
+                }
+                else
+                {
+                <div class="selects">
+                    <div>
+                        @Html.HiddenFor(model => model.InfectionType)
+                        @Html.EditorFor(model => model.InfectionType, null, "InfectionTypeSelect")
+                    </div>
+                    <div>
+                        @Html.HiddenFor(model => model.InfectionSite)
+                        @Html.EditorFor(model => model.InfectionSite, null, "InfectionSiteSelect")
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.Classification, null)
+                    </div>
+                </div>
+                <div style="float:right;font-size:9px;color:red;font-weight:bold;width:310px;" data-bind="html: classificationWarning"></div>
+                <div style="clear:both;"></div>
+                <span id="SiteDetails">
+                    <fieldset class="sitedetails" data-bind="visible: infectionSiteDetailsDisplay">
+                        <legend>Site Details</legend>
+                        <span data-bind="html: infectionSiteDetailsDescription"></span>
+                        <select name="InfectionSiteDetail" data-bind="options: infectionSiteDetailsItems, optionsText: 'Text', optionsValue: 'Value', value: infectionSelectedSiteDetail ">
+                        </select>
+                    </fieldset>
+                    <div class="clear"></div>
+                </span>
+                <fieldset class="left">
+                    <legend>Criteria</legend>
+                    <div style="height:300px;overflow:auto;padding-right:5px;padding-left:5px;">
+                    <span id="RuleSetCriteria"></span>
+                    <span style="color:Red;" data-bind="visible: hideCriteria, html:hiddenCriteriaMessage"></span>
+                    </div>
+                </fieldset>
+                <fieldset class="right">
+                    <legend>Comments</legend>
+                    <div style="height:300px;overflow:auto;padding-right:5px;">
+                    <span id="RuleSetComments"  ></span>
+                    </div>
+                </fieldset>
+                }
+            </div>
+            <div>
+                <h3>Risk Factors</h3>
+                <hr />
+                <div style="font-size:12px;">
+                    @Html.EditorFor(model => model.SelectedRiskFactors) 
+                </div>
+                <div style="clear:both;"></div>
+                <hr />
+                <div>
+                    <h4>Additional Risk Factors</h4>
+                     @Html.TextAreaFor(model => model.AdditionalRiskFactors)
+                </div>
+                <br />
+            </div>
+            <div>
+                <h3>Treatment</h3>
+                 <div align="right" data-bind="visible: rulesSatisfied() == false">
+                     <div style="width:350px;font-weight:bold;font-size:10px;background-color:#FFC;">
+                        <div style="padding:5px;">
+                            @Html.CheckBoxFor(model => model.MdNotifiedIneligibleCriteria, new { style="top: 0px;" }) <span>MD has been notified that this infection does not meet the criteria</span>
+                        </div>
+                     </div>
+                 </div>
+                 <div data-bind="template: { name: 'treatmentTypeTemplate', foreach: TreatmentTypes, afterRender: afterTreatmentTypeRender }">                     
+                </div>
+            </div>
+            <div>
+                <h3>Precautions</h3>
+                <br />
+                  @{ Html.RenderAction("PatientList", new { controller = "Precaution", id = Model.Patient.Guid , productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking }); }
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <input type="button" onclick="precautionForm.showAdd();" value="Track New Prevention">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div>
+                <h3>Labs</h3>
+                <div>
+                    <div style="padding-top:5px;padding-bottom:15px;">
+                     <div style="font-weight:bold;font-size:10px;background-color:#FFC;">
+                        <div style="padding:5px;">
+                            @Html.CheckBoxFor(model => model.LabsPending, new { style="top: 0px;" }) <span>Labs Pending?</span>
+                        </div>
+                     </div>
+                    </div>
+                    <table style="font-size:10px;">
+                        <tr>
+                            <td>
+                                 Type of Test:
+                                 <select id="LabResultType">
+                                 </select>
+                            </td>
+                            <td style="width:200px;padding-left:5px;">
+                                 Date Completed:
+                                 <input id="LabResultDateCompleted" type="datepicker" />  
+                            </td>
+                            <td style="width:200px;padding-left:5px;">
+                                 Result:
+                                 <select id="LabResultOption"></select>
+                            </td>
+                            <td>
+                                 <input type="button" id="LabResultAdd" data-bind="click: addLabResult" value="Add Result" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+                <div style="padding:10px;font-weight:bold;color:Red;display:none;" id="addLabTestPrompt">Adding test.....</div>
+                <div data-bind="template: { name: 'labResultTemplate', foreach: LabResults }">                     
+                </div>
+                <br />
+            </div>
+            <div>
+                <h3>X-ray</h3>
+                <div class="checktoggle">
+                    <p>
+                        @Html.EditorFor(model => model.HadChestXray,
+                            new { HtmlAttributes = new { @class = "trigger" } })
+                        <span class="toggle">
+                            @Html.EditorFor(model => model.ChestXrayCompletedOn)
+                        </span>
+                    </p>
+                    <div class="toggle">
+                        <p>
+                            @Html.EditorFor(model => model.ChestXRayResults)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Notes</h3>
+                <div>
+                    <table style="width:820px;">
+                        <tr>
+                            <td>
+                                <textarea style="width:700px;height:50px;" data-bind="value: selectedNote"></textarea>
+                            </td>
+                            <td>
+                                <input type="button" id="NoteAdd" value="Add Notes" data-bind="click: addNote" />
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+                    <div data-bind="template: { name: 'noteTemplate', foreach: InfectionNotes }">                     
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </section>
+}
+<div class="clear"></div>
+
+<script type="text/javascript">
+    var DEFAULT_MD = '@Model.DefaultMD';
+    var CRITERIA_DISABLE = @Model.CriteriaLocked.ToString().ToLower();
+</script>
+
+
+
+@{ Html.RenderAction("Form", new { controller = "Precaution", patientId = Model.Patient.Id , productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking }); }
+
+
+
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}

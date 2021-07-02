@@ -1,0 +1,20 @@
+﻿@model IQI.Intuition.Web.Models.Incident.IncidentGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "View Incidents";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function incidentRowSelect(id) {
+            smoothLoad('@Url.Action("Edit","Incident")/?id=' + id + '&returnUrl=@Url.Action("List","Incident")');
+        }
+
+    </script>
+}

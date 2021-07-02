@@ -1,0 +1,139 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Psychotropic.Facility.QuarterlyPsychotropicControlView
+
+
+<section class="grid_32 leading"> 
+        <h3>Psychotropic Types</h3>
+        <div class="inside">
+            <br />
+            <table class="iqitable">
+            <tr>
+                <th>&nbsp;</td>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Drug Type</th>
+                <th>+/- Dosage</th>
+                <th>Active</th>
+                <th>Rate</th>
+                <th>Change</th>
+                <th>+/- Dosage</th>
+                <th>Active</th>
+                <th>Rate</th>
+                <th>Change</th>
+                <th>+/- Dosage</th>
+                <th>Active</th>
+                <th>Rate</th>
+                <th>Change</th>
+            </tr>
+            @foreach (var group in Model.Groups)
+            {
+            <tr>
+                <td>@group.Name</td>
+                <td>@group.Month1.IncreaseCount / @group.Month1.DecreaseCount 
+                    @if(group.Month1.DosageChange > 0)
+                    {
+                        <span>( @group.Month1.DosageChange ) <img src="@Url.Content("~/Content/Images/up.png")"></span>
+                    }
+                    else if (group.Month1.DosageChange < 0)
+                    {
+                        <span>( @group.Month1.DosageChange ) <img src="@Url.Content("~/Content/Images/down.png")"></span>
+                    }
+                    else
+                    {
+                        <span>( @group.Month1.DosageChange ) <img src="@Url.Content("~/Content/Images/nochange.png")"></span>
+                    }
+                </td>
+                <td>@group.Month1.ActiveCount</td>
+                <td>@group.Month1.ActiveRate.ToString("#0.00")</td>
+                <td>@group.Month1.ActiveChange
+                    @if(group.Month1.ActiveChange > 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/up.png")" />
+                    }
+                    else if (group.Month1.ActiveChange < 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/down.png")" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/Images/nochange.png")" />
+                    }
+                </td>
+                <td>@group.Month2.IncreaseCount / @group.Month2.DecreaseCount 
+                    @if(group.Month2.DosageChange > 0)
+                    {
+                        <span>( @group.Month2.DosageChange ) <img src="@Url.Content("~/Content/Images/up.png")"></span>
+                    }
+                    else if (group.Month2.DosageChange < 0)
+                    {
+                        <span>( @group.Month2.DosageChange ) <img src="@Url.Content("~/Content/Images/down.png")"></span>
+                    }
+                    else
+                    {
+                        <span>( @group.Month2.DosageChange ) <img src="@Url.Content("~/Content/Images/nochange.png")"></span>
+                    }
+                </td>
+                <td>@group.Month2.ActiveCount</td>
+                <td>@group.Month2.ActiveRate.ToString("#0.00")</td>
+                <td>@group.Month2.ActiveChange
+                    @if(group.Month2.ActiveChange > 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/up.png")" />
+                    }
+                    else if (group.Month2.ActiveChange < 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/down.png")" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/Images/nochange.png")" />
+                    }
+                </td>
+                <td>@group.Month3.IncreaseCount / @group.Month3.DecreaseCount 
+                    @if(group.Month3.DosageChange > 0)
+                    {
+                        <span>( @group.Month3.DosageChange ) <img src="@Url.Content("~/Content/Images/up.png")"></span>
+                    }
+                    else if (group.Month3.DosageChange < 0)
+                    {
+                        <span>( @group.Month3.DosageChange ) <img src="@Url.Content("~/Content/Images/down.png")"></span>
+                    }
+                    else
+                    {
+                        <span>( @group.Month3.DosageChange ) <img src="@Url.Content("~/Content/Images/nochange.png")"></span>
+                    }
+                </td>
+                <td>@group.Month3.ActiveCount</td>
+                <td>@group.Month3.ActiveRate.ToString("#0.00")</td>
+                <td>@group.Month3.ActiveChange
+                    @if(group.Month3.ActiveChange > 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/up.png")" />
+                    }
+                    else if (group.Month3.ActiveChange < 0)
+                    {
+                        <img src="@Url.Content("~/Content/Images/down.png")" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/Images/nochange.png")" />
+                    }
+                </td>
+            </tr>
+            }
+            </table>
+        </div>
+</section>
+
+
+<section class="grid_16 box leading"> 
+        <h3>Active Psychotropic</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.ActiveChart)
+        </div> 
+</section>
+
+
+<div class="clear"></div>

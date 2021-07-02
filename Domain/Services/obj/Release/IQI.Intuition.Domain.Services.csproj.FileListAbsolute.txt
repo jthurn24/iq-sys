@@ -1,0 +1,12 @@
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\IQI.Intuition.Domain.Services.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\IQI.Intuition.Domain.Services.pdb
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\IQI.Intuition.Domain.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\RedArrow.Framework.Extensions.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\RedArrow.Framework.ObjectModel.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\RedArrow.Framework.Persistence.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\RedArrow.Framework.Utilities.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\IQI.Intuition.Domain.pdb
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\obj\Release\IQI.Intuition.Domain.Services.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\obj\Release\IQI.Intuition.Domain.Services.pdb
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\bin\Release\SnyderIS.sCore.Encryption.dll
+C:\Dev\WorkSpace\IQI\Intuition\Trunk\Domain\Services\obj\Release\IQI.Intuition.Domain.Services.csprojResolveAssemblyReference.cache

@@ -1,0 +1,67 @@
+﻿@model int?
+@{
+    ViewBag.Layout_ContentTitle = "Resource Library";
+}
+
+@Html.Css("/Styles/ui.jqtreeview.css")
+@Html.Script("/Scripts/jquery.jqTreeView.min.js")
+
+<br />
+<section class="grid_5 box">
+<h3>Folders</h3>
+<div>
+    <br />
+    @Html.Trirand().JQTreeView(
+                new JQTreeView
+                {
+                    DataUrl = Url.Action("FolderList"),
+                    Height = System.Web.UI.WebControls.Unit.Pixel(300),
+                    Width = System.Web.UI.WebControls.Unit.Pixel(300)
+                }, "treeview")
+
+</div>
+<br />
+</section>
+
+
+<section class="grid_11 box">
+<h3>Resources</h3>
+<div>
+    <div id="FolderView"></div>
+</div>
+</section>
+
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    function handleSelect(node, event) {
+        var tree = $("#treeview").getTreeViewInstance();
+        var nodeOptions = tree.getNodeOptions(node);
+        var id = nodeOptions.value;
+        loadList(id);
+    }
+
+    function loadList(id)
+    {
+        $.ajaxSetup({
+            cache: false
+        });
+
+        $('#FolderView').load("@Url.Action("LoadFolder")/?id=" + id);
+    }
+
+    $(function () {
+
+        var tree = $("#treeview").getTreeViewInstance();
+        tree.options["onSelect"] = handleSelect;
+
+        @if(Model.HasValue)
+        {
+            <text>loadList(@Model.Value);</text>
+        }
+
+    });
+
+</script>

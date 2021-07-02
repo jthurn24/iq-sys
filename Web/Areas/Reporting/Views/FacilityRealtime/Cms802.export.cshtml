@@ -1,0 +1,116 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.CmsMatrix.Matrix802View
+           
+@{
+    ViewBag.Layout_ContentTitle = "CMS-802";
+    ViewBag.HideHeader = true;
+}
+
+
+<div style="padding:10px;">
+
+    <table width="100%">
+    <tr>
+        <td>
+            <div style="font-size:10px;">DEPARTMENT OF HEALTH AND HUMAN SERVICES </div>
+            <div style="font-size:10px;">CENTERS FOR MEDICARE & MEDICAID SERVICES </div>
+        </td>
+        <td>
+            <div style="font-size:12px;text-align:right;">
+                Offsite _____ Phase I _____ Phase 2 _____ Provider # __________________ 
+            </div>
+        </td>
+    </tr>
+    </table>
+    <hr />
+    <div style="text-align:center;font-size:20px;font-weight:bold;padding:5px;">ROSTER/MATRIX</div>
+
+@{bool isFirstPage = true;}
+@foreach (var page in Model.Pages)
+{
+ 
+    <table style="page-break-inside:avoid;border-left:solid 3px black;border-right:solid 3px black;border-top:solid 3px black;">
+    <tr>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><img src="@Url.Action("RenderVerticalText", new { Controller = "Chart", Area = "Reporting", data = "Resident Number" })" /></td>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><img src="@Url.Action("RenderVerticalText", new { Controller = "Chart", Area = "Reporting", data = "Resident Room" })" /></td>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><img src="@Url.Action("RenderVerticalText", new { Controller = "Chart", Area = "Reporting", data = "Surveyor Assigned" })" /></td>
+    <td style="width:220px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">
+        @if(isFirstPage)
+        {
+        <div style="font-size:10px;padding:5px;">
+             <div style="padding-bottom:20px;font-weight:bold;">TOTAL SAMPLE:_______________</div>
+             <div style="padding-bottom:20px;">PHASE 1 ____________________</div>
+             <div style="padding-bottom:20px;">PHASE 2 ____________________</div>
+             <div style="padding-bottom:20px;">INDIVIDUAL INTERVIEW (I) ______</div>
+             <div style="padding-bottom:20px;">FAMILY INTERVIEW (F) ________</div>
+             <div style="padding-bottom:20px;">CLOSED RECORD (CL) _________</div>
+             <div style="padding-bottom:20px;">COMPREHENSIVE (C) __________</div>
+             <div style="padding-bottom:20px;">FOCUSED REVIEW (FO) ________ </div>
+        </div>
+        }
+    </td>
+        @foreach (var header in Model.Headers)
+        {
+            <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;@(header.Shaded ? "background-color:#d6d5d5" : string.Empty) ">
+            <img src="@Url.Action("RenderVerticalText", new { Controller = "Chart", Area = "Reporting", data = header.Category })" />
+            </td>
+        }
+        <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+        <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+        <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+        <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;">&nbsp;</td>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;">&nbsp;</td>
+    <td style="border-right:solid 1px #757575;border-bottom:solid 1px #757575;">&nbsp;</td>
+    <td style="width:220px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><div style="text-align:center;font-weight:bold;font-size:12px;">Resident Name</div></td>
+        @foreach (var header in Model.Headers)
+        {
+        <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;@(header.Shaded ? "background-color:#d6d5d5" : string.Empty)">
+            @if (header.ColumnNumber > 0)
+            {
+                <span>@header.ColumnNumber</span>
+            }
+        </td>
+        }
+    <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+    <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+    <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+    <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+    </tr>
+    </table>
+
+    <div>
+    <table style="page-break-inside:avoid;border-left:solid 3px black;border-right:solid 3px black;border-bottom:solid 3px black;">
+    @foreach (var row in page.Rows)
+    {
+        <tr>
+            <td style="width:25px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">&nbsp;</td>
+            <td style="width:25px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><div style="font-size:9px;text-align:center;">@row.Room</div></td>
+            <td style="width:25px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">&nbsp;</td>
+            <td style="width:220px;border-right:solid 1px #757575;border-bottom:solid 1px #757575;"><div style="font-size:14px;font-weight:bold;padding-left:5px;padding-top:3px;padding-bottom:3px;">@row.PatientName</div></td>
+            @foreach (var column in row.Columns)
+            {
+                <td style="width:27px;text-align:center;font-size:10px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;@(column.Shaded ? "background-color:#d6d5d5" : string.Empty) " >@column.Value.Replace(',', ' ')</td>
+            }
+            <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+            <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+            <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+            <td style="width:27px;text-align:center;border-right:solid 1px #757575;border-bottom:solid 1px #757575;font-size:12px;">&nbsp;</td>
+        </tr>
+
+    }
+    </table>
+    </div>
+    <br />
+    
+    isFirstPage = false;    
+      
+}
+
+</div>
+
+
+
+
+<div style="clear:both;">&nbsp;</div>

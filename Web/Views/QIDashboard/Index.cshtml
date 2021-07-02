@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Layout_ContentTitle = Model + "'s Custom QI Dashboard";
+}
+<br />
+
+
+        <div id="exiRoot">
+
+        </div>
+
+
+
+<div style="clear:both;"></div>
+
+@Html.Script("/scripts/jquery.smartWizard.js")
+@Html.Script("/scripts/sCore.Exi.TaskManager.js")
+@Html.Script("/scripts/sCore.Exi.js")
+@Html.Css("/styles/sCore.exi.default.css")
+@Html.Css("/styles/smartFloorMap.css")
+@Html.Css("/styles/smart_wizard_vertical.css")
+@Html.Script("/scripts/smartFloorMap.js")
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#main').removeClass('container_16');
+
+        var options = [];
+        options['ActionRoot'] = '@Url.Content("~/QIDashboard/")';
+        options['onActiveSectionRendered'] = activeSectionRendered;
+        sCoreExi.initCanvas($('#exiRoot'), options);
+
+    });
+
+
+    function activeSectionRendered(section) {
+        $('.sCoreExiSectionSectionManagement').hide();
+        $('.sCoreExiControlPrintSlot').hide();
+    };
+</script>

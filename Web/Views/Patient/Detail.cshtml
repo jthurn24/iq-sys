@@ -1,0 +1,289 @@
+﻿@model IQI.Intuition.Web.Models.Patient.Chart
+
+@{
+    ViewBag.Layout_ContentTitle = "Patient Chart";
+
+    ViewBag.AuditRequest =  new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("All Changes - ", Model.FullName),
+        PatientId = Model.Guid
+    };
+}
+<section class="grid_10 box leading">
+    <h3>Patient Information</h3>
+    <div class="actions">
+        @if (ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemovePatients)) {
+            @Html.SmartButton(Url.Action("Remove", "Patient", new { id = Model.Guid }),"Remove");
+        }
+        &nbsp;
+        @Html.SmartButton(@Url.Action("Edit", "Patient", new { id = Model.Guid }),"Edit")
+    </div>
+    <div class="inside">
+        <div class="grid_4">
+        <p>
+            Name: <strong>@Model.FullName</strong><br />
+            Date of Birth: <strong>@Model.BirthDate.FormatAsShortDate()</strong><br />
+            Current Age: <strong>@Model.BirthDate.FormatBirthDateAsAge()</strong><br />
+            Physician: <strong>@Model.MDName</strong>
+        </p>
+        </div>
+        <div class="grid_4">
+        <p>
+            Status: <strong>@Model.Status</strong><br />
+            Wing: <strong>@Model.WingName</strong><br />
+            Room: <strong>@Model.RoomName</strong>
+        </p>
+        </div>
+        <div class="clear"></div>
+
+        <div style="padding-bottom:3px;" align="right">
+            @Html.SmartButton(Url.Action("FacilityTimeline", "Timeline", new { PatientId= Model.Id }),"View Timeline")
+        </div>
+        
+    </div>
+</section>
+<section class="grid_6 box leading">
+    <h3>Concerns</h3>
+    <div class="inside warnings">
+    <h4>Flags:</h4>
+     @if (Model.Flags.Any())
+    { 
+        <p>
+        @foreach (var flag in Model.Flags)
+        {
+            @flag<br />
+        }
+        </p>
+    }
+    else
+    {
+        <div>No flags</div> 
+    }
+    <h4>Warnings/Alerts:</h4>
+    @if (Model.Warnings.Any())
+    { 
+        <p>
+        @foreach (var warning in Model.Warnings)
+        {
+            @warning<br />
+        }
+        </p>
+    }
+    else
+    {
+        <div>No recent warnings</div> 
+    }
+
+    </div>
+</section>
+<div class="clear"></div>
+<section class="grid_16 box">
+    <h3>&nbsp;</h3>
+    <ul class="boxtabs">
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking))
+        {
+        <li><a href="#">Infections</a></li>
+        <li><a href="#">Catheters</a></li>
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking))
+        {
+        <li><a href="#">Incidents</a></li>
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.PsychotropicTracking))
+        {
+        <li><a href="#">Psychotropic</a></li>
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.VaccineTracking))
+        {
+        <li><a href="#">Immunizations</a></li>
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking))
+        {
+        <li><a href="#">Wounds</a></li>
+        }
+        <li><a href="#">Preventions</a></li>
+        <li><a href="#">Admission History</a></li>
+        <li><a href="#">Room History</a></li>
+    </ul>
+    <div class="inside panes">
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking))
+        {
+            <div>
+                <br />
+                @{ Html.RenderAction("PatientInfectionList", new { controller = "Infection", id = Model.Guid }); }     
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "Infection", new { id = Model.Guid })">Track New Infection</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+            <div>
+                <br />
+                @{ Html.RenderAction("PatientCatheterList", new { controller = "Catheter", id = Model.Guid }); }     
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "Catheter", new { id = Model.Guid })">Track New Catheter</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking))
+        {
+        <div>
+            <br />
+            @{ Html.RenderAction("PatientIncidentList", new { controller = "Incident", id = Model.Guid }); }     
+            <div class="tablenav">
+                <div class="newbtn">
+                    <button class="link" data-url="@Url.Action("Add", "Incident", new { id = Model.Guid })">Track New Incident</button>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.PsychotropicTracking))
+        {
+            <div>
+                <br />
+                @{ Html.RenderAction("PatientPsychotropicAdministrationList", new { controller = "PsychotropicAdministration", id = Model.Guid }); }     
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "PsychotropicAdministration", new { id = Model.Guid })">Track New Medication</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.VaccineTracking))
+        {
+            <div>
+                <br />
+                @{ Html.RenderAction("PatientVaccineList", new { controller = "Vaccine", id = Model.Guid }); }     
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "Vaccine", new { id = Model.Guid })">Track New Immunization</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+        }
+        @if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking))
+        {
+            <div>
+                <br />
+                @{ Html.RenderAction("PatientWoundList", new { controller = "Wound", id = Model.Guid }); }     
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "Wound", new { id = Model.Guid })">Track New Wound</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+        }
+        <!-- Precautions -->
+        <div>
+            <br />
+            @{ Html.RenderAction("PatientList", new { controller = "Precaution", id = Model.Guid }); }
+            <div class="tablenav">
+                <div class="newbtn">
+                    <button onclick="precautionForm.showAdd();">Track New Precaution</button>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>             
+        <!-- Admission History -->
+        <div>
+            <br />  
+            <div style="height:200px;overflow:auto;">
+                    
+                <table class="iqitable">
+                <tr> 
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                </tr>
+                @foreach (var entry in Model.StatusChanges)
+                {
+                 <tr>
+                    <td>@entry.Status</td>
+                    <td>@entry.StatusOn</td>
+                    <td><button style="float:right;" class="link" data-url="@Url.Action("EditStatus", "Patient", new { id = entry.Id })">Edit</button></td>
+                 </tr>   
+                }
+                </table>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!-- Room History -->
+        <div>
+            <br />  
+            <div style="height:200px;overflow:auto;">
+                    
+                <table class="iqitable">
+                <tr> 
+                    <th>Room</th>
+                    <th>Date</th>
+                    <th>&nbsp;</th>
+                </tr>
+                @foreach (var entry in Model.RoomChanges)
+                {
+                 <tr>
+                    <td>@entry.Room</td>
+                    <td>@entry.ChangeOn</td>
+                    <td>&nbsp;</td>
+                 </tr>   
+                }
+                </table>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@{ Html.RenderAction("Form", new { controller = "Precaution", patientId = Model.Id }); }
+
+<div style="clear:both;"></div>
+
+<script type="text/javascript">
+
+    function infectionRowSelect(id) {
+        smoothLoad('@Url.Action("Edit", "Infection")/?id=' + id + '&returnUrl=@Url.Action("Detail", "Patient", new { id = Model.Guid })');
+    }
+
+    function incidentRowSelect(id) {
+        smoothLoad('@Url.Action("Edit", "Incident")/?id=' + id + '&returnUrl=@Url.Action("Detail", "Patient", new { id = Model.Guid })');
+    }
+
+    function psychotropicRowSelect(id) {
+        smoothLoad('@Url.Action("View", "PsychotropicAdministration")/?id=' + id + '&returnUrl=@Url.Action("Detail", "Patient", new { id = Model.Guid })');
+    }
+
+    function WoundRowSelect(id) {
+        smoothLoad('@Url.Action("View", "Wound")/?id=' + id + '&returnUrl=@Url.Action("Detail","Patient", new { id=Model.Guid })');
+    }
+
+
+    function catheterRowSelect(id) {
+        smoothLoad('@Url.Action("View", "Catheter")/?id=' + id + '&returnUrl=@Url.Action("Detail","Patient", new { id=Model.Guid })');
+    }
+
+    function vaccineRowSelect(id) {
+        smoothLoad('@Url.Action("Edit", "Vaccine")/?id=' + id + '&returnUrl=@Url.Action("Detail","Patient", new { id=Model.Guid })');
+    }
+
+    function precautionRowSelect(id) {
+        precautionForm.showEdit(id);
+    }
+
+    function precautionLoadComplete() {
+    }
+
+    precautionForm.onSaveSuccess = function()
+    {
+        $("#PatientPrecautionGrid").trigger("reloadGrid");
+    }
+
+</script>

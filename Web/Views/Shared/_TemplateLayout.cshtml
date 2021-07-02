@@ -1,0 +1,10 @@
+﻿<span class="label">
+    @ViewData.ModelMetadata.GetDisplayName():
+</span>
+<span class="controls">
+@if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Display.SubText"))
+{
+    <span class="sublabel">@ViewData.ModelMetadata.AdditionalValues["Display.SubText"]</span>
+}
+@RenderSection("FormField")
+</span>

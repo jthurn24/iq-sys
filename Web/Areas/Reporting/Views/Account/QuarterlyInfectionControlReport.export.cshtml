@@ -1,0 +1,110 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Account.QuarterlyInfectionControlView
+
+@{
+    ViewBag.Layout_LocationDescription = "Coporate";
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Census Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th>@Model.Month1.Name</th>
+                <th>@Model.Month2.Name</th>
+                <th>@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <td>Avg Census</td>
+                <td>@Model.Census.Month1.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.Census.Month2.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.Census.Month3.AverageCensus.ToString("#0.0")</td>
+            </tr>
+             <tr>
+                <td>Time Period</td>
+                <td>@Model.Census.Month1.TimePeriod</td>
+                <td>@Model.Census.Month2.TimePeriod</td>
+                <td>@Model.Census.Month3.TimePeriod</td>
+            </tr>
+            <tr>
+                <td>Patient Days</td>
+                <td>@Model.Census.Month1.PatientDays</td>
+                <td>@Model.Census.Month2.PatientDays</td>
+                <td>@Model.Census.Month3.PatientDays</td>
+            </tr>
+        </table>
+        </div> 
+</section>
+
+<section class="grid_16 box leading"> 
+        <h3>HAI/Nosocomial Infections</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Infection</th>
+                <th>#Inf.</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+                <th>Non-Noso.</th>
+                <th>#Inf.</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+                <th>Non-Noso.</th>
+                <th>#Inf.</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+                <th>Non-Noso.</th>
+            </tr>
+            @foreach (var group in Model.NosocomialInfections.Groups)
+            {
+            <tr>
+                <td>@group.InfectionType.Name</td>
+                <td style="font-weight:bold;">@group.Month1Total.Count</td>
+                <td>@group.Month1Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month1Total.Change.ToString("#0.00")</td>
+                <td>@group.Month1Total.NonNosoCount</td>
+                <td style="font-weight:bold;">@group.Month2Total.Count</td>
+                <td>@group.Month2Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month2Total.Change.ToString("#0.00")</td>
+                <td>@group.Month2Total.NonNosoCount</td>
+                <td style="font-weight:bold;">@group.Month3Total.Count</td>
+                <td>@group.Month3Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month3Total.Change.ToString("#0.00")</td>
+                <td>@group.Month3Total.NonNosoCount</td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Total HAI/Nosocomial</td>
+                <td>@Model.NosocomialInfections.Month1Total.Count</td>
+                <td>@Model.NosocomialInfections.Month1Total.Rate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month1Total.Change.ToString("#0.0")</td>
+                <td>@Model.NosocomialInfections.Month1Total.NonNosoCount</td>
+                <td>@Model.NosocomialInfections.Month2Total.Count</td>
+                <td>@Model.NosocomialInfections.Month2Total.Rate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month2Total.Change.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month2Total.NonNosoCount</td>
+                <td>@Model.NosocomialInfections.Month3Total.Count</td>
+                <td>@Model.NosocomialInfections.Month3Total.Rate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month3Total.Change.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month3Total.NonNosoCount</td>  
+            </tr>
+            </table>
+        </div> 
+</section>
+
+<section class="grid_16 box leading" style="page-break-inside:avoid;"> 
+        <h3>HAI/Nosocomial Infection Rate</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.NosocomialInfectionRateChart, new { width = 1200, height = 400 })
+        </div> 
+</section>
+
+<div class="clear"></div>

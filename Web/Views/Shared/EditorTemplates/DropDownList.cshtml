@@ -1,0 +1,13 @@
+﻿@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+}
+@section FormField
+{
+    @Html.SmartDropDownList(
+        TemplateHelperName.Default,
+        ViewData.ModelMetadata.SelectListItems() ?? Enumerable.Empty<SelectListItem>(),
+        ViewBag.HtmlAttributes as object)
+}

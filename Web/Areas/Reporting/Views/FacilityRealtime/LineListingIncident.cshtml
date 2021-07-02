@@ -1,0 +1,148 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.LineListingIncidentView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Incident Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Incident Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+<section class="grid_16 box leading"> 
+        <h3>Incident Line Listing</h3>
+        <div class="inside">
+
+            <div style="padding:10px;">
+                <table width="100%">
+                <tr>
+                    <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                    <td><div style="font-size:12px;">Floor:</div> @Html.DropDownListFor(m => m.Floor, Model.FloorOptions, new { style = "font-size:10px;" }) </td>
+                    <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBoxFor(m => m.StartDate, new { type="datepicker" }) </td>
+                    <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker" })   </td>
+                    <td>@Html.SmartSubmit("Refresh")</td>
+                </tr>
+                </table>
+                <hr />
+                <div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <span style="font-weight:bold;font-size:12px;">Filter:</span>
+                    &nbsp;
+                    <input type="button" id="IncidentTypeFilterButton" onclick="showIncidentTypeFilters()" value="Incident Types" />
+                    &nbsp;
+                    <input type="button" id="InjuryTypeFilterButton" onclick="showInjuryTypeFilters()" value="Injuries" />
+                </div>
+                <br />
+            </div>
+            
+        </div> 
+</section>
+    
+<div id="ctrl_incidenttype_selector" style="font-size:10px;display:none;" class="box">
+<div class="inside">
+    @Html.HorizontalCheckBoxFor(m => m.SelectedIncidentGroups, Model.IncidentGroupOptions)
+</div>        
+</div>
+
+<div id="ctrl_injurytype_selector" style="font-size:10px;display:none;" class="box">
+<div class="inside">
+    @Html.HorizontalCheckBoxFor(m => m.SelectedInjuryTypes, Model.InjuryTypeOptions)
+</div>        
+</div>
+    
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Incident List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Description</th>
+                <th style="width:300px;">Statements</th>
+            </tr>
+        </table>
+            @foreach (var incident in Model.Incidents)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingIncidentRow.cshtml", incident, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+  
+        function showIncidentTypeFilters() {
+
+            var d = $("#ctrl_incidenttype_selector").dialog({
+                resizable: false,
+                height: 200,
+                width: 900,
+                modal: true,
+                title: 'Filter Incident Types',
+                beforeClose: updateFilterButtons
+            });
+
+            d.parent().appendTo(jQuery("form:first"));
+            $('#ctrl_incidenttype_selector').find("input").css("position", "inherit");
+        }
+
+
+        function showInjuryTypeFilters() {
+
+            var d = $("#ctrl_injurytype_selector").dialog({
+                resizable: false,
+                height: 200,
+                width: 900,
+                modal: true,
+                title: 'Filter Injuries',
+                beforeClose: updateFilterButtons
+            });
+
+            d.parent().appendTo(jQuery("form:first"));
+            $('#ctrl_injurytype_selector').find("input").css("position", "inherit");
+        }
+
+
+
+        function updateFilterButtons() {
+
+            var incidentTypeBtn = $('#IncidentTypeFilterButton');
+            var injuryTypeBtn = $('#InjuryTypeFilterButton');
+
+
+            var incidentTypeCount = $('#ctrl_incidenttype_selector').find(":checked").length;
+            var injuryTypeCount = $('#ctrl_injurytype_selector').find(":checked").length;
+
+
+            if (incidentTypeCount > 0) { incidentTypeBtn.css("color", "red"); }
+            else { incidentTypeBtn.css("color", "black"); }
+
+            if (injuryTypeCount > 0) { injuryTypeBtn.css("color", "red"); }
+            else { injuryTypeBtn.css("color", "black"); }
+
+
+        }
+
+
+        $(function () {
+            updateFilterButtons();
+        });
+
+    </script>
+}

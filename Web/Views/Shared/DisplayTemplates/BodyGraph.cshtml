@@ -1,0 +1,6 @@
+﻿@model IQI.Intuition.Reporting.Graphics.BodyGraph
+ 
+<div style="background-image:url('/Content/Images/report-loader.gif');background-repeat:no-repeat;background-position:center center;min-height:200px;">
+    <img src="@Url.Action("RenderBodyGraph", "Chart", new { area="", data = Model.SerializeForRender(), noCache = DateTime.Now.Ticks})" />
+</div>
+

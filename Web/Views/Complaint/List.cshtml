@@ -1,0 +1,21 @@
+﻿@model IQI.Intuition.Web.Models.Complaint.ComplaintGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Complaints";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function rowSelect(id) {
+            smoothLoad('@Url.Action("Edit","Complaint")/?id=' + id);
+        }
+
+    </script>
+}

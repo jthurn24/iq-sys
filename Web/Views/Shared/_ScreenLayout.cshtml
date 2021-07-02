@@ -1,0 +1,41 @@
+﻿<!doctype html>  
+ 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]--> 
+
+
+
+<head> 
+    <meta charset="utf-8" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+    @Html.Css("/styles/smoothness/jquery-ui-1.8.14.custom.css")
+    @Html.Css("/styles/sCore.exi.screen.css")
+    @Html.Css("/styles/smart_wizard_vertical.css")
+    @Html.Css("/styles/metro-bootstrap.min.css")
+    @Html.Css("/styles/smartFloorMap.css")
+    @Html.Css("/styles/qi-cast.css")
+
+    @Html.Script("/scripts/jquery-2.1.1.min.js")
+    @Html.Script("/scripts/jquery-ui-1.11.0.js")
+    @Html.Script("/scripts/jquery.smartWizard.js")
+    @Html.Script("/scripts/sCore.Exi.TaskManager.js")
+    @Html.Script("/scripts/sCore.Exi.js")
+    @Html.Script("/scripts/metro.min.js")
+    @Html.Script("/scripts/smartFloorMap.js")
+    <title>Screen</title>
+
+
+</head> 
+<body class="metro"> 
+
+
+    <div id="root" style="width:1920px;height:1075px;overflow:hidden;">
+        @RenderBody()
+    </div>
+
+</body> 
+</html>
+

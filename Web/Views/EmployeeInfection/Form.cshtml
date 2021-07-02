@@ -1,0 +1,97 @@
+﻿@model IQI.Intuition.Web.Models.EmployeeInfection.EmployeeInfectionForm
+
+@Html.HiddenFor(m => m.Id)
+    
+    <section class="grid_16 box">
+        <h3>Employee Information</h3>
+        @if (Model.Id.HasValue)
+        {
+            <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "EmployeeInfection", new { id = Model.Id }), "Remove", "Are you sure you want to remove this infection permanently?")    
+            </div>
+        }
+        <div class="inside form">
+        <div class="grid_6">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.FirstName)</div>
+            <div class="field">@Html.EditorFor(model => model.LastName)</div>
+            <div class="field">@Html.EditorFor(model => model.DateOfBirth, new { HtmlAttributes = new { @class = "birthDate" } })</div>
+            <div class="field">@Html.EditorFor(model => model.Gender)</div>
+        </p>
+        </div>
+        <div class="grid_6">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.Department)</div>
+            <div class="field">@Html.EditorFor(model => model.Floor)</div>
+            <div class="field">@Html.EditorFor(model => model.Wing)</div>
+            <div class="field">@Html.EditorFor(model => model.LastShift)</div>
+            <div class="field">@Html.EditorFor(model => model.LastWorkedOn)</div>
+            <div class="field">@Html.EditorFor(model => model.ReturnToWorkOn)</div>
+        </p>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+   
+    <section class="grid_16 box">
+        <h3>Details of Confirmed/Suspected Infection</h3>
+        <div class="inside form">
+        <div class="grid_7">
+        <p>
+                <div class="field">@Html.EditorFor(model => model.NotifiedOn)</div>
+                <div class="field">@Html.EditorFor(model => model.InfectionType)</div> 
+                <div class="field">@Html.EditorFor(model => model.WellOn)</div>
+            <br />
+        </p>
+        <p style="font-size:12px;font-weight:bold;">@Html.EditorFor(model => model.FirstSymptomOn) @Html.EditorFor(model => model.FirstSymptomHour)  @Html.EditorFor(model => model.FirstSymptomMinutes)</p>
+        <p style="font-size:12px;font-weight:bold;">@Html.EditorFor(model => model.LastSymptomOn) @Html.EditorFor(model => model.LastSymptomHour)  @Html.EditorFor(model => model.LastSymptomMinutes)</p>
+        </div>
+        <div class="grid_7">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.Notes, new { HtmlAttributes = new { style = "height:175px;width:240px;" } })</div>
+        </p>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+    
+    <section class="grid_16 box">
+        <h3>Symptoms</h3>
+        <div class="inside form">
+        <div class="grid_16">
+        <br />
+            @Html.EditorFor(model => model.InfectionSymptoms)
+        <br />
+        <br />
+        </div>
+        </div>
+       </section>
+    <div class="clear"></div>
+    
+     
+    <section class="grid_16 box">
+        <h3>Resolution/Additional Information</h3>
+        <div class="inside form">
+        <div class="grid_7">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.SeenByMD)</div>
+            <div class="field">@Html.EditorFor(model => model.MDInstructions, new { HtmlAttributes = new { style = "height:125px;width:240px;" } })</div>
+        </p>
+        </div>
+        <div class="grid_7">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.LabResults, new { HtmlAttributes = new { style = "height:150px;width:240px;" } })</div>
+        </p>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+        <br />
+    </section>
+    <div class="clear"></div>
+
+

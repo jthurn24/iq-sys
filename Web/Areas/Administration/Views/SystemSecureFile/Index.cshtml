@@ -1,0 +1,31 @@
+@model IQI.Intuition.Web.Models.Administration.SystemSecureFile.SystemSecureFileGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Secure Files List";
+}
+
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+
+    <div>
+        <div class="tablenav">
+            <div class="newbtn">
+                <button class="link" data-url="@Url.Action("Add", "SystemSecureFile")">Add Secure File</button> &nbsp;
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> 
+
+</section>
+
+
+<script type="text/javascript">
+
+    function systemsecurefileRowSelect(id) {
+        smoothLoad('@Url.Action("View","SystemSecureFile")/?id=' + id);
+    }
+
+</script>
+

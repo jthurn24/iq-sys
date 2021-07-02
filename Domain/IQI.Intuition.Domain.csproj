@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{10420AE7-A248-4FD3-B793-ED00378CFBC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Domain</RootNamespace>
+    <AssemblyName>IQI.Intuition.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RedArrow.Framework.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.ObjectModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Encryption">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Encryption.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Extensions">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculations.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AuditEntry.cs" />
+    <Compile Include="Models\CatheterAssessment.cs" />
+    <Compile Include="Models\CatheterEntry.cs" />
+    <Compile Include="Models\CmsMatrixCategory.cs" />
+    <Compile Include="Models\CmsMatrixCategoryOption.cs" />
+    <Compile Include="Models\CmsMatrixEntry.cs" />
+    <Compile Include="Models\CmsMatrixType.cs" />
+    <Compile Include="Models\CmsNote.cs" />
+    <Compile Include="Models\Drug.cs" />
+    <Compile Include="Models\DrugSection.cs" />
+    <Compile Include="Models\MobileToken.cs" />
+    <Compile Include="Models\PatientPrecaution.cs" />
+    <Compile Include="Models\PatientRoomChange.cs" />
+    <Compile Include="Models\PrecautionType.cs" />
+    <Compile Include="Models\PsychotropicAdministrationPRN.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\FacilityProduct.cs" />
+    <Compile Include="Models\Complaint.cs" />
+    <Compile Include="Models\ComplaintType.cs" />
+    <Compile Include="Models\IncidentInjury.cs" />
+    <Compile Include="Models\IncidentLocation.cs" />
+    <Compile Include="Models\IncidentWitness.cs" />
+    <Compile Include="Models\InfectionDefinition.cs" />
+    <Compile Include="Models\LogEntry.cs" />
+    <Compile Include="Models\EmployeeInfection.cs" />
+    <Compile Include="Models\Facility.cs" />
+    <Compile Include="Models\Floor.cs" />
+    <Compile Include="Models\IncidentReport.cs" />
+    <Compile Include="Models\IncidentType.cs" />
+    <Compile Include="Models\InfectionClassification.cs" />
+    <Compile Include="Models\InfectionCriteria.cs" />
+    <Compile Include="Models\InfectionCriteriaRule.cs" />
+    <Compile Include="Models\InfectionCriteriaRuleSet.cs" />
+    <Compile Include="Models\InfectionLabResult.cs" />
+    <Compile Include="Models\InfectionLabResultPathogen.cs" />
+    <Compile Include="Models\InfectionNote.cs" />
+    <Compile Include="Models\InfectionSite.cs" />
+    <Compile Include="Models\InfectionSiteSupportingDetail.cs" />
+    <Compile Include="Models\InfectionSymptom.cs" />
+    <Compile Include="Models\InfectionTreatment.cs" />
+    <Compile Include="Models\InfectionType.cs" />
+    <Compile Include="Models\InfectionVerification.cs" />
+    <Compile Include="Models\InfectionRiskFactor.cs" />
+    <Compile Include="Models\LabResult.cs" />
+    <Compile Include="Models\LabResultSet.cs" />
+    <Compile Include="Models\LabTestType.cs" />
+    <Compile Include="Models\Pathogen.cs" />
+    <Compile Include="Models\PathogenQuantity.cs" />
+    <Compile Include="Models\PathogenQuantitySet.cs" />
+    <Compile Include="Models\PathogenSet.cs" />
+    <Compile Include="Models\PatientCensus.cs" />
+    <Compile Include="Models\PatientFlagType.cs" />
+    <Compile Include="Models\PatientStatusChange.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\SignUpRequest.cs" />
+    <Compile Include="Models\SystemSMSNotification.cs" />
+    <Compile Include="Models\VaccineAdmistrativeSite.cs" />
+    <Compile Include="Models\VaccineEntry.cs" />
+    <Compile Include="Models\VaccineManufacturer.cs" />
+    <Compile Include="Models\VaccineRefusalReason.cs" />
+    <Compile Include="Models\VaccineRoute.cs" />
+    <Compile Include="Models\VaccineTradeName.cs" />
+    <Compile Include="Models\VaccineType.cs" />
+    <Compile Include="Models\VaccineUnitOfMeasure.cs" />
+    <Compile Include="Models\WarningRuleNotification.cs" />
+    <Compile Include="Models\WoundAssessment.cs" />
+    <Compile Include="Models\WoundReport.cs" />
+    <Compile Include="Models\WoundSite.cs" />
+    <Compile Include="Models\WoundStage.cs" />
+    <Compile Include="Models\PsychotropicAdministration.cs" />
+    <Compile Include="Models\PsychotropicDosageChange.cs" />
+    <Compile Include="Models\PsychotropicDosageForm.cs" />
+    <Compile Include="Models\PsychotropicDrugType.cs" />
+    <Compile Include="Models\PsychotropicFrequency.cs" />
+    <Compile Include="Models\Resource.cs" />
+    <Compile Include="Models\ResourceFolder.cs" />
+    <Compile Include="Models\SystemContact.cs" />
+    <Compile Include="Models\SystemEmailNotification.cs" />
+    <Compile Include="Models\SystemProduct.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\SystemSecureFile.cs" />
+    <Compile Include="Models\SystemLead.cs" />
+    <Compile Include="Models\SystemSetting.cs" />
+    <Compile Include="Models\SystemTicket.cs" />
+    <Compile Include="Models\SystemTicketType.cs" />
+    <Compile Include="Models\SystemUser.cs" />
+    <Compile Include="Models\Treatment.cs" />
+    <Compile Include="Models\TreatmentType.cs" />
+    <Compile Include="Models\WarningRule.cs" />
+    <Compile Include="Models\WarningRuleDefault.cs" />
+    <Compile Include="Models\WarningTarget.cs" />
+    <Compile Include="Models\Wing.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Warning.cs" />
+    <Compile Include="Models\WoundType.cs" />
+    <Compile Include="Repositories\ICatheterRepository.cs" />
+    <Compile Include="Repositories\IDrugRepository.cs" />
+    <Compile Include="Repositories\IPrecautionRepository.cs" />
+    <Compile Include="Repositories\IVaccineRepository.cs" />
+    <Compile Include="Repositories\IWoundRepository.cs" />
+    <Compile Include="Repositories\IPsychotropicRespository.cs" />
+    <Compile Include="Repositories\ICmsMatrixRepository.cs" />
+    <Compile Include="Repositories\IComplaintRepository.cs" />
+    <Compile Include="Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\IResourceRepository.cs" />
+    <Compile Include="Repositories\ISystemContactRepository.cs" />
+    <Compile Include="Repositories\ISystemSecureFileRepository.cs" />
+    <Compile Include="Repositories\ISystemLeadRepository.cs" />
+    <Compile Include="Repositories\IEmployeeInfectionRepository.cs" />
+    <Compile Include="Repositories\IFacilityRepository.cs" />
+    <Compile Include="Repositories\IIncidentRepository.cs" />
+    <Compile Include="Repositories\IInfectionRepository.cs" />
+    <Compile Include="Repositories\ILabResultRepository.cs" />
+    <Compile Include="Repositories\IPatientCensusRepository.cs" />
+    <Compile Include="Repositories\IPatientRepository.cs" />
+    <Compile Include="Repositories\ISystemRepository.cs" />
+    <Compile Include="Repositories\ISystemTicketRepository.cs" />
+    <Compile Include="Repositories\ITreatmentRepository.cs" />
+    <Compile Include="Repositories\IWarningRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAccountRepository.cs" />
+    <Compile Include="Models\AccountUser.cs" />
+    <Compile Include="Services\ChangeTracking\IChangeTrackingDefinition.cs" />
+    <Compile Include="Services\ChangeTracking\ITrackChanges.cs" />
+    <Compile Include="Services\ChangeTracking\DefinitionBuilder.cs" />
+    <Compile Include="Services\Psychotropic\DosageSegment.cs" />
+    <Compile Include="Services\Psychotropic\IDosageFrequencyDefinition.cs" />
+    <Compile Include="Utilities\AuthenticationRequestToken.cs" />
+    <Compile Include="Utilities\UrlEncodeHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

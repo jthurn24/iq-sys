@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Administration.WoundMap.Edit
+@{
+    ViewBag.Layout_ContentTitle = "Edit Wound Map";
+}
+
+    <section class="grid_7 box leading">
+        <div class="inside">
+
+            @foreach (var item in Model.Sites)
+            {
+                <div>
+                    @Html.ActionLink(item.Text,"Index",new { siteID= item.Value })
+                </div>
+            }
+
+        </div>
+    </section>
+
+    <section class="grid_7 box leading">
+        <div class="inside">
+            <div>
+                <span id="LocationX"></span> , <span id="LocationY"></span>
+            </div>
+            <div id="SiteImageCanvas" onclick="point_it(event)" style="cursor:pointer;">
+            @Html.DisplayFor(X => X.Graph)
+            </div>
+        </div>
+    </section>
+
+<div style="clear:both;"></div>
+
+<script type="text/javascript">
+
+function point_it(event) {
+
+        pos_x = event.offsetX ? (event.offsetX) : event.pageX - document.getElementById("SiteImageCanvas").offsetLeft;
+        pos_y = event.offsetY ? (event.offsetY) : event.pageY - document.getElementById("SiteImageCanvas").offsetTop;
+        var date = new Date();
+        $('#LocationX').html(pos_x);
+        $('#LocationY').html(pos_y);
+}
+
+</script>

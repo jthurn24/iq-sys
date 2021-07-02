@@ -1,0 +1,112 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.FloorMapView
+
+@{
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Incident Floor Map History";
+    ViewBag.IsExportable = true;
+}
+
+<script type="text/javascript">
+
+    function hideFloowMapDetails(source) {
+        $('#detailsContainer').html('');
+        $('#criteriaContainer').show();
+    }
+
+    function showFloowMapDetails(source) {
+        $('#detailsContainer').html($(source).html());
+        $('#criteriaContainer').hide();
+    }
+
+</script>
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+
+<section class="grid_16 box leading"> 
+        <h3>Incident Line Listing By Wing</h3>
+
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table width="100%">
+                    <tr>
+                        <td><div>Floor Map:</div> @Html.DropDownListFor(m => m.FloorMap, Model.FloorMapOptions, new { style = "font-size:10px;" }) </td>
+                        <td><div>Active From:</div> @Html.TextBoxFor(m => m.StartDate, new { type = "datepicker", style = "font-size:10px;" })</td>
+                        <td><div>Active To:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker", style = "font-size:10px;" })</td>
+                        <td>@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div>
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div> 
+</section>
+ 
+<section class="grid_16 box leading"> 
+        <h3>Facility Floor Map</h3>
+
+        <div style="padding-top:10px;" align="center">
+        <table>
+        <tr>
+            @foreach (var key in Model.IncidentGroupNames.Keys)
+            {
+                <td>
+                    <div style="width:10px;height:10px;float:left;background-color:@System.Drawing.ColorTranslator.ToHtml(Model.IncidentGroupColors[key]);">&nbsp;</div>
+                    <div style="float:right;font-size:10px;color:Black;font-weight:bold;text-align:left;padding-right:10px;padding-left:5px;">@Model.IncidentGroupNames[key]</div>
+               </td>
+            }
+        </tr>
+        </table>
+        </div>
+
+        <div class="inside">
+            @Html.DisplayFor(model => model.FloorMapChart)
+        </div>
+</section>
+
+<div class="clear"></div>
+}
+
+
+<script type="text/javascript">
+
+    function displayData(target, dataUrl) {
+
+        $('#toolTip').qtip('api').set('content.title.text', 'Loading:');
+        $('#toolTip').qtip('api').set('content.text', 'Please wait..');
+        $('#toolTip').qtip('api').set('position.target', $(target));
+        $('#toolTip').qtip('show');
+
+
+        $.ajaxSetup({ cache: false });
+        $.getJSON(dataUrl, function (data) {
+
+            var container = $('<div/>');
+
+            $('<div/>', { text: data['CategoryName'] }).appendTo(container);
+            $('<div/>', { text: data['CategoryDescription'] }).appendTo(container);
+            $('<br/>').appendTo(container);
+
+            for (var i = 0; i < data['Incidents'].length; i++) {
+
+                var incident = data['Incidents'][i];
+                var iContainer = $('<div/>');
+                iContainer.css('padding', '2px');
+                iContainer.css('background-color', '#1c2428');
+                iContainer.css('border', 'solid 1px #6d777d');
+
+                var incidentDescription = '(' + incident['On'] + ') ' + incident['Patient'] + ' - ' + incident['Group'];
+
+                $('<div/>', { html: incidentDescription, style: 'font-weight:bold;color:#FFFFFF;width:200px;padding:3px;text-align:left;' }).appendTo(iContainer);
+                iContainer.appendTo(container);
+            }
+
+            $('#toolTip').qtip('api').set('content.title.text', 'Room: ' + data['Room']);
+            $('#toolTip').qtip('api').set('content.text', container);
+
+        });
+    }
+
+</script>

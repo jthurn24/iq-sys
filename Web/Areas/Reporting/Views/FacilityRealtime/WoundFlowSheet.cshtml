@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Wound.Facility.WeeklyFlowSheet     
+@{
+    ViewBag.Layout_ContentTitle = "Wound Flow Sheet";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Wound Flow Sheet";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+
+<section class="grid_16 box leading"> 
+        <h3>Wound Flow Sheet</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Name</th>
+                <th style="width:150px;">Wound Type</th>
+                <th style="width:150px;">Change</th>
+                <th style="width:150px;">Last Assessment</th>
+                <th style="width:150px;">Wound Site</th>
+                <th style="width:150px;">MD Updated</th>
+
+            </tr>
+            @foreach (var e in Model.Entries)
+            {
+                    <tr>
+                        <td style="width:150px;vertical-align:top;">@e.PatientName</td>
+                        <td style="width:150px;vertical-align:top;">@e.WoundType</td>
+                        <td style="width:150px;vertical-align:top;">@e.Change</td>
+                        <td style="width:150px;vertical-align:top;">@e.LastAssessment</td>
+                        <td style="width:150px;vertical-align:top;">@e.WoundSite</td>
+                        <td style="width:150px;vertical-align:top;">&nbsp;</td>
+                    </tr>
+            }
+             </table>
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+

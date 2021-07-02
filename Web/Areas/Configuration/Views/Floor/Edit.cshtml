@@ -1,0 +1,36 @@
+﻿@model IQI.Intuition.Web.Models.Configuration.Floor.FloorEntry
+
+@{
+    ViewBag.Layout_ContentTitle = "Floor";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Guid)
+    <br />
+    <div class="grid_16" id="buttons">
+        <button type="submit" class="right save">Save</button>
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    <section class="grid_16 box">
+        <h3>Details</h3>
+        <div class="inside form" style="min-height:50px;">
+            <div class="field">
+                @Html.EditorFor(x => x.Name)
+            </div>
+        </div>
+    </section>
+    <div class="clear"></div>
+   
+}
+<div class="clear"></div>

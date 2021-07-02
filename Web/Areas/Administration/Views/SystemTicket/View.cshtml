@@ -1,0 +1,96 @@
+@model IQI.Intuition.Web.Models.Administration.SystemTicket.SystemTicketViewForm
+@{
+    ViewBag.Layout_ContentTitle = "View Ticket";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Return To List", new { @class = "left cancel" })
+        @Html.SmartSubmit("Edit", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>View Ticket</h3>
+		<div class="inside form">
+
+            <div class="grid_6">
+            <div class="field">@Html.DisplayFor(model => model.SystemTicketType)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.SystemTicketStatus)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.Account)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.AccountUser)</div>
+            <div class="clear"></div>
+            </div>
+            
+            <div class="grid_6">
+            <div class="field">@Html.DisplayFor(model => model.Priority)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.SystemUser)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.CreatedOn)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.ClosedOn)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.Release)</div>
+            <div class="clear"></div>
+            </div>
+
+            <div class="clear"></div>
+		    <br />
+
+        </div>
+	</section>
+	<div class="clear"></div>
+
+}
+<div class="clear"></div>
+
+<section class="grid_16 box">
+    <h3>Additional Information</h3>
+    <ul class="boxtabs">
+        <li><a href="#">Details</a></li>
+        <li><a href="#">Files</a></li>
+    </ul>
+    <div class="inside panes">
+            <div>
+                <br />
+                <div style="height:200px;overflow:auto;font-size:12px;">
+                    @Html.Raw(Model.Details.Replace(Environment.NewLine,"<br>"))
+                </div>
+                <br />
+            </div> 
+             <div>
+                <br />
+                @{ Html.RenderAction("ListFor", new { controller = "SystemSecureFile", area = "Administration", ticketId = Model.Id }); }
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "SystemSecureFile", new { ticketId = Model.Id })">Add File</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+           </div>
+     </div>
+</section>
+
+
+<div style="clear:both;"></div>
+
+

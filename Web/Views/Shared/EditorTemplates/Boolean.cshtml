@@ -1,0 +1,35 @@
+﻿@model System.Boolean?
+
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+}
+@section FormField
+{
+    @if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        var htmlAttributes = new RouteValueDictionary(ViewBag.HtmlAttributes as object);
+    
+        if (ViewData.ModelMetadata.IsReadOnly)
+        {
+            htmlAttributes["disabled"] = "disabled";
+        
+            @Html.Hidden(TemplateHelperName.Default, Model)
+            @Html.CheckBox(
+                TemplateHelperName.Default,
+                Model ?? false,
+                htmlAttributes)
+        }
+        else
+        {
+            @Html.CheckBox(
+                TemplateHelperName.Default,
+                Model ?? false,
+                htmlAttributes)
+        }
+    }
+}
+
+           

@@ -1,0 +1,70 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.QuarterlyComplaintByWingView
+
+@{
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Quarterly Complaints By Wing";
+    ViewBag.IsExportable = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Quarterly Complaint Control Report</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Quarter:</div>@Html.DropDownListFor(m => m.Quarter, Model.QuarterOptions) </td>
+                        <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.ComplaintType, Model.ComplaintTypeOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div>
+</section>
+
+
+
+<section class="grid_16 box leading"> 
+        <h3>Complaints</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.ComplaintView, "QuarterlyStatTable")
+        </div>
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart)
+        </div> 
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart)
+        </div> 
+</section>
+
+<div style="clear:both"></div>
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart)
+        </div> 
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>Quarter</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.TotalChart)
+        </div> 
+</section>
+
+<div class="clear"></div>

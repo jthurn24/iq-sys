@@ -1,0 +1,134 @@
+﻿@model IQI.Intuition.Web.Models.Vaccine.VaccineForm
+@{
+    ViewBag.Layout_ContentTitle = "Track Immunization ";
+
+    ViewBag.AuditRequest = Model.IsUpdateMode ? new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("Immunization - ", Model.Patient.FullName),
+        ComponentId = Model.Guid,
+        PatientId = Model.Patient.Guid
+    } : null;
+}
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.IsUpdateMode)
+    @Html.EditorFor(model => model.VaccineEntryId)
+    <h4 class="grid_16 patient">
+        Patient: <strong>@Model.Patient.FullName</strong> 
+    </h4>
+    @Html.HiddenFor(model => model.Patient.Guid)
+    @Html.HiddenFor(model => model.Guid)
+    <div class="clear"></div>
+    
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    
+   
+    
+    <section class="grid_8 box">
+        <h3>Location Information</h3>
+        <div class="actions">
+        @if (Model.IsUpdateMode && ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveIncidents))
+        {
+            @Html.SmartButton(Url.Action("Remove", "Vaccine", new { id = Model.VaccineEntryId }), "Remove", "Are you sure you want to remove this vaccine permanently?");
+        }
+        </div>
+        <div class="inside">
+            <p class="indent">@Html.EditorFor(model => model.Floor)</p>
+            <p class="indent">@Html.EditorFor(model => model.Wing)</p>
+            <p class="indent">@Html.EditorFor(model => model.Room)</p>
+        </div>
+    </section>     
+    <section class="grid_8 box">
+        <h3>Immunization Type</h3>
+        <div class="inside">
+            <p>@Html.EditorFor(model => model.VaccineTypeId, new { HtmlAttributes = new { @style = "width:350px;" } })</p>
+            <p>@Html.EditorFor(model => model.VaccineRefusalReasonId)</p>
+            <div class="field">@Html.EditorFor(model => model.AdministeredOn)</div>
+            <br />
+        </div>
+    </section>
+    <div class="clear"></div>    
+
+}
+<div class="clear"></div>
+
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}
+
+<script type="text/javascript">
+
+    function hideShowAmount(ctrl) {
+        if (ctrl) {
+            if (ctrl.is(':checked')) {
+                $('#AmountSection').hide();
+                $('#AdministeredAmount').val('');
+                $('#VaccineUnitOfMeasureId').val('');
+            }
+            else {
+                $('#AmountSection').show();
+            }
+        }
+    }
+
+    function hideShowAdministered(ctrl) {
+        if (ctrl) {
+            if (ctrl.val() != '') {
+                $('#AdminsteredSection').hide();
+                $('#UnknownAdmisteredAmount').removeAttr('checked');
+                $('#AdministeredAmount').val('');
+                $('#VaccineUnitOfMeasureId').val('');
+            }
+            else {
+                $('#AdminsteredSection').show();
+                hideShowAmount($('#UnknownAdmisteredAmount'));
+            }
+        }
+    }
+
+    function loadTradeNames(init) {
+        var id = $('#VaccineTypeId').val();
+
+        $.ajax({
+            url: '@Url.Action("VaccineTradeName")/?type=' + id,
+                context: this,
+                cache: false,
+                success: function (result) {
+                    $('#VaccineTradeNameId').empty();
+                    $('#VaccineTradeNameId').append(result);
+                    if (init) {
+                        $("#VaccineTradeNameId option")
+                            .each(function () {
+                                if ($(this).val() == '@Model.VaccineTradeNameId') {
+                                    $(this).attr('selected', 'selected')
+                                };
+                            });
+                    }
+                }
+            });
+    }
+
+    $(function () {
+        hideShowAdministered($('#VaccineRefusalReasonId'));
+        hideShowAmount($('#UnknownAdmisteredAmount'));
+        loadTradeNames(true);
+        $('#UnknownAdmisteredAmount').change(function () { hideShowAmount($(this)); });
+        $('#VaccineRefusalReasonId').change(function () { hideShowAdministered($(this)); });
+        $('#VaccineTypeId').change(function () { loadTradeNames(false); });
+    });
+</script>

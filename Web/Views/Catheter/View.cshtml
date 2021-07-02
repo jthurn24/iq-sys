@@ -1,0 +1,62 @@
+﻿@model IQI.Intuition.Web.Models.Catheter.CatheterInfo
+
+@{
+    ViewBag.Layout_ContentTitle = "View Catheter";
+}
+
+    <br />
+ <div class="grid_16" id="buttons" align="center">
+        @Html.SmartButton(Url.Action("Detail","Patient",new { id = Model.PatientGuid }),"Return To Patient")
+<span class="clear"></span>
+</div> 
+
+<section class="grid_6 box leading">
+    <h3>Catheter Information</h3>
+    <div class="actions">
+        @Html.SmartButton(@Url.Action("Edit", "Catheter", new { id = Model.Id }), "Edit")
+    </div>
+    <div class="inside">
+        <p style="font-size:12x;">
+            Started On: <strong>@(Model.StartedOn.HasValue ? Model.StartedOn.Value.ToString("MM/dd/yyyy") : string.Empty)</strong><br />
+            @if (Model.DiscontinuedOn.HasValue) {
+                <text>Discontinued On: <strong>@Model.DiscontinuedOn.Value.ToString("MM/dd/yyyy")</strong><br /></text>
+            }
+            <div style="padding-bottom:10px;">Type: @Model.Type</div>
+            <div style="padding-bottom:10px;">Material: @Model.Material</div>
+            <div style="padding-bottom:10px;">Reason: @Model.Reason</div>
+            <div>
+            Diagnosis: <strong>@Model.Diagnosis</strong>
+            </div>
+        </p>
+        <div class="clear"></div>
+    </div>
+</section>
+
+<section class="grid_10 box leading">
+<h3>Assessments</h3>
+
+
+<div style="padding-left:10px;padding-right:10px;">
+    <br />
+    @{ Html.RenderAction("EntryCatheterAssessmentList", new { controller = "CatheterAssessment", id = Model.Id }); }     
+    <div class="tablenav">
+        <div class="newbtn">
+            <button class="link" data-url="@Url.Action("Add", "CatheterAssessment", new { id = Model.Id })">Track New Assessment</button>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div> 
+
+
+</section>
+
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    function assessmentRowSelect(id) {
+        smoothLoad('@Url.Action("Edit","CatheterAssessment")/?id=' + id);
+    }
+
+</script>

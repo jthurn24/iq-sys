@@ -1,0 +1,148 @@
+
+@model IQI.Intuition.Web.Models.SignUp.SignUpForm
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="container">
+
+        @using (Html.BeginForm())
+    {
+        <div align="center" style="padding-top:10px;padding-bottom:10px;">
+            <img src="/Content/Images/logo2.png" />
+        </div>
+
+
+    if (ViewContext.HasErrors())
+    {
+        <div class="row">
+            <div class="col s12" style="color:red;">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="z-depth-1" style="padding:10px;">
+                <h4>Create Your Free Account</h4>
+                <br />
+                <p><div class="field">@Html.EditorFor(model => model.Name)</div><br /></p>
+                <p><div class="field">@Html.EditorFor(model => model.EmailAddress)</div><br /></p>
+
+                <button type="submit" class="waves-effect waves-light btn light-blue darken-4">
+                    Create My Free Account!
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <h5>What other say:</h5>
+
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s2">
+                    <img src="https://www.iqisystems.com/wp-content/uploads/2016/01/te4.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </div>
+                <div class="col s10">
+                    <span class="black-text">
+                        Being responsible for Infection control oversight of multiple campuses/locations, I can log into IQI and see at a glance the infections at that campus, trends, outbreaks or concerns. I can view the activity at multiple campuses from the convenience of my office or wherever I have internet access.
+                        <br /><br />
+                        There is substantial time saved in Infection Control reporting by using the IQI system.
+                        <br /><br />
+                        Karen Sautbine RN, MSN
+                        <br />
+                        <img src="/Content/Images/rating.png" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s2">
+                    <img src="http://www.iqisystems.com/wp-content/uploads/2016/01/TE.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </div>
+                <div class="col s10">
+                    <span class="black-text">
+                        IQI is a time saving and cost effective tool for our facility. It helps reduce daily paper work, assures appropriate identification of infections, monitors antibiotics, and provides numerous custom reports to enhance resident safety and assure regulatory compliance.
+                        <br /><br />
+                        Darlette Kleinmann
+                        <br />
+                        <img src="/Content/Images/rating.png" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s2">
+                    <img src="http://www.iqisystems.com/wp-content/uploads/2016/01/TE3.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </div>
+                <div class="col s10">
+                    <span class="black-text">
+                        We have been using IQI Systems since July of 2012.  As the Infection Preventionist for a 98 bed SNF and the RN Manager for a 46 bed Unit, I find IQI an invaluable tool.  Once the data is entered the program takes care of calculating rates, trends, type of infections, etc.  and all of this can be further disseminated by a specific time period, specific floor or unit.  The data is displayed in reports that are very user friendly for staff education and quality improvement.  There is an alert system to let you know when you have exceeded the threshold of a certain type of infection on a particular Unit. In addition, there is the capability of recording employee illness and facility incidents.  I fully endorse IQI Systems, it has made my job much more manageable.
+                        <br /><br />
+                        Debbie Briggs, RN
+                        <br />
+                        <img src="/Content/Images/rating.png" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s2">
+                    <img src="http://www.iqisystems.com/wp-content/uploads/2016/01/te2.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </div>
+                <div class="col s10">
+                    <span class="black-text">
+                        IQI has helped provide me with the snapshot I need to provide surveillance of the infections that might occur at my facility. It also gives my nursing staff a concise and directed way of organizing the process of infection identification and treatment planning. And it’s green – no paper needed!
+                        <br />
+                        I like the floor maps when we are looking for outbreaks.
+                        <br />
+                        The program is flexible so I can see which areas of the facility are having problems and then determine, with staff, how we can prevent the infections that are occurring.
+                        <br />
+                        I believe that, in addition to being a great listing tool, the IQI is also a Quality Assurance and Performance Improvement tool which helps us identify the areas and staff that need the added procedure education and encouragement necessary to provide the best care and get the best results that can be achieved.
+                        <br /><br />
+                        Patricia Borgman, MSN, RN
+                        <br />
+                        <img src="/Content/Images/rating.png" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33943272-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-33943272-1');
+    </script>
+</body>
+</html>

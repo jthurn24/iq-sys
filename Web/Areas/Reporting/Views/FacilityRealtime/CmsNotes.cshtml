@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.CmsMatrix.NotesView
+           
+@{
+    ViewBag.Layout_ContentTitle = "CMS Notes";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "CMS Notes";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = false;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>CMS Notes</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.SelectedWing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+</section>
+
+
+<section class="grid_16 box"> 
+
+@foreach (var note in Model.Entries)
+{
+    <div style="page-break-inside:avoid;border-top:1px solid black;padding:10px;">
+        <div style="font-weight:bold;font-size:16px;padding-bottom:10px;">@note.Name</div>
+        <div>@Html.Raw(note.NoteText)</div>
+    </div>
+}
+
+</section>
+
+
+<div style="clear:both;"></div>

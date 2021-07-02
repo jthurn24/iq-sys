@@ -1,0 +1,195 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LineListingInfectionView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Patient Infection Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Patient Infection Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+    <section class="grid_16 box leading"> 
+            <h3>Infection Line Listing</h3>
+            <div class="inside">
+
+                <div style="padding:10px;">
+                    <table width="100%">
+                        <tr>
+                            <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                            <td><div style="font-size:12px;">Floor:</div> @Html.DropDownListFor(m => m.Floor, Model.FloorOptions, new { style = "font-size:10px;" }) </td>
+                            <td><div style="font-size:12px;">Display:</div> @Html.DropDownListFor(m => m.DisplayMode, Model.DisplayModeOptions, new { style = "font-size:10px;" }) </td>
+                            <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.InfectionType, Model.InfectionTypeOptions, new { style = "font-size:10px;" }) </td>
+                            <td>@Html.SmartSubmit("Refresh")</td>
+                        </tr>
+                        </table>
+                        <hr />
+                        <table>
+                        <tr>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBoxFor(m => m.StartDate, new { type = "datepicker" }) </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker" })   </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Include Resolved</div> @Html.CheckBoxFor(m => m.IncludeResolved) </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Pending Labs</div> @Html.CheckBoxFor(m => m.IncludePendingLabsOnly) </td>
+                            <td>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <span style="font-weight:bold;font-size:12px;">Filter:</span>
+                                &nbsp;
+                                <input type="button" id="LabTestFilterButton" onclick="showLabTestFilters()" value="Positive Labs" />
+                                &nbsp;
+                                <input type="button" id="PathogenFilterButton" onclick="showPathogenFilters()" value="Pathogens" />
+                                &nbsp;
+                                <input type="button" id="TreatmentFilterButton" onclick="showTreatmentFilters()" value="Antibiotics" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div> 
+    </section>
+    
+    <div id="ctrl_labtest_selector" style="font-size:10px;display:none;" class="box">
+    <div class="inside">
+        @Html.HorizontalCheckBoxFor(m => m.LabTests, Model.LabTestOptions)
+    </div>        
+    </div>
+
+    <div id="ctrl_pathogen_selector" style="font-size:10px;display:none;" class="box">
+    <div class="inside">
+        @Html.HorizontalCheckBoxFor(m => m.Pathogens, Model.PathogenOptions)
+    </div>        
+    </div>
+
+    <div id="ctrl_treatment_selector" style="font-size:10px;display:none;" class="box">
+    <div class="inside">
+            @Html.HorizontalCheckBoxFor(m => m.Antibiotics, Model.AntibioticOptions)
+    </div>
+    </div>
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Infection List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Reason/Classification</th>
+                <th style="width:300px;">Info</th>
+            </tr>
+        </table>
+            @foreach (var infection in Model.Infections)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingInfectionRow.cshtml", infection, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        function showLabTestFilters() {
+
+            var d = $("#ctrl_labtest_selector").dialog({
+                resizable: false,
+                height: 250,
+                width: 900,
+                modal: true,
+                title: 'Filter Lab Tests',
+                beforeClose: updateFilterButtons
+            });
+
+            d.parent().appendTo(jQuery("form:first"));
+            $('#ctrl_labtest_selector').find("input").css("position", "inherit");
+        }
+
+
+        function showPathogenFilters() {
+
+            var d = $("#ctrl_pathogen_selector").dialog({
+                resizable: false,
+                height: 400,
+                width: 900,
+                modal: true,
+                title: 'Filter Pathogens',
+                beforeClose: updateFilterButtons
+            });
+
+            d.parent().appendTo(jQuery("form:first"));
+            $('#ctrl_pathogen_selector').find("input").css("position", "inherit");
+        }
+
+        function showTreatmentFilters() {
+
+            var d = $("#ctrl_treatment_selector").dialog({
+                resizable: false,
+                height: 400,
+                width: 900,
+                modal: true,
+                title: 'Filter Antibiotics',
+                beforeClose: updateFilterButtons
+            });
+
+            d.parent().appendTo(jQuery("form:first"));
+            $('#ctrl_treatment_selector').find("input").css("position", "inherit");
+        }
+
+        function updateFilterButtons() {
+
+            var pathogenBtn = $('#PathogenFilterButton');
+            var labTestBtn = $('#LabTestFilterButton');
+            var treatmentBtn = $('#TreatmentFilterButton');
+
+            var labTestCount = $('#ctrl_labtest_selector').find(":checked").length;
+            var pathogenCount = $('#ctrl_pathogen_selector').find(":checked").length;
+            var treatmentCount = $('#ctrl_treatment_selector').find(":checked").length;
+
+            if (labTestCount > 0) { labTestBtn.css("color", "red"); }
+            else { labTestBtn.css("color", "black"); }
+
+            if (pathogenCount > 0) { pathogenBtn.css("color", "red"); }
+            else { pathogenBtn.css("color", "black"); }
+
+            if (treatmentCount > 0) { treatmentBtn.css("color", "red"); }
+            else { treatmentBtn.css("color", "black"); }
+        }
+
+        function toggleResolved() {
+            if ($('#IncludeResolved').prop("checked")) {
+                $("#StartDate").removeAttr("disabled");
+                $("#EndDate").removeAttr("disabled");
+            }
+            else {
+                $('#StartDate').val('');
+                $('#EndDate').val('');
+                $("#StartDate").attr("disabled", "disabled");
+                $("#EndDate").attr("disabled", "disabled"); 
+            }
+        }
+
+        $(function () {
+
+            toggleResolved();
+
+            $('#IncludeResolved').change(function () {
+                toggleResolved();
+            });
+
+            updateFilterButtons();
+
+        });
+
+
+
+    </script>
+}

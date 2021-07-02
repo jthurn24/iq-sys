@@ -1,0 +1,62 @@
+﻿
+<div style="display:none;" id="ctrl_patient_selector">
+<table class="iqitable" style="width:400px;">
+<tr>
+    <th style="width:80px;">&nbsp;</th>
+    <th style="width:85px;">First Name</th>
+    <th style="width:85px;">Last Name</th>
+    <th style="width:140px;">Include Discharged</th>
+</tr>
+<tr>
+    <td style="width:100px;"><input type="button" style="font-size:9px;" value="Search" onclick="Ctrl_Do_Search_Patient_Selector()" /></td>
+    <td style="width:90px;"><input type="text" id="ctrl_patient_selector_first_name" style="width:80px;font-size:9px;" /></td>
+    <td style="width:90px;"><input type="text" id="ctrl_patient_selector_last_name" style="width:80px;font-size:9px;" /></td>
+    <td style="width:140px;"><input type="checkbox" id="ctrl_patient_selector_include_discharged" name="ctrl_patient_selector_include_discharged" /></td>
+</tr>
+</table>
+    <div style="height:200px;overflow:auto">
+        <div id="ctrl_patient_selector_results" style="padding:3px;">                     
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function Ctrl_Show_Patient_Selector() {
+
+        $("#ctrl_patient_selector").dialog({
+            resizable: false,
+            height: 330,
+            width: 550,
+            modal: true,
+            title: 'Select Patient'
+        });
+
+        $("#ctrl_patient_selector_include_discharged").css("z-index", 9999);  
+
+    }
+
+    function Ctrl_Do_Search_Patient_Selector() {
+        
+        var firstName = $('#ctrl_patient_selector_first_name').val();
+        var lastName = $('#ctrl_patient_selector_last_name').val();
+        var includeDischarged = false;
+
+        if ($('#ctrl_patient_selector_include_discharged').attr('checked')) {
+            includeDischarged = true;
+        }
+
+        var searchAction = '@Url.Action("SelectPatientSearch")?firstName=' + firstName + '&lastName=' + lastName + '&includeDischarged=' + includeDischarged;
+        $('#ctrl_patient_selector_results').load(searchAction);
+
+    }
+
+    function Ctrl_Patient_Selector_Select(id, name) {
+        $("#ctrl_patient_selector").dialog("close");
+        SelectPatient(id, name);
+    }
+
+</script>
+

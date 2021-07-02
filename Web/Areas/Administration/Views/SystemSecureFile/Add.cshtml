@@ -1,0 +1,61 @@
+@model IQI.Intuition.Web.Models.Administration.SystemSecureFile.SystemSecureFileAddForm
+@{
+    ViewBag.Layout_ContentTitle = "Add File";
+}
+
+<form method="post" enctype = "multipart/form-data" >
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Upload", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    @if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>Upload Secure File</h3>
+		<div class="inside form">
+		<p>
+            <div class="field">
+                <span class="label">
+                    Description:
+                </span>
+                @Html.TextBoxFor(model => model.Description, new { style = "width:400px;" })
+             </div>
+            <div class="clear"></div>
+            <div class="field">
+                <span class="label">
+                    Expiration Days:
+                </span>
+                @Html.TextBoxFor(model => model.ExpireDays)</div>
+            <div class="clear"></div>
+            <div class="field">
+                <span class="label">
+                    File:
+                </span>
+                <span class="controls">
+                    <input type="file" name="File" />
+                </span>
+            </div>
+            <div class="clear"></div>
+			<br />
+		</p>
+	</section>
+	<div class="clear"></div>
+
+</form>
+<div class="clear"></div>
+
+

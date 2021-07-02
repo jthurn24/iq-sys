@@ -1,0 +1,255 @@
+﻿@model IQI.Intuition.Web.Models.Incident.IncidentForm
+@{
+    ViewBag.Layout_ContentTitle = "Track Incident ";
+
+    ViewBag.AuditRequest = Model.IsUpdateMode ? new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("Incident - ", Model.Patient.FullName),
+        ComponentId = Model.Guid,
+        PatientId = Model.Patient.Guid
+    } : null;
+}
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.IsUpdateMode)
+    @Html.EditorFor(model => model.IncidentReportId)
+    <h4 class="grid_16 patient">
+        Patient: <strong>@Model.Patient.FullName</strong> 
+    </h4>
+    @Html.HiddenFor(model => model.Patient.Guid)
+    @Html.HiddenFor(model => model.Guid)
+    <div class="clear"></div>
+    
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    
+   
+    
+    <section class="grid_8 box">
+        <h3>Location Information</h3>
+        <div class="actions">
+        @if (Model.IsUpdateMode && ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveIncidents))
+        {
+            @Html.SmartButton(Url.Action("Remove", "Incident", new { id = Model.IncidentReportId }), "Remove", "Are you sure you want to remove this incident permanently?");
+        }
+        </div>
+        <div class="inside">
+            <p class="indent">@Html.EditorFor(model => model.Floor)</p>
+            <p class="indent">@Html.EditorFor(model => model.Wing)</p>
+            <p class="indent">@Html.EditorFor(model => model.Room)</p>
+        </div>
+    </section>
+    <section class="grid_8 box">
+        <h3>General Information</h3>
+        <div class="inside">
+
+            <p class="indent" style="font-size:10px;">@Html.EditorFor(model => model.DiscoveredOn) @Html.EditorFor(model => model.DiscoveredHour)  @Html.EditorFor(model => model.DiscoveredMinutes)</p>
+            <p class="indent" style="font-size:10px;" data-bind="visible: OcurredDateEnabled">
+                @Html.EditorFor(model => model.OccurredOn) @Html.EditorFor(model => model.OccurredHour)  
+                @Html.EditorFor(model => model.OccurredMinutes)
+            </p>
+            <p class="indent" style="font-size:10px;padding-top:3px;">
+                 <span class="label">
+                    Ocurred Date &amp; Time Unknown
+                </span>
+                <span class="controls">
+                    <input id="OcurredUnknown" name="OcurredUnknown" type="checkbox" data-bind="checked: OcurredUnknown"  value="true"><input name="OcurredUnknown" type="hidden" value="false">
+                </span>
+            </p>
+            <p class="indent" style="font-size:10px;">
+                @Html.EditorFor(model => model.AssessmentCompleted)
+            </p>
+
+        </div>
+    </section>
+    <div class="clear"></div>
+     
+    
+    <div class="clear"></div>
+    <section class="grid_16 box">
+        <h3></h3>
+        <ul class="boxtabs">
+            <li><a href="#">Description</a></li>
+            <li><a href="#">Injuries</a></li>
+            <li><a href="#">Vitals</a></li>
+            <li><a href="#">Witnesses</a></li>
+            <li><a href="#">Preventions</a></li>
+            <li><a href="#">Resident Statement</a></li>
+        </ul>
+        <div class="inside panes">
+            <div>
+                <h3>Description</h3>
+                <div class="form">
+                    <hr />
+                    <div class="field" style="font-size:11px;">
+                        @Html.EditorFor(model => model.SelectedIncidentTypes)
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr />
+
+                    <div style="width:450px;float:left;">
+                        <div class="field">@Html.EditorFor(model => model.IncidentLocation)</div>
+                        <div style="clear:both;"></div>
+                        <div class="field">@Html.EditorFor(model => model.LocationDetails, new { HtmlAttributes = new { @style = "width:300px;height:45px;" } })</div>
+                        <div style="clear:both;"></div>
+                    </div>
+
+                   <div style="width:300px;float:left;">
+
+                       <div  class="field">
+                            <span class="label">
+                                Found By:
+                            </span>
+                            <span class="controls">
+                                @Html.HiddenFor(model => model.FoundById)
+                                @Html.HiddenFor(model => model.FoundByName)
+                                <span style="font-size:10px;font-weight:bold;" id="FoundByNameDisplay">@Model.FoundByName</span>
+                                &nbsp;
+                               <input type="button" onclick="launchEmployeeSearch('FoundBy');" style="font-size:10px;" value = "Select" />
+                            </span>
+                        </div>
+
+                       <div  class="field">
+                            <span class="label">
+                                CNA:
+                            </span>
+                            <span class="controls">
+                                @Html.HiddenFor(model => model.CNAId)
+                                @Html.HiddenFor(model => model.CNAName)
+                                <span style="font-size:10px;font-weight:bold;" id="CNANameDisplay">@Model.CNAName</span>
+                                &nbsp;
+                               <input type="button" onclick="launchEmployeeSearch('CNA');" style="font-size:10px;" value = "Select" />
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <br />
+                </div>
+            </div>
+            <div>
+                <h3>Injuries</h3>
+                <div class="form">
+                    <hr />
+                    <div class="field" style="font-size:12px;">
+                        @Html.EditorFor(model => model.SelectedIncidentInjuries)
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="field">@Html.EditorFor(model => model.InjuryLevel)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.InjuryAndTreatmentDescription, new { HtmlAttributes = new { @style = "width:600px;height:25px;" } })</div>
+                    <div style="clear:both;"></div>
+                    <br />
+                </div>
+            </div>
+            <div>
+                <h3>Vitals</h3>
+                <div class="form">
+                <div class="grid_6">
+                    <div class="field">@Html.EditorFor(model => model.Pulse)</div>
+                    <div class="field">@Html.EditorFor(model => model.Respiratory)</div>
+                    <div class="field">@Html.EditorFor(model => model.NeuroCheckCompleted)</div>
+                </div>
+                <div class="grid_6">
+                    <div class="field">@Html.EditorFor(model => model.BloodGlucos)</div>
+                    <div class="field">@Html.EditorFor(model => model.BloodPressureSitting)</div>
+                    <div class="field">@Html.EditorFor(model => model.BloodPressureStanding)</div>
+                </div>
+                </div>
+                <div style="clear:both;"></div>
+                <br />
+            </div>
+            <div>
+                <h3>Witnesses</h3>
+                 <div>
+                    <input type="button" id="WitnessAdd" value="Add Witness" data-bind="click: addWitness" style="float:right;" />
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div data-bind="template: { name: 'witnessTemplate', foreach: Witnesses }">                     
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div>
+                <h3>Precautions</h3>
+                <br />
+                @{ Html.RenderAction("PatientList", new { controller = "Precaution", id = Model.Patient.Guid, productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking }); }
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <input type="button" onclick="precautionForm.showAdd();" value="Track New Prevention">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div>
+                <h3>Resident Statement</h3>
+                <div class="form">
+                    <div class="field">@Html.EditorFor(model => model.ResidentStatement, new { HtmlAttributes = new { @style = "width:600px;height:100px;" } })</div>
+                </div>
+                <div style="clear:both;"></div>
+                <br />
+            </div>
+        </div>
+    </section>
+}
+<div class="clear"></div>
+
+@{Html.RenderAction("SelectEmployee", "Employee");}
+
+ <script type="text/javascript">
+
+     var currentEmployeeTarget = '';
+
+     function launchEmployeeSearch(target)
+     {
+         currentEmployeeTarget = target;
+         Ctrl_Show_Employee_Selector();
+     }
+
+     function SelectEmployee(id, name) {
+
+         $('#' + currentEmployeeTarget + 'Name').val(name);
+         $('#' + currentEmployeeTarget + 'Id').val(id);
+         $('#' + currentEmployeeTarget + 'NameDisplay').html(name);
+     }
+
+
+    </script>
+
+
+
+@{ Html.RenderAction("Form", new { controller = "Precaution", patientId = Model.Patient.Id, productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking }); }
+
+
+<script type="text/javascript">
+
+    function precautionRowSelect(id) {
+        precautionForm.showEdit(id);
+    }
+
+    precautionForm.onSaveSuccess = function()
+    {
+        $("#PatientPrecautionGrid").trigger("reloadGrid");
+    }
+
+</script>
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}
+

@@ -1,0 +1,15 @@
+﻿@model IQI.Intuition.Reporting.Models.User.ExportRequest
+
+@{
+    ViewBag.Layout_ContentTitle = "Document Export";
+}
+
+<section class="grid_5">
+&nbsp;
+</section>
+<section class="grid_6 box leading">
+    <h3>Export Request</h3>
+    <div style="font-weight:bold;padding:10px;text-align:center;">
+        @Html.ActionLink("Download Document", "StreamPrintRequest", new { id = Model.Id }, new { target = "PrintPage" })
+    </div>
+</section>

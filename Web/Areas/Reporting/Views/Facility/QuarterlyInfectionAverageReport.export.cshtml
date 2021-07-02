@@ -1,0 +1,70 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.QuarterlyInfectionAverageView
+
+<section class="grid_16 box leading"> 
+        <h3>Averages</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable" style="width:550px;">
+            <tr>
+                <th>Month</td>
+                <th colspan="2">@Model.Month1.Name</th>
+                <th colspan="2">@Model.Month2.Name</th>
+                <th colspan="2">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Infection</th>
+                <th>Facility</th>
+                <th>Average</th>
+                <th>Facility</th>
+                <th>Average</th>
+                <th>Facility</th>
+                <th>Average</th>
+            </tr>
+            @foreach (var group in Model.NosocomialInfections.Groups)
+            {
+            <tr>
+                <td>@group.InfectionType.Name</td>
+                <td>@group.Month1Total.FacilityRate.ToString("#0.00")</td>
+                <td>@group.Month1Total.AverageRate.ToString("#0.00")</td>
+                <td>@group.Month2Total.FacilityRate.ToString("#0.00")</td>
+                <td>@group.Month2Total.AverageRate.ToString("#0.00")</td>
+                <td>@group.Month3Total.FacilityRate.ToString("#0.00")</td>
+                <td>@group.Month3Total.AverageRate.ToString("#0.00")</td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Total HAI/Nosocomial</td> 
+                <td>@Model.NosocomialInfections.Month1Total.FacilityRate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month1Total.AverageRate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month2Total.FacilityRate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month2Total.AverageRate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month3Total.FacilityRate.ToString("#0.00")</td>
+                <td>@Model.NosocomialInfections.Month3Total.AverageRate.ToString("#0.00")</td>
+            </tr>
+            </table>
+        </div> 
+</section>
+
+<section class="grid_16 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart, new { width = 550, height = 320 })
+        </div> 
+</section>
+
+<section class="grid_16 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart, new { width = 550, height = 320 })
+        </div> 
+</section>
+
+<section class="grid_16 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart, new { width = 550, height = 320 })
+        </div> 
+</section>
+
+
+<div class="clear"></div>

@@ -1,0 +1,25 @@
+﻿@model IQI.Intuition.Web.Models.Home.FacilityInfo
+<div class="grid_3" id="account"> 
+    <fieldset> 
+        <legend>@Model.AccountName</legend> 
+        @if (Model.FacilityOptions.Count() > 1)
+        {
+            @Html.DropDownListFor(model => model.SubDomain, Model.FacilityOptions)
+        }
+    </fieldset> 
+</div> 
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#SubDomain").change(function () {
+            var subDomain = $(this).val();
+            var protocol = '@Model.Protocol';
+            var domainSegments = window.location.host.split(".");
+            domainSegments[0] = subDomain;
+            smoothLoad( protocol + "://" + domainSegments.join("."));
+
+        });
+    });
+</script>
+

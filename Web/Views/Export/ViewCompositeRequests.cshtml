@@ -1,0 +1,37 @@
+﻿@model List<IQI.Intuition.Web.Models.Reporting.Composite.CompositeRequest>
+
+@{
+    ViewBag.Layout_ContentTitle = "Composite Report";
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Composite Report</h3>
+        <div class="inside">
+      
+
+        @if (Model.Count() < 1)
+        {
+            <div style="padding-top:20px;padding-bottom:20px;font-weight:bold;" align="center">
+                No reports have been selected for the composite report.
+            </div>
+        }
+        else
+        {
+            <div align="left" style="padding-top:15px;">
+            <a href="@Url.Action("CreateCompositePrintRequest", new { Controller = "Export", Area = "", path = ViewData["path"] })"><img src="/Content/Images/export.png" border="0" /></a>
+            &nbsp;
+            <a href="@Url.Action("CreateCompositeEmailRequest", new { Controller = "Export", Area = "", path = ViewData["path"] })"><img src="/Content/Images/email.png" border="0" /></a>
+            </div>
+            
+            <div style="padding-top:20px;">
+            @foreach (var request in Model)
+            {
+                <div style="padding-bottom:15px;">
+                <input type="button" value="Remove" onclick="window.location='@Url.Action("RemoveCompositeRequest", new { id = request.ID })'"/> -  @request.Title
+                </div>
+            }
+            </div>
+        }
+
+        </div> 
+</section>

@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C0765BA-534E-4AAC-A292-FC8D22B41554}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Reporting</RootNamespace>
+    <AssemblyName>IQI.Intuition.Reporting</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\ExternalDependencies\sCore\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\ExternalDependencies\sCore\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Extensions">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Logging">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Extensions">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Containers\DataDimensions.cs" />
+    <Compile Include="Containers\QuarterMonths.cs" />
+    <Compile Include="Funnels\InfectionCubeFunnel.cs" />
+    <Compile Include="Graphics\BodyChart.cs" />
+    <Compile Include="Graphics\BodyGraph.cs" />
+    <Compile Include="Graphics\ColumnChart.cs" />
+    <Compile Include="Graphics\Helpers\ColorScheme.cs" />
+    <Compile Include="Graphics\Helpers\Rectangle.cs" />
+    <Compile Include="Graphics\SeriesLineChart.cs" />
+    <Compile Include="Graphics\SeriesColumnChart.cs" />
+    <Compile Include="Graphics\FloorMapChart.cs" />
+    <Compile Include="Graphics\PieChart.cs" />
+    <Compile Include="Graphics\SmartFloorMap.cs" />
+    <Compile Include="Graphics\VerticalTextLabel.cs" />
+    <Compile Include="Models\AnnotatedEntry.cs" />
+    <Compile Include="Models\BaseReportingEntity.cs" />
+    <Compile Include="Models\Cubes\AverageTypeMonthInfectionType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthSCAUTI.cs" />
+    <Compile Include="Models\Cubes\FloorMapRoomWoundStage.cs" />
+    <Compile Include="Models\Cubes\WingMonthWoundType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthCatheter.cs" />
+    <Compile Include="Models\Cubes\FloorMonthComplaintType.cs" />
+    <Compile Include="Models\Cubes\WingMonthComplaintType.cs" />
+    <Compile Include="Models\Cubes\FacilityInfectionSite.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthComplaintType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentTypeGroup.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentHourOfDay.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentDayOfWeek.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentInjuryLevel.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentLocation.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthWoundClassification.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthWoundSite.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthWoundStage.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthPsychotropicDrugType.cs" />
+    <Compile Include="Models\Cubes\FloorMapRoomIncidentInjury.cs" />
+    <Compile Include="Models\Cubes\FloorMapRoomIncidentType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentInjury.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthInfectionSite.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthIncidentType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthInfectionType.cs" />
+    <Compile Include="Models\Cubes\FacilityMonthCensus.cs" />
+    <Compile Include="Models\Cubes\FloorMapRoomInfectionType.cs" />
+    <Compile Include="Models\Cubes\FloorMonthIncidentTypeGroup.cs" />
+    <Compile Include="Models\Cubes\FloorMonthInfectionType.cs" />
+    <Compile Include="Models\Cubes\Virtual\FacilityGroupMonthInfectionType.cs" />
+    <Compile Include="Models\Cubes\WingMonthIncidentTypeGroup.cs" />
+    <Compile Include="Models\Cubes\WingMonthInfectionSite.cs" />
+    <Compile Include="Models\Dimensions\Account.cs" />
+    <Compile Include="Models\Dimensions\AverageType.cs" />
+    <Compile Include="Models\Dimensions\CatheterType.cs" />
+    <Compile Include="Models\Dimensions\ComplaintType.cs" />
+    <Compile Include="Models\Dimensions\FloorMapImage.cs" />
+    <Compile Include="Models\Dimensions\WoundType.cs" />
+    <Compile Include="Models\Dimensions\Day.cs" />
+    <Compile Include="Models\Dimensions\Facility.cs" />
+    <Compile Include="Models\Dimensions\FacilityAverageType.cs" />
+    <Compile Include="Models\Dimensions\Floor.cs" />
+    <Compile Include="Models\Dimensions\FloorMap.cs" />
+    <Compile Include="Models\Dimensions\FloorMapRoom.cs" />
+    <Compile Include="Models\Dimensions\IncidentInjury.cs" />
+    <Compile Include="Models\Dimensions\IncidentInjuryLevel.cs" />
+    <Compile Include="Models\Dimensions\IncidentLocation.cs" />
+    <Compile Include="Models\Dimensions\IncidentType.cs" />
+    <Compile Include="Models\Dimensions\IncidentTypeGroup.cs" />
+    <Compile Include="Models\Dimensions\InfectionClassification.cs" />
+    <Compile Include="Models\Dimensions\InfectionSite.cs" />
+    <Compile Include="Models\Dimensions\InfectionType.cs" />
+    <Compile Include="Models\Dimensions\WoundClassification.cs" />
+    <Compile Include="Models\Dimensions\WoundSite.cs" />
+    <Compile Include="Models\Dimensions\WoundStage.cs" />
+    <Compile Include="Models\Dimensions\PsychotropicDrugName.cs" />
+    <Compile Include="Models\Dimensions\PsychotropicDrugType.cs" />
+    <Compile Include="Models\Facts\Catheter.cs" />
+    <Compile Include="Models\Facts\Complaint.cs" />
+    <Compile Include="Models\Facts\WoundReport.cs" />
+    <Compile Include="Models\Facts\PsychotropicAdministrationMonth.cs" />
+    <Compile Include="Models\Facts\IncidentReport.cs" />
+    <Compile Include="Models\Facts\InfectionVerification.cs" />
+    <Compile Include="Models\Dimensions\Month.cs" />
+    <Compile Include="Models\Dimensions\Quarter.cs" />
+    <Compile Include="Models\Dimensions\Room.cs" />
+    <Compile Include="Models\Dimensions\Wing.cs" />
+    <Compile Include="Models\Facts\PsychotropicAdministration.cs" />
+    <Compile Include="Models\User\CubeSyncJob.cs" />
+    <Compile Include="Models\User\ExportRequest.cs" />
+    <Compile Include="Models\User\QICastCommand.cs" />
+    <Compile Include="Models\User\QINote.cs" />
+    <Compile Include="Models\User\QICast.cs" />
+    <Compile Include="Models\User\QIDashboard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Tables\QuarterlyInfectionTable.cs" />
+    <Compile Include="Tables\QuarterlyStatTable.cs" />
+    <Compile Include="Repositories\ICubeBuilderRepository.cs" />
+    <Compile Include="Repositories\ICubeRepository.cs" />
+    <Compile Include="Repositories\IDimensionRepository.cs" />
+    <Compile Include="Repositories\IDimensionBuilderRepository.cs" />
+    <Compile Include="Repositories\IFactBuilderRepository.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\IQI.Intuition.Domain.csproj">
+      <Project>{10420AE7-A248-4FD3-B793-ED00378CFBC5}</Project>
+      <Name>IQI.Intuition.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

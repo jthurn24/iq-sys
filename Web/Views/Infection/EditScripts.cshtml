@@ -1,0 +1,409 @@
+﻿
+<script id="ruleSetCriteriaTemplate" type="text/x-jquery-tmpl">
+    {{if criteriaRuleSet() }}
+        <!-- Level 1 -->
+        {{if criteriaRuleSet().Instructions }}
+            <p>{{html criteriaRuleSet().Instructions }}</p>
+        {{/if}}
+        {{each criteriaRuleSet().Rules }}
+            {{if Instructions }}
+                <p><div style="font-weight:bold;font-style:italic;font-size:12px;background-color:#ffffcc;padding:2px;">{{html Instructions }}</div></p>
+            {{/if}}
+            {{each Criteria }}
+                <label for="SelectedCriteria"><input name="SelectedCriteria" type="checkbox" 
+                    value="${ Id }" data-bind="checked: SelectedCriteria" /> {{html Name }}</label>
+            {{/each}}
+        {{/each}}
+
+        <!-- LEVEL 2 -->
+        {{each criteriaRuleSet().RuleSets }}
+            {{if Instructions }}
+                <p><div style="font-weight:bold;font-style:italic;font-size:12px;background-color:#ffffcc;padding:2px;">{{html Instructions }}</div></p>
+            {{/if}}
+            {{each Rules }}
+                {{if Instructions }}
+                <p><div style="font-weight:bold;font-style:italic;font-size:12px;background-color:#ffffcc;padding:2px;">{{html Instructions }}</div></p>
+                {{/if}}
+                {{each Criteria }}
+                    <label for="SelectedCriteria"><input name="SelectedCriteria" type="checkbox" 
+                    value="${ Id }" data-bind="checked: SelectedCriteria" /> {{html Name }}</label>
+                {{/each}}
+            {{/each}}
+            <!-- LEVEL 3 -->
+                 {{each RuleSets }}
+                    {{if Instructions }}
+                        <p><div style="font-weight:bold;font-style:italic;font-size:12px;background-color:#ffffcc;padding:2px;">{{html Instructions }}</div></p>
+                    {{/if}}
+                    {{each Rules }}
+                        {{if Instructions }}
+                        <p><div style="font-weight:bold;font-style:italic;font-size:12px;background-color:#ffffcc;padding:2px;">{{html Instructions }}</div></p>
+                        {{/if}}
+                        {{each Criteria }}
+                            <label for="SelectedCriteria"><input name="SelectedCriteria" type="checkbox" 
+                            value="${ Id }" data-bind="checked: SelectedCriteria" /> {{html Name }}</label>
+                        {{/each}}
+                    {{/each}}
+                {{/each}}
+
+
+        {{/each}}       
+
+
+    {{/if}}
+</script>
+
+
+<script id="labResultTemplate" type="text/x-jquery-tmpl">
+<div style="font-size:12px;background-color:#FFC;" data-bind="visible: Removed() == false">
+        <div style="font-weight:bold;background-color:#3a4a54;padding:5px;color:#CAF8FF;">
+            <table style="width:830px">
+                <tr>
+                    <td>
+                        Test: ${ LabTestTypeName }
+                        &nbsp; &nbsp;
+                        Completed On: ${ LabCompletedOn }
+                        &nbsp; &nbsp;
+                        Result: ${ LabResultName }
+                    </td>  
+                    <td style="text-align:right;">
+                        <input type="button" value="Remove" data-bind="click: removeLabResult" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div style="padding-top:3px;padding-bottom:25px;">
+        <table style="width:830px;">
+            <tr>
+                <td style="vertical-align:top;">
+                   <div style="padding-top:10px;padding-left:5px;"  data-bind="visible: showPathogens">
+                         <table>
+                            <tr>
+                                <td>
+                                    <div style="padding-bottom:2px;">Pathogen/Organism</div>
+                                    <select data-bind="options: PathogenOptions, optionsText: 'Name', value: selectedPathogen" ></select> 
+                                </td>
+                                <td data-bind="visible: showPathogenQuantities">
+                                    <div style="padding-left:5px;">Quantity</div>
+                                    <select data-bind="options: PathogenQuantityOptions, optionsText: 'Name', value: selectedPathogenQuantity" ></select> 
+                                </td>
+                                <td style="padding-top:15px;">
+                                    <input type="button" value="Add" data-bind="click: addPathogen"/>
+                                </td>
+                            </tr>
+                         </table>
+                    </div>
+                    <div style="padding-top:15px;">
+                        <div data-bind="template: { name: 'pathogenTemplate', foreach: Pathogens, templateOptions: {ParentIndex: Index } }">                     
+                        </div>
+                    </div>
+                </td>
+                <td style="vertical-align:top;">
+                    <div align="right" style="padding-right:265px;">
+                        Notes:
+                    </div>
+                    <div align="right">
+                        <textarea style="width:300px;height:50px;" data-bind="value: Notes"></textarea>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <input type="hidden" name="InfectionLabResults[${ Index }].LabTestTypeId" data-bind="value: LabTestTypeId" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].InfectionLabResultId"  data-bind="value: InfectionLabResultId" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].LabResultName"  data-bind="value: LabResultName" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].LabResultId"  data-bind="value: LabResultId" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].LabTestTypeName"  data-bind="value: LabTestTypeName" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].LabCompletedOn"  data-bind="value: LabCompletedOn" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].Removed"  data-bind="boolValue: Removed" />
+        <input type="hidden" name="InfectionLabResults[${ Index }].Notes"  data-bind="value: Notes" />
+        <div data-bind="template: { name: 'pathogenOptionTemplate', foreach: PathogenOptions,  templateOptions: {ParentIndex: Index } }"></div>
+        <div data-bind="template: { name: 'pathogenQuantityOptionTemplate', foreach: PathogenQuantityOptions,  templateOptions: {ParentIndex: Index } }"></div>
+</div>
+
+</script>
+
+<script id="noteTemplate" type="text/x-jquery-tmpl">
+
+
+    <div data-bind="visible: Removed() == false" style="padding-top:5px;">
+    <div style="background-color:#FFC;padding:2px;"> 
+
+        <div style="font-weight:bold;background-color:#3a4a54;padding:3px;color:#CAF8FF;font-size:11px;">
+            ${CreatedOn} &nbsp;
+        </div>
+        <div style="padding:3px;" data-bind="visible: EditMode() == false">
+        <table style="font-size:9px;width:800px;">
+            <tr>
+                <td>${Note}</td>
+                <td align="right" style="text-align:right;"><input style="font-size:9px;" type="button" value="Edit" data-bind="click: editNote" /></td>
+            </tr>
+        </table>
+        </div>
+        
+
+        <div data-bind="visible: EditMode">
+             <table style="width:800px;">
+                <tr>
+                    <td>
+                       <textarea style="width:700px;height:40px;font-size:11px;"  name="InfectionNotes[${ Index }].Note" data-bind="value: Note" />
+                    </td>
+                    <td align="right" style="vertical-align:bottom;">
+                        <input style="font-size:12px;width:80px;" type="button" value="Remove" data-bind="click: removeNote" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    </div>
+    
+    <input type="hidden" name="InfectionNotes[${ Index }].CreatedOn" data-bind="value: CreatedOn" />
+    <input type="hidden" name="InfectionNotes[${ Index }].CreatedBy" data-bind="value: CreatedBy" />
+    <input type="hidden" name="InfectionNotes[${ Index }].InfectionNoteId" data-bind="value: InfectionNoteId" />
+    <input type="hidden" name="InfectionNotes[${ Index }].Removed" data-bind="boolValue: Removed" />
+
+</script>
+
+<script id="pathogenTemplate" type="text/x-jquery-tmpl">
+   <div style="width:420px;">
+   <div style="padding:3px;" data-bind="visible: Removed() == false">
+   <div style="background-color:white;padding:5px;color:#3a4a54;border:solid 1px #3a4a54;"> 
+        <table style="width:400px;">
+            <tr>
+                <td><span style="font-weight:bold;">${ PathogenName }</span>  ${ PathogenQuantityName }</td>
+                <td align="right" style="text-align:right;"><input type="button" data-bind="click: removePathogen" style="font-size:9px;" value="Remove"/></td>
+            </tr>
+        </table>
+   </div>
+   </div>
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].PathogenId" data-bind="value: PathogenId" />
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].PathogenName" data-bind="value: PathogenName" />
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].PathogenQuantityId" data-bind="value: PathogenQuantityId" />
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].PathogenQuantityName" data-bind="value: PathogenQuantityName" />
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].Id" data-bind="value: Id" />
+   <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].Pathogens[${ Index }].Removed" data-bind="boolValue: Removed" />
+   </div>
+</script>
+
+<script id="pathogenOptionTemplate" type="text/x-jquery-tmpl">
+    <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].PathogenOptions[${ Index }].Name" data-bind="value: Name" />
+    <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].PathogenOptions[${ Index }].Id" data-bind="value: Id" />
+</script>
+
+<script id="pathogenQuantityOptionTemplate" type="text/x-jquery-tmpl">
+    <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].PathogenQuantityOptions[${ Index }].Name" data-bind="value: Name" />
+    <input type="hidden" name="InfectionLabResults[${ $item.ParentIndex }].PathogenQuantityOptions[${ Index }].Id" data-bind="value: Id" />
+</script>
+
+<script id="treatmentNameTemplate" type="text/x-jquery-tmpl">
+    <input type="hidden" name="InfectionTreatmentTypes[${ $item.ParentIndex }].TreatmentNames[${ Index }]" value="${ Item }"/>
+</script>
+
+<script id="treatmentTypeTemplate" type="text/x-jquery-tmpl">
+    <h4>${ Name }</h4>
+    <div>
+        <table>
+            <tr>
+                <td style="font-size:9px;">Treatment</td>
+                <td style="font-size:9px;">Date</td>
+                <td style="font-size:9px;">MD name</td>
+                <td style="font-size:9px;">Dosage</td>
+                <td style="font-size:9px;">Units</td>
+                <td style="font-size:9px;">Frequency</td>
+                <td style="font-size:9px;">Duration</td>
+                <td style="font-size:9px;">Route</td>
+            </tr>
+            <tr>
+                <td style="width:220px;"><input type="text" class="treatment-list" style="width:200px;font-size:11px;" /></td>
+                <td style="width:90px;"><input type="text" class="treatment-date" style="width:70px;font-size:11px;" /></td>
+                <td style="width:130px;"><input type="text" style="width:110px;font-size:11px;" data-bind="value: SelectedMDName" /></td>
+                <td style="width:70px;"><input type="text" style="width:60px;font-size:11px;" data-bind="value: SelectedDosage" /></td>
+                <td style="width:70px;"><input type="text" style="width:60px;font-size:11px;" data-bind="value: SelectedUnits" /></td>
+                <td style="width:90px;"><input type="text" class="frequency-list" style="width:80px;font-size:11px;"></td>
+                <td style="width:70px;"><input type="text" class="duration-list" style="width:60px;font-size:11px;"></td>
+                <td style="width:95px;"><input type="text" class="delivery-list" style=width:60px;font-size:11px;"></td>
+            </tr>
+            </table>
+            <div style="padding-top:5px;">
+             <table style="width:800px;">
+                <tr>
+                    <td>
+                        <div style="font-size:11px;">Special Instructions</div> 
+                        <input type="text" class="instructions-list" style="width:700px;font-size:11px;"> 
+                    </td>
+                    <td align="right" style="vertical-align:bottom;">
+                        <input style="font-size:12px;width:80px;" type="button" value="Add" data-bind="click: addTreatment" />
+                    </td>
+                </tr>
+            </table>
+            </div>
+    </div>
+    <hr>
+    <div>
+        <div data-bind="template: { name: 'treatmentTemplate', foreach: Treatments, afterRender: afterTreatmentRender,  templateOptions: {ParentIndex: Index } }"></div>
+    </div>
+    <input type="hidden" name="InfectionTreatmentTypes[${ Index }].Id" data-bind="value: Id" />
+    <input type="hidden" name="InfectionTreatmentTypes[${ Index }].Name" data-bind="value: Name" />
+</script>
+
+<script id="treatmentTemplate" type="text/x-jquery-tmpl">
+    <div data-bind="visible: Removed() == false" style="padding-top:5px;">
+    <div style="background-color:#FFC;padding:2px;"> 
+
+        <div style="font-weight:bold;background-color:#3a4a54;padding:3px;color:#CAF8FF;font-size:11px;">
+            ${TreatmentName} ${AdministeredOn}
+        </div>
+        <div style="padding:3px;" data-bind="visible: EditMode() == false">
+        <table style="font-size:9px;">
+            <tr>
+                <td style="width:70px;vertical-align:top;"><div style="font-weight:bold;">MD</div> ${MDName}</td>
+                <td style="width:70px;vertical-align:top;"><div style="font-weight:bold;">Dosage</div> ${Dosage}</td>
+                <td style="width:70px;vertical-align:top;"><div style="font-weight:bold;">Units</div> ${Units}</td>
+                <td style="width:90px;vertical-align:top;"><div style="font-weight:bold;">Freqency</div> ${Frequency}</td>
+                <td style="width:70px;vertical-align:top;"><div style="font-weight:bold;">Duration</div> ${Duration}</td>
+                <td style="width:95px;vertical-align:top;"><div style="font-weight:bold;">Delivery Method</div> ${DeliveryMethod}</td>
+                <td style="width:90px;vertical-align:top;"><div style="font-weight:bold;">Discontinued</div>${DiscontinuedOn}</td>
+                <td style="width:320px;vertical-align:top;"><div style="font-weight:bold;">Instructions</div> ${SpecialInstructions}</td>
+                <td style="width:70px;vertical-align:top;"><input style="font-size:9px;" type="button" value="Edit" data-bind="click: editTreatment" /></td>
+            </tr>
+        </table>
+        </div>
+        
+
+        <div data-bind="visible: EditMode">
+            <table>
+            <tr>
+                <td style="font-size:9px;">MD name</td>
+                <td style="font-size:9px;">Dosage</td>
+                <td style="font-size:9px;">Units</td>
+                <td style="font-size:9px;">Frequency</td>
+                <td style="font-size:9px;">Duration</td>
+                <td style="font-size:9px;">Route</td>
+                <td style="font-size:9px;">Discontinued On</td>
+            </tr>
+            <tr>
+                <td style="width:130px;">
+                    <input style="width:110px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].MDName" data-bind="value: MDName" />
+                </td>
+                <td style="width:70px;">
+                    <input style="width:60px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Dosage" data-bind="value: Dosage" />
+                </td>
+                <td style="width:70px;">
+                    <input style="width:60px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Units" data-bind="value: Units" />
+                </td>
+                <td style="width:90px;">
+                    <input style="width:80px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Frequency" data-bind="value: Frequency" />
+                </td>
+                <td style="width:70px;">
+                    <input style="width:60px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Duration" data-bind="value: Duration" />
+                </td>
+                <td style="width:95px;">
+                    <input style="width:60px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].DeliveryMethod" data-bind="value: DeliveryMethod" />
+                </td>
+                <td style="width:95px;">
+                    <input style="width:80px;font-size:11px;" type="text" class="discontinued-date" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].DiscontinuedOn" data-bind="value: DiscontinuedOn" />
+                </td>
+            </tr>
+            </table>
+            <div style="padding-top:5px;">
+             <table style="width:800px;">
+                <tr>
+                    <td>
+                        <div style="font-size:11px;">Special Instructions</div> 
+                       <input style="width:700px;font-size:11px;" type="text" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].SpecialInstructions" data-bind="value: SpecialInstructions" />
+                    </td>
+                    <td align="right" style="vertical-align:bottom;">
+                        <input style="font-size:12px;width:80px;" type="button" value="Remove" data-bind="click: removeTreatment" />
+                    </td>
+                </tr>
+            </table>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    
+    <input type="hidden" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].AdministeredOn" data-bind="value: AdministeredOn" />
+    <input type="hidden" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].TreatmentName" data-bind="value: TreatmentName" />
+    <input type="hidden" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Id" data-bind="value: Id" />
+    <input type="hidden" name="InfectionTreatmentTypes[${ $item.ParentIndex }].Treatments[${ Index }].Removed" data-bind="boolValue: Removed" />
+
+</script>
+
+@Html.Script("/scripts/jquery.tmpl.min.js")
+@Html.Script("/scripts/knockout-1.2.1.min.js")
+@Html.Script("/scripts/knockout.mapping-1.2.4.min.js")
+@Html.Script("/scripts/knockout.helper.js")
+@Html.Script("/scripts/jquery.unobtrusive-knockout.min.js")
+@Html.Script("/scripts/infection-form-model.js?v=3006")
+@Html.Script("/scripts/infection-form.js?v=3006")
+
+<script type="text/javascript">
+    var infectionSites = @Html.Raw(Json.Encode(Model.ClientViewModel));
+    var infectionForm = InfectionForm(infectionSites, CRITERIA_DISABLE);
+
+    function precautionRowSelect(id) {
+        precautionForm.showEdit(id);
+    }
+
+    function precautionLoadComplete()
+    {
+        evalPrecautions();
+    }
+
+    $('#FirstNotedOn').change(function() {
+        evalPrecautions();
+    });
+
+    $('#ResolvedOn').change(function() {
+        evalPrecautions();
+    });
+
+    $('#IsResolved').click(function() {
+        evalPrecautions();
+    });
+
+    function evalPrecautions()
+    {
+
+        var nullDate = Date.now();
+        var notedOnTxt = $('#FirstNotedOn').val();
+        var resolvedOnTxt = $('#ResolvedOn').val();
+        var notedOnDate =  Date.parse(notedOnTxt) ;
+        var resolvedOnDate = Date.parse(resolvedOnTxt);
+        if(isNaN(resolvedOnDate)) { resolvedOnDate = nullDate; }
+        if ($('#IsResolved').is(':checked') == false) { resolvedOnDate = nullDate; }
+
+
+        $("#PatientPrecautionGrid").find('.jqgrow').each(function( index, element) {
+
+            var startDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_StartDate"]').html();
+            var endDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_EndDate"]').html();
+            var startDate =  Date.parse(startDateTxt);
+            var endDate =  Date.parse(endDateTxt);
+            if(isNaN(endDate)) { endDate = nullDate; }
+
+            if(startDate <= resolvedOnDate && endDate >= notedOnDate)
+            {
+                $(this).find('td').css('background-color','#ff9999');
+                $(this).find('td').css('font-weight','bold');
+            }
+            else
+            {
+                $(this).find('td').css('background-color','');
+                $(this).find('td').css('font-weight','normal');
+            }
+
+        });
+    }
+
+    precautionForm.onSaveSuccess = function()
+    {
+        $("#PatientPrecautionGrid").trigger("reloadGrid");
+    }
+
+
+
+</script>

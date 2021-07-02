@@ -1,0 +1,26 @@
+﻿@model IQI.Intuition.Web.Models.Complaint.ComplaintForm
+
+@{
+    ViewBag.Layout_ContentTitle = "Complaint";
+}
+@using (Html.BeginForm())
+{
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+    @Html.Partial("Form", Model);
+}
+<div class="clear"></div>

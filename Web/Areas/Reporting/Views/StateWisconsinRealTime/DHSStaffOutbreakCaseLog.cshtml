@@ -1,0 +1,86 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.StateOfWisconsin.DHSStaffOutbreakCaseLogView
+           
+@{
+    ViewBag.Layout_ContentTitle = "DHS Staff Outbreak Case Log";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "DHS Staff Outbreak Case Log";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>DHS Staff Outbreak Case Log</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBox("StartDate", Model.StartDate.FormatAsMinimalDate(), new { type = "datepicker" })  </td>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBox("EndDate", Model.EndDate.FormatAsMinimalDate(), new { type = "datepicker" })   </td>
+                        <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.InfectionType, Model.InfectionTypeOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+</section>
+
+
+<section class="grid_16 box leading"> 
+        <h3>Employee Infection List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:50px;">NO</th>
+                <th style="width:200px;">Name</th>
+                <th style="width:80px;">Age</th>
+                <th style="width:80px;">Sex</th>
+                <th style="width:200px;">Assignment</th>
+                <th style="width:100px;">Onset</th>
+                <th style="width:100px;">Well</th>
+                <th style="width:50px;">N</th>
+                <th style="width:50px;">V</th>
+                <th style="width:50px;">D</th>
+                <th style="width:50px;">AC</th>
+                <th style="width:50px;">Fe</th>
+                <th style="width:50px;">Ch</th>
+                <th style="width:100px;">Ret - Wk</th>
+                <th style="width:100px;">Hosp.</th>
+                <th style="width:100px;">Lab Results</th>
+            </tr>
+            @foreach (var infection in Model.Infections)
+            {
+                    <tr>
+                        <td style="width:50px;vertical-align:top;">@infection.Number</td>
+                        <td style="width:200px;vertical-align:top;">@infection.Name</td>
+                        <td style="width:80px;vertical-align:top;">@infection.Age</td>
+                        <td style="width:80px;vertical-align:top;">@infection.Gender</td>
+                        <td style="width:200px;vertical-align:top;">@infection.Assignment</td>
+                        <td style="width:100px;vertical-align:top;">@infection.OnSet</td>
+                        <td style="width:100px;vertical-align:top;">@infection.Well</td>
+                        <td style="width:50px;vertical-align:top;">@infection.N</td>
+                        <td style="width:50px;vertical-align:top;">@infection.V</td>
+                        <td style="width:50px;vertical-align:top;">@infection.D</td>
+                        <td style="width:50px;vertical-align:top;">@infection.AC</td>
+                        <td style="width:50px;vertical-align:top;">@infection.FE</td>
+                        <td style="width:50px;vertical-align:top;">@infection.CH</td>
+                        <td style="width:100px;vertical-align:top;">@infection.RetWork</td>
+                        <td style="width:100px;vertical-align:top;">@infection.Hospital</td>
+                        <td style="width:100px;vertical-align:top;">@infection.LabResults</td>
+                    </tr>
+            }
+             </table>
+
+            <div style="font-style:italic;font-size:12px;padding-top:10px;">
+            Onset=Onset of Illness; Well=Well Day; N=Nausea, V=Vomiting, D=Diarrhea; AC=Abdominal Cramping; Fe=Fever; Ch=Chills; Rt-Wk=Return to Work date; Hosp=Hospitalization 
+            </div>
+
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>

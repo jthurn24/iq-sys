@@ -1,0 +1,100 @@
+﻿
+<script id="witnessTemplate" type="text/x-jquery-tmpl">
+
+
+    <div data-bind="visible: Removed() == false">
+    <div style="background-color:#FFC;padding:5px;"> 
+
+        <table>
+            <tr>
+                <td style="width:200px;horizontal-alignment:top;">
+                    <div style="font-size: 12px;font-weight: bold;padding-bottom:5px;">Name:</div>
+                    <div><input type="text" name="IncidentWitnesses[${ Index }].Name" data-bind="value: Name" /></div>
+                    <div style="font-size: 12px;font-weight: bold;padding-bottom:5px;padding-top:5px;">Role:</div>
+                    <div><input type="text" name="IncidentWitnesses[${ Index }].Role" data-bind="value: Role" /></div>
+                </td>
+                <td>
+                    <div style="font-size: 12px;font-weight: bold;padding-bottom:5px;">Statement:</div>
+                    <div><textarea style="width:500px;height:50px;" name="IncidentWitnesses[${ Index }].Statement" data-bind="value: Statement" /></div>
+                </td>
+                <td style="width:100px;horizontal-alignment:right;">
+                    <input style="font-size:12px;width:80px;float:right;" type="button" value="Remove" data-bind="click: removeWitness" />
+                </td>
+        </table>
+
+    </div>
+    </div>
+    
+    <input type="hidden" name="IncidentWitnesses[${ Index }].IncidentWitnessId" data-bind="value: IncidentWitnessId" />
+    <input type="hidden" name="IncidentWitnesses[${ Index }].Removed" data-bind="boolValue: Removed" />
+
+    <hr>
+</script>
+
+
+@Html.Script("/scripts/jquery.tmpl.min.js")
+@Html.Script("/scripts/knockout-1.2.1.min.js")
+@Html.Script("/scripts/knockout.mapping-1.2.4.min.js")
+@Html.Script("/scripts/knockout.helper.js")
+@Html.Script("/scripts/jquery.unobtrusive-knockout.min.js")
+@Html.Script("/scripts/incident-form-model.js")
+@Html.Script("/scripts/incident-form.js")
+
+<script type="text/javascript">
+    IncidentForm(@Html.Raw(Json.Encode(Model.ClientViewModel)));
+
+    function precautionLoadComplete() {
+        evalPrecautions();
+    }
+
+    $('#DiscoveredOn').change(function () {
+        evalPrecautions();
+    });
+
+    $('#OccurredOn').change(function () {
+        evalPrecautions();
+    });
+
+    $('#OcurredUnknown').click(function () {
+        evalPrecautions();
+    });
+
+    function evalPrecautions() {
+
+        var nullDate = Date.now();
+        var discoveredOnTxt = $('#DiscoveredOn').val();
+        var occurredOnTxt = $('#OccurredOn').val();
+        var discoveredOnDate = Date.parse(discoveredOnTxt);
+        var occurredOnDate = Date.parse(occurredOnTxt);
+
+        var targetDate = discoveredOnDate;
+
+        if ($('#OcurredUnknown').is(':checked') == false && isNaN(occurredOnDate) == false) { targetDate = occurredOnDate; }
+
+
+        $("#PatientPrecautionGrid").find('.jqgrow').each(function (index, element) {
+
+            var startDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_StartDate"]').html();
+            var endDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_EndDate"]').html();
+            var startDate = Date.parse(startDateTxt);
+            var endDate = Date.parse(endDateTxt);
+            if (isNaN(endDate)) { endDate = nullDate; }
+
+
+            if (startDate <= targetDate && endDate >= targetDate) {
+                $(this).find('td').css('background-color', '#ff9999');
+                $(this).find('td').css('font-weight', 'bold');
+            }
+            else {
+                $(this).find('td').css('background-color', '');
+                $(this).find('td').css('font-weight', 'normal');
+            }
+
+        });
+    }
+
+    precautionForm.onSaveSuccess = function () {
+        $("#PatientPrecautionGrid").trigger("reloadGrid");
+    }
+
+</script>

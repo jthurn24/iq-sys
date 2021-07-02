@@ -1,0 +1,324 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Wound.Facility.QuarterlyWoundControlView
+
+
+
+
+<section class="grid_32" style="page-break-inside:avoid;"> 
+        <h3>Active @Model.WoundTypeName - Source</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+            </tr>
+            @foreach (var group in Model.ClassificationStats)
+            {
+            <tr>
+                <td>@group.Name</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month1Stat,group.Month1Stat.Count)</td>
+                <td>@group.Month1Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month1Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month1Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month1Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month1Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month2Stat,group.Month2Stat.Count)</td>
+                <td>@group.Month2Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month2Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month2Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month2Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month2Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month3Stat,group.Month3Stat.Count)</td>
+                <td>@group.Month3Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month3Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month3Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month3Stat.Change,2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month3Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+            </tr>
+            }
+            </table>
+        </div> 
+</section>
+
+
+
+<section class="grid_32" style="page-break-inside:avoid;"> 
+        <h3>Active @Model.WoundTypeName - Site</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+            </tr>
+            @foreach (var group in Model.SiteStats)
+            {
+            <tr>
+                <td>@group.Name</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month1Stat,group.Month1Stat.Count)</td>
+                <td>@group.Month1Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month1Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month1Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month1Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month1Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month2Stat,group.Month2Stat.Count)</td>
+                <td>@group.Month2Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month2Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month2Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month2Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month2Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month3Stat,group.Month3Stat.Count)</td>
+                <td>@group.Month3Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month3Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month3Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month3Stat.Change,2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month3Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+            </tr>
+            }
+            </table>
+        </div> 
+</section>
+
+
+
+<section class="grid_32" style="page-break-inside:avoid;"> 
+        <h3>Active @Model.WoundTypeName - Stage</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+                <th>#</th>
+                <th>PU/1000 PD</th>
+                <th>Change</th>
+                <th>% Pop</th>
+            </tr>
+            @foreach (var group in Model.StageStats)
+            {
+            <tr>
+                <td>@group.Name</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month1Stat,group.Month1Stat.Count)</td>
+                <td>@group.Month1Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month1Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month1Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month1Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month1Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month2Stat,group.Month2Stat.Count)</td>
+                <td>@group.Month2Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month2Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month2Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month2Stat.Change, 2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month2Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+                <td style="font-weight:bold;">@Html.RenderAnnotation(group.Month3Stat,group.Month3Stat.Count)</td>
+                <td>@group.Month3Stat.Rate.ToString("#0.00")</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month3Stat.Change.ToString("#0.00")
+
+                    @if (Math.Round(group.Month3Stat.Change, 2) > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if (Math.Round(group.Month3Stat.Change,2) < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+                <td>@group.Month3Stat.PercentageOfPopulation.ToString("#0.00")%</td>
+            </tr>
+            }
+            </table>
+        </div> 
+</section>
+
+
+<section class="grid_16" style="page-break-before: always;"> 
+            <table>
+                <tr>
+                    <td>@Html.DisplayFor(x => x.Month1BodyGraph)</td>
+                    <td>@Html.DisplayFor(x => x.Month2BodyGraph)</td>
+                    <td>@Html.DisplayFor(x => x.Month3BodyGraph)</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">@Model.Month1.Name</td>
+                    <td style="text-align:center;">@Model.Month2.Name</td>
+                    <td style="text-align:center;">@Model.Month3.Name</td>
+                </tr>
+            </table>
+</section>
+
+
+<div class="clear"></div>

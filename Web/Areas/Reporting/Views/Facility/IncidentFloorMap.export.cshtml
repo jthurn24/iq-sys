@@ -1,0 +1,23 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.FloorMapView
+
+<section class="grid_16 box leading"> 
+        <div style="padding-top:10px;" align="center">
+        <table>
+        <tr>
+            @foreach (var key in Model.IncidentGroupNames.Keys)
+            {
+                <td>
+                    <div style="width:10px;height:10px;float:left;background-color:@System.Drawing.ColorTranslator.ToHtml(Model.IncidentGroupColors[key]);">&nbsp;</div>
+                    <div style="float:right;font-size:10px;color:Black;font-weight:bold;text-align:left;padding-right:10px;padding-left:5px;">@Model.IncidentGroupNames[key]</div>
+               </td>
+            }
+        </tr>
+        </table>
+        </div>
+
+        <div class="inside">
+            @Html.DisplayFor(model => model.FloorMapChart)
+        </div>
+</section>
+
+<div class="clear"></div>

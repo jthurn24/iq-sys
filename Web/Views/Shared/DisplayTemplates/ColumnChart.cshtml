@@ -1,0 +1,13 @@
+﻿@model IQI.Intuition.Reporting.Graphics.ColumnChart
+ 
+@if (Model == null || Model.HasData() == false)
+{
+    <div style="padding-top:100px;padding-bottom:84px;text-align:center;font-weight:bold;color:#2f3a3f;width:@ViewData["width"]px;height:@ViewData["height"];">No Data To Display</div>
+}
+else
+{
+    <div style="background-image:url('/Content/Images/report-loader.gif');background-repeat:no-repeat;background-position:center center;min-height:200px;" align="center">
+    <img src="@Url.Action("RenderColumnChart", "Chart", new { area="Reporting",data = Model.SerializeDataForRender(), options = Model.SerializeOptionsForRender(), noCache = DateTime.Now.Ticks, width = ViewData["width"], height = ViewData["height"] })" />
+    </div>
+}
+

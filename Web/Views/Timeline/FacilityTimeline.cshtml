@@ -1,0 +1,152 @@
+﻿@model IQI.Intuition.Web.Models.Timeline.FacilityTimelineView
+
+@{
+    ViewBag.Layout_ContentTitle = Model.Title;
+}
+
+<br />
+
+@if(Model.PatientMode)
+{
+<div class="grid_16" id="buttons" align="center">
+        @Html.SmartButton(Url.Action("Detail","Patient",new { id = Model.PatientGuid }),"Return To Patient") &nbsp;
+        <button onclick="doPrint();">Print Timeline</button>
+<span class="clear"></span>
+</div> 
+}
+
+<section id="timeline-options" class="grid_5 box" style="position:fixed; top:180px; left:10px;z-index:99999;">
+   <h3>Timeline Options</h3>
+        <div class="inside">
+            <div style="height:400px;overflow:auto;">
+
+                @foreach (var g in Model.TagGroups.OrderBy(x => x.Name))
+                {
+                    <div>
+                    <div style="font-size:12px;font-weight:bold;padding-top:5px;">@g.Name</div>
+                    <div style="padding-left:10px;">               
+                        @foreach (var t in g.Options.OrderBy(x => x.Name))
+                        {
+                            <div>
+                                <input class="option_checkbox" id="@t.Css" type="checkbox" />
+                                <span style="font-size:10px;">@t.Name (@t.Count)</span>   
+                            </div>                  
+                        }
+                    </div>
+                    </div>
+                }
+
+            </div>
+        </div>  
+</section>
+
+<section class="grid_16 box"  id="tl-container" style="display:none;">
+    <div>
+
+
+        @{var currentDay = new DateTime(); }
+        <ul class="timeline">
+            
+        @foreach (var e in Model.Entries)
+        {
+           	<li>
+                @if (currentDay != e.On.Date)
+                {
+                    currentDay = e.On.Date;
+                    <div id="@e.On.Date.ToString("__MM-dd-yy")" class="timeline-date-container" align="center" style="padding-bottom:25px;padding-top:10px;display:none;">
+                        <span class="timeline-date">@e.On.Date.ToString("dddd MMM-dd-yy")</span>
+                    </div>
+                    <a id="@e.On.Date.ToString("MM-dd-yyyy")"></a>
+                }
+		        <div style="display:none;" class="@e.On.Date.ToString("__MM-dd-yy") @e.CSSClass event-item direction-r">
+			        <div class="flag-wrapper">
+				        <span class="flag">@e.Title</span>
+			        </div>
+			        <div class="desc">@e.Description</div>
+		        </div>
+
+	        </li>
+        }
+
+</ul>
+
+
+    </div>
+
+</section>
+
+<div style="clear:both;"></div>
+
+
+<script type="text/javascript">
+
+
+    $('.option_checkbox').click(function () {
+        var c = $(this).attr('id');
+
+        if ($(this).is(':checked')) {
+            $('.' + c).fadeIn("slow", function () { scanDays(); });
+        }
+        else {
+            $('.' + c).fadeOut("slow", function () { scanDays(); });
+        }
+
+    });
+
+    $('#DateQuickList').change(function () {
+
+        var val = $('#DateQuickList').val();
+
+        $("body, html").animate({
+            scrollTop: $('#' + val).offset().top
+        }, 600);
+
+
+    });
+
+    function scanDays() {
+
+        $('#tl-container').show();
+
+        $(".timeline-date-container").each(function (index) {
+            var c = $(this).attr('id');
+            var ch = $('.' + c + ':visible');
+            var count = ch.length;
+
+            if (count > 0) {
+                $(this).show()
+            }
+            else {
+                $(this).hide();
+            }
+        });
+
+        $('.event-item:visible').removeClass('direction-r');
+        $('.event-item:visible').removeClass('direction-l');
+
+        $('.event-item:visible').filter(":odd").addClass('direction-l');
+        $('.event-item:visible').filter(":even").addClass('direction-r');
+
+        if ($('.event-item:visible').length > 0) {
+            $('#tl-container').show();
+        }
+        else {
+            $('#tl-container').hide();
+        }
+    }
+
+    function doPrint()
+    {
+        $('#timeline-options').hide();
+        $('#quick').hide();
+        $('header').hide();
+        $('button').hide();
+        window.print();
+
+        $('#timeline-options').show();
+        $('#quick').show();
+        $('header').show();
+        $('button').show();
+    }
+
+</script>

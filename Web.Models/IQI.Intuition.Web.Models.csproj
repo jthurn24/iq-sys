@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7207C800-09A5-41B9-A739-724F30425BE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Web.Models</RootNamespace>
+    <AssemblyName>IQI.Intuition.Web.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Extensions">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Mvc.ModelMapper">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Mvc.ModelMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.ObjectModel">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence.Core">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Utilities">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Web.Mvc.JQGridHelpers">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Web.Mvc.JQGridHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Trirand.Web.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\Trirand.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administration\Account\AccountAddForm.cs" />
+    <Compile Include="Administration\Account\AccountAddMapForm.cs" />
+    <Compile Include="Administration\Account\AccountEditForm.cs" />
+    <Compile Include="Administration\Account\AccountEditMapForm.cs" />
+    <Compile Include="Administration\Account\AccountGrid.cs" />
+    <Compile Include="Administration\Account\AccountGridItem.cs" />
+    <Compile Include="Administration\Account\AccountGridItemMap.cs" />
+    <Compile Include="Administration\Account\AccountGridMap.cs" />
+    <Compile Include="Administration\Account\AccountGridRequest.cs" />
+    <Compile Include="Administration\Account\AccountViewForm.cs" />
+    <Compile Include="Administration\Account\AccountViewMapForm.cs" />
+    <Compile Include="Administration\Average\EditForm.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductAddForm.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductAddMapForm.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductGrid.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductGridItem.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductGridItemMap.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductGridMap.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductGridRequest.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductViewForm.cs" />
+    <Compile Include="Administration\FacilityProduct\FacilityProductViewMapForm.cs" />
+    <Compile Include="Administration\Facility\FacilityAddForm.cs" />
+    <Compile Include="Administration\Facility\FacilityAddMapForm.cs" />
+    <Compile Include="Administration\Facility\FacilityEditForm.cs" />
+    <Compile Include="Administration\Facility\FacilityEditMapForm.cs" />
+    <Compile Include="Administration\Facility\FacilityGrid.cs" />
+    <Compile Include="Administration\Facility\FacilityGridItem.cs" />
+    <Compile Include="Administration\Facility\FacilityGridItemMap.cs" />
+    <Compile Include="Administration\Facility\FacilityGridMap.cs" />
+    <Compile Include="Administration\Facility\FacilityGridRequest.cs" />
+    <Compile Include="Administration\Facility\FacilityViewForm.cs" />
+    <Compile Include="Administration\Facility\FacilityViewMapForm.cs" />
+    <Compile Include="Administration\Utilization\FacilityStats.cs" />
+    <Compile Include="Administration\Utilization\IndexView.cs" />
+    <Compile Include="Administration\WoundMap\Edit.cs" />
+    <Compile Include="CatheterAssessment\AssessmentForm.cs" />
+    <Compile Include="CatheterAssessment\AssessmentFormClientData.cs" />
+    <Compile Include="CatheterAssessment\AssessmentFormClientDataMap.cs" />
+    <Compile Include="CatheterAssessment\AssessmentFormMap.cs" />
+    <Compile Include="CatheterAssessment\AssessmentGridRequest.cs" />
+    <Compile Include="CatheterAssessment\AssessmentInfo.cs" />
+    <Compile Include="CatheterAssessment\AssessmentInfoMap.cs" />
+    <Compile Include="CatheterAssessment\EntryAssessmentGrid.cs" />
+    <Compile Include="CatheterAssessment\EntryAssessmentGridMap.cs" />
+    <Compile Include="Catheter\CatheterForm.cs" />
+    <Compile Include="Catheter\CatheterFormClientData.cs" />
+    <Compile Include="Catheter\CatheterFormClientDataMap.cs" />
+    <Compile Include="Catheter\CatheterFormMap.cs" />
+    <Compile Include="Catheter\CatheterGrid.cs" />
+    <Compile Include="Catheter\CatheterGridMap.cs" />
+    <Compile Include="Catheter\CatheterGridRequest.cs" />
+    <Compile Include="Catheter\CatheterInfo.cs" />
+    <Compile Include="Catheter\CatheterInfoMap.cs" />
+    <Compile Include="Catheter\PatientCatheterGrid.cs" />
+    <Compile Include="Catheter\PatientCatheterGridMap.cs" />
+    <Compile Include="Drug\NameSearchResult.cs" />
+    <Compile Include="Drug\Section.cs" />
+    <Compile Include="Drug\SectionView.cs" />
+    <Compile Include="Audit\AuditEntry.cs" />
+    <Compile Include="Audit\AuditRequest.cs" />
+    <Compile Include="Audit\AuditResult.cs" />
+    <Compile Include="Audit\AuditSummaryEntry.cs" />
+    <Compile Include="Patient\ChartRoomChange.cs" />
+    <Compile Include="Precaution\PatientPrecautionFormData.cs" />
+    <Compile Include="Precaution\PatientPrecautionInfoMap.cs" />
+    <Compile Include="Precaution\PatientPrecautionGridMap.cs" />
+    <Compile Include="Precaution\PatientPrecautionGridRequest.cs" />
+    <Compile Include="Precaution\PatientPrecautionGrid.cs" />
+    <Compile Include="Precaution\PatientPrecautionInfo.cs" />
+    <Compile Include="Precaution\PatientPrecautionForm.cs" />
+    <Compile Include="Precaution\PatientPrecautionOption.cs" />
+    <Compile Include="QICast\ImageUpload.cs" />
+    <Compile Include="QICast\NoteEdit.cs" />
+    <Compile Include="Reporting\Catheter\Facility\LineListingCatheterView.cs" />
+    <Compile Include="Reporting\Catheter\Facility\QuarterlyCatheterControlView.cs" />
+    <Compile Include="Reporting\Complaint\Facility\QuarterlyComplaintByFloorView.cs" />
+    <Compile Include="Reporting\Complaint\Facility\QuarterlyComplaintByWingView.cs" />
+    <Compile Include="Reporting\Complaint\Facility\QuarterlyComplaintTrendView.cs" />
+    <Compile Include="Reporting\Incident\Facility\WitnessedFallView.cs" />
+    <Compile Include="Reporting\Incident\Facility\CNAFallView.cs" />
+    <Compile Include="Reporting\Incident\Facility\PatientRepeatFallView.cs" />
+    <Compile Include="Reporting\Incident\FloorMapView.cs" />
+    <Compile Include="Reporting\Infection\Facility\AntibioticUtilizationByMDStatistics.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlySCAUTIView.cs" />
+    <Compile Include="Reporting\Infection\Facility\OrganismYearly.cs" />
+    <Compile Include="Reporting\Vaccine\Facility\LineListingVaccineView.cs" />
+    <Compile Include="Reporting\Wound\Facility\QuarterlyWoundByWingView.cs" />
+    <Compile Include="Reporting\Wound\Facility\WeeklyFlowSheet.cs" />
+    <Compile Include="QICast\FacilityView.cs" />
+    <Compile Include="SignUp\ApproveForm.cs" />
+    <Compile Include="SignUp\ApproveFormMap.cs" />
+    <Compile Include="SignUp\SignUpFormMap.cs" />
+    <Compile Include="SignUp\SignUpForm.cs" />
+    <Compile Include="Timeline\FacilityTimeline.cs" />
+    <Compile Include="Vaccine\PatientVaccineGrid.cs" />
+    <Compile Include="Vaccine\PatientVaccineGridMap.cs" />
+    <Compile Include="Vaccine\VaccineForm.cs" />
+    <Compile Include="Vaccine\VaccineFormClientData.cs" />
+    <Compile Include="Vaccine\VaccineFormClientDataMap.cs" />
+    <Compile Include="Vaccine\VaccineFormMap.cs" />
+    <Compile Include="Vaccine\VaccineGrid.cs" />
+    <Compile Include="Vaccine\VaccineGridMap.cs" />
+    <Compile Include="Vaccine\VaccineGridRequest.cs" />
+    <Compile Include="Vaccine\VaccineInfo.cs" />
+    <Compile Include="Vaccine\VaccineInfoMap.cs" />
+    <Compile Include="WoundAssessment\AssessmentFormClientData.cs" />
+    <Compile Include="WoundAssessment\AssessmentFormClientDataMap.cs" />
+    <Compile Include="Wound\ActiveWoundMap.cs" />
+    <Compile Include="Wound\ActiveWoundMapDetail.cs" />
+    <Compile Include="Wound\WoundGrid.cs" />
+    <Compile Include="Wound\WoundGridMap.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\AdministrationPRNGrid.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\AdministrationPRNGridMap.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\AdministrationPRNGridRequest.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\PsychotropicAdministrationPRNFormEdit.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\PsychotropicAdministrationPRNFormEditMap.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\PsychotropicAdministrationPRNInfo.cs" />
+    <Compile Include="PsychotropicAdministrationPRN\PsychotropicAdministrationPRNInfoMap.cs" />
+    <Compile Include="WoundAssessment\ReportAssessmentGrid.cs" />
+    <Compile Include="WoundAssessment\ReportAssessmentGridMap.cs" />
+    <Compile Include="WoundAssessment\AssessmentForm.cs" />
+    <Compile Include="WoundAssessment\AssessmentFormMap.cs" />
+    <Compile Include="WoundAssessment\AssessmentGridRequest.cs" />
+    <Compile Include="WoundAssessment\AssessmentInfo.cs" />
+    <Compile Include="WoundAssessment\AssessmentInfoMap.cs" />
+    <Compile Include="Wound\PatientWoundGrid.cs" />
+    <Compile Include="Wound\PatientWoundGridMap.cs" />
+    <Compile Include="Wound\WoundForm.cs" />
+    <Compile Include="Wound\WoundFormMap.cs" />
+    <Compile Include="Wound\WoundGridRequest.cs" />
+    <Compile Include="Wound\WoundInfo.cs" />
+    <Compile Include="Wound\WoundInfoMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationGridMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationGrid.cs" />
+    <Compile Include="PsychotropicDosageChange\AdministrationPsychotropicDosageGrid.cs" />
+    <Compile Include="PsychotropicDosageChange\AdministrationPsychotropicDosageGridMap.cs" />
+    <Compile Include="PsychotropicDosageChange\AdministrationPsychotropicDosageGridRequest.cs" />
+    <Compile Include="PsychotropicDosageChange\DosageForm.cs" />
+    <Compile Include="PsychotropicDosageChange\DosageSegmentEntry.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeFormAdd.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeFormAddMap.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeFormEdit.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeFormEditMap.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeInfoMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationInfoMap.cs" />
+    <Compile Include="PsychotropicDosageChange\PsychotropicDosageChangeInfo.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationFormEditMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationFormAddMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationFormEdit.cs" />
+    <Compile Include="PsychotropicAdministration\PatientPsychotropicAdministrationGrid.cs" />
+    <Compile Include="PsychotropicAdministration\PatientPsychotropicAdministrationGridMap.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationFormAdd.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationGridRequest.cs" />
+    <Compile Include="PsychotropicAdministration\PsychotropicAdministrationInfo.cs" />
+    <Compile Include="Reporting\Complaint\Facility\QuarterlyComplaintControlView.cs" />
+    <Compile Include="Reporting\Infection\Facility\LabDailyLineListingView.cs" />
+    <Compile Include="Reporting\Wound\Facility\LineListingWoundView.cs" />
+    <Compile Include="Reporting\Wound\Facility\QuarterlyWoundControlView.cs" />
+    <Compile Include="Reporting\Psychotropic\Facility\LineListingPsychotropicView.cs" />
+    <Compile Include="Reporting\Psychotropic\Facility\QuarterlyPsychotropicControlView.cs" />
+    <Compile Include="Resource\ResourceEntry.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactAddForm.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactAddMapForm.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactEditForm.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactEditMapForm.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactGrid.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactGridItem.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactGridItemMap.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactGridMap.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactGridRequest.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactViewForm.cs" />
+    <Compile Include="Administration\SystemContact\SystemContactViewMapForm.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileAddForm.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileGrid.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileGridItem.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileGridItemMap.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileGridMap.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileGridRequest.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileViewForm.cs" />
+    <Compile Include="Administration\SystemSecureFile\SystemSecureFileViewMapForm.cs" />
+    <Compile Include="Administration\SystemTicket\AccountSystemTicketGrid.cs" />
+    <Compile Include="Administration\SystemTicket\AccountSystemTicketGridMap.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketAddForm.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketAddMapForm.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketEditForm.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketEditMapForm.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketGrid.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketGridItem.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketGridItemMap.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketGridMap.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketGridRequest.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketList.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketViewForm.cs" />
+    <Compile Include="Administration\SystemTicket\SystemTicketViewMapForm.cs" />
+    <Compile Include="CmsMatrix\Dashboard.cs" />
+    <Compile Include="CmsMatrix\Entry.cs" />
+    <Compile Include="CmsMatrix\Note.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserForm.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserFormMap.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserGrid.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserGridMap.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserGridRequest.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserInfo.cs" />
+    <Compile Include="Configuration\AccountUser\AccountUserInfoMap.cs" />
+    <Compile Include="Configuration\Floor\FloorEntry.cs" />
+    <Compile Include="Configuration\Floor\FloorEntryList.cs" />
+    <Compile Include="Configuration\Floor\FloorEntryMap.cs" />
+    <Compile Include="Configuration\Room\RoomEntry.cs" />
+    <Compile Include="Configuration\Room\RoomEntryList.cs" />
+    <Compile Include="Configuration\Room\RoomEntryMap.cs" />
+    <Compile Include="Configuration\Warning\WarningRuleDescription.cs" />
+    <Compile Include="Configuration\Wing\WingEntry.cs" />
+    <Compile Include="Configuration\Wing\WingEntryList.cs" />
+    <Compile Include="Configuration\Wing\WingEntryMap.cs" />
+    <Compile Include="Complaint\ComplaintForm.cs" />
+    <Compile Include="Complaint\ComplaintFormMap.cs" />
+    <Compile Include="Complaint\ComplaintGrid.cs" />
+    <Compile Include="Complaint\ComplaintGridMap.cs" />
+    <Compile Include="Complaint\ComplaintGridRequest.cs" />
+    <Compile Include="Complaint\ComplaintInfo.cs" />
+    <Compile Include="Complaint\ComplaintInfoMap.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionForm.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionFormMap.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionGrid.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionGridMap.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionGridRequest.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionInfo.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionInfoMap.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionFormClientData.cs" />
+    <Compile Include="EmployeeInfection\EmployeeInfectionFormClientDataMap.cs" />
+    <Compile Include="Employee\EmployeeInfo.cs" />
+    <Compile Include="Employee\EmployeeInfoMap.cs" />
+    <Compile Include="Extensions\FormatExtensions.cs" />
+    <Compile Include="Incident\IncidentForm.cs" />
+    <Compile Include="Incident\IncidentFormClientData.cs" />
+    <Compile Include="Incident\IncidentFormClientDataMap.cs" />
+    <Compile Include="Incident\IncidentFormMap.cs" />
+    <Compile Include="Incident\IncidentWitness.cs" />
+    <Compile Include="Incident\IncidentGrid.cs" />
+    <Compile Include="Incident\IncidentGridMap.cs" />
+    <Compile Include="Incident\IncidentGridRequest.cs" />
+    <Compile Include="Incident\IncidentInfo.cs" />
+    <Compile Include="Incident\IncidentInfoMap.cs" />
+    <Compile Include="Incident\IncidentWitnessMap.cs" />
+    <Compile Include="Incident\PatientIncidentGrid.cs" />
+    <Compile Include="Incident\PatientInfectionGridMap.cs" />
+    <Compile Include="Infection\InfectionLabResult.cs" />
+    <Compile Include="Infection\InfectionLabResultMap.cs" />
+    <Compile Include="Infection\InfectionLabResultPathogen.cs" />
+    <Compile Include="Infection\InfectionNote.cs" />
+    <Compile Include="Infection\InfectionTreatment.cs" />
+    <Compile Include="Infection\InfectionTreatmentMap.cs" />
+    <Compile Include="Infection\InfectionTreatmentType.cs" />
+    <Compile Include="Infection\RemoveInfection.cs" />
+    <Compile Include="Navigation\NavigationItem.cs" />
+    <Compile Include="Authentication\SignInFormMap.cs" />
+    <Compile Include="Extensions\JqGridExtensions.cs" />
+    <Compile Include="Extensions\MappingExtensions.cs" />
+    <Compile Include="Home\DashboardMap.cs" />
+    <Compile Include="Home\FacilityInfo.cs" />
+    <Compile Include="Authentication\AccountUserInfoMap.cs" />
+    <Compile Include="Authentication\SignInForm.cs" />
+    <Compile Include="Authentication\AccountUserInfo.cs" />
+    <Compile Include="Home\Dashboard.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="PatientCensus\PatientCensusFormMap.cs" />
+    <Compile Include="PatientCensus\PatientCensusForm.cs" />
+    <Compile Include="PatientCensus\PatientCensusGrid.cs" />
+    <Compile Include="PatientCensus\PatientCensusGridMap.cs" />
+    <Compile Include="PatientCensus\PatientCensusGridRequest.cs" />
+    <Compile Include="PatientCensus\PatientCensusInfo.cs" />
+    <Compile Include="PatientCensus\PatientCensusInfoMap.cs" />
+    <Compile Include="Patient\ChartStatusChange.cs" />
+    <Compile Include="Patient\RemovePatient.cs" />
+    <Compile Include="Reporting\CmsMatrix\Census672View.cs" />
+    <Compile Include="Reporting\CmsMatrix\Matrix802View.cs" />
+    <Compile Include="Reporting\CmsMatrix\NotesView.cs" />
+    <Compile Include="Reporting\Complaint\Facility\LineListingComplaintView.cs" />
+    <Compile Include="Reporting\Composite\CompositeRequest.cs" />
+    <Compile Include="Reporting\Configuration\FloorMapConfiguration.cs" />
+    <Compile Include="Reporting\Configuration\FloorMapConfigurationPoint.cs" />
+    <Compile Include="Reporting\EmployeeInfection\Facility\LineListingInfectionView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByWingView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByFloorView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByHourOfDayView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByDayOfWeekView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByLocationView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByInjuryLevelView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByInjuryView.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentByTypeView.cs" />
+    <Compile Include="Reporting\Incident\Facility\LineListingIncidentView.cs" />
+    <Compile Include="Reporting\Incident\Facility\LineListingWitnessView.cs" />
+    <Compile Include="Reporting\Infection\Account\QuarterlyInfectionAverageView.cs" />
+    <Compile Include="Reporting\Infection\Account\QuarterlyInfectionByFacilityView.cs" />
+    <Compile Include="Reporting\Infection\Account\QuarterlyInfectionControlView.cs" />
+    <Compile Include="Reporting\Infection\Facility\AntibioticUtilizationMultipleByMD.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionBySiteView.cs" />
+    <Compile Include="Reporting\Infection\Facility\LineListingLabResultView.cs" />
+    <Compile Include="Reporting\Infection\Facility\LineListingNoteView.cs" />
+    <Compile Include="Reporting\Infection\Facility\LineListingTreatmentView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionTrendView.cs" />
+    <Compile Include="Reporting\Patient\PatientListView.cs" />
+    <Compile Include="Reporting\StateOfWisconsin\DHSStaffOutbreakCaseLog.cs" />
+    <Compile Include="Resource\ResourceEntryList.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemSecureFileAddForm.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketAddForm.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketAddMapForm.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketGrid.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketGridItem.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketGridItemMap.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketGridMap.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketGridRequest.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketViewForm.cs" />
+    <Compile Include="Timeline\SupportCenter\SystemTicketViewMapForm.cs" />
+    <Compile Include="Warning\WarningGrid.cs" />
+    <Compile Include="Warning\WarningGridMap.cs" />
+    <Compile Include="Warning\WarningGridRequest.cs" />
+    <Compile Include="Warning\WarningInfo.cs" />
+    <Compile Include="Warning\WarningInfoMap.cs" />
+    <Compile Include="Infection\PatientInfectionGridMap.cs" />
+    <Compile Include="Infection\InfectionFormMap.cs" />
+    <Compile Include="Infection\InfectionForm.cs" />
+    <Compile Include="Infection\PatientInfectionGrid.cs" />
+    <Compile Include="Infection\InfectionGridRequest.cs" />
+    <Compile Include="Infection\InfectionInfo.cs" />
+    <Compile Include="Infection\InfectionGrid.cs" />
+    <Compile Include="Infection\InfectionGridMap.cs" />
+    <Compile Include="Infection\InfectionInfoMap.cs" />
+    <Compile Include="Extensions\TemplateExtensions.cs" />
+    <Compile Include="Infection\InfectionFormClientData.cs" />
+    <Compile Include="Infection\InfectionFormClientDataMap.cs" />
+    <Compile Include="Patient\Chart.cs" />
+    <Compile Include="Patient\ChartMap.cs" />
+    <Compile Include="Patient\PatientFormMap.cs" />
+    <Compile Include="Patient\PatientForm.cs" />
+    <Compile Include="Patient\PatientGridMap.cs" />
+    <Compile Include="Patient\PatientInfo.cs" />
+    <Compile Include="Patient\PatientGrid.cs" />
+    <Compile Include="Patient\PatientGridRequest.cs" />
+    <Compile Include="Patient\PatientInfoMap.cs" />
+    <Compile Include="Patient\PatientInfoStatus.cs" />
+    <Compile Include="Patient\PatientFormClientData.cs" />
+    <Compile Include="Patient\PatientFormClientDataMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporting\Incident\Facility\QuarterlyIncidentControlView.cs" />
+    <Compile Include="Reporting\Infection\Facility\LineListingInfectionView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionAverageView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionByFloorView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionByTypeView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionByWingView.cs" />
+    <Compile Include="Reporting\Infection\FloorMapView.cs" />
+    <Compile Include="Reporting\Infection\Facility\QuarterlyInfectionControlView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\IQI.Intuition.Domain.csproj">
+      <Project>{10420AE7-A248-4FD3-B793-ED00378CFBC5}</Project>
+      <Name>IQI.Intuition.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Services\IQI.Intuition.Infrastructure.Services.csproj">
+      <Project>{887ED715-BDE1-4E27-8385-3C91847024B9}</Project>
+      <Name>IQI.Intuition.Infrastructure.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\IQI.Intuition.Reporting.csproj">
+      <Project>{0C0765BA-534E-4AAC-A292-FC8D22B41554}</Project>
+      <Name>IQI.Intuition.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,62 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.StateOfWisconsin.DHSStaffOutbreakCaseLogView
+           
+@{
+    ViewBag.Layout_ContentTitle = "DHS Staff Outbreak Case Log";
+
+}
+
+<section class="grid_32 box leading"> 
+        <h3>Employee Infection List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th>NO</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Assignment</th>
+                <th>Onset</th>
+                <th>Well</th>
+                <th>N</th>
+                <th>V</th>
+                <th>D</th>
+                <th>AC</th>
+                <th>Fe</th>
+                <th>Ch</th>
+                <th>Ret - Wk</th>
+                <th>Hosp.</th>
+                <th>Lab Results</th>
+            </tr>
+            @foreach (var infection in Model.Infections)
+            {
+                    <tr>
+                        <td style="vertical-align:top;">@infection.Number</td>
+                        <td style="vertical-align:top;">@infection.Name</td>
+                        <td style="vertical-align:top;">@infection.Age</td>
+                        <td style="vertical-align:top;">@infection.Gender</td>
+                        <td style="vertical-align:top;">@infection.Assignment</td>
+                        <td style="vertical-align:top;">@infection.OnSet</td>
+                        <td style="vertical-align:top;">@infection.Well</td>
+                        <td style="vertical-align:top;">@infection.N</td>
+                        <td style="vertical-align:top;">@infection.V</td>
+                        <td style="vertical-align:top;">@infection.D</td>
+                        <td style="vertical-align:top;">@infection.AC</td>
+                        <td style="vertical-align:top;">@infection.FE</td>
+                        <td style="vertical-align:top;">@infection.CH</td>
+                        <td style="vertical-align:top;">@infection.RetWork</td>
+                        <td style="vertical-align:top;">@infection.Hospital</td>
+                        <td style="vertical-align:top;">@infection.LabResults</td>
+                    </tr>
+            }
+             </table>
+
+            <div style="font-style:italic;font-size:12px;padding-top:10px;">
+            Onset=Onset of Illness; Well=Well Day; N=Nausea, V=Vomiting, D=Diarrhea; AC=Abdominal Cramping; Fe=Fever; Ch=Chills; Rt-Wk=Return to Work date; Hosp=Hospitalization 
+            </div>
+
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>

@@ -1,0 +1,78 @@
+﻿@model IQI.Intuition.Web.Models.Configuration.AccountUser.AccountUserForm
+
+@{
+    ViewBag.Layout_ContentTitle = "Account User";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+    <br />
+    <div class="grid_16" id="buttons">
+        <button type="submit" class="left cancel" name="cancel" value="true">Cancel</button>
+        <button type="submit" class="right save">Save</button>
+        <span class="clear"></span>
+    </div>
+
+    if (ViewContext.HasErrors())
+    {
+        <section class="grid_16 box">
+            <div class="inside form">
+                @Html.ValidationSummary()
+            </div>
+        </section>
+    }
+    <section class="grid_16 box">
+        <h3>Account User Information</h3>
+        <div class="inside form">
+
+            <div class="grid_6">
+                <p>
+                    <div class="field">@Html.EditorFor(model => model.Login)</div>
+                    <div class="field">@Html.EditorFor(model => model.FirstName)</div>
+                    <div class="field">@Html.EditorFor(model => model.LastName)</div>
+                    <div class="field">@Html.EditorFor(model => model.EmailAddress)</div>
+                    <div class="field">@Html.EditorFor(model => model.CellPhone)</div>
+                    <div class="field">@Html.EditorFor(model => model.Password)</div>
+                    <div class="field">@Html.EditorFor(model => model.IsActive)</div>
+                </p>
+            </div>
+            <div class="grid_4">
+                <p>
+                    <h3>Facility Access</h3>
+                    <div class="field" style="font-size:12px;">@Html.EditorFor(model => model.SelectedFacilities)</div>
+                </p>
+            </div>
+            <div class="grid_4">
+                <p>
+                    <h3>Permissions</h3>
+                    <div class="field" style="font-size:12px;">@Html.EditorFor(model => model.SelectedPermissions)</div>
+                </p>
+            </div>
+            <div class="clear"></div>
+            <br />
+        </div>
+    </section>
+
+
+    <section class="grid_16 box" >
+        <h3>Warning Notifications</h3>
+        <div class="inside form">
+            <p>
+
+                <div class="field" style="font-size:12px;">@Html.EditorFor(model => model.NotificationMethod)</div>
+            </p>  
+            <br />
+            <hr />
+            <div style="font-size:12px;">
+                @Html.EditorFor(model => model.SelectedWarningRules)
+            </div>
+            
+        </div>
+     </section>
+
+
+            <div class="clear"></div>
+
+            }
+            <div class="clear"></div>

@@ -1,0 +1,110 @@
+﻿@model IQI.Intuition.Web.Models.QICast.FacilityView
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="background-color:rgba(0,0,0,0.6);color:#FFFFFF;font-size:24px;padding:5px;border-bottom:1px #808080 solid;font-family:'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;width:1900px;">
+    <div style="float:left;width:500px;">
+        <img src="@Url.Content("~/Content/icons/home-24.png")"/>
+        <span  style="vertical-align:middle;" >@Model.AccountName - @Model.FacilityName</span> 
+    </div>
+    <div style="float:right;" align="right;">
+        <img src="@Url.Content("~/Content/icons/clock-24.png")"/>
+        <span id="Clock"  style="vertical-align:middle;" ></span>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+<div id="exiRoot" style="height:980px">
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    var getCommandsCommand = '@Url.Action("GetCommands")';
+    var designMode = @Model.DesignMode.ToString().ToLower() ;
+
+    $(document).ready(function () {
+
+        var finalZoomLevel = 1;
+
+        if(designMode)
+        {
+            var width = $(window).width();
+            var height = $(window).height();
+
+            var hZoomLevel = $(window).height() / 1080;
+            var wZoomLevel = $(window).width() / 1900;
+
+            finalZoomLevel = hZoomLevel;
+
+            if(wZoomLevel < hZoomLevel)
+            {
+                finalZoomLevel = wZoomLevel;
+            }
+
+            $('#root').css('transform','scale(' + finalZoomLevel + ')' );
+            $('#root').css('transform-origin','top left' );
+        }
+
+        var options = [];
+        options['ActionRoot'] = '@Url.Content("~/QICast/Facility/")';
+        options['onActiveSectionRendered'] = activeSectionRendered;
+        options['nonTileMode'] = true;
+        options['zoom'] = finalZoomLevel;
+        sCoreExi.initCanvas($('#exiRoot'), options);
+
+        setInterval(function () {
+            $('#Clock').text(new Date().toLocaleString());
+        }, 1000);
+
+        if(!designMode)
+        {
+            getCommands(true);
+
+            setInterval(function () {
+                getCommands(false);
+            }, 5000);
+        }
+
+
+
+    });
+
+    function activeSectionRendered(section) {
+        $('.sCoreExiSectionSectionManagement').hide();
+        $('.sCoreExiControlPrintSlot').hide();
+
+
+        $('.sCoreExiControlPanel').hover(
+        function () {
+            $('.sCoreExiControlAddWidget').show();
+        },
+        function () {
+            $('.sCoreExiControlAddWidget').hide();
+        });
+
+        $('.sCoreExiControlAddWidget').hide();
+
+    }
+
+    function getCommands(init) {
+        $.get(getCommandsCommand + '?initial=' + init, function (data) {
+
+            var commands = data["commands"];
+
+            for(i= 0; i < commands.length; i++)
+            {
+                eval(commands[i]["Command"]);
+            }
+
+            sCoreExi.sendKioskCommand('HeartBeat');
+
+        });
+    }
+
+
+</script>

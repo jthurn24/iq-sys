@@ -1,0 +1,54 @@
+﻿@model IQI.Intuition.Web.Models.Administration.Average.EditForm
+@{
+    ViewBag.Layout_ContentTitle = "Manage Averages";
+}
+
+<section class="grid_16 box leading">
+    <h3>Averages</h3>
+    <div class="inside form">
+
+        <div class="grid_6">
+           <div style="padding-top:15px;padding-bottom:10px;">
+              @Html.DropDownListFor(m => m.AverageType, Model.AverageOptions)
+           </div>
+
+            <div style="padding-top:10px;padding-bottom:10px;">
+                @foreach (var e in Model.FacilityAverageOptions.OrderBy(x => x.Text))
+                {
+                    <div style="padding-top:10px;">
+                        <div style="width:200px;font-weight:bold;float:left;">
+                            @e.Text
+                        </div>
+                        <div style="width:100px;float:left;" id="@e.Value">
+                            @if (e.Selected)
+                            {
+                                <a href='@Url.Action("toggle",new{ facilityid = e.Value, typeid = Model.AverageType })' style="color:green;">On</a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action("toggle",new{ facilityid = e.Value, typeid = Model.AverageType })' style="color:red;">Off</a>
+                            }
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script type="text/javascript">
+
+  
+
+    $(document).ready(function () {
+
+        $('#AverageType').change(function () {
+            window.location = ('/Administration/Average/Index/' + $('#AverageType').val())
+        });
+    });
+
+</script>

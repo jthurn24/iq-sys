@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    ViewBag.Layout_PageTitle = "User Agreement";
+}
+
+<section class="grid_4">
+&nbsp;
+</section>
+
+<section class="grid_10 box leading">
+    <h3>User Agreement</h3>
+    <div class="inside form">
+
+        @using (Html.BeginForm())
+        {
+            <div>
+            User acknowledges that the use of IQI Systems LLC  and access to the IQI Systems Intuition will involve access to highly confidential information. 
+            User agrees to ensure that use of IQI Systems Intuition and all information obtained through its use by User is in compliance with all 
+            applicable laws and regulations, including the Health Insurance Portability and Accountability Act of 1996 (“HIPAA”) and all regulations 
+            relating thereto and any other laws and regulations governing restricted access to and the confidentiality of patient clinical records and 
+            individually identifiable health information. User agrees that User shall not disclose, by any means, such information to any unauthorized 
+            person, business, or other entity. User agrees that User shall not permit any unauthorized person, business or entity to review or copy any 
+            such information except as provided by law. User will be responsible for violation of any applicable law and for any misuse of that information.  
+            </div>
+            <div class="submit" style="padding-top:20px;padding-bottom:10px;" align="center">
+                <button type="submit">I Agree</button>
+            </div>
+        }
+    </div>
+</section>
+
+<div style="clear:both;"></div>
+
+
+

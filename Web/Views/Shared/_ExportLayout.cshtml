@@ -1,0 +1,74 @@
+﻿<!doctype html>  
+ 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]--> 
+<head> 
+ 
+
+    @{var locationDescription = ""; }
+
+    @if (ViewBag.Layout_LocationDescription == null)
+    { locationDescription = this.ViewContext.GetFacilityName(); }
+    else
+    { locationDescription = ViewBag.Layout_LocationDescription; }
+
+    @{var user = this.ViewContext.GetUserName(); }
+    @{var title = ViewBag.Layout_ContentTitle; }
+    @{var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"); }
+    @{var on = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, cstZone).ToString("MM/dd/yy HH:mm"); }
+
+    <meta charset="utf-8" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+    @Html.Css("/styles/smoothness/jquery-ui-1.8.14.custom.css")
+    @Html.Css("/styles/ui.jqgrid.css")
+    @Html.Css("/styles/style-export.css")
+    @Html.Css("/styles/dev.css")
+
+    <style>
+        .image-fit-portrait 
+        {
+        	max-height:1150px;
+        }
+    </style>
+
+    <title>@(ViewBag.Layout_PageTitle ?? ViewBag.Layout_ContentTitle ?? "IQI Intuition")</title>
+</head> 
+<body> 
+
+<section id="content">
+    @if(ViewBag.HideHeader != true)
+    {
+        <table border="0" width="100%">
+            <tr>
+                <td style="vertical-align:top;">
+                    <img src="/Content/images/print-logo.jpg" />
+                </td>
+                <td style="vertical-align:top;">
+                    <div style="text-align:right;font-weight:bold;font-size:22px;">
+                        @title
+                    </div>
+                    <div style="text-align:right;font-weight:bold;font-size:14px;padding-top:1px;">
+                        @locationDescription
+                    </div>
+                    <div style="text-align:right;font-weight:bold;font-size:14px;padding-top:1px;">
+                        Printed By: @user
+                    </div>
+                    <div style="text-align:right;font-weight:bold;font-size:14px;padding-top:1px;">
+                        Printed On: @on
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+    <div id="main"> 
+        @RenderBody()
+    </div>
+
+</section>
+
+</body> 
+</html>
+

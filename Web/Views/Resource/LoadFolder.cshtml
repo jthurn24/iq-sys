@@ -1,0 +1,40 @@
+﻿@model IQI.Intuition.Web.Models.Resource.ResourceEntryList
+
+@{var alt = false;}
+<div style="padding:10px;font-size:12px;font-weight:bold;">
+@Model.Path
+</div>
+<hr />        
+
+@foreach (var entry in Model.Entries)
+{
+    <div style="padding:5px;">
+        <div style="background-color:#e8e8e8;border:solid 1px #939495;padding:2px;">
+            @if (alt)
+            {
+                alt = false;
+            <div style="padding-bottom:3px;background-color:#ffffcc;border:1px solid #e8e8e8;padding-left:5px;">
+                <a style="text-decoration:none;font-size:12px;color:#344148;font-style:italic;" @if (entry.ResourceType == IQI.Intuition.Domain.Enumerations.ResourceType.Link)
+                {<text>target="top"</text>} href="@entry.Link">
+                &bull; @entry.Name
+                </a>
+            </div>
+            }
+            else
+            {
+                alt = true;
+            <div style="padding-bottom:3px;background-color:#344148;border:1px solid #e8e8e8;padding-left:5px;">
+                <a style="text-decoration:none;font-size:12px;color:White;font-style:italic;" @if (entry.ResourceType == IQI.Intuition.Domain.Enumerations.ResourceType.Link)
+                {<text>target="top"</text>} href="@entry.Link">
+                &bull; @entry.Name
+                </a>
+            </div>                
+            }
+            <div style="font-size:9px;padding-top:3px;padding-left:10px;padding-bottom:4px;">
+                 @entry.Description
+            </div>
+        </div>
+    </div>
+
+}
+

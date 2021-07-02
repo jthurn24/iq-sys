@@ -1,0 +1,68 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.WitnessedFallView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Falls Witnessed/Unwitnessed";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Falls Witnessed/Unwitnessed";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = false;
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+<section class="grid_16 box leading"> 
+        <h3>Falls Witnessed/Unwitnessed</h3>
+        <div class="inside">
+
+            <div style="padding:10px;">
+                <table width="100%">
+                <tr>
+                    <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                    <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBox("StartDate", Model.StartDate.FormatAsMinimalDate(), new { type = "datepicker" })  </td>
+                    <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBox("EndDate", Model.EndDate.FormatAsMinimalDate(), new { type = "datepicker" })   </td>
+                    <td>@Html.SmartSubmit("Refresh")</td>
+                </tr>
+                </table>
+                <br />
+            </div>
+            
+        </div> 
+</section>
+
+}
+<section class="grid_8 box leading"> 
+        <h3>Fall Totals</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;width:350px;">
+            <tr>
+                <th style="width:200px;">CNA</th>
+                <th style="width:200px;">Total Falls</th>
+            </tr>
+        </table>
+            @foreach (var e in Model.Entries)
+            {
+                <table class="iqitable" style="margin-bottom:0px;width:350px;">
+                    <tr>
+                        <td style="width:200px;">@e.Title</td>
+                        <td style="width:200px;">@e.Total</td>
+                    </tr>
+                </table>
+            }
+        
+        </div> 
+    <br />
+</section>
+
+
+<section class="grid_8 box leading"> 
+        <h3>Witnessed/Unwitnessed %</h3>
+        <div class="inside">
+        <br />
+            @Html.DisplayFor(x => x.WitnessedChart)
+        </div>
+</section>
+
+<div style="clear:both;">&nbsp;</div>

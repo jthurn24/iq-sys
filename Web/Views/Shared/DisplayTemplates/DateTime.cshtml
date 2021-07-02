@@ -1,0 +1,22 @@
+﻿@model System.DateTime?
+           
+           
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+}
+@section FormField
+{
+    @if (Model.HasValue == false)
+    {
+        <span class="answer">N/A</span>
+    }
+    else 
+    {
+        <span class="answer">@Model.Value.ToString("MM/dd/yyyy")</span>
+    }
+}
+

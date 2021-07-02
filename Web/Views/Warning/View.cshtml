@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Warning.WarningInfo
+
+@{
+    ViewBag.Layout_ContentTitle = "View Warning";
+}
+@using (Html.BeginForm())
+{
+
+    <br />    
+    <div class="grid_16" id="buttons">
+        <button type="submit" class="right save">Exit</button>
+    <span class="clear"></span>
+    </div> 
+ 
+ <section class="grid_16 box">
+        <h3>Warning</h3>
+        <div class="inside form">
+            <div class="grid_6">
+            <p>
+                <div class="field">@Html.DisplayFor(model => model.Title)</div>
+                @if (Model.PatientName.IsNotNullOrEmpty())
+                {
+                    <div class="field">@Html.DisplayFor(model => model.PatientName)</div>
+                }
+                <div class="field">@Html.DisplayFor(model => model.Target)</div>
+                <div class="field">@Html.DisplayFor(model => model.TriggeredOn)</div>
+            </p>
+            </div>
+            <div class="grid_6">
+            <p>
+                <div style="padding-top:10px;">
+                    @Html.Raw(Model.DescriptionText)
+                </div>
+            </p>
+            </div>
+        </div>
+         <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+    
+}
+<div class="clear"></div>

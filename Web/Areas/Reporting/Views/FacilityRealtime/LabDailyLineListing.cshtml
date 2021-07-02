@@ -1,0 +1,79 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LabDailyLineListingView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Lab Daily Infection Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Lab Daily Infection Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+
+<section class="grid_16 box leading"> 
+        <h3>Infection List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:200px;">Patient/ <br /> Date/ <br /> Point Of Origin</th>
+                <th style="width:150px;">Infection</th>
+                <th style="width:70px;">Temp/ <br /> WBC/ <br /> Catheter</th>
+                <th style="width:150px;">Antibiotics</th>
+                <th style="width:150px;">Lab Results</th>
+                <th style="width:150px;">Isolation Type</th>
+                <th style="width:150px;">Xray Results</th>
+            </tr>
+            @foreach (var infection in Model.Infections)
+            {
+                <tr>
+                    <td>
+                        @infection.PatientName
+                        <br />
+                        @infection.Date
+                        <br />
+                        @infection.PointOfOrigin
+                    </td>
+                    <td>
+                        <div style="font-weight:bold;padding-bottom:3px;">@infection.InfectionType</div>
+                        <a href="@Url.Action("Edit", new { Controller = "Infection", Area = "", id = infection.Id, returnurl = Request.Url.AbsoluteUri })">
+                        @infection.InfectionSite
+                        </a>
+                    </td>
+                    <td>@infection.Temp
+                        <br />
+                        @infection.WBC
+                        <br />
+                        @infection.Catheter
+                    </td>
+                    <td>
+                        @foreach (var antibiotic in infection.Antibiotics)
+                        {
+                            <div>@Html.Raw(antibiotic)</div>
+                            <hr />
+                        }
+                    </td>
+                    <td>
+                        @foreach (var result in infection.LabResults)
+                        {
+                            <div>@Html.Raw(result)</div>
+                            <hr />
+                        }
+                    </td>
+                    <td>
+                        @foreach (var isolation in infection.IsolationTypes)
+                        {
+                            <div>@Html.Raw(isolation)</div>
+                            <hr />
+                        }
+                    </td>
+                    <td>@infection.XrayResults</td>
+                </tr>
+            }
+        </table>
+
+      
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>

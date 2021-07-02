@@ -1,0 +1,25 @@
+﻿@model string
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+    var htmlAttributes = new RouteValueDictionary(ViewBag.HtmlAttributes as object);
+    htmlAttributes["data_max_length"] = ViewData.ModelMetadata.MaxLength(); // This will need javascript to enforce
+}
+@section FormField
+{
+    @if (ViewData.ModelMetadata.IsReadOnly)
+    {
+        <span class="multiline">@ViewData.TemplateInfo.FormattedModelValue</span>
+        @Html.Hidden(TemplateHelperName.Default, Model)
+    }
+    else
+    {
+        @Html.TextArea(
+            TemplateHelperName.Default,
+            Model,
+            htmlAttributes)
+    }
+}

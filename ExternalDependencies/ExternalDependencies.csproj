@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6DA525D1-4878-4DAF-B94A-1A6C824F83FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExternalDependencies</RootNamespace>
+    <AssemblyName>ExternalDependencies</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Freshbooks.Library.dll" />
+    <Content Include="HibernatingRhinos.Profiler.Appender.dll" />
+    <Content Include="Ionic.Zip.dll" />
+    <Content Include="Microsoft\MSChart.exe" />
+    <Content Include="sCore\Antlr3.Runtime.dll" />
+    <Content Include="sCore\Castle.Core.dll" />
+    <Content Include="sCore\Elmah.dll" />
+    <Content Include="sCore\FluentNHibernate.dll" />
+    <Content Include="sCore\GoGrid.dll" />
+    <Content Include="sCore\Iesi.Collections.dll" />
+    <Content Include="sCore\log4net.dll" />
+    <Content Include="sCore\Loggly.Config.dll" />
+    <Content Include="sCore\Loggly.dll" />
+    <Content Include="sCore\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="sCore\Moq.dll" />
+    <Content Include="sCore\Newtonsoft.Json.dll" />
+    <Content Include="sCore\NHibernate.ByteCode.Castle.dll" />
+    <Content Include="sCore\NHibernate.dll" />
+    <Content Include="sCore\NLog.dll" />
+    <Content Include="sCore\PdfSharp.dll" />
+    <Content Include="sCore\RazorEngine.dll" />
+    <Content Include="sCore\RedArrow.Framework.Extensions.dll" />
+    <Content Include="sCore\RedArrow.Framework.Ioc.dll" />
+    <Content Include="sCore\RedArrow.Framework.Ioc.Mvc.dll" />
+    <Content Include="sCore\RedArrow.Framework.Ioc.StructureMap.dll" />
+    <Content Include="sCore\RedArrow.Framework.Logging.dll" />
+    <Content Include="sCore\RedArrow.Framework.Logging.log4net.dll" />
+    <Content Include="sCore\RedArrow.Framework.Mvc.dll" />
+    <Content Include="sCore\RedArrow.Framework.Mvc.ModelMapper.dll" />
+    <Content Include="sCore\RedArrow.Framework.ObjectModel.dll" />
+    <Content Include="sCore\RedArrow.Framework.Persistence.Core.dll" />
+    <Content Include="sCore\RedArrow.Framework.Persistence.dll" />
+    <Content Include="sCore\RedArrow.Framework.Persistence.Mvc.dll" />
+    <Content Include="sCore\RedArrow.Framework.Persistence.NHibernate.dll" />
+    <Content Include="sCore\RedArrow.Framework.Persistence.NHibernate.Helpers.dll" />
+    <Content Include="sCore\RedArrow.Framework.Utilities.dll" />
+    <Content Include="sCore\Remotion.Data.Linq.dll" />
+    <Content Include="sCore\Renci.SshNet.dll" />
+    <Content Include="sCore\ScriptGenerator.exe" />
+    <Content Include="sCore\SnyderIS.sCore.Charting.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Console.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Console.ReportRunner.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Console.ReportRunner.Sti.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Encryption.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Exi.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Exi.Mvc.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Extensions.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Logging.elmah.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Migration.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Persistence.dll" />
+    <Content Include="sCore\SnyderIS.sCore.SystemManagement.dll" />
+    <Content Include="sCore\SnyderIS.sCore.SystemManagement.exe" />
+    <Content Include="sCore\SnyderIS.sCore.Web.Mvc.dll" />
+    <Content Include="sCore\SnyderIS.sCore.Web.Mvc.JQGridHelpers.dll" />
+    <Content Include="sCore\StructureMap.dll" />
+    <Content Include="sCore\System.Web.Mvc.dll" />
+    <Content Include="sCore\System.Web.Routing.dll" />
+    <Content Include="sCore\System.Web.Services.dll" />
+    <Content Include="sCore\Trirand.Web.Mvc.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sCore\ScriptGenerator.exe.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

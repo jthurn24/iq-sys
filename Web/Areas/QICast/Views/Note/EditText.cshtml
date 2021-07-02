@@ -1,0 +1,33 @@
+﻿@model IQI.Intuition.Web.Models.QICast.NoteEdit
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Edit Note Text</title>
+</head>
+<body style="background-color:black;">
+    <div align="center">
+    <div style="width:850px;">
+        @using (Html.BeginForm())
+        {
+            <div style="color:white;">
+                Content:
+            </div>
+            <div>
+                <textarea name="content" style="width:800px;height:100px;">@Model.Content</textarea>
+            </div>
+            <div>
+                <input type="hidden" value="@Model.Id" name="Id" />
+                <input type="hidden" value="@Model.Referrer" name="Referrer" />
+                <input type="submit" value="Save" style="width:800px;" />
+            </div>
+        }
+    </div>
+    </div>
+</body>
+</html>

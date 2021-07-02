@@ -1,0 +1,28 @@
+﻿@model IQI.Intuition.Web.Models.SupportCenter.SystemTicketGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Open Support Tickets";
+}
+
+<br />
+
+<div class="grid_16" id="buttons">
+    @Html.SmartButton(Url.Action("Index"),"Return To Support Center")
+<span class="clear"></span>
+</div> 
+
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+
+</section>
+
+
+<script type="text/javascript">
+
+    function systemticketRowSelect(id) {
+        smoothLoad('@Url.Action("ViewTicket")/?id=' + id);
+    }
+
+</script>

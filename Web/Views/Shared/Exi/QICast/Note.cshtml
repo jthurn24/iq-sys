@@ -1,0 +1,63 @@
+﻿@model IQI.Intuition.Exi.Models.QICast.Note
+
+
+
+<div id="@Model.GetHashCode()" class="@Model.BackgroundStyle" style="opacity:.85;">
+<div class="tile-content fg-white" style="padding:5px;">
+
+    <div>
+    @if ( (Model.Content == null || Model.Content == string.Empty) && Model.HasImage == false)
+    {
+        <span>Special Note...</span>
+    }
+    else
+    {
+        <div style="min-width:300px;padding:3px;max-width:600px;" class="bg-black"> 
+
+            @if (Model.HasImage)
+            {
+                <img style="float:left;margin:10px;" src="@Url.Action("DisplayImage",new { controller="note", area="qicast", id=Model.Id })" />
+            }
+
+            @Html.Raw(Model.Content.ReplaceNewLineWithBreakTag())
+                
+        </div>
+        <div style="clear:both;"></div>
+    }
+    </div>
+
+    <div class="quinotes_control" style="padding-bottom:5px;height:40px;" align="right">
+        <div class="bg-white fg-black quinotes_control_c" style="display:none;padding:3px;">
+        <a href="@Url.Action("EditText",new { controller="note", area="qicast", id=Model.Id }) ">Edit Text</a> 
+        &nbsp; |  &nbsp; 
+        <a href="@Url.Action("UploadImage",new { controller="note", area="qicast", id=Model.Id }) ">Edit Image</a>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var id = '@Model.GetHashCode()';
+
+
+        $('#' + id).find('.quinotes_control').mouseover(
+              function () {
+                  $(this).find('.quinotes_control_c').show();
+              }
+            );
+
+        $('#' + id).find('.quinotes_control').mouseout(
+        function () {
+            $(this).find('.quinotes_control_c').hide();
+        }
+    );
+    });
+
+</script>

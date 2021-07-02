@@ -1,0 +1,161 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LineListingInfectionView.InfectionRow
+
+
+<tr>
+    <td style="vertical-align:top;width:150px;">
+        <div>
+        <span>Noted:</span> @Model.Date.ToString() 
+        </div>
+        <div style="padding-top:10px;font-weight:bold;">
+        @if (Model.ResolvedDate != string.Empty)
+        {
+            <span>Resolved:</span> @Model.ResolvedDate
+        }
+        </div>
+        @if (Model.RecentInfectionDates.Count() > 0)
+        {
+            <div><span style="font-size:9px;">@Model.RecentInfectionsDescription</span></div>
+            foreach (var date in Model.RecentInfectionDates)
+            {
+                <div>@date</div>
+            }
+        }
+    </td>
+    <td style="vertical-align:top;width:150px;">
+        <div style="color:Black;font-weight:bold;">@Model.PatientName</div>
+        <div><span style="font-weight:bold;">Room:</span> @Model.Room</div>
+        <div><span style="font-weight:bold;">Wing:</span> @Model.Wing</div>
+        <div><span style="font-weight:bold;">Floor:</span> @Model.Floor</div>
+        <div><span style="font-weight:bold;">Birthdate:</span> @Model.PatientBirthDate</div>
+        <div><span style="font-weight:bold;">Admitted:</span> @Model.AdmissionDate</div>
+        <br />
+        @if (Model.Flags.Count() > 0)
+        {
+            <div><span style="font-weight:bold;">Flags:</span></div>
+            foreach (var flag in Model.Flags)
+            {
+                <div>@flag</div>
+            }
+        }
+        
+        @if(Model.NursePractitioner != null && Model.NursePractitioner != String.Empty)
+        {
+            <div style="padding-top:10px;">
+                <div style="font-weight:bold;">Nurse Practitioner</div>
+                <div>@Model.NursePractitioner</div>
+            </div>
+        }
+
+    </td>
+    <td style="vertical-align:top;width:300px;">
+        <div style="font-weight:bold;">Type</div> 
+        @if (Convert.ToBoolean(ViewData["showLink"]))
+        {
+            <div style="padding-bottom:5px;font-weight:bold;"><a href="@Url.Action("Edit", new { Controller = "Infection", Area = "", id = Model.ID, returnurl = Request.Url.AbsoluteUri })">@Model.InfectionType</a></div>
+        }
+        else
+        {
+            <div style="padding-bottom:5px;font-weight:bold;">@Model.InfectionType</div>
+        }
+        <div style="font-weight:bold;">Condition</div> 
+        <div style="padding-bottom:5px;">@Model.InfectionTypeDetails</div>
+        <div style="font-weight:bold;">Classification</div>
+        <div style="padding-bottom:5px;">@Model.Classification</div>
+        @if (Model.MdNotifiedIneligibleCriteria)
+        {
+            <div style="font-weight:bold;font-style:italic;font-size:9px;">** MD has been notified that this infection does not meet the criteria</div>
+        }
+        <div style="font-weight:bold;padding-top:5px;">Reasons:</div>
+        <hr />
+        @foreach (var reason in Model.Reasons)
+        {
+            <div>@Html.Raw(reason)</div>
+            <hr />
+        }
+    </td>
+    <td style="vertical-align:top;width:300px;">
+        @if (@Model.HasChestXrayResults)
+        {
+        <div style="font-weight:bold;">Chest Xray Date</div>
+        <div>@Model.ChestXrayDate</div>
+        <div style="font-weight:bold;">Xray Results</div>
+        <div>@Model.ChestXrayResults</div>
+        }
+                    
+        @if (Model.RiskFactors.Count() > 0)
+        {
+            <div style="font-weight:bold;">Risk Factors:</div>  
+            foreach (var factor in Model.RiskFactors)
+            {
+                <div>@factor</div>
+            }
+        }
+                    
+        @if (Model.AdditionalRiskFactors.IsNotNullOrEmpty())
+        {
+            <div style="font-weight:bold;">Additional Risk Factors:</div>  
+            <div>@Model.AdditionalRiskFactors</div>
+        }
+                
+
+        @if (Model.Precautions.Count() > 0)
+        {
+        <div style="font-weight:bold;">Preventions:</div>
+            foreach (var precaution in Model.Precautions)
+            {
+                <div>@precaution</div>
+            }
+        }
+        
+                    
+        @if (Model.Treatments.Count() > 0)
+        {
+            <div style="font-weight:bold;">Treatments:</div>
+            foreach (var treatment in Model.Treatments)
+            {
+                <div style="font-style:italic;">@treatment.TreatmentName</div>
+                <span>@treatment.AdministeredOn</span>
+                <span>@treatment.MDName</span>
+                <span>@treatment.Dosage</span>
+                <span>@treatment.Units</span>
+                <span>@treatment.Frequency</span>
+                <span>@treatment.Duration</span>
+                <span>@treatment.DeliveryMethod</span>
+                <div>@treatment.SpecialInstructions</div>
+                <hr />
+            }
+        }
+        
+        @if (Model.LabsPending)
+        {
+            <div style="font-weight:bold;font-style:italic;font-size:11px;color:red;padding:5px;">** Labs Pending</div>
+        }
+        @if (Model.LabResults.Count() > 0)
+        {
+            <div style="font-weight:bold;">Lab Results:</div>
+            foreach (var result in Model.LabResults)
+            {
+                <div style="font-style:italic;">@result.TestType - @result.Result - @result.CompletedOn</div>
+                foreach (var pathogen in result.Pathogens)
+                {
+                    <div>@pathogen</div>
+                }
+                <div>@result.Notes</div>
+                <hr />
+            }
+        }
+                    
+        @if (Model.Notes.Count() > 0)
+        {
+            <div style="font-weight:bold;">Notes:</div>
+            foreach (var note in Model.Notes)
+            {
+                <div style="font-style:italic;">@note.CreatedOn</div>
+                <div style="word-break:break-all;">@note.Note</div>
+                <hr />
+            }
+        }
+                    
+    </td>
+                
+</tr>

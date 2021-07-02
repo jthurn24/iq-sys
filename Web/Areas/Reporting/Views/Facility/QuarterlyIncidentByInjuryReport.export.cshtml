@@ -1,0 +1,40 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.QuarterlyIncidentByInjuryView
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>Totals</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.TotalChart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<div class="clear"></div>
+
+<section class="grid_32 box"> 
+            @Html.DisplayFor(m => m.IncidentInjuryView, "QuarterlyStatTable")
+</section>
+
+
+
+<div class="clear"></div>

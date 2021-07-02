@@ -1,0 +1,117 @@
+﻿@model IQI.Intuition.Web.Models.CatheterAssessment.AssessmentForm
+@{
+    ViewBag.Layout_ContentTitle = "Catheter Assessment";
+}
+@using (Html.BeginForm())
+{
+    <br />
+     
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    
+    <section class="grid_16 box">
+        <h3>General Information</h3>
+        @if(ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveCatheter) && Model.Id.IsNotNullOrEmpty())
+        {
+        <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "CatheterAssessment", new { id = Model.Id }), "Remove", "Are you sure you want to remove this entry?")
+        </div>
+        }
+        <div class="inside form">
+            <div class="field">@Html.EditorFor(model => model.Floor)</div>
+            <div class="field">@Html.EditorFor(model => model.Wing)</div>
+            <div class="field">@Html.EditorFor(model => model.Room)</div>
+            <div class="field">@Html.EditorFor(model => model.AssessmentDate)</div>
+        </div>
+        <div style="clear:both;"></div>
+        <br />
+    </section>
+    
+    
+    <section class="grid_8 box">
+        <h3>Details</h3>
+        <div class="inside form">
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.ContinuedUseEstimateDays, new { HtmlAttributes = new { @style = "text-align:right;width:40px;" } })</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.TubeHolderUsed)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.TherapyGoal, new { HtmlAttributes = new { @style = "width:300px;"} })</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.AlternativeInterventions, new { HtmlAttributes = new { @style = "width:300px;"} })</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.CSResults, new { HtmlAttributes = new { @style = "width:300px;"} })</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.ReversibleFactors, new { HtmlAttributes = new { @style = "width:300px;"} })</div>
+            <div style="clear:both;"></div>
+            <br />
+        </div>
+    </section>   
+
+    <section class="grid_8 box">
+        <h3>Action</h3>
+        <div class="inside form">
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Action)</div>
+            <div style="clear:both;"></div>
+                <div id="ContinueFields">
+                    <div class="field">@Html.EditorFor(model => model.NextAssessmentDate)</div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div id="RemoveFields">
+                    <div class="field">@Html.EditorFor(model => model.RemovalComplications)</div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr1, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr1Hours, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr2, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr2Hours, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr3, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemovalPvr3Hours, new { HtmlAttributes = new { @style = "width:50px;"} })</div>
+                    <div style="clear:both;"></div>
+                    <hr />
+                    <div class="field">@Html.EditorFor(model => model.RemovalReason)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemoveAlternativeTherapeutic)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemoveIntakeDaily)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemoveQualityOfUrine)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemoveResidentResponse)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemovedAndReplaced)</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.RemovedAndReplacedReason)</div>
+                    <div style="clear:both;"></div>
+                </div>
+            <br />
+        </div>
+    </section>   
+    <div class="clear"></div>  
+}
+<div class="clear"></div>
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}

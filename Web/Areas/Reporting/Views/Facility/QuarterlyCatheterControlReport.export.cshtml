@@ -1,0 +1,71 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Catheter.Facility.QuarterlyCatheterControlView
+
+<section class="grid_16 box leading"> 
+        <h3>Catheters</h3>
+        <div class="inside">
+        <br />
+         <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th colspan="3">@Model.Month1.Name</th>
+                <th colspan="3">@Model.Month2.Name</th>
+                <th colspan="3">@Model.Month3.Name</th>
+                <th colspan="2">Quarter</th>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <th>#</th>
+                <th>D Days</th>
+                <th>U Ratio</th>
+                <th>#</th>
+                <th>D Days</th>
+                <th>U Ratio</th>
+                <th>#</th>
+                <th>D Days</th>
+                <th>U Ratio</th>
+                <th>D Days</th>
+                <th>U Ratio</th>
+            </tr>
+            @foreach (var group in Model.Catheters.Groups)
+            {
+            <tr>
+                <td>@group.CatheterType</td>
+                <td style="font-weight:bold;">@group.Month1Total.Count</td>
+                <td>@group.Month1Total.DeviceDays</td>
+                <td>@Math.Round(group.Month1Total.UtilizationRatio,2)</td>
+                <td style="font-weight:bold;">@group.Month2Total.Count</td>
+                <td>@group.Month2Total.DeviceDays</td>
+                <td>@Math.Round(group.Month2Total.UtilizationRatio,2)</td>
+                <td style="font-weight:bold;">@group.Month3Total.Count</td>
+                <td>@group.Month3Total.DeviceDays</td>
+                <td>@Math.Round(group.Month3Total.UtilizationRatio,2)</td>
+                <td style="font-weight:bold;color:#aa4644;">@group.DeviceDays</td>
+                <td style="font-weight:bold;color:#aa4644;">@Math.Round(group.UtilizationRatio,4)</td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Totals</td>
+                <td>@Model.Catheters.Month1Total.Count</td>
+                <td>@Model.Catheters.Month1Total.DeviceDays</td>
+                <td>@Math.Round(Model.Catheters.Month1Total.UtilizationRatio,4)</td>
+                <td>@Model.Catheters.Month2Total.Count</td>
+                <td>@Model.Catheters.Month2Total.DeviceDays</td>
+                <td>@Math.Round(Model.Catheters.Month2Total.UtilizationRatio,4)</td>
+                <td>@Model.Catheters.Month3Total.Count</td>
+                <td>@Model.Catheters.Month3Total.DeviceDays</td>
+                <td>@Math.Round(Model.Catheters.Month3Total.UtilizationRatio,4)</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            </table>
+        </div> 
+</section>
+
+<section class="grid_16 box leading"> 
+        <h3>Catheter Utilization Trend</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.CatheterChart)
+        </div> 
+</section>
+
+<div class="clear"></div>

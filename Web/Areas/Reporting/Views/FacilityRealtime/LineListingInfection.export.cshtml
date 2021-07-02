@@ -1,0 +1,28 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LineListingInfectionView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Patient Infection Line Listing";
+}
+
+<section class="grid_32 box leading"> 
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Reason/Classification</th>
+                <th style="width:300px;">Info</th>
+            </tr>
+        </table>
+            @foreach (var infection in Model.Infections)
+            {
+            <table class="iqitable" style="page-break-inside:avoid;margin-bottom:0px;">
+                @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingInfectionRow.cshtml", infection);}
+            </table>
+            }
+        
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>

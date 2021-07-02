@@ -1,0 +1,26 @@
+﻿@model IQI.Intuition.Web.Models.Configuration.AccountUser.AccountUserGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Account Users";
+}
+<div class="tablenav">
+    <div class="newbtn search">
+        <button class="link" data-url="@Url.Action("Add", "AccountUser", new { Area="Configuration" })">Add New Account</button>
+    </div>
+    <span class="clear"></span>
+</div>
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function rowSelect(id) {
+            smoothLoad('@Url.Action("Edit","AccountUser",new { Area = "Configuration" })/?id=' + id);
+        }
+
+    </script>
+} 

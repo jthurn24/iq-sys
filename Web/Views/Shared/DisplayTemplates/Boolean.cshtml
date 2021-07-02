@@ -1,0 +1,26 @@
+﻿@model System.Boolean?
+           
+           
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+}
+@section FormField
+{
+
+    @if (Model.HasValue == false)
+    {
+        <span class="answer">N/A</span>
+    }
+    else if(Model == true)
+    {
+        <span class="answer">Yes</span>
+    }
+    else
+    {
+        <span class="answer">No</span>
+    }
+}

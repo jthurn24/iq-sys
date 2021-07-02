@@ -1,0 +1,42 @@
+﻿@model IQI.Intuition.Web.Models.Configuration.Floor.FloorEntryList
+
+@{
+    ViewBag.Layout_ContentTitle = "Facility Floors";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    <div class="inside">
+
+    <div style="padding:10px;">
+    <div class="newbtn" align="right">
+        <button class="link" data-url="@Url.Action("Add", "Floor")">Add New Floor</button>
+    </div>
+    </div>
+
+    <table class="iqitable">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>GUID</th>
+            <th>&nbsp;</th>
+        </tr>
+    @foreach (var entry in Model.Entries)
+    {
+        <tr>
+            <td>@entry.Id</td>
+            <td>@entry.Name</td>
+            <td>@entry.Guid</td>
+            <td>
+                @Html.ActionLink("Edit","Edit",new { id = entry.Id})  
+                &nbsp;
+                @Html.ActionLink("Wings","Index",new { controller="Wing", area="Configuration", floorId = entry.Id})
+            </td>
+        </tr>
+    }
+    </table>
+
+    </div>
+
+</section>
+<div class="clear"></div>

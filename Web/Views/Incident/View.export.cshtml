@@ -1,0 +1,29 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.LineListingIncidentView.IncidentRow
+
+@{
+    ViewBag.Layout_ContentTitle = string.Concat(Model.PatientName, " - Incident ");
+}
+@using (Html.BeginForm())
+{
+
+   <section class="grid_16 box leading" style="margin-top:0px;"> 
+        <h3>Incident Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Description</th>
+                <th style="width:300px;">Statements</th>
+            </tr>
+        </table>
+        <table class="iqitable" style="margin-bottom:0px;">
+            @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingIncidentRow.cshtml", Model);}
+        </table>
+        <br />
+        </div> 
+    </section>
+    
+}
+<div class="clear"></div>

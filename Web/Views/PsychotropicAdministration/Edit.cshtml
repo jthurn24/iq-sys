@@ -1,0 +1,100 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicAdministration.PsychotropicAdministrationFormEdit
+
+@{
+    ViewBag.Layout_ContentTitle = "Edit Medication";
+}
+
+<div id="DrugSearchCenter" style="display:none;">
+@{Html.RenderAction("DrugSearchCenter","Drug");}
+
+    <div class="clear"></div>
+</div>
+@Html.Script("/scripts/drug-search-center.js")
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+    <section class="grid_16 box">
+        <h3>Medication</h3>
+        @if(ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemovePsychotropic))
+        {
+        <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "PsychotropicAdministration", new { id = Model.Id }), "Remove", "Are you sure you want to remove this entry?")
+        </div>
+        }
+        <div class="inside form">
+        <div class="grid_6">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.DrugType)</div>
+            <div class="field">@Html.EditorFor(model => model.Name)</div>
+            <div class="field">@Html.EditorFor(model => model.DosageForm)</div>
+            <div class="field">@Html.EditorFor(model => model.TargetBehavior)</div>
+        </p>
+        </div>
+
+            <div class="grid_12">
+            <p>
+                <div class="field">@Html.EditorFor(model => model.SideEffects, new { HtmlAttributes = new { @style = "height:100px;width:510px;" } })
+                </div>
+                <div class="field">
+                    <div style="padding-left:110px;">
+                    <img src="@Url.Content("~/Content/images/search-drug-db.jpg")" onclick="launchDrugSearchCenter()" style="cursor:pointer;" />
+                    </div>
+                </div>
+            </p>
+            </div>
+
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+}
+<div class="clear"></div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Frequency').change(function () {
+            updateSegments();
+        });
+
+    });
+
+    var segmentAction = '@Url.Action("DosageForm", "PsychotropicDosage")';
+
+    function updateSegments() {
+        $('#Segments').load(segmentAction + '?prefix=Segments&frequencyId=' + $('#Frequency').val());
+    }
+
+    function launchDrugSearchCenter() {
+        $('#DrugSearchCenter').dialog({
+            resizable: false,
+            height: 600,
+            width: 1000,
+            modal: true,
+            title: 'Drug Database'
+        });
+    }
+
+</script>

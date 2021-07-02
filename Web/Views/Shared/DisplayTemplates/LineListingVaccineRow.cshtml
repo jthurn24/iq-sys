@@ -1,0 +1,50 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Vaccine.Facility.LineListingVaccineView.PatientRow
+
+
+<tr>
+    <td style="vertical-align:top;width:150px;">
+        <div style="color:Black;font-weight:bold;">@Model.PatientName</div>
+        <div><span style="font-weight:bold;">Room:</span> @Model.Room</div>
+        <div><span style="font-weight:bold;">Wing:</span> @Model.Wing</div>
+        <div><span style="font-weight:bold;">Floor:</span> @Model.Floor</div>
+        <div><span style="font-weight:bold;">Birthdate:</span> @Model.PatientBirthDate</div>
+        <div><span style="font-weight:bold;">Admitted:</span> @Model.AdmissionDate</div>
+    </td>
+    <td style="vertical-align:top;width:600px;">
+        @if (Model.Entries.Count() > 0)
+        {
+            <table class="iqitable" style="margin-bottom:0px;">
+                <tr>
+                    <th style="width:150px;">Type</th>
+                    <th style="width:150px;">On</th>
+                    <th style="width:300px;">Refusal</th>
+                </tr>
+                @foreach (var entry in Model.Entries)
+                {
+                    <tr>
+                        <td>
+                            @if (Convert.ToBoolean(ViewData["showLink"]))
+                            {
+                                <a href="@Url.Action("Edit", new { Controller = "Vaccine", Area = "", id = entry.Id, returnurl = Request.Url.AbsoluteUri })">@entry.VaccineType</a>
+                            }
+                            else
+                            {
+                                <span>@entry.VaccineType</span>
+                            }
+                        </td>
+                        <td>@entry.AdministeredOn</td>
+                        <td>
+                            @if(entry.Refused)
+                            {
+                                <span style="color:red">Refused: @entry.RefusalReason</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </td>
+</tr>
+
+
+

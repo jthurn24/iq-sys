@@ -1,0 +1,16 @@
+﻿@model Dictionary<string, List<SelectListItem>>
+<select id="QuickLinkAction" name ="QuickLinkAction">
+    <option value="">&nbsp;</option>
+@foreach (string key in Model.Keys)
+{
+   <optgroup label="@key">
+   @foreach (var item in Model[key])
+   {
+       <option value="@item.Value">@item.Text</option>
+   } 
+   </optgroup>
+    <option value="">&nbsp;</option>
+}
+
+</select>
+@Html.Image("/images/gobtn.png", new { alt = "Go" })

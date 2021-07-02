@@ -1,0 +1,35 @@
+﻿@model IQI.Intuition.Web.Models.QICast.ImageUpload
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Upload Note Image</title>
+</head>
+<body style="background-color:black;">
+    <div align="center">
+    <div style="width:850px;">
+        @using (Html.BeginForm("UploadImage", "Note", new { area="QiCast" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div style="color:white;padding-bottom:10px;">
+                File:
+            </div>
+            <div>
+                <input type="file" name="FileUpload" id="FileUpload" style="border:solid 1px white;" />
+                &nbsp;
+                <input type="submit" value="Upload"  />
+            </div>
+            <div>
+                <input type="hidden" value="@Model.Id" name="Id" />
+                <input type="hidden" value="@Model.Referrer" name="Referrer" />
+
+            </div>
+        }
+    </div>
+    </div>
+</body>
+</html>

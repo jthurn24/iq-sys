@@ -1,0 +1,13 @@
+﻿
+
+@Html.Script("/scripts/jquery.tmpl.min.js")
+@Html.Script("/scripts/knockout-1.2.1.min.js")
+@Html.Script("/scripts/knockout.mapping-1.2.4.min.js")
+@Html.Script("/scripts/knockout.helper.js")
+@Html.Script("/scripts/jquery.unobtrusive-knockout.min.js")
+@Html.Script("/scripts/wound-assessment-form-model.js")
+@Html.Script("/scripts/wound-assessment-form.js")
+
+<script type="text/javascript">
+    WoundAssessmentForm(@Html.Raw(Json.Encode(Model.ClientViewModel)));
+</script>

@@ -1,0 +1,133 @@
+﻿@model IQI.Intuition.Web.Models.Wound.WoundInfo
+
+@{
+    ViewBag.Layout_ContentTitle = "View Wound";
+}
+
+    <br />
+ <div class="grid_16" id="buttons" align="center">
+        @Html.SmartButton(Url.Action("Detail","Patient",new { id = Model.PatientGuid }),"Return To Patient")
+<span class="clear"></span>
+</div> 
+
+<section class="grid_6 box leading">
+    <h3>Wound Information</h3>
+    <div class="actions">
+        @Html.SmartButton(@Url.Action("Edit", "Wound", new { id = Model.Id }), "Edit")
+    </div>
+    <div class="inside">
+        <p style="font-size:12x;">
+            Noted On: <strong>@Model.FirstNoted</strong><br />
+            Resolved On: <strong>@Model.ResolvedOn</strong><br />
+            Stage: <strong>@Model.StageName</strong><br />
+            Site: <strong>@Model.SiteName</strong><br />
+        </p>
+        <p>
+            @Model.AdditionalSiteDetails
+        </p>
+        <img id="SiteImage" src="@Url.Action("BodyImage", new { x = Model.LocationX, y = Model.LocationY, disabled = true })" />
+        <div class="clear"></div>
+    </div>
+</section>
+
+<section class="grid_10 box leading">
+<h3>Assessments</h3>
+
+
+<div style="padding-left:10px;padding-right:10px;">
+    <br />
+    @{ Html.RenderAction("ReportWoundAssessmentList", new { controller = "WoundAssessment", id = Model.Id }); }     
+    <div class="tablenav">
+        <div class="newbtn">
+            <button class="link" data-url="@Url.Action("Add", "WoundAssessment", new { id = Model.Id })">Track New Assessment</button>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div> 
+
+
+</section>
+
+
+<section class="grid_10 box leading">
+    <h3>Preventions</h3>
+    <div style="padding-left:10px;padding-right:10px;">
+        <br />
+        @{ Html.RenderAction("PatientList", new { controller = "Precaution", id = Model.PatientGuid, productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking }); }
+        <div class="tablenav">
+            <div class="newbtn">
+                <input type="button" onclick="precautionForm.showAdd();" value="Track New Prevention">
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+
+<section class="grid_10 box leading">
+    <h3>PUSH Score</h3>
+
+
+    <div style="padding-left:10px;padding-right:10px;">
+        <br />
+        @Html.DisplayFor(x => x.PushChart, new { width = 670, height = 300 })
+    </div>
+
+
+</section>
+
+
+<div class="clear"></div>
+
+
+
+
+@{ Html.RenderAction("Form", new { controller = "Precaution", patientId = Model.PatientId, productid = (int)IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking }); }
+
+
+<script type="text/javascript">
+
+    function precautionRowSelect(id) {
+        precautionForm.showEdit(id);
+    }
+
+    precautionForm.onSaveSuccess = function()
+    {
+        $("#PatientPrecautionGrid").trigger("reloadGrid");
+    }
+
+    function assessmentRowSelect(id) {
+        smoothLoad('@Url.Action("Edit","WoundAssessment")/?id=' + id);
+    }
+
+
+    function precautionLoadComplete() {
+
+        var nullDate = Date.now();
+        var notedOnTxt = '@Model.FirstNoted';
+        var resolvedOnTxt = '@Model.ResolvedOn';
+        var notedOnDate = Date.parse(notedOnTxt);
+        var resolvedOnDate = Date.parse(resolvedOnTxt);
+        if (isNaN(resolvedOnDate)) { resolvedOnDate = nullDate; }
+
+
+        $("#PatientPrecautionGrid").find('.jqgrow').each(function (index, element) {
+
+            var startDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_StartDate"]').html();
+            var endDateTxt = $(this).find('td[aria-describedby="PatientPrecautionGrid_EndDate"]').html();
+            var startDate = Date.parse(startDateTxt);
+            var endDate = Date.parse(endDateTxt);
+            if (isNaN(endDate)) { endDate = nullDate; }
+
+            if (startDate <= resolvedOnDate && endDate >= notedOnDate) {
+                $(this).find('td').css('background-color', '#ff9999');
+                $(this).find('td').css('font-weight', 'bold');
+            }
+            else {
+                $(this).find('td').css('background-color', '');
+                $(this).find('td').css('font-weight', 'normal');
+            }
+
+        });
+    }
+
+</script>

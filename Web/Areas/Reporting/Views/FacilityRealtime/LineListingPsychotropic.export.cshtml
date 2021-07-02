@@ -1,0 +1,136 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Psychotropic.Facility.LineListingPsychotropicView
+@{
+    ViewBag.Layout_ContentTitle = "Psychotropic Line Listing";
+}
+
+
+<section class="grid_32 box leading"> 
+        <div class="inside">
+        <br />
+
+        @foreach (var type in Model.Entries.Where(x => x.Entries.Count() > 0))
+        {
+            <h4>@type.Name </h4>
+            
+           
+                foreach (var patient in type.Entries)
+                {
+                    <div style="font-size:14px;padding-bottom:5px;font-weight:bold;">@patient.PatientName</div>
+                    <table style="margin-bottom:0px;border:0px;">
+                    <tr>
+                        <td style="border-top:solid 1px black;padding-top:5px;">
+                                <table class="iqitable" style="margin-bottom:0px;">
+                                    <tr>
+                                        <th style="width:150px;">&nbsp;</th>
+                                        <th style="width:200px;">Scheduled Dosage Changes</th>
+                                        <th style="width:150px;">Prn</th>
+                                        <th style="width:300px;">Side Effects</th>
+                                    </tr>
+                                    @foreach (var admin in patient.Entries)
+                                    {
+                                        <tr>
+                                            <td style="vertical-align:top;">
+                                                <div style="padding-bottom:5px;font-weight:bold;">
+                                                    @admin.DrugName
+                                                </div>
+                                                <div style="font-size:10px;">Start: @admin.StartDate</div>
+                                                <div style="font-size:10px;">End: @admin.EndDate</div>
+                                                <div style="font-size:10px;">Target: @admin.TargetBehavior</div>
+                                                <div style="font-size:10px;">Current: @admin.CurrentDosageDescription</div>
+                                            </td>
+                                            <td style="vertical-align:top;">
+                                                @foreach(var change in admin.Changes)
+                                                {
+                                                    if (change.ChangeAmount > 0)
+                                                    {  
+                                                    <div style="padding-top:5px;">
+                                                        <img src="@Url.Content("~/Content/Images/up.png")">
+                                                        @change.Description
+                                                        <span style="font-size:10px;padding-top:3px;">(@change.Date)</span>
+                                                    </div>
+                                                    }
+                                                    else if (change.ChangeAmount < 0)
+                                                    {
+                                                    <div style="padding-top:5px;">
+                                                        <img src="@Url.Content("~/Content/Images/down.png")">
+                                                        @change.Description
+                                                        <span style="font-size:10px;padding-top:3px;">(@change.Date)</span>
+                                                    </div>
+                                                    }
+                                                    else
+                                                    {
+                                                    <div style="padding-top:5px;">
+                                                        <img src="@Url.Content("~/Content/Images/nochange.png")">
+                                                        @change.Description
+                                                        <span style="font-size:10px;padding-top:3px;">(@change.Date)</span>
+                                                    </div>    
+                                                    }
+                                                }
+                                                
+                                                @if (admin.Changes.Count() > 1)
+                                                {
+                                                    <div style="padding-top:10px;font-weight:bold;font-size:10px;">Total Changes:</div>
+                                                    if (admin.DosageChange > 0)
+                                                    {
+                                                        <div style="padding-top:2px;font-weight:bold;font-size:10px;">
+                                                        <img src="@Url.Content("~/Content/Images/up.png")">
+                                                        @admin.TotalChangeDescription
+                                                        </div>
+                                                    }
+                                                    else if (admin.DosageChange < 0)
+                                                    {
+                                                        <div style="padding-top:2px;font-weight:bold;font-size:10px;">
+                                                        <img src="@Url.Content("~/Content/Images/down.png")">
+                                                        @admin.TotalChangeDescription
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div style="padding-top:2px;font-weight:bold;font-size:10px;">
+                                                        <img src="@Url.Content("~/Content/Images/nochange.png")">
+                                                        @admin.TotalChangeDescription
+                                                        </div>
+                                                    }
+                                                }
+                                            </td>
+                                            <td style="vertical-align:top;">
+                                                @foreach (var prn in admin.Prns)
+                                                {
+                                                   <div style="padding-bottom:3px;">
+                                                    @prn.Description
+                                                    <span style="font-size:9px;">(@prn.Date)</span>
+                                                   </div>  
+                                                }
+
+                                                @if (admin.Prns.Count() > 1)
+                                                {
+                                                    <div style="padding-top:5px;font-weight:bold;font-size:10px;">Total PRN:</div>
+                                                    <div style="padding-top:2px;font-weight:bold;font-size:10px;">@admin.TotalPrn</div>
+                                                }
+                                            </td>
+                                            <td>@Html.Raw(admin.SideEffects.Replace(Environment.NewLine, "<br>"))</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div style="text-align:right;padding-right:10px;font-weight:bold;background-color:#ffc;">
+                                                    @admin.DrugName  (@Model.StartDate.FormatAsShortDate() - @Model.EndDate.FormatAsShortDate()) : @admin.TotalGiven
+                                                </div>
+                                            </td>
+                                        </tr>
+                                       
+                                    }
+                                </table>
+                                <br />
+                        </td>
+                    </tr>
+                    </table>
+                }
+
+            
+        }
+       
+        </div> 
+<br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>

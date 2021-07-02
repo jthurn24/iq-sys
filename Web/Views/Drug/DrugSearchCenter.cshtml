@@ -1,0 +1,72 @@
+﻿
+<section class="grid_5 box">
+<h3>Search</h3>
+<div style="width:270px;">
+    <div  style="font-size:9px;padding:5px;">
+        <input type="text" id="SearchBox"/>
+        <input type="button" value="Search" onclick="doSearch()" />
+    </div>
+    <div style="font-size:9px;padding-bottom:5px;padding-left:10px;padding-top:5px;">
+        <a href="#" onclick="doStartsWith('A')" >A</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('B')" >B</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('C')" >C</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('D')" >D</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('E')" >E</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('F')" >F</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('G')" >G</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('H')" >H</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('I')" >I</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('J')" >J</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('K')" >K</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('L')" >L</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('M')" >M</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('N')" >N</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('O')" >O</a>  &nbsp;
+    </div>
+    <div style="font-size:9px;padding-bottom:5px;padding-left:10px;">
+        <a href="#" onclick="doStartsWith('P')" >P</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('Q')" >Q</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('R')" >R</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('S')" >S</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('T')" >T</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('U')" >U</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('V')" >V</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('W')" >W</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('X')" >X</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('Y')" >Y</a>  &nbsp;
+        <a href="#" onclick="doStartsWith('Z')" >Z</a>  &nbsp;
+    </div>
+    <div style="padding-left:10px;font-size:10px;">
+        <hr />
+        <div id="TestList" style="height:400px;overflow:auto;">
+
+        </div>
+    </div>
+</div>
+<br />
+</section>
+
+
+<section class="grid_11 box">
+<h3>Drug Details</h3>
+<div style="width:650px;">
+    <div id="SectionView" style="padding-left:10px;padding-right:30px;padding-bottom:10px;font-size:12px;">
+        <div style="height:400px;">
+            <h3>Drug Details</h3>
+            <p>Powered by U.S. National Library of Medicine</p>
+            <p>For information, disclaimers, and copyright information on NLM please visit <a href="http://www.nlm.nih.gov/copyright.html" target="new">http://www.nlm.nih.gov/copyright.html</a></p>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    var searchUrl = '@Url.Action("SearchNames")';
+    var detailsUrl = '@Url.Action("GetSections")';
+
+</script>

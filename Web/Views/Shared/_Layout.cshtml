@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@RenderBody()
+
+
+@section Nav
+{
+
+ @{ Html.RenderAction("FacilityPanel", "Home", new { area = "" }); }
+<div class="grid_10" id="right">
+    @{ Html.RenderAction("UserPanel", "Authentication", new { area = "" }); }
+    @{ Html.RenderAction("NavigationPanel", "Navigation", new { area = "" }); }
+}
+
+@section SubMenu
+{
+    <section id="white">
+        <div class="container_16">
+            <section class="grid_10" id="breadcrumb">
+                <strong><span id="BreadcrumbValue">@ViewBag.Layout_ContentTitle</span></strong>
+            </section>
+            <section class="grid_6" id="quick">
+                <fieldset>
+                    @if (ViewBag.QuickListAction != null)
+                    {
+                        Html.RenderAction((string)ViewBag.QuickListAction, "Navigation", new { area = "" });
+                    }
+                    else
+                    {
+                        Html.RenderAction("PatientQuickSearch", "Navigation", new { area = "" });
+                    }
+                </fieldset>
+                @if (ViewBag.IsExportable != null && ViewBag.IsExportable)
+                {
+                    if (ViewBag.LimitedExport != null && ViewBag.LimitedExport)
+                    {
+                        Html.RenderExportPanel(true, true);
+                    }
+                    else
+                    {
+                        Html.RenderExportPanel();
+                    }
+                }
+                @if (ViewBag.AuditRequest != null)
+                {
+                    <span align="right" style="padding-top:5px;float:right;">
+                        &nbsp;&nbsp;
+                        <a href="#" onclick="showAudit('@Html.Raw(Html.RenderAuditLink((IQI.Intuition.Web.Models.Audit.AuditRequest)ViewBag.AuditRequest))')"><img src="@Url.Content("~/Content/Images/audit.png")" /></a>
+                    </span>
+                }
+            </section>
+            <div class="clear"></div>
+        </div>
+    </section>
+}
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#PatientName").autocomplete({
+                source: "@Url.Action("QuickSearch", "Patient")",
+                select: function (event, ui) {
+                    if (ui.item) {
+                        top.window.location = "@Url.Action("Detail", "Patient", new { id = "" })?id=" + ui.item.id;
+                    }
+                }
+            });
+
+
+            $("#QuickLinkAction").change(function () {
+                if ($("#QuickLinkAction").val() != '') {
+                    smoothLoad($("#QuickLinkAction").val());
+                }
+            });
+
+            $("#QuickLinkAction").find("option").each(function(){
+		        if( $(this).text() == '@ViewBag.QuickListItem' ) {
+			        $(this).attr("selected","selected");
+		        }
+	        });
+
+
+
+        });
+    </script>
+    @RenderSection("Scripts", false)
+  
+}

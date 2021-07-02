@@ -1,0 +1,8 @@
+﻿@model  IEnumerable<IQI.Intuition.Web.Models.Drug.NameSearchResult>
+
+@foreach (var result in Model)
+{
+    <div style="padding-bottom:3px;">
+        <a href="#" onclick="selectDrug(@result.Id)">@result.Name</a>
+    </div>
+}

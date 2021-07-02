@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Layout_ContentTitle = " Support Center";
+}
+<div class="grid_10">
+
+    <section class="grid_10 box leading"> 
+    <h3>I need help:</h3> 
+        <div class="inside">
+            <p>     
+            Looking for help with a particular feature, or have general questions?
+            Open a support ticket and our friendly support staff will assist you.
+            </p>
+
+            <div align="right" style="padding-bottom:10px;font-weight:bold;font-size:12px;">
+            @Html.ActionLink("Request Support", "RequestSupport")
+            &nbsp; | &nbsp;
+            @Html.ActionLink("View open tickets", "ViewTickets")
+            </div>
+        </div>
+    </section>
+
+    <section class="grid_10 box"> 
+    <h3>I have an idea:</h3> 
+        <div class="inside">
+            <p>
+            We are always looking for new ways to improve and make our product better. 
+            Do you have an idea? Submit a feature request and our team will take a look.
+            </p>
+            <div align="right" style="padding-bottom:10px;font-weight:bold;font-size:12px;">
+            @Html.ActionLink("Request a feature", "RequestFeature")
+            </div>
+        </div>
+    </section>
+
+    <section class="grid_10 box"> 
+    <h3>I need to send IQI a secure file: </h3> 
+        <div class="inside">
+            <p>
+            You can securely send a file to us using our secure file upload tool.
+            </p>
+            <div align="right" style="padding-bottom:10px;font-weight:bold;font-size:12px;">
+            @Html.ActionLink("Send a secure file", "UploadFile")
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="grid_6">
+
+    <section class="grid_6 box leading"> 
+        <h3>Helpful Links</h3> 
+        <div class="inside">
+            <br />
+            <div style="padding:5px;">
+                <table class="iqitable">
+                    <tr>
+                        <td><a style="text-decoration:none;" href="@Url.Action("Index","Resource")"><img src="/Content/Images/reference.jpg" /> IQI Reference Library</a></td>
+                    </tr>
+                    <tr>
+                        <td><a style="text-decoration:none;" href="@Url.Content("Content/Downloads/UserGuide.pdf")"><img src="/Content/Images/help.jpg" /> Intuition &trade; User Guide</a></td>
+                    </tr>
+                    <tr>
+                        <td><a style="text-decoration:none;" target="new" href="http://eepurl.com/uujU5"><img src="/Content/Images/email.jpg" /> IQI Mailing List</a></td>
+                    </tr>
+                    <tr>
+                        <td><a style="text-decoration:none;" target="new" href="https://twitter.com/iqisystems"><img src="/Content/Images/twitter.png" /> IQI on Twitter</a></td>
+                    </tr>
+                    <tr>
+                        <td><a style="text-decoration:none;" target="new" href="http://www.linkedin.com/company/iqi-systems-llc"> <img src="/Content/Images/linkedin.png" /> IQI on Linkedin</a></td>
+                    </tr>
+                </table>
+            </div>
+
+         </div>
+    </section>
+
+</div>
+
+
+
+
+<div style="clear:both;"></div>

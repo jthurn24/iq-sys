@@ -1,0 +1,55 @@
+﻿@model IQI.Intuition.Web.Models.Audit.AuditResult
+
+
+
+        <div style="font-size:12px;padding-bottom:10px;">
+            <span>Page:</span>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.Request.Page)
+                {
+                    <span>@i</span>
+                }
+                else
+                {
+                    <a onclick="loadAudit('@Html.RenderAuditLink(Model.Request,i)')" href="#">@i</a>
+                }
+                <span>&nbsp;</span>
+            }
+        </div>
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:90px;">Date</th>
+                <th style="width:70px;">By</th>
+                <th style="width:100px;">Type</th>
+                <th style="width:500px;">Details</th>
+            </tr>
+            @foreach (var entry in Model.Results)
+            {
+                <tr>
+                    <td>@entry.PerformedAt</td>
+                    <td>@entry.PerformedBy</td>
+                    <td>@entry.AuditType</td>
+                    <td>
+                        <div>
+                            @Html.Raw(entry.Details)
+                        </div>
+                   </td>
+                </tr>
+            }
+        </table>
+        <div style="font-size:12px;padding-top:10px;">
+            <span>Page:</span>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.Request.Page)
+                {
+                    <span>@i</span>
+                }
+                else
+                {
+                    <a onclick="loadAudit('@Html.RenderAuditLink(Model.Request,i)')" href="#">@i</a>
+                }
+                <span>&nbsp;</span>
+            }
+        </div>

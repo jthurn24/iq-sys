@@ -1,0 +1,99 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Wound.Facility.LineListingWoundView.WoundRow
+
+
+<tr>
+    <!-- Main Data Area -->
+    <td style="width:550px;border:0px;vertical-align:top;">
+        <table>
+            <tr>
+                <td style="vertical-align:top;width:150px;border:0px;">
+                    <div style="padding-bottom:5px;">
+                        <div style="font-weight:bold;">Initial Assessment:</div> 
+                        <div>@Html.Raw(Model.IntialAssessment)</div>
+                    </div>
+                    <div style="padding-bottom:5px;">
+                        <div style="font-weight:bold;">Resolved:</div> 
+                        <div>@Html.Raw(Model.Resolved)</div>
+                    </div>
+
+                    @if (Model.Precautions.Count() > 0)
+                    {
+                        <div style="padding-bottom:5px;">
+                            <div style="font-weight:bold;">Preventions:</div>
+                            @foreach (var precaution in Model.Precautions)
+                            {
+                            <div>@precaution</div>
+                            }
+                        </div>
+                    }
+
+                </td>
+                <td style="vertical-align:top;width:200px;border:0px;">
+                    <div style="color:Black;font-weight:bold;">@Model.PatientName</div>
+                    <div><span style="font-weight:bold;">Room:</span> @Model.CurrentRoom</div>
+                    <div><span style="font-weight:bold;">Wing:</span> @Model.CurrentWing</div>
+                    <div><span style="font-weight:bold;">Floor:</span> @Model.CurrentFloor</div>
+                    <div><span style="font-weight:bold;">Birthdate:</span> @Model.PatientBirthDate</div>
+                    <div><span style="font-weight:bold;">Admitted:</span> @Model.AdmissionDate</div>
+                </td>
+                <td style="vertical-align:top;width:200px;border:0px;">
+                    <div style="font-weight:bold;">Type</div> 
+                    @if (Convert.ToBoolean(ViewData["showLink"]))
+                    {
+                        <div style="padding-bottom:5px;font-weight:bold;">
+                            <a href="@Url.Action("View", new { Controller = "Wound", Area = "", id = Model.ID, returnurl = Request.Url.AbsoluteUri })">
+                                @Model.Type</a></div>
+                    }
+                    else
+                    {
+                        <div style="padding-bottom:5px;font-weight:bold;">@Model.Type</div>
+                    }
+
+                    <div style="font-weight:bold;">Stage</div> 
+                    <div style="padding-bottom:5px;">@Model.CurrentStage</div>
+
+                    <div style="font-weight:bold;">Classification</div> 
+                    <div style="padding-bottom:5px;">@Model.Classification</div>
+
+                    @if(@Model.MaxStage != @Model.MinStage)
+                    {
+                    <div style="font-weight:bold;">Minimum Stage</div> 
+                    <div style="padding-bottom:5px;">@Model.MinStage</div>
+
+                    <div style="font-weight:bold;">Maximum Stage</div> 
+                    <div style="padding-bottom:5px;">@Model.MaxStage</div>
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="vertical-align:top;border:0px;">
+                        <div style="font-weight:bold;">Last Assessment</div>
+                        @Html.Raw(Model.LastAssessment)
+                </td>
+            </tr>
+            @if(Model.PushChart.HasData())
+            {
+            <tr>
+                <td colspan="3" style="vertical-align:top;border:0px;">
+                        <div style="width:600px;overflow:hidden">
+                        @Html.DisplayFor(x => x.PushChart, new { width = 800, height = 100 })
+                        </div>
+                </td>
+            </tr>
+            }
+        </table>
+
+    </td>
+    <!-- Site Location Area -->
+    <td style="vertical-align:top;width:150px;border-top:0px;">
+        <div style="padding-top:10px;font-weight:bold;padding-bottom:5px;text-align:center;">@Model.SiteName</div>
+        <div style="padding-top:5px;padding-bottom:5px;">@Model.AdditionalSiteDetails</div>
+        <div align="center">
+        <img src="@Url.Action("BodyImage",new { Controller="Wound", Area = "", x = Model.LocationX, y = Model.LocationY, disabled = false, width = 150, height = 300  })" />
+        </div> 
+    </td>
+</tr>
+
+
+

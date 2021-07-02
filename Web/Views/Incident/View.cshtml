@@ -1,0 +1,40 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.LineListingIncidentView.IncidentRow
+
+@{
+    ViewBag.Layout_ContentTitle = "View Incidents";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+
+}
+@using (Html.BeginForm())
+{
+     <h4 class="grid_16 patient">
+        Patient: <strong>@Model.PatientName</strong> 
+    </h4>
+    <div class="grid_16" id="buttons">
+        @Html.SmartSubmit("Exit", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+
+   <section class="grid_16 box leading" style="margin-top:0px;"> 
+        <h3>Incident Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Description</th>
+                <th style="width:300px;">Statements</th>
+            </tr>
+        </table>
+        <table class="iqitable" style="margin-bottom:0px;">
+            @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingIncidentRow.cshtml", Model);}
+        </table>
+        <br />
+        </div> 
+    </section>
+    
+}
+<div class="clear"></div>

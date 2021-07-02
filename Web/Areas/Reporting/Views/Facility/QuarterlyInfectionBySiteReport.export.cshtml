@@ -1,0 +1,42 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.QuarterlyInfectionBySiteView
+
+
+
+<section class="grid_8"> 
+            @Html.DisplayFor(m => m.InfectionSiteView, "QuarterlyInfectionTableVertical")
+</section>
+
+
+
+<section class="grid_8 box"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart, new { width = 385, height = 260 })
+        </div> 
+</section>
+
+<section class="grid_8 box"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart, new { width = 385, height = 260 })
+        </div> 
+</section>
+
+
+<section class="grid_8 box"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart, new { width = 385, height = 260 })
+        </div> 
+</section>
+
+<section class="grid_8 box"> 
+        <h3>Totals</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.TotalChart, new { width = 385, height = 260 })
+        </div> 
+</section>
+
+
+
+<div class="clear"></div>

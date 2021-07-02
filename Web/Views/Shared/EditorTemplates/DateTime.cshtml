@@ -1,0 +1,25 @@
+﻿@model System.DateTime?
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+    var htmlAttributes = new RouteValueDictionary(ViewBag.HtmlAttributes as object);
+    htmlAttributes["type"] = "datepicker";
+}
+@section FormField
+{
+    @if (ViewData.ModelMetadata.IsReadOnly)
+    {
+        @ViewData.TemplateInfo.FormattedModelValue
+        @Html.Hidden(TemplateHelperName.Default, ViewData.Model)
+    }
+    else
+    {
+        @Html.TextBox(
+            TemplateHelperName.Default, 
+            ViewData.Model.FormatAs("MM/dd/yyyy"),
+            htmlAttributes)
+    }
+}

@@ -1,0 +1,35 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Account.QuarterlyInfectionByFacilityView
+
+@{
+    ViewBag.Layout_LocationDescription = "Coporate";
+}
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart, new { width = 600, height = 320 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart, new { width = 600, height = 320 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart, new { width = 600, height = 320 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading"> 
+        <h3>Totals</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.TotalChart, new { width = 600, height = 320 })
+        </div> 
+</section>
+
+<div class="clear"></div>

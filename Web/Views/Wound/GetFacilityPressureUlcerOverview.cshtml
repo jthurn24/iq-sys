@@ -1,0 +1,89 @@
+﻿@model IQI.Intuition.Web.Models.Wound.ActiveWoundMap
+
+
+<map name="wmap">
+@foreach(var s in Model.Sites.OrderByDescending(x => x.Priority))
+{
+    string coords = string.Concat(s.TopLeftX, ",", s.TopLeftY, ",", s.BottomRightX, ",", s.BottomRightY);   
+    <area id="@string.Concat("area_",s.Id)" shape="rect" coords="@coords" style="outline:none;" href="javascript:displaySiteDetails('@string.Concat("#area_",s.Id)','@s.Id')" alt=""  />
+}
+</map>
+<div id="fpuMap" align="center">
+    @Html.DisplayFor(x => x.Graph)
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#fpuMap').find('img').attr('usemap', '#wmap');
+
+
+        var ttContainer = $('<div id="fputoolTip"/>');
+        $('body').append(ttContainer);
+
+        $('#fputoolTip').qtip({
+            content: {
+                text: '-',
+                title:
+            {
+                text: ' ',
+                button: true
+            }
+            },
+            position: {
+                target: 'mouse',
+                viewport: $(window),
+                adjust: {
+                    mouse: true  // Can be omitted (e.g. default behaviour)
+                }
+            },
+            style: {
+                classes: 'qtip-shadow qtip-jtools'
+            }
+        });
+
+    });
+
+
+
+    function displaySiteDetails(target,site) {
+
+        $('#fputoolTip').qtip('api').set('content.title.text', 'Loading:');
+        $('#fputoolTip').qtip('api').set('content.text', 'Please wait..');
+        $('#fputoolTip').qtip('api').set('position.target', $(target));
+        $('#fputoolTip').qtip('show');
+
+        var dataUrl = '@Url.Action("GetFacilityPressureUlcerDetails", "Wound")' + '?siteId=' + site;
+        var viewUrl = '@Url.Action("Detail","Patient")';
+
+        $.ajaxSetup({ cache: false });
+        $.getJSON(dataUrl, function (data) {
+
+            var container = $('<div/>');
+
+            $('<br/>').appendTo(container);
+
+            for (var i = 0; i < data['Wounds'].length; i++) {
+
+                var wound = data['Wounds'][i];
+                var iContainer = $('<div/>');
+                iContainer.css('padding', '2px');
+                iContainer.css('background-color', '#1c2428');
+                iContainer.css('border', 'solid 1px #6d777d');
+
+                var woundDescription = '<a  style="color:white;text-decoration:none;" href="' + viewUrl + '?id=' + wound['PatientGuid'] + '"> ' + wound['PatientName'] + ' (' + wound['Stage'] + ') </a>';
+
+                $('<div/>', { html: woundDescription, style: 'font-weight:bold;color:#FFFFFF;width:200px;padding:3px;text-align:left;' }).appendTo(iContainer);
+                iContainer.appendTo(container);
+            }
+
+            $('#fputoolTip').qtip('api').set('content.title.text', 'Site: ' + data['SiteName']);
+            $('#fputoolTip').qtip('api').set('content.text', container);
+
+        });
+    }
+
+</script>

@@ -1,0 +1,21 @@
+﻿@model IQI.Intuition.Web.Models.Wound.WoundGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Patient Wounds";
+}
+
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function WoundRowSelect(id) {
+            smoothLoad('@Url.Action("View","Wound")/?id=' + id);
+        }
+
+    </script>
+}

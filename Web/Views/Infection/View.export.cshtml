@@ -1,0 +1,26 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LineListingInfectionView.InfectionRow
+
+@{
+    ViewBag.Layout_ContentTitle = string.Concat(Model.PatientName, " - Infection - ", Model.InfectionType);
+}
+@using (Html.BeginForm())
+{
+   <section class="grid_32 box leading"> 
+        <h3>Infection Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Reason/Classification</th>
+                <th style="width:300px;">Info</th>
+            </tr>
+        </table>
+            <table class="iqitable" style="margin-bottom:0px;">
+               @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingInfectionRow.cshtml", Model );}
+            </table>
+        </div> 
+    </section>
+}
+<div class="clear"></div>

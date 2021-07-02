@@ -1,0 +1,38 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.QuarterlyComplaintTrendView
+
+@{
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Quarterly Complaint Trends";
+    ViewBag.IsExportable = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Quarterly Infections Trends</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+            @Html.DropDownListFor(m => m.Quarter,Model.QuarterOptions)                                                 
+            @Html.SmartSubmit("Refresh")
+            </div>
+        }
+        </div> 
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div>
+</section>
+
+
+
+@foreach (var group in Model.ChartGroups)
+{
+<section class="grid_16 box leading"> 
+    <h3>@group.Description /1000pd </h3>
+    <div class="inside">
+            @Html.DisplayFor(x => group.Chart)
+    </div> 
+</section>
+}
+
+
+
+<div class="clear"></div>

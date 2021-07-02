@@ -1,0 +1,92 @@
+﻿@model IQI.Intuition.Web.Models.PatientCensus.PatientCensusForm
+
+@{
+    ViewBag.Layout_ContentTitle = "Patient Census";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Month)
+    @Html.HiddenFor(model => model.Year)
+    @Html.HiddenFor(model => model.DaysInMonth)
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    <section class="grid_16 box">
+        <h3>General Information</h3>
+        <div class="inside">
+            <div class="grid_7">
+                <p>Year: @Model.Year</p>
+                <p>Month: @Model.Month</p>
+                <p>Days In Month: @Model.DaysInMonth</p>
+            </div>
+            <div class="grid_7">
+                <p>
+                    <div class="field">@Html.EditorFor(model => model.PatientDays)</div>
+                    <div style="padding-top:10px;padding-bottom:10px;">Or</div>
+                    <div class="field">
+                        <span class="label">
+                          Average Patients:
+                        </span>
+                        <span class="controls">
+                        <input id="Average" type="text" value="">
+                        </span>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="clear"></div>
+   
+}
+<div class="clear"></div>
+<script type="text/javascript">
+
+    $('#Average').keyup(function () {
+       
+        var i = parseFloat($('#Average').val());
+
+        if(isNaN(i))
+        {
+           $('#PatientDays').val(0);
+        }
+        else
+        {
+           $('#PatientDays').val(Math.round(i * @Model.DaysInMonth));
+        }
+    });
+
+     $('#PatientDays').keyup(function () {
+        calcAverage();
+     });
+
+     function calcAverage()
+     {
+        var i = parseInt($('#PatientDays').val());
+
+        if(isNaN(i))
+        {
+           $('#Average').val(0);
+        }
+        else
+        {
+           $('#Average').val(i / @Model.DaysInMonth);
+        }
+     }
+
+     calcAverage();
+
+</script>

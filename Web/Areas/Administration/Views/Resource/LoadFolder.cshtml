@@ -1,0 +1,93 @@
+﻿@model IQI.Intuition.Web.Models.Resource.ResourceEntryList
+
+@{var alt = false;}
+<div style="padding:10px;font-size:12px;font-weight:bold;">
+@Model.Path
+</div>
+<table>
+<tr>
+    <td style="vertical-align:top;width:250px;">
+        <div style="padding-left:10px;font-size:10px;font-weight:bold;">
+        <a onclick="showAddFolderOption()"  href="#">Add Folder</a> | <a onclick="showAddFileOption()"  href="#">Add File</a> | <a onclick="showAddLinkOption()" href="#">Add Link</a> 
+        </div>
+    </td>
+    <td style="vertical-align:top;">
+        <div>
+            
+            <div id="AddFolder" style="display:none;background-color:">
+            <div style="padding-top:5px;font-weight:bold;font-size:10px;">Add Folder:</div>
+            @using (Html.BeginForm("AddFolder", "Resource", new { area = "Administration", parent = Model.FolderId }))
+            {
+                <div style="padding-top:2px;">
+                <span style="font-weight:bold;font-size:9px;">Folder Name:</span>
+                @Html.TextBox("Name", string.Empty, new { style="font-size:10px;" })
+                </div>
+                <input type="submit" style="font-size:9px;" value="Add" />
+            }
+            </div>
+
+
+            <div  id="AddLink" style="display:none;">
+            <div style="padding-top:5px;font-weight:bold;font-size:10px;">Add Link:</div>
+            @using (Html.BeginForm("AddLink", "Resource", new { area = "Administration", parent = Model.FolderId }))
+            {
+                <div style="padding-top:2px;"><span style="font-weight:bold;font-size:9px;">Name:</span> @Html.TextBox("Name", string.Empty, new { style="font-size:10px;width:250px;" })</div>
+                <div style="padding-top:2px;"><span style="font-weight:bold;font-size:9px;">Link:</span> @Html.TextBox("Link", string.Empty, new { style = "font-size:10px;width:250px;" })</div>
+                <div style="padding-top:2px;"><span style="font-weight:bold;font-size:9px;">Description:</span> @Html.TextArea("Description", string.Empty, new { style="font-size:10px;width:300px;50px;" })</div>
+                <div style="padding-top:4px;"><input type="submit"  style="font-size:9px;"  value="Add" /></div>
+    
+            }
+            </div>
+
+
+            <div  id="AddFile" style="display:none;">
+            <div style="padding-top:5px;font-weight:bold;font-size:10px;">Add File:</div>
+            @using (Html.BeginForm("AddFile", "Resource", new { area = "Administration", parent = Model.FolderId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div style="padding-top:2px;"><span style="font-weight:bold;font-size:9px;">Name:</span> @Html.TextBox("Name", string.Empty, new { style = "font-size:10px;width:250px;" })</div>
+                <div style="padding-top:4px;"><span style="font-weight:bold;font-size:9px;">File:</span> <input type="file" name="File" style="font-size:10px;" /></div>
+                <div style="padding-top:2px;"><span style="font-weight:bold;font-size:9px;">Description:</span> @Html.TextArea("Description", string.Empty, new { style = "font-size:10px;width:300px;50px;" })</div>
+                <div style="padding-top:4px;"><input type="submit"  style="font-size:9px;"  value="Add" /></div>
+    
+            }
+            </div>
+        
+        </div>
+    </td>
+</tr>
+</table>
+<hr />        
+
+@foreach (var entry in Model.Entries)
+{
+    <div style="padding:5px;">
+        <div style="background-color:#e8e8e8;border:solid 1px #939495;padding:2px;">
+            @if (alt)
+            {
+                alt = false;
+            <div style="padding-bottom:3px;font-weight:bold;background-color:#ffffcc;border:1px solid #e8e8e8;padding-left:5px;">
+                <a style="text-decoration:none;font-size:11px;font-weight:bold;color:#344148;" @if (entry.ResourceType == IQI.Intuition.Domain.Enumerations.ResourceType.Link)
+                {<text>target="top"</text>} href="@entry.Link">
+                @entry.Name
+                </a>
+            </div>
+            }
+            else
+            {
+                alt = true;
+            <div style="padding-bottom:3px;font-weight:bold;background-color:#344148;border:1px solid #e8e8e8;padding-left:5px;">
+                <a style="text-decoration:none;font-size:11px;font-weight:bold;color:White;" @if (entry.ResourceType == IQI.Intuition.Domain.Enumerations.ResourceType.Link)
+                {<text>target="top"</text>} href="@entry.Link">
+                @entry.Name
+                </a>
+            </div>                
+            }
+            <div style="font-size:9px;padding-top:1px;padding-left:10px;">
+                 @entry.Description
+            </div>
+            <div style="padding-top:2px;font-size:9px;color:#1567b0">Added: @entry.CreatedOn  <a href="@Url.Action("DeleteResource", new { id = entry.Id })" style="font-size:9px;">[remove]</a></div>
+        </div>
+    </div>
+
+}
+

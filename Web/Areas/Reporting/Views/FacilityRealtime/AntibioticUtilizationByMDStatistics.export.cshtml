@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.AntibioticUtilizationByMDStatistics
+           
+@{
+    ViewBag.Layout_ContentTitle = "Antibiotic Utilization MD Statistics";
+}
+
+
+<section class="grid_16 box leading"> 
+        <h3>List</h3>
+        <div class="inside">
+        <br />
+
+            @foreach (var entry in Model.Entries)
+            {
+                <div style="padding-bottom:5px;padding-top:15px;font-size:16px;font-weight:bold;">@entry.PhysicianName</div>
+
+                
+                <table class="iqitable" style="margin-bottom:0px;">
+                <tr>
+                    <th style="width:40%;">Name</th>
+                    <th style="width:15%;">Total</th>
+                    <th style="width:15%;">Admission</th>
+                    <th style="width:15%;">No Infection</th>
+                    <th style="width:15%;">HAI</th>
+                </tr>
+                @foreach (var antibiotic in entry.Antibiotics)
+                {
+                    <tr>
+                        <td>@antibiotic.Name</td>
+                        <td>@antibiotic.Count</td>
+                        <td>@Math.Round(antibiotic.PercentageAdmission,2)%</td>
+                        <td>@Math.Round(antibiotic.PercentageNoInfection,2)%</td>
+                        <td>@Math.Round(antibiotic.PercentageHAI,2)%</td>
+                    </tr>
+                 }
+                 </table>
+            }
+        
+        <br />
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>

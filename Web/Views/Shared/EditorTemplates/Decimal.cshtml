@@ -1,0 +1,23 @@
+﻿@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+    var htmlAttributes = new RouteValueDictionary(ViewBag.HtmlAttributes as object);
+}
+@section FormField
+{
+    @if (ViewData.ModelMetadata.IsReadOnly)
+    {
+        @ViewData.TemplateInfo.FormattedModelValue
+        @Html.Hidden(TemplateHelperName.Default, (object)Model)
+    }
+    else
+    {
+        @Html.TextBox(
+            TemplateHelperName.Default,
+            (object)Model, 
+            htmlAttributes)
+    }
+}

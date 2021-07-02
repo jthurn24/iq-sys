@@ -1,0 +1,55 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.EmployeeInfection.Facility.LineListingInfectionView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Employee Infection Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Employee Infection Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Employee Infection Line Listing</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBox("StartDate", Model.StartDate.FormatAsMinimalDate(), new { type = "datepicker" })  </td>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBox("EndDate", Model.EndDate.FormatAsMinimalDate(), new { type = "datepicker" })   </td>
+                        <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.InfectionType, Model.InfectionTypeOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+</section>
+
+
+<section class="grid_16 box leading"> 
+        <h3>Employee Infection List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:250px;">Date</th>
+                <th style="width:180px;">Employee</th>
+                <th style="width:170px;">Symptoms</th>
+                <th style="width:300px;">Info</th>
+            </tr>
+        </table>
+            @foreach (var infection in Model.Infections)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingEmployeeInfectionRow.cshtml", infection, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>

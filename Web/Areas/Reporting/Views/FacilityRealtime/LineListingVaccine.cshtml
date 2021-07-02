@@ -1,0 +1,91 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Vaccine.Facility.LineListingVaccineView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Immunization Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Immunization Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+    <section class="grid_16 box leading"> 
+            <h3>Immunization Line Listing</h3>
+            <div class="inside">
+
+                <div style="padding:10px;">
+                    <table>
+                        <tr>
+                            <td style="padding-right:15px;">
+                                <div style="font-size:12px;">Wing:</div>
+                                @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" })
+                            </td>
+                            <td style="padding-right:15px;">
+                                <div style="font-size:12px;">
+                                    Immunization Type:
+                                </div> @Html.DropDownListFor(m => m.VaccineTypeId, Model.TypeOptions, new { style = "font-size:10px;" })
+                            </td>
+                            <td style="padding-right:15px;">
+                                <div style="font-size:12px;">
+                                    Refusal Reason:
+                                </div> @Html.DropDownListFor(m => m.VaccineRefusalReasonId, Model.RefusalOptions, new { style = "font-size:10px;width:150px;" })
+                            </td>
+                        </tr>
+                        </table>
+                        <hr />
+                        <table>
+                            <tr>
+                                <td style="padding-right:15px;"><div style="font-size:12px;">Administered From:</div> @Html.TextBoxFor(m => m.StartDate, new { type = "datepicker" }) </td>
+                                <td style="padding-right:15px;"><div style="font-size:12px;">Administered To:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker" })   </td>
+                                <td style="padding-right:15px;">
+                                    <div style="font-size:12px;">
+                                        Include Discharged:
+                                    </div> @Html.CheckBoxFor(m => m.IncludeDischarged)
+                                </td>
+                                <td style="padding-right:15px;">
+                                    <div style="font-size:12px;">
+                                        Sort By:
+                                    </div> @Html.DropDownListFor(m => m.SortId, Model.SortOptions, new { style = "font-size:10px;width:150px;" })
+                                </td>
+                                <td style="padding-left:200px;">@Html.SmartSubmit("Refresh")</td>
+                            </tr>
+                    </table>
+                </div>
+            </div> 
+    </section>
+    
+
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Immunization List</h3>
+        <div class="inside">
+        <br />
+            <table class="iqitable" style="margin-bottom:0px;">
+                <tr>
+                <th style="width:150px;">Patient</th>
+                <th style="width:600px;">Immunizations</th>
+                </tr>
+            </table>
+            @foreach (var row in Model.Patients)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingVaccineRow.cshtml", row, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+            <br />
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+        $(function () {});
+    </script>
+}

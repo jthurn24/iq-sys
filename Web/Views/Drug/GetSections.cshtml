@@ -1,0 +1,22 @@
+﻿@model  IQI.Intuition.Web.Models.Drug.SectionView
+
+<h2 style="width:550px;">@Model.DrugName</h2>
+<div style="font-size:14px;padding-bottom:5px;">
+Sections:
+
+<select class="section_selector"  onchange="selectSection()" style="font-size:11px;">
+@foreach (var s in Model.Sections)
+{
+    <option value="@s.Id">@s.Title</option>
+}
+</select>
+</div>
+
+@foreach (var s in Model.Sections)
+{
+    <div id="@String.Concat("section_",s.Id)" class="section" style="display:none;height:400px;overflow:auto;">
+    <h3>@s.Title</h3>
+    <br />
+    @Html.Raw(s.Content)
+    </div>
+}

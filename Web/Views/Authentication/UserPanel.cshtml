@@ -1,0 +1,11 @@
+﻿@model IQI.Intuition.Web.Models.Authentication.AccountUserInfo
+<p>
+@if (Model == null)
+{
+    @Html.ActionLink("Log In", "SignIn", "Authentication")
+}
+else
+{
+    @:Current User: @Model.Name | @Html.ActionLink("Log Out", "SignOut", "Authentication") | 
+}
+</p> 

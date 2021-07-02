@@ -1,0 +1,54 @@
+
+@model IQI.Intuition.Web.Models.Administration.SystemContact.SystemContactViewForm
+@{
+    ViewBag.Layout_ContentTitle = "View Contact";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Return To List", new { @class = "left cancel" })
+        @Html.SmartSubmit("Edit", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>View Contact</h3>
+		<div class="inside form">
+		<p>
+        <div class="field">@Html.DisplayFor(model => model.FirstName)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.LastName)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.Title)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.Cell)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.Direct)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.Email)</div>
+        <div class="clear"></div>
+        <div class="field">@Html.DisplayFor(model => model.Notes)</div>
+			<br />
+		</p>
+	</section>
+	<div class="clear"></div>
+
+}
+<div class="clear"></div>
+
+

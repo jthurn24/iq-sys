@@ -1,0 +1,30 @@
+﻿@model IEnumerable<IQI.Intuition.Web.Models.Navigation.NavigationItem>
+
+<nav> 
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@Html.SmartLink(item.Link,item.Text)
+            @if (item.SubItems.Count() > 0)
+            {
+                <ul>
+                @foreach(var subItem in item.SubItems)
+                {
+                    <li>
+                        @if (subItem.IsSeparator)
+                        {
+                            <a href="#"><img border="0" src="@subItem.Image" />&nbsp; @subItem.Text</a>
+                        }
+                        else
+                        {
+                            @Html.SmartLink(subItem.Link, subItem.Text)
+                        }
+                        
+                    </li>
+                }
+                </ul>
+            }
+            </li>
+        } 
+    </ul> 
+</nav> 

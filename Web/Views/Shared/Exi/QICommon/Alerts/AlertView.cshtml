@@ -1,0 +1,33 @@
+﻿@model IEnumerable<IQI.Intuition.Exi.Models.QIDashboard.Alerts.AlertView>
+
+
+  <div id="@Model.GetHashCode()" class="inside"> 
+        <div>  
+        <div style="padding-right:10px;height:300px;overflow:auto;">
+        @foreach (var warning in Model)
+        {
+            <div style="width:200px;float:left;font-size:12px;font-weight:bold;">
+            <div style="padding:3px;">
+            <div style="border:1px dotted black;height:115px;">
+                <p style="background-image:url('/Content/images/alert-icon.jpg');background-position:top left;background-repeat:no-repeat;padding-left:30px;padding-right:5px;"> 
+                    <span style="color:#414141;">@warning.Title</span>
+                    <span style="color:#414141;">@warning.TriggeredOn</span> 
+                    <br />
+                    @Html.SmartLink(@Url.Action("View", "Warning", new { id = warning.Id, returnUrl = Url.Action("Index", "Home") }), "View", new { @style = "color:#156796" })
+                    &nbsp;|&nbsp;
+                    @Html.SmartLink(Url.Action("HideWarning", "Home", new { id = warning.Id }), "Hide", new { @style = "color:#156796" })
+                </p> 
+            </div>
+            </div>
+            </div>
+        }
+        </div>
+        </div>  
+        <div style="padding-top:10px;padding-left:10px;"> 
+            @Html.SmartButton("/Warning/List", "View All Alerts/Warnings")
+        </div> 
+     </div>
+
+<script>
+    scanFormSmartClick('#@Model.GetHashCode()');
+</script>

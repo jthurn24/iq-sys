@@ -1,0 +1,16 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.QuarterlyComplaintTrendView
+
+
+@foreach (var group in Model.ChartGroups)
+{
+<section class="grid_32 box leading" style="page-break-inside:avoid;"> 
+    <h3>@group.Description /1000pd </h3>
+    <div class="inside">
+            @Html.DisplayFor(x => group.Chart)
+    </div> 
+</section>
+}
+
+
+
+<div class="clear"></div>

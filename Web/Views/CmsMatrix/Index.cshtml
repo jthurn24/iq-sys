@@ -1,0 +1,302 @@
+﻿@model IQI.Intuition.Web.Models.CmsMatrix.Dashboard
+@{
+    ViewBag.Layout_ContentTitle = Model.CurrentFacilityName + " CMS Dashboard";
+}
+
+<script type="text/javascript">
+    var toolTipOpened = false;
+    var activePatientId = null;
+    var activeCategoryId = null;
+    var activeTargetCell = null;
+</script>
+
+<section class="grid_16 box leading"> 
+<h3>Facility CMS Matrix</h3> 
+
+<div style="padding:10px;">
+    @using (Html.BeginForm(null, null, FormMethod.Get))
+    {
+        <div style="padding:10px;">
+            <table>
+                <tr>
+                    <td valign="top" ><span style="font-size:12px;font-weight:bold;">Wing: &nbsp;</span></td>
+                    <td valign="top" >@Html.DropDownListFor(m => m.SelectedWing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                    <td valign="top" ><span style="font-size:12px;font-weight:bold;"> &nbsp; Entry Type: &nbsp;</span></td>
+                    <td valign="top" >@Html.DropDownListFor(m => m.SelectedMatrixType, Model.MatrixTypeOptions, new { style = "font-size:10px;" }) </td>
+                    <td valign="top" ><span style="font-size:12px;font-weight:bold;"> &nbsp; Sort By: &nbsp;</span></td>
+                    <td valign="top" >@Html.DropDownListFor(m => m.SortBy, Model.SortByOptions, new { style = "font-size:10px;" }) </td>
+                    <td valign="top" style="padding-left:15px;">@Html.SmartSubmit("Refresh", new { style="font-size:9px;" })</td>
+                </tr>
+            </table>
+        </div>
+
+    }
+    <table border="1">
+    <tr>
+    <td style="width:190px;">&nbsp;</td>
+        @foreach (var header in Model.Headers)
+        {
+        <td class="@string.Concat("c_", header.ColumnNumber, " matrix matrix_header")">
+            <img src="@Url.Action("RenderVerticalText",new { Controller="Chart", Area="Reporting", data=header.Category })" />
+        </td>
+        }
+    </tr>
+    <tr>
+    <td style="width:190px;">&nbsp;</td>
+        @foreach (var header in Model.Headers)
+        {
+        <td class="@string.Concat("c_", header.ColumnNumber, " matrix matrix_header")" style="width:27px;text-align:center;">@header.ColumnNumber</td>
+        }
+    </tr>
+    </table>
+
+    <div style="height:250px;overflow:auto;">
+    <table border="1">
+    @foreach (var row in Model.Rows)
+    {
+        <tr>
+            <td class="@string.Concat("r_",row.PatientNumber, " matrix")" style="width:190px;">
+                <div onclick="editNote(@row.PatientId,'@row.PatientName',this)" class="@(row.HasNote ? "cms-with-note" : "cms-without-note")" style="font-size:12px;font-weight:bold;padding-left:25px;padding-top:2px;padding-bottom:2px;">
+                <span>@row.PatientName</span>
+                </div>
+            </td>
+            @foreach (var column in row.Columns)
+            {
+                if (column.IsPlaceHolder)
+                {
+                    <td style="width:27px;text-align:center;font-size:9px;background-color:#f1f1f1 ;">&nbsp;</td>
+                }
+                else
+                {    
+                <td onclick="clickMatrixElement(this, @row.PatientId, @column.CategoryId)" style="width:27px;text-align:center;cursor:pointer;font-size:9px;" class="@string.Concat("c_", column.ColumnNumber, " r_", row.PatientNumber, " matrix")">@column.Value.Replace(',', ' ')</td>
+                }
+            }
+        </tr>
+         <script type="text/javascript">
+             $('@string.Concat(".r_", row.PatientNumber)').mouseover(function () {
+
+                 if (!toolTipOpened) {
+                     $('.matrix').css('background-color', '#FFFFFF');
+                     $('@string.Concat(".r_", row.PatientNumber)').css('background-color', '#FDC5C5');
+                 }
+             });
+         </script>
+
+    }
+    </table>
+    </div>
+
+    @foreach (var header in Model.Headers)
+    {
+        <script type="text/javascript">
+            $('@string.Concat(".c_", header.ColumnNumber, ":not(.matrix_header)")').mouseover(function () {
+                if (!toolTipOpened) {
+                    $('@string.Concat(".c_", header.ColumnNumber)').css('background-color', '#F9FDC5');
+                }
+            });
+         </script>   
+    }
+
+</div>
+
+
+
+</section>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var ttContainer = $('<div id="toolTip"/>');
+        $('body').append(ttContainer);
+
+        $('#toolTip').qtip({
+            content: {
+                text: '-',
+                title:
+                {
+                    text: ' ',
+                    button: true
+                }
+            },
+            position: {
+                target: 'mouse',
+                viewport: $(window),
+                adjust: {
+                    mouse: true  // Can be omitted (e.g. default behaviour)
+                }
+            },
+            style: {
+                classes: 'qtip-shadow qtip-jtools'
+            },
+            events: {
+                hide: function (event, api) {
+                    toolTipOpened = false;
+                    activePatientId = null;
+                    activeCategoryId = null;
+                    activeTargetCell = null;
+                }
+            }
+        });
+    });
+
+
+
+    function clickMatrixElement(target, patient, category) {
+
+        toolTipOpened = true;
+        activePatientId = patient;
+        activeCategoryId = category;
+        activeTargetCell = target;
+
+        $('#toolTip').qtip('api').set('content.title.text', 'Loading:');
+        $('#toolTip').qtip('api').set('content.text', 'Please wait..');
+        $('#toolTip').qtip('api').set('position.target', target);
+        $('#toolTip').qtip('show');
+
+        var url = '@Url.Action("EntryData")?patientid=' + patient + '&categoryid=' + category ;
+
+        $.ajaxSetup({ cache: false });
+        $.getJSON(url, function (data) {
+
+            var container = $('<div/>');
+
+            $('<div/>', { text: data['CategoryName'] }).appendTo(container);
+            $('<div/>', { text: data['CategoryDescription'] }).appendTo(container);
+            $('<br/>').appendTo(container);
+
+            for (var i = 0; i < data['Options'].length; i++) {
+
+                var option = data['Options'][i];
+                var oContainer = $('<div/>');
+                oContainer.css('padding', '2px');
+                oContainer.css('background-color', '#1c2428');
+                oContainer.css('border', 'solid 1px #6d777d');
+
+
+                var checkBox = $('<input/>', { type: 'checkbox', style: 'float:left;' }).appendTo(oContainer);
+                checkBox.attr('value', option['OptionValue']);
+
+                if (option['Selected'] == true) {
+                    checkBox.attr('checked', true);
+                }
+
+                var optionDescription = '(' + option['OptionValue'] + ') ' + option['Description'];
+
+                $('<div/>', { html: optionDescription, style: 'font-weight:bold;color:#FFFFFF;width:200px;padding:3px;float:left;text-align:left;' }).appendTo(oContainer);
+                $('<div/>', { html: '', style: 'clear:both;' }).appendTo(oContainer);
+                oContainer.appendTo(container);
+            }
+
+            $('<br/>').appendTo(container);
+            var submitButton = $('<input/>', { type: 'button', onclick: 'applyMatrixChanges()', value: 'Save' }).appendTo(container);
+
+            $('#toolTip').qtip('api').set('content.title.text', data['PatientName']);
+
+            $('#toolTip').qtip('api').set('content.text', container);
+
+        });
+    }
+
+    function applyMatrixChanges() {
+
+        $(activeTargetCell).html('<img src="/Content/Images/matrix-entry-loader.gif" />');
+
+        var container = $('#toolTip').qtip('api').elements.content;
+
+        var values = $(container).find(':checked').map(function() {return $(this).val();}).get().join(',')
+
+        $(container).find(':button').hide();
+        $(container).find(':checkbox').hide();
+
+        var url = '@Url.Action("UpdateEntryData")?patientid=' + activePatientId + '&categoryid=' + activeCategoryId + '&selectedValues=' + values;
+
+        
+
+        $.ajaxSetup({ cache: false });
+        $.getJSON(url, function (data) {
+
+            $(activeTargetCell).html(data['SelectedOptions'].replace(',',' '));
+            $('#toolTip').qtip('hide');
+        });
+
+
+    }
+
+    var ACTIVE_PATIENT_NOTE_ELEMENT;
+
+    function editNote(id, name, src) {
+
+        ACTIVE_PATIENT_NOTE_ELEMENT = src;
+
+        $('#note_patient_name').html(name);
+        $('#note_patient_id').attr('value', id);
+
+        var url = '@Url.Action("GetPatientNote")?id=' + id;
+
+        $.ajaxSetup({ cache: false });
+        $.getJSON(url, function (data) {
+
+            $('#note_textbox').val(data["Note"]);
+            $('#note_holder').show();
+            $('#note_waiting_holder').hide();
+            $("#ctrl_edit_note").dialog({
+                resizable: false,
+                height: 440,
+                width: 520,
+                modal: true,
+                title: 'Modify Note'
+            });
+
+        });
+
+    }
+
+    function updateNote() {
+        
+        $('#note_holder').hide();
+        $('#note_waiting_holder').show();
+        var patientID = $('#note_patient_id').attr('value');
+        var note = $('#note_textbox').val();
+
+        var url = '@Url.Action("UpdatePatientNote")';
+
+        if (note == '') {
+            $(ACTIVE_PATIENT_NOTE_ELEMENT).removeClass('cms-with-note');
+            $(ACTIVE_PATIENT_NOTE_ELEMENT).addClass('cms-without-note');
+        }
+        else {
+            $(ACTIVE_PATIENT_NOTE_ELEMENT).removeClass('cms-without-note');
+            $(ACTIVE_PATIENT_NOTE_ELEMENT).addClass('cms-with-note');
+        }
+
+        $.post(url, { PatientId: patientID, NoteText: note })
+        .done(function (data) {
+            if (data["Success"] == true) {
+                $("#ctrl_edit_note").dialog("close");
+            }
+        });
+
+    }
+
+</script>
+
+
+<div style="display:none;" id="ctrl_edit_note">
+
+<div id="note_holder">
+    <div id="note_patient_name" style="font-size:14px;font-weight:bold;padding-top:5px;padding-bottom:5px;"></div>
+    <input id="note_patient_id" type="hidden" value="" />
+    <textarea id="note_textbox" style="width:500px;height:300px;"></textarea>
+    <div style="padding-top:10px;">
+        <input type="button" style="width:500px;" onclick="updateNote()" value="Update Note" />
+    </div>
+    </div>
+</div>
+<div id="note_waiting_holder" style="padding-top:100px;font-weight:bold;text-align:center;display:none;">
+Please wait....
+</div>
+
+<div style="clear:both;"></div>

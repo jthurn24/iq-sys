@@ -1,0 +1,32 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.LineListingComplaintView.ComplaintRow
+
+<tr>
+    <td style="vertical-align:top;width:250px;">
+        <div>
+        <span style="font-weight:bold;">Date Reported:</span> @Model.DateReported
+        </div>
+        <div>
+        <span style="font-weight:bold;">Date Occurred:</span> @Model.DateOccurred
+        </div>
+        <div>
+        <span style="font-weight:bold;">Reported By:</span> @Model.ReportedBy
+        </div>
+        <div>
+        <span style="font-weight:bold;">Reported:</span> @Model.Reported
+        </div>
+        <div>
+        <span style="font-weight:bold;">Cleared:</span> @Model.Cleared
+        </div>
+    </td>
+    <td style="vertical-align:top;width:180px;">
+        <div><span style="font-weight:bold;">Patient #1:</span> @Model.PatientName</div>
+        <div><span style="font-weight:bold;">Patient #2:</span> @Model.PatientName2</div>
+        <div><span style="font-weight:bold;">Employee #1:</span> @Model.EmployeeName</div>
+        <div><span style="font-weight:bold;">Employee #2:</span> @Model.EmployeeName2</div>
+        <div><span style="font-weight:bold;">Wing:</span> @Model.Wing</div>
+        <div><span style="font-weight:bold;">Type:</span> @Model.ComplaintType</div>
+    </td>
+    <td style="vertical-align:top;width:370px;">
+        <div>@Html.Raw(Model.Description)</div>
+    </td>               
+</tr>

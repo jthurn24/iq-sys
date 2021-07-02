@@ -1,0 +1,39 @@
+﻿@model IQI.Intuition.Web.Models.Patient.PatientGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "View Patients";
+}
+<div class="tablenav">
+  <div class="radio text-left" style="float:left;">
+    @using (Html.BeginForm("List", "Patient", FormMethod.Get, new { id = "radioForm" }))
+    {
+        <label>@Html.RadioButton("ShowAdmittedOnly", false) Show All</label>
+        <label>@Html.RadioButton("ShowAdmittedOnly", true,true) Show Admitted Only</label>
+    }
+    </div>
+    <div class="newbtn search">
+        <button class="link" data-url="@Url.Action("Add", "Patient")">Add New Patient</button>
+    </div>
+    <span class="clear"></span>
+</div>
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("input[name=ShowAdmittedOnly]", "#radioForm").change(function () {
+                $("#radioForm")[0].submit();
+            });
+        })
+
+        function rowSelect(id) {
+            smoothLoad('@Url.Action("Detail","Patient")/' + id);
+        }
+
+    </script>
+}

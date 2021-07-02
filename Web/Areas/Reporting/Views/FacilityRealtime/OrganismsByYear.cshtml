@@ -1,0 +1,85 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.OrganismYearly
+           
+@{
+    ViewBag.Layout_ContentTitle = "Path/Org Yearly Totals";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Path/Org Yearly Totals";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+
+<section class="grid_16 box leading"> 
+        <h3>Organisms/Pathogens By Year</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Year:</div>@Html.TextBoxFor(x => x.Year, new { style="width:80px;" })</td>
+                        <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.WingId, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+
+        }
+        </div> 
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div>
+</section>
+
+<section class="grid_16 box leading">
+        <h3>Organisms/Pathogens</h3>
+        <div class="inside">
+                <br />
+                <table style="page-break-inside:avoid;border:solid 1px black;">
+                <tr>
+                <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">P/O</td>
+                @foreach (var month in Model.MonthEntries)
+                {
+                    <td style="width:50px;text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;@(month.Shaded ? "background-color:#d6d5d5" : string.Empty) " >
+                        @month.Name
+                    </td>
+                }
+                <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">
+                    <div style="padding:3px;">Total</div>
+                </td>
+                </tr>
+                @foreach (var path in Model.OrganismTotals.OrderBy(x => x.Name))
+                {
+                    <tr>
+                        <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">
+                            <div style="padding:5px;font-size:12px;font-weight:bold;">@path.Name</div>
+                        </td>
+                        @foreach (var month in Model.MonthEntries)
+                        {
+                            <td style="width:50px;text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;@(month.Shaded ? "background-color:#d6d5d5" : string.Empty) " >
+                                @Model.GetTotal(month,path)
+                            </td>   
+                        }
+                        <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">
+                            <div style="padding:5px;font-size:12px;font-weight:bold;">@path.Total</div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">Total</td>
+                @foreach (var month in Model.MonthEntries)
+                {
+                    <td style="width:50px;text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;@(month.Shaded ? "background-color:#d6d5d5" : string.Empty) " >
+                        <div style="padding:5px;">@month.Total</div>
+                    </td>
+                }
+                <td style="text-align:center;font-size:12px;font-weight:bold;border-right:solid 1px #757575;border-bottom:solid 1px #757575;">
+                   @Model.MonthEntries.Sum(x => x.Total)
+                </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+</section>
+
+
+<div style="clear:both;">&nbsp;</div>

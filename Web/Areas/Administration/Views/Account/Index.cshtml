@@ -1,0 +1,38 @@
+@{
+    ViewBag.Title = "Account List";
+}
+
+@model IQI.Intuition.Web.Models.Administration.Account.AccountGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Account List";
+}
+
+
+
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+
+    <div>
+        <div class="tablenav">
+            <div class="newbtn">
+                <button class="link" data-url="@Url.Action("Add", "Account")">Add Account</button> &nbsp;
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> 
+
+</section>
+
+
+<script type="text/javascript">
+
+    function accountRowSelect(id) {
+        smoothLoad('@Url.Action("View","Account")/?id=' + id);
+    }
+
+</script>
+

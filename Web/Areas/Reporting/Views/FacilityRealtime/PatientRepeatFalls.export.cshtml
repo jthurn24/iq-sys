@@ -1,0 +1,43 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.PatientRepeatFallView
+           
+
+<section class="grid_8 box leading"> 
+        <h3>Fall Totals</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;width:350px;">
+            <tr>
+                <th style="width:150px;">Patient</th>
+                <th style="width:50px;">Total Falls</th>
+                <th style="width:150px;">Avg Per Month</th>
+            </tr>
+        </table>
+            @foreach (var e in Model.Entries)
+            {
+                <table class="iqitable" style="margin-bottom:0px;width:350px;">
+                    <tr>
+                        <td style="width:150px;">@e.PatientName</td>
+                        <td style="width:50px;">@e.Total</td>
+                        <td style="width:150px;">@Math.Round(e.AveragePerMonth,2)
+                            &nbsp;
+                            <span style="font-size:9px;">(@e.DateRange)</span>
+                        </td>
+                    </tr>
+                </table>
+            }
+        
+        </div> 
+    <br />
+</section>
+
+
+<section class="grid_8 box leading"> 
+        <h3>Single vs Repeat</h3>
+        <div class="inside">
+        <br />
+            @Html.DisplayFor(x => x.RepeatChart)
+        </div>
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+

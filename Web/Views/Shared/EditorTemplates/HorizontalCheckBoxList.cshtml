@@ -1,0 +1,59 @@
+﻿@model System.Collections.IEnumerable
+           
+@if (ViewData.ModelMetadata.ShowForEdit)
+{
+    IEnumerable<SelectListItem> selectListItems;
+
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CheckBoxList.SelectListItems"))
+    {
+        /* Support the mapper version */
+        selectListItems = (ViewData.ModelMetadata.AdditionalValues["CheckBoxList.SelectListItems"] as IEnumerable<SelectListItem>);
+    }
+    else
+    {
+        /* Support the html helper version */
+        selectListItems = (ViewData["SelectListItems"] as IEnumerable<SelectListItem>);
+    }
+    
+    
+    int rowCount = (int)Math.Ceiling(((decimal)selectListItems.Count() / 4));
+    int column = 1;
+    
+    while (column <= 4)   
+    {
+        <div style="width:200px;float:left;">
+        @foreach (var selectListItem in selectListItems.Skip((column -1) * rowCount).Take(rowCount))
+        {
+
+            <div style="padding-bottom:5px;padding-right:5px;">
+                <table>
+                    <tr>
+                        <td style="vertical-align:top;">
+                           <input 
+                            type="checkbox" 
+                            name="@ViewData.TemplateInfo.HtmlFieldPrefix" 
+                            value="@selectListItem.Value"
+                            @if (Model != null && Model.ToStringArray().Contains(selectListItem.Value))
+                            {
+                                @: checked="checked"
+                            }
+                            @if (ViewData.ModelMetadata.IsReadOnly)
+                            {
+                                @: disabled="disabled"
+                            }
+                            />
+                        </td>
+                        <td style="vertical-align:top;">
+                            <div>@selectListItem.Text</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+          
+        }
+        </div>
+        
+        column++;
+    }
+
+}

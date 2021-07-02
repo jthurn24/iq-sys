@@ -1,0 +1,63 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.EmployeeInfection.Facility.LineListingInfectionView.InfectionRow
+
+<tr>
+    <td style="vertical-align:top;width:250px;">
+        <div>
+        <span style="font-weight:bold;">Call-In/Notification Date:</span> @Model.NotifiedOn
+        </div>
+        <div>
+        <span style="font-weight:bold;">Last Worked Date:</span> @Model.LastWorkedOn
+        </div>
+        <div>
+        <span style="font-weight:bold;">Last Shift:</span> @Model.LastShift
+        </div>
+        <div>
+        <span style="font-weight:bold;">Well/Return To Work Date:</span> @Model.WellOn
+        </div>
+
+        <hr />
+        <div>
+        <span style="font-weight:bold;">First Symptom Date:</span> @Model.FirstSymptomOn
+        </div>
+        <div>
+        <span style="font-weight:bold;">Last Symptom Date:</span> @Model.LastSymptomOn
+        </div>
+
+    </td>
+    <td style="vertical-align:top;width:180px;">
+        <div style="color:Black;font-weight:bold;">@Model.FullName</div>
+        <div><span style="font-weight:bold;">Wing:</span> @Model.Wing</div>
+        <div><span style="font-weight:bold;">Floor:</span> @Model.Floor</div>
+        <div><span style="font-weight:bold;">Birthdate:</span> @Model.DateOfBirth</div>
+        <div><span style="font-weight:bold;">Gender:</span> @Model.Gender</div>
+        <div><span style="font-weight:bold;">Department:</span> @Model.Department</div>
+    </td>
+    <td style="vertical-align:top;width:170px;">
+        <div style="font-weight:bold;">Type</div> 
+        @if (Convert.ToBoolean(ViewData["showLink"]))
+        {
+            <div style="padding-bottom:5px;font-weight:bold;"><a href="@Url.Action("Edit", new { Controller = "EmployeeInfection", Area = "", id = Model.ID, returnurl = Request.Url.AbsoluteUri })">@Model.InfectionType</a></div>
+        }
+        else
+        {
+            <div style="padding-bottom:5px;font-weight:bold;">@Model.InfectionType</div>
+        }
+        <div style="color:Black;font-weight:bold;padding-bottom:5px;padding-top:5px;">Symptoms</div>
+        @foreach (var symptom in Model.Symptoms)
+        {
+            <div>@symptom</div>
+            <hr />
+        }
+    </td>
+    <td style="vertical-align:top;width:300px;">
+        <div style="font-weight:bold;">Seen by MD?</div>
+        <div>@Model.SeenByMD</div>
+        <div style="font-weight:bold;">MD Instructions</div>
+        <div>@Model.MDInstructions</div> 
+        <div style="font-weight:bold;">Lab Results</div>
+        <div>@Model.LabResults</div>     
+        <div style="font-weight:bold;">Notes</div>
+        <div>@Model.Notes</div>      
+    </td>
+                
+</tr>

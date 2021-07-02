@@ -1,0 +1,21 @@
+﻿@model IQI.Intuition.Reporting.Models.User.ExportRequest
+
+@{
+    ViewBag.Layout_ContentTitle = "Email Document";
+}
+
+<section class="grid_5">
+&nbsp;
+</section>
+<section class="grid_6 box leading">
+    <h3>Email Information</h3>
+     @using (Html.BeginForm())
+     {
+    <div style="font-weight:bold;padding:10px;text-align:center;">
+        Email Address: @Html.TextBox("EmailAddress")
+    </div>
+    <div align="center" style="padding-top:5px;padding-bottom:10px;">
+         <input class="link" type="button" data-submit="true" value="Send">
+    </div>
+     }
+</section>

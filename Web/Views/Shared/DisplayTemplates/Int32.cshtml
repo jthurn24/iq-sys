@@ -1,0 +1,13 @@
+﻿@model System.Int32
+           
+@{
+    if (ViewData.ModelMetadata.ShowForEdit)
+    {
+        Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+    }
+
+}
+@section FormField
+{
+    <span class="answer">@Model</span>
+}

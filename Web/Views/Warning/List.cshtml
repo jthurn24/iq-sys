@@ -1,0 +1,22 @@
+﻿@model IQI.Intuition.Web.Models.Warning.WarningGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "View Warnings";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function rowSelect(id) {
+            smoothLoad('@Url.Action("View","Warning")/?id=' + id + '&returnUrl=@Url.Action("List","Warning")');
+        }
+
+    </script>
+}

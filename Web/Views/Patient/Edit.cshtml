@@ -1,0 +1,94 @@
+﻿@model IQI.Intuition.Web.Models.Patient.PatientForm
+
+@{
+    ViewBag.Layout_ContentTitle = (Model.IsUpdateMode ? "Edit" : "Add New") + " Patient";
+
+    ViewBag.AuditRequest = Model.IsUpdateMode ? new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("Demographic Changes - ", Model.FirstName, " ", Model.LastName),
+        PatientId = Model.Guid,
+        Types = new List<IQI.Intuition.Domain.Enumerations.AuditEntryType>() { IQI.Intuition.Domain.Enumerations.AuditEntryType.ModifiedPatientDemographic }
+    } : null;
+}
+
+@using (Html.BeginForm()) 
+{
+
+    @Html.EditorFor(model => model.IsUpdateMode)
+    @Html.EditorFor(model => model.Guid)
+    @Html.HiddenFor(model => model.CurrentStatus)
+    @Html.HiddenFor(model => model.CurrentRoom)
+    <div class="clear"></div>
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+        <span class="clear"></span>
+    </div>
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+   
+    <section class="grid_16 box">
+        <h3>Patient Information</h3>
+        <div class="inside form">
+            
+            <div class="grid_6">
+            <p>
+            <div class="field">@Html.EditorFor(model => model.FirstName)</div>
+            <div class="field">@Html.EditorFor(model => model.MiddleInitial,
+                new { HtmlAttributes = new { @class = "input_tiny" } })</div>
+            <div class="field">@Html.EditorFor(model => model.LastName)</div>
+            <div class="field">@Html.EditorFor(model => model.BirthDate,
+                new { HtmlAttributes = new { @class = "birthDate" } })</div>
+            <div class="field">@Html.EditorFor(model => model.MDName)</div>
+            </p>
+            </div>
+            <div class="grid_6">
+            <p>
+            <div class="field">@Html.EditorFor(model => model.NewStatus)</div>
+            <div class="field" data-bind="visible: showStatusChangeDate">@Html.EditorFor(model => model.StatusChangedAt, new { @class = "date" })</div>
+            <div class="field"></div>
+            <div class="field">@Html.EditorFor(model => model.Floor)</div>
+            <div class="field">@Html.EditorFor(model => model.Wing)</div>
+            <div class="field">@Html.EditorFor(model => model.Room)</div>
+            <div class="field roomchangedata">@Html.EditorFor(model => model.RoomChangeAt, new { @class = "date" })</div>
+            </p>
+            </div>
+            <div class="clear"></div>
+            <br />
+        </div>
+    </section>
+    <div class="clear"></div>
+    
+    <section class="grid_16 box">
+    <h3>Patient Information</h3>
+     <div class="inside form">
+            <p>
+            @Html.EditorFor(model => model.SelectedPatientFlags)
+            </p>
+            <div class="clear"></div>
+            <br />
+     </div>
+    </section>
+    <div class="clear"></div>
+}
+@section Scripts
+{
+    @Html.Script("/scripts/knockout-1.2.1.min.js")
+    @Html.Script("/scripts/knockout.mapping-1.2.4.min.js")
+    @Html.Script("/scripts/jquery.unobtrusive-knockout.min.js")
+    @Html.Script("/scripts/patient-form-model.js")
+    @Html.Script("/scripts/patient-form.js")
+
+    <script type="text/javascript">
+        PatientForm(@Html.Raw(Json.Encode(Model.ClientViewModel)));
+    </script>
+}
+

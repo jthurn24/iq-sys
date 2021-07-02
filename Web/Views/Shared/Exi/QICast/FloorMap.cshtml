@@ -1,0 +1,88 @@
+﻿@model IQI.Intuition.Exi.Models.QICast.FloorMapView
+
+<div class="qicontrol-maproot" id ="@Model.GetHashCode()">
+<div style="width:210px;float:left;padding-right:10px;opacity:.9">
+
+   
+<div>
+
+
+    <div class="listview-outlook">
+
+    @{ string color = string.Empty;}
+    @foreach (var group in Model.Groups)
+    {
+       <a href="#" class="list shadow bg-black fm_group"  style="width:200px;height:30px;color:white;">
+        <div class="list-content">
+            <div class="data" style="margin-left:0px;">
+                <span class="list-title">@group.Name</span>
+            </div>
+        </div>
+       </a>
+        
+        foreach (var layer in group.Layers)
+        {
+
+            if (group.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking) { color = "darkViolet"; }
+            if (group.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking) { color = "darkCobalt"; }
+            if (group.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking) { color = "brown"; }
+            
+              <a id="@layer.LayerId" href="#" class="list shadow bg-@color fm_item"  style="width:200px;height:30px;color:white;">
+                <div class="list-content">
+                    <div class="data" style="margin-left:0px;">
+                        <span class="list-title" description="@layer.Description">
+                            @layer.Title &nbsp;
+                            @if(layer.Count > 0) { <span style="background-color:black;color:yellow;font-weight:bold;padding:1px;">@layer.Count</span> }
+                        </span>
+                    </div>
+                </div>
+            </a> 
+        }
+    }
+
+        </div>
+  
+
+</div>
+    
+</div>
+<div style="float:left;background-color:rgba(0,0,0,0.7);border:1px solid #808080;position:relative;" class="shadow">
+    @Html.DisplayFor(x => x.FloorMap)
+    <div style="color:white;font-size:22px;font-weight:bold;width:100%;font-style:italic;">
+    <div style="text-align:center;padding:5px;" class="FMPTitle"></div>
+    </div>
+</div>
+</div>
+
+<script>
+
+    sCoreExi.setParentSlotForAutoRefresh('#@Model.GetHashCode()', 300);
+
+    var ctrl = '@Model.FloorMap.GetHashCode().ToString()';
+
+    $('#' + ctrl).data('sfm_on_render_layer', function (layerid) {
+
+
+        var ctrl = '@Model.FloorMap.GetHashCode().ToString()';
+        var parent = $('#' + ctrl).closest('.qicontrol-maproot');
+
+
+        $(parent).find('.FMPTitle').css('width', $('#' + ctrl).css('width'));
+
+        $(parent).find('.list-content').removeClass('bg-red');
+        $('#' + layerid).find('.list-content').addClass('bg-red');
+
+        var desc = $('#' + layerid).find('.list-title').attr('description');
+
+        $(parent).find('.FMPTitle').fadeOut("slow", function () {
+
+            var ctrl = '@Model.FloorMap.GetHashCode().ToString()';
+            var parent = $('#' + ctrl).closest('.qicontrol-maproot');
+            $(parent).find('.FMPTitle').html(desc);
+            $(parent).find('.FMPTitle').fadeIn();
+        });
+
+
+    });
+
+</script>

@@ -1,0 +1,71 @@
+﻿@model IQI.Intuition.Web.Models.Patient.RemovePatient
+
+@{
+    ViewBag.Layout_ContentTitle = "Remove Patient";
+}
+
+
+@using (Html.BeginForm())
+{
+    <br />
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+    <div class="inside form">
+        @Html.ValidationSummary()
+    </div>
+    </section>
+    }
+    
+    <section class="grid_16 box leading"> 
+            <h3>Remove Patient</h3>
+
+            <div class="inside">
+            @using (Html.BeginForm(null, null, FormMethod.Get))
+            {
+                <div style="padding:10px;">
+                    <table width="100%">
+                        <tr>
+                            <td style="text-align:left;width:300px;">
+                                <div>Patient: @Model.PatientName </div> 
+                                @Html.HiddenFor(m => m.Patient) 
+                                @Html.HiddenFor(m => m.PatientName) 
+                             </td>
+                            <td style="text-align:left;width:150px;"><span>Move Data</span> @Html.CheckBoxFor(m => m.MoveData) </td>
+                            <td style="text-align:left;width:300px;"><span id="Dest"><div>Destination:</div> @Html.DropDownListFor(m => m.DestinationPatient, Model.DestinationPatientOptions, new { style = "font-size:12px;" }) </span></td>
+                            <td style="text-align:left;width:150px;">
+                                @Html.SmartSubmit("Remove","Are you sure you wish to remove this patient?") 
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+            </div> 
+    </section>
+    
+    <div class="clear"></div>
+}
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        function toggleDest() {
+            if ($('#MoveData').prop("checked")) {
+                $('#Dest').show();
+            }
+            else {
+                $('#Dest').hide();
+            }
+        }
+
+        toggleDest();
+
+        $('#MoveData').change(function () {
+            toggleDest();
+        });
+
+    </script>
+}

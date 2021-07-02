@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D7C76E0-C89F-47AB-A181-72D89F25D84C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Infrastructure</RootNamespace>
+    <AssemblyName>IQI.Intuition.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=1.2.0.721, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Extensions">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc.StructureMap">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Logging">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Logging.log4net">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Logging.log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Mvc.ModelMapper">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Mvc.ModelMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.ObjectModel">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence.Core">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence.NHibernate">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence.NHibernate.Helpers">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.NHibernate.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Exi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Exi.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\ExternalDependencies\sCore\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="Ioc\StructureMapConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\IQI.Intuition.Domain.csproj">
+      <Project>{10420AE7-A248-4FD3-B793-ED00378CFBC5}</Project>
+      <Name>IQI.Intuition.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IQI.Intuition.Exi\IQI.Intuition.Exi.csproj">
+      <Project>{c83e1429-4529-49df-a545-7504968839b2}</Project>
+      <Name>IQI.Intuition.Exi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Models\IQI.Intuition.Web.Models.csproj">
+      <Project>{7207C800-09A5-41B9-A739-724F30425BE0}</Project>
+      <Name>IQI.Intuition.Web.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="Persistence\IQI.Intuition.Infrastructure.Persistence.csproj">
+      <Project>{99316255-68DA-4887-A4F3-9B39E000D29C}</Project>
+      <Name>IQI.Intuition.Infrastructure.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="Services\IQI.Intuition.Infrastructure.Services.csproj">
+      <Project>{887ED715-BDE1-4E27-8385-3C91847024B9}</Project>
+      <Name>IQI.Intuition.Infrastructure.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

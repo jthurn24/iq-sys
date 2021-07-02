@@ -1,0 +1,35 @@
+﻿@model IQI.Intuition.Web.Models.Infection.InfectionGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Patient Infections";
+}
+
+<div class="tablenav">
+    <div class="radio text-left">
+    @using (Html.BeginForm("List", "Infection", FormMethod.Get, new { id = "radioForm" }))
+    {
+        <label>@Html.RadioButton("ShowOpenOnly", false, true) Show All</label>
+        <label>@Html.RadioButton("ShowOpenOnly", true) Show Open Only</label>
+    }
+    </div>
+    <span class="clear"></span>
+</div>
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("input[name=ShowOpenOnly]", "#radioForm").change(function () {
+                $("#radioForm")[0].submit();
+            });
+        })
+
+        function infectionRowSelect(id) {
+            smoothLoad('@Url.Action("Edit","Infection")/?id=' + id + '&returnUrl=@Url.Action("List","Infection")');
+        }
+
+    </script>
+}

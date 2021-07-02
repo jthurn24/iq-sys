@@ -1,0 +1,73 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.QuarterlyComplaintControlView
+
+@{
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Quarterly Complaints Overview";
+    ViewBag.IsExportable = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Quarterly Complaint Control Report</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+            @Html.DropDownListFor(m => m.Quarter,Model.QuarterOptions)                                                 
+            @Html.SmartSubmit("Refresh")
+            </div>
+        }
+        </div> 
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div>
+</section>
+
+<section class="grid_16 box leading"> 
+        <h3>Census Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th>@Model.Month1.Name</th>
+                <th>@Model.Month2.Name</th>
+                <th>@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <td>Avg Census</td>
+                <td>@Model.Census.Month1.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.Census.Month2.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.Census.Month3.AverageCensus.ToString("#0.0")</td>
+            </tr>
+             <tr>
+                <td>Time Period</td>
+                <td>@Model.Census.Month1.TimePeriod</td>
+                <td>@Model.Census.Month2.TimePeriod</td>
+                <td>@Model.Census.Month3.TimePeriod</td>
+            </tr>
+            <tr>
+                <td>Patient Days</td>
+                <td>@Model.Census.Month1.PatientDays</td>
+                <td>@Model.Census.Month2.PatientDays</td>
+                <td>@Model.Census.Month3.PatientDays</td>
+            </tr>
+        </table>
+        </div> 
+</section>
+
+<section class="grid_16 box leading"> 
+        <h3>Complaints</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.ComplaintView, "QuarterlyStatTable")
+        </div>
+</section>
+
+
+<section class="grid_16 box leading"> 
+        <h3>Complaint Overview</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.ComplaintChart)
+        </div> 
+</section>
+
+<div class="clear"></div>

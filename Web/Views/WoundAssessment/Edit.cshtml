@@ -1,0 +1,162 @@
+﻿@model IQI.Intuition.Web.Models.WoundAssessment.AssessmentForm
+@{
+    ViewBag.Layout_ContentTitle = "Wound Assessment";
+}
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.StageLocked)
+    
+    <br />
+     
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    
+    <section class="grid_16 box">
+        <h3>General Information</h3>
+        @if(ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemovePsychotropic) && Model.Id.IsNotNullOrEmpty())
+        {
+        <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "WoundAssessment", new { id = Model.Id }), "Remove", "Are you sure you want to remove this entry?")
+        </div>
+        }
+        <div class="inside form">
+            <div class="field">@Html.EditorFor(model => model.Floor)</div>
+            <div class="field">@Html.EditorFor(model => model.Wing)</div>
+            <div class="field">@Html.EditorFor(model => model.Room)</div>
+            <div class="field">@Html.EditorFor(model => model.AssessmentDate)</div>
+        </div>
+        <div style="clear:both;"></div>
+        <br />
+    </section>
+    
+    
+     <section class="grid_16 box">
+        <h3></h3>
+        <ul class="boxtabs">
+            <li><a href="#">Details</a></li>
+            <li><a href="#">Undermining</a></li>
+            <li><a href="#">Tunneling</a></li>
+        </ul>
+        <div class="inside panes">
+            <div>
+                <h3>Details</h3>
+                <div class="inside form" style="width:300px;float:left;">
+                    <div style="font-weight:bold;padding-top:5px;">Stage LxWxD</div>
+                    @if(Model.StageLocked == false)
+                    {
+                    <div class="field">@Html.EditorFor(model => model.Stage,  new { HtmlAttributes = new { @style = "font-size:11px;" } })</div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => model.Stage)
+                    }
+                    <div class="field">@Html.EditorFor(model => model.Lcm,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Wcm,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Dcm,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div style="clear:both;"></div>
+                    <div class="field">@Html.EditorFor(model => model.Superficial)</div>
+                    <div style="clear:both;"></div>
+                    <div style="font-weight:bold;padding-top:20px;padding-bottom:10px;">Wound Bed</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundBedEpithelial,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundBedGranulation,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundBedSlough,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundBedNecrosis,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundBedOther)</div>
+                </div>
+
+               <div class="inside form" style="width:300px;float:left;">
+                    <div style="font-weight:bold;">Description</div>
+                    <div class="field">@Html.EditorFor(model => model.Exudate)</div>
+                    <div class="field">@Html.EditorFor(model => model.ExudateType)</div>
+                    <div class="field">@Html.EditorFor(model => model.Odor)</div>
+                    <div class="field">@Html.EditorFor(model => model.PeriwoundTissue)</div>
+                    <div class="field">@Html.EditorFor(model => model.WoundEdge)</div>
+                    <div style="clear:both;"></div>
+                    <div style="font-weight:bold;padding-top:20px;padding-bottom:10px;">Pain/Treatment</div>
+                    <div class="field">@Html.EditorFor(model => model.Pain)</div>
+                    <div class="field">@Html.EditorFor(model => model.PainManagedWith)</div>
+                    <div class="field">@Html.EditorFor(model => model.Progress)</div>
+                    <div class="field">@Html.EditorFor(model => model.TreatmentStatus)</div>
+                    <div class="field">
+                        @Html.EditorFor(model => model.PushScore,  new { HtmlAttributes = new { @style = "width:50px;" } })
+                        <input type="button" id="CalcPushButton" value="Calculate" style="float:left;font-size:9px;" />
+                        &nbsp;
+                    </div>
+                </div>
+
+                <div style="clear:both;"></div>
+                <br />
+            </div>
+        </div>
+        <div class="inside panes">
+            <div>
+                <h3>Undermining</h3>
+                 <div class="inside form" style="width:300px;float:left;">
+                    <div style="padding-top:10px;font-weight:bold;">Area 1</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining1To,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining1From,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining1Depth,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                  </div>
+                  <div class="inside form" style="width:300px;float:left;">
+                    <div style="padding-top:10px;font-weight:bold;">Area 2</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining2To,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining2From,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    <div class="field">@Html.EditorFor(model => model.Undermining2Depth,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                </div>
+                <div style="clear:both;"></div>
+                <br />
+            </div>
+        </div>
+         <div class="inside panes">
+            <div>
+                <h3>Tunneling</h3>
+                    <div class="inside form" style="width:300px;float:left;">
+                        <div style="padding-top:10px;font-weight:bold;">Area 1</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel1Location,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel1Depth,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    </div>
+
+                    <div class="inside form" style="width:300px;float:left;">
+                        <div style="padding-top:10px;font-weight:bold;">Area 2</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel2Location,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel2Depth,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    </div>
+
+                    <div class="inside form" style="width:300px;float:left;">
+                        <div style="padding-top:10px;font-weight:bold;">Area 3</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel3Location,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                        <div class="field">@Html.EditorFor(model => model.Tunnel3Depth,  new { HtmlAttributes = new { @style = "width:50px;" } })</div>
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <br />
+            </div>
+        </div>
+    </section>
+    
+
+
+    
+    <div class="clear"></div>
+
+    
+}
+<div class="clear"></div>
+
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}

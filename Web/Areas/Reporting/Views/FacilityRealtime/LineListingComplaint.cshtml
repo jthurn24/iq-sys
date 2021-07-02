@@ -1,0 +1,62 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.LineListingComplaintView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Complaint Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Complaint Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Complaint Line Listing</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table style="width:850px;">
+                    <tr>
+                        <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.ComplaintType, Model.ComplaintTypeOptions, new { style = "font-size:10px;" }) </td>
+                        <td><div style="font-size:12px;">Employee:</div> @Html.DropDownListFor(m => m.Employee, Model.EmployeeOptions, new { style = "font-size:10px;" }) </td>
+                        <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                        <td><div style="font-size:12px;">Sort By:</div> @Html.DropDownListFor(m => m.SortBy, Model.SortOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+                <hr />
+                <table>
+                    <tr>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">Start Date:</div> @Html.TextBox("StartDate", Model.StartDate.FormatAsMinimalDate(), new { type = "datepicker" })  </td>
+                        <td style="padding-right:15px;"><div style="font-size:12px;">End Date:</div> @Html.TextBox("EndDate", Model.EndDate.FormatAsMinimalDate(), new { type = "datepicker" })   </td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+</section>
+
+
+<section class="grid_16 box leading"> 
+        <h3>Complaint List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:250px;">Date</th>
+                <th style="width:180px;">Details</th>
+                <th style="width:370px;">Description</th>
+            </tr>
+        </table>
+            @foreach (var complaint in Model.Complaints)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingComplaintRow.cshtml", complaint, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>

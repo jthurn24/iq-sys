@@ -1,0 +1,53 @@
+﻿@model IQI.Intuition.Exi.Models.QICast.FloorMapView
+
+
+
+
+<div style="padding-top:10px;">
+    <div align="right">
+    <select id="FloorMapSelector" style="font-weight:bold;">
+    @foreach (var group in Model.Groups)
+    {
+        foreach (var layer in group.Layers)
+        {
+            if(Model.FloorMap.Layers.Where(x => x.LayerId == layer.LayerId).First().Icons.Count() > 0)
+            {
+                <option description="@layer.Description" value="@layer.LayerId">@group.Name - @layer.Title</option>
+            }
+        }
+    }
+    </select>
+    </div>
+    <div style="color:black;padding:10px;font-size:14px;font-weight:bold;font-style:italic;">
+        <div style="text-align:center;" id="FMPTitle"></div>
+    </div>
+    @Html.DisplayFor(x => x.FloorMap)
+</div>
+
+
+<script>
+
+
+    sCoreExiTaskmgr.scheduleTask('#FloorMapSelector', 'SMART_FLOOR_MAP.RenderLayer($("#FloorMapSelector").val());', 2);
+
+    $('#FloorMapSelector').change(function() {
+        SMART_FLOOR_MAP.RenderLayer($('#FloorMapSelector').val());
+    });
+
+
+    function on_sfm_render_layer(layerid) {
+
+        var desc = $('#FloorMapSelector option:selected').attr('description');
+
+        if ($('#SmartFloorMapImage').width() > 0) {
+            $('#SmartFloorMapContainer').css('width', $('#SmartFloorMapImage').width());
+        }
+
+        $('#FMPTitle').fadeOut("slow", function () {
+            $('#FMPTitle').html(desc);
+            $('#FMPTitle').fadeIn();
+        });
+               
+    }
+
+</script>

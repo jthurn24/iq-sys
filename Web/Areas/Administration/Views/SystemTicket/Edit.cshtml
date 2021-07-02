@@ -1,0 +1,68 @@
+@model IQI.Intuition.Web.Models.Administration.SystemTicket.SystemTicketEditForm
+@{
+    ViewBag.Layout_ContentTitle = "Edit Ticket";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>Edit Ticket</h3>
+		<div class="inside form">
+
+            <div class="grid_6">
+		    <p>
+            <div class="field">@Html.EditorFor(model => model.SystemTicketType)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.SystemTicketStatus)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.SystemUser)</div>
+            <div class="clear"></div>
+            </p>
+            </div>
+
+            <div class="grid_6">
+		    <p>
+            <div class="field">@Html.EditorFor(model => model.Priority)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.Release)</div>
+            <div class="clear"></div>
+            </p>
+            </div>
+
+        </div>
+	</section>
+	<div class="clear"></div>
+
+    <section class="grid_16 box">
+        <h3>Details</h3>
+        <div style="padding:5px;">
+        <div align="center">
+            @Html.TextAreaFor(model => model.Details, new { style="width:900px;height:250px;" })
+        </div>
+        </div>
+    </section>
+
+}
+<div class="clear"></div>
+
+

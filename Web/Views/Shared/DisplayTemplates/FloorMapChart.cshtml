@@ -1,0 +1,57 @@
+﻿@model IQI.Intuition.Reporting.Graphics.FloorMapChart
+ 
+@if (Model == null)
+{
+    <div style="padding-top:100px;padding-bottom:100px;text-align:center;">No Floor Map To Display</div>
+}
+else
+{           
+    <img usemap="#fmap" image class="image-fit-portrait" src="@Url.Action("RenderFloorMap", "Chart", new { data = Model.SerializeForRender(), noCache = DateTime.Now.Ticks })" />  
+    
+    <map name="fmap">
+    @foreach(var circle in Model.Circles)
+    {
+        if (circle.Coordinates.IsNotNullOrEmpty())
+        {
+            var x = Convert.ToInt32(circle.Coordinates.Split(",".ToCharArray())[0]);
+            var y = Convert.ToInt32(circle.Coordinates.Split(",".ToCharArray())[1]);
+            y = y - circle.Width;
+
+        <area id="@string.Concat("area_", circle.Index)" shape="circle" coords="@x,@y,@circle.Width" style="outline:none;" href="javascript:displayData('@string.Concat("#area_", circle.Index)','@circle.DataUrl')" alt=""  />
+        }
+    }
+    </map>
+
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var ttContainer = $('<div id="toolTip"/>');
+            $('body').append(ttContainer);
+
+            $('#toolTip').qtip({
+                content: {
+                    text: '-',
+                    title:
+                {
+                    text: ' ',
+                    button: true
+                }
+                },
+                position: {
+                    target: 'mouse',
+                    viewport: $(window),
+                    adjust: {
+                        mouse: true  // Can be omitted (e.g. default behaviour)
+                    }
+                },
+                style: {
+                    classes: 'qtip-shadow qtip-jtools'
+                 }
+            });
+        });
+
+
+    </script>    
+}

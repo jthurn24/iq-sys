@@ -1,0 +1,1026 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="11.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25CDAB94-5B50-4021-9882-19304DB356EF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Web</RootNamespace>
+    <AssemblyName>IQI.Intuition.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PublishDatabases>false</PublishDatabases>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>true</MvcBuildViews>
+    <PublishDatabases>false</PublishDatabases>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Oshkosh.PrototypeBuilder.Web.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>opb.redarrowlabs.com</DeployIisAppPath>
+    <PublishDatabases>false</PublishDatabases>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\ExternalDependencies\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\ExternalDependencies\sCore\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Mvc.ModelMapper">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Mvc.ModelMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.ObjectModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Exi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Exi.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Exi.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Exi.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Web.Mvc.JQGridHelpers">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Web.Mvc.JQGridHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Trirand.Web.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\Trirand.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AuthenticationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\UtilizationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AverageController.cs" />
+    <Compile Include="Areas\Administration\Controllers\FacilityController.cs" />
+    <Compile Include="Areas\Administration\Controllers\FacilityProductController.cs" />
+    <Compile Include="Areas\Administration\Controllers\NavigationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\ResourceController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SystemContactController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SystemSecureFileController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SystemTicketController.cs" />
+    <Compile Include="Areas\Administration\Controllers\WoundMapController.cs" />
+    <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
+    <Compile Include="Areas\Configuration\Controllers\AccountUserController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\QICastController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FloorController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\WarningRuleController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\WingController.cs" />
+    <Compile Include="Areas\MobileApi\Controllers\FacilityController.cs" />
+    <Compile Include="Areas\MobileApi\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\MobileApi\Controllers\PatientController.cs" />
+    <Compile Include="Areas\MobileApi\Controllers\TokenController.cs" />
+    <Compile Include="Areas\MobileApi\MobileApiAreaRegistration.cs" />
+    <Compile Include="Areas\MobileApi\Models\Counter.cs" />
+    <Compile Include="Areas\QICast\Controllers\NoteController.cs" />
+    <Compile Include="Areas\QICast\QICastAreaRegistration.cs" />
+    <Compile Include="Areas\Reporting\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\AnnotationController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\FacilityController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\FacilityRealtimeController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\StateWisconsinRealtimeController.cs" />
+    <Compile Include="Areas\Reporting\ReportingAreaRegistration.cs" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Icons\clock-24.png" />
+    <Content Include="Content\Icons\home-24.png" />
+    <Content Include="Content\Images\a-immunization.jpg" />
+    <Content Include="Content\Images\alert-divider.jpg" />
+    <Content Include="Content\Images\alert-icon-bw.jpg" />
+    <Content Include="Content\Images\alert-icon.jpg" />
+    <Content Include="Content\Images\audit-entry.png" />
+    <Content Include="Content\Images\audit.png" />
+    <Content Include="Content\Images\body.bmp" />
+    <Content Include="Content\Images\composite.png" />
+    <Content Include="Content\Images\counter-with-count.jpg" />
+    <Content Include="Content\Images\CriteriaResources\cdc-nhsn-table-11.jpg" />
+    <Content Include="Content\Images\CriteriaResources\cdc-nhsn-table-15.jpg" />
+    <Content Include="Content\Images\CriteriaResources\cdc-nhsn-table-4.jpg" />
+    <Content Include="Content\Images\down.png" />
+    <Content Include="Content\Images\email.jpg" />
+    <Content Include="Content\Images\email.png" />
+    <Content Include="Content\Images\export.png" />
+    <Content Include="Content\Images\folder-open.png" />
+    <Content Include="Content\Images\folder.png" />
+    <Content Include="Content\Images\help.jpg" />
+    <Content Include="Content\Images\intuition.jpg" />
+    <Content Include="Content\Images\linkedin.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logo2.png" />
+    <Content Include="Content\Images\matrix-entry-loader.gif" />
+    <Content Include="Content\Images\nav-add.png" />
+    <Content Include="Content\Images\nav-search.png" />
+    <Content Include="Content\Images\nochange.png" />
+    <Content Include="Content\Images\note-empty.png" />
+    <Content Include="Content\Images\note-filled.png" />
+    <Content Include="Content\Images\print-logo.jpg" />
+    <Content Include="Content\Images\prompt.jpg" />
+    <Content Include="Content\Images\rating.png" />
+    <Content Include="Content\Images\rating\delete.gif" />
+    <Content Include="Content\Images\reference.jpg" />
+    <Content Include="Content\Images\reference2.jpg" />
+    <Content Include="Content\Images\report-loader.gif" />
+    <Content Include="Content\Images\search-drug-db.jpg" />
+    <Content Include="Content\Images\standard-loader.gif" />
+    <Content Include="Content\Images\rating\star.gif" />
+    <Content Include="Content\Images\twitter.png" />
+    <Content Include="Content\Images\up.png" />
+    <Content Include="Content\Images\views.png" />
+    <Content Include="Content\Images\wound-legend.jpg" />
+    <Content Include="Content\Scripts\catheter-assessment-form-model.js" />
+    <Content Include="Content\Scripts\catheter-assessment-form.js" />
+    <Content Include="Content\Scripts\catheter-form-model.js" />
+    <Content Include="Content\Scripts\catheter-form.js" />
+    <Content Include="Content\Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Content\Scripts\jquery-ui-1.11.0.js" />
+    <Content Include="Content\Scripts\jquery.smartWizard.js" />
+    <Content Include="Content\Scripts\metro.min.js" />
+    <Content Include="Content\Scripts\moment.js" />
+    <Content Include="Content\Scripts\precaution-form.js" />
+    <Content Include="Content\Scripts\sCore.Exi.js" />
+    <Content Include="Content\Scripts\sCore.Exi.TaskManager.js" />
+    <Content Include="Content\Scripts\smartFloorMap.js" />
+    <Content Include="Content\Scripts\smartprompt.js" />
+    <Content Include="Content\Scripts\vaccine-form-model.js" />
+    <Content Include="Content\Scripts\wound-assessment-form-model.js" />
+    <Content Include="Content\Scripts\wound-assessment-form.js" />
+    <Content Include="Content\Scripts\wound-form-model.js" />
+    <Content Include="Content\Scripts\wound-form.js" />
+    <Content Include="Content\Scripts\employee-infection-form-model.js" />
+    <Content Include="Content\Scripts\employee-infection-form.js" />
+    <Content Include="Content\Scripts\incident-form-model.js" />
+    <Compile Include="Areas\QICast\Controllers\FacilityController.cs" />
+    <Compile Include="Areas\SignUp\Controllers\SetupController.cs" />
+    <Compile Include="Areas\SignUp\SignUpAreaRegistration.cs" />
+    <Compile Include="Attributes\AllowCrossSiteJsonAttribute.cs" />
+    <Compile Include="Attributes\EnableAccountRestriction.cs" />
+    <Compile Include="Attributes\RequiresActiveAccountAttribute.cs" />
+    <Compile Include="Attributes\RequireSystemUserAttribute.cs" />
+    <Compile Include="Attributes\PremiumOnlyAttribute.cs" />
+    <Compile Include="Attributes\SupportsFormCancelAttribute.cs" />
+    <Compile Include="Attributes\SupportsTokenAuthenticationAttribute.cs" />
+    <Content Include="Content\Scripts\drug-search-center.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Styles\qi-cast.css" />
+    <Content Include="Content\Styles\sCore.exi.default.css" />
+    <Content Include="Content\Styles\smartFloorMap.css" />
+    <Compile Include="Controllers\AuditController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\ChartController.cs" />
+    <Compile Include="Controllers\CatheterAssessmentController.cs" />
+    <Compile Include="Controllers\CmsMatrixController.cs" />
+    <Compile Include="Controllers\ComplaintController.cs" />
+    <Compile Include="Controllers\CatheterController.cs" />
+    <Compile Include="Controllers\DrugController.cs" />
+    <Compile Include="Controllers\PrecautionController.cs" />
+    <Compile Include="Controllers\PsychotropicAdministrationPRNController.cs" />
+    <Compile Include="Controllers\QIDashboardController.cs" />
+    <Compile Include="Controllers\TimelineController.cs" />
+    <Compile Include="Controllers\VaccineController.cs" />
+    <Compile Include="Controllers\WoundAssessmentController.cs" />
+    <Compile Include="Controllers\WoundController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeInfectionController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Controllers\IncidentController.cs" />
+    <Compile Include="Controllers\InfectionController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\PatientCensusController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\PsychotropicAdministrationController.cs" />
+    <Compile Include="Controllers\PsychotropicDosageController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\SupportCenterController.cs" />
+    <Compile Include="Controllers\WarningController.cs" />
+    <Compile Include="Extensions\ControllerContextExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\ViewContextExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\back.png" />
+    <Content Include="Content\Images\barbg.png" />
+    <Content Include="Content\Images\barmenuitem.png" />
+    <Content Include="Content\Images\barmenusep.png" />
+    <Content Include="Content\Images\button.png" />
+    <Content Include="Content\Images\cancel.png" />
+    <Content Include="Content\Images\fieldbg.png" />
+    <Content Include="Content\Images\gobtn.png" />
+    <Content Include="Content\Images\graybg.png" />
+    <Content Include="Content\Images\headbg.png" />
+    <Content Include="Content\Images\incident.png" />
+    <Content Include="Content\Images\infection.png" />
+    <Content Include="Content\Images\navbtn.png" />
+    <Content Include="Content\Images\navbtnl.png" />
+    <Content Include="Content\Images\navbtnr.png" />
+    <Content Include="Content\Images\navdropbg.png" />
+    <Content Include="Content\Images\navdropsep.png" />
+    <Content Include="Content\Images\next.gif" />
+    <Content Include="Content\Images\prev.gif" />
+    <Content Include="Content\Images\save.png" />
+    <Content Include="Content\Images\searchbtn.png" />
+    <Content Include="Content\Images\searchin.png" />
+    <Content Include="Content\Images\select_arrow.gif" />
+    <Content Include="Content\Images\shadowfull.png" />
+    <Content Include="Content\Scripts\incident-form.js" />
+    <Content Include="Content\Scripts\infection-form-model.js" />
+    <Content Include="Content\Scripts\infection-form.js" />
+    <Content Include="Content\Scripts\grid.locale-en.js" />
+    <Content Include="Content\Scripts\init.js" />
+    <Content Include="Content\Scripts\jquery-ui-1.8.21.custom.min.js" />
+    <Content Include="Content\Scripts\jquery.jqChart.min.js" />
+    <Content Include="Content\Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Content\Scripts\jquery.jqTreeView.min.js" />
+    <Content Include="Content\Scripts\jquery.maskedinput-1.3.min.js" />
+    <Content Include="Content\Scripts\jquery.MetaData.js" />
+    <Content Include="Content\Scripts\jquery.min.js" />
+    <Content Include="Content\Scripts\jquery.qtip.min.js" />
+    <Content Include="Content\Scripts\jquery.tmpl.min.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-knockout.min.js" />
+    <Content Include="Content\Scripts\knockout-1.2.1.min.js" />
+    <Content Include="Content\Scripts\knockout.helper.js" />
+    <Content Include="Content\Scripts\knockout.mapping-1.2.4.min.js" />
+    <Content Include="Content\Scripts\modernizr.js" />
+    <Content Include="Content\Scripts\patient-form-model.js" />
+    <Content Include="Content\Scripts\patient-form.js" />
+    <Content Include="Content\Styles\elmah.css" />
+    <Content Include="Content\Styles\iconFont.min.css" />
+    <Content Include="Content\Styles\jquery.qtip.css" />
+    <Content Include="Content\Styles\metro-bootstrap.min.css" />
+    <Content Include="Content\Styles\sCore.exi.screen.css" />
+    <Content Include="Content\Styles\smart_wizard_vertical.css" />
+    <Content Include="Content\Styles\style-export.css" />
+    <Content Include="Content\Styles\dev.css" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Styles\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Styles\smoothness\jquery-ui-1.8.14.custom.css" />
+    <Content Include="Content\Styles\style.css" />
+    <Content Include="Content\Styles\ui.jqgrid.css" />
+    <Content Include="Content\Styles\ui.jqtreeview.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="IISExpress Setup Instructions.txt" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\SignUp\Views\Setup\ApproveComplete.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_TemplateLayout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Areas\Configuration\Views\Shared\" />
+    <Folder Include="Areas\QICast\Views\Shared\" />
+    <Folder Include="Areas\Reporting\Views\Shared\" />
+    <Folder Include="Areas\SignUp\Models\" />
+    <Folder Include="Content-Mobile\Images\" />
+    <Folder Include="Content-Mobile\Scripts\" />
+    <Folder Include="Content-Mobile\Styles\" />
+    <Folder Include="Content\FloorMaps\" />
+    <Folder Include="Views\Results\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\IQI.Intuition.Domain.csproj">
+      <Project>{10420AE7-A248-4FD3-B793-ED00378CFBC5}</Project>
+      <Name>IQI.Intuition.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\IQI.Intuition.Infrastructure.csproj">
+      <Project>{8D7C76E0-C89F-47AB-A181-72D89F25D84C}</Project>
+      <Name>IQI.Intuition.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Services\IQI.Intuition.Infrastructure.Services.csproj">
+      <Project>{887ED715-BDE1-4E27-8385-3C91847024B9}</Project>
+      <Name>IQI.Intuition.Infrastructure.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IQI.Intuition.Exi\IQI.Intuition.Exi.csproj">
+      <Project>{c83e1429-4529-49df-a545-7504968839b2}</Project>
+      <Name>IQI.Intuition.Exi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\IQI.Intuition.Reporting.csproj">
+      <Project>{0C0765BA-534E-4AAC-A292-FC8D22B41554}</Project>
+      <Name>IQI.Intuition.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Models\IQI.Intuition.Web.Models.csproj">
+      <Project>{7207C800-09A5-41B9-A739-724F30425BE0}</Project>
+      <Name>IQI.Intuition.Web.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\HiddenInput.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.QA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Authentication\UserPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Authentication\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_BaseLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\FacilityPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Patient\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Patient\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Patient\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\PatientInfectionList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxQuestion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\EditScripts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\FloorMapChart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\InfectionFloorMap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Navigation\NavigationPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\View.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\ColumnChart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionControlReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\PieChart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByTypeReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Navigation\QuickList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Navigation\PatientQuickSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByFloorReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByWingReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionAverageReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Incident\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Incident\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Incident\PatientIncidentList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentControlReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Export\RenderExportPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Export\MonitorPrintRequest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByFloorReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ExportLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentControlReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionControlReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionAverageReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByTypeReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionByWingReport.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Facility\InfectionFloorMap.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Export\ViewPrintRequest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Export\CreateEmailRequest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingInfection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingInfection.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Warning\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Warning\View.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PatientCensus\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PatientCensus\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Reporting\Views\Configuration\FloorMapConfiguration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\HorizontalCheckBoxList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Export\ViewCompositeRequests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Infection\View.export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupportCenter\References.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Configuration\Views\AccountUser\Edit.cshtml" />
+    <Content Include="Areas\Configuration\Views\AccountUser\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Web.config" />
+    <Content Include="Areas\Configuration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Configuration\Views\Floor\Edit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Floor\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Room\Edit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Wing\Edit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Wing\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\WarningRule\Index.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingEmployeeInfection.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingEmployeeInfection.export.cshtml" />
+    <Content Include="Areas\Administration\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionBySiteReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionBySiteReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingIncident.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingIncident.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByTypeReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByInjuryReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByInjuryLevelReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByLocationReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByDayOfWeekReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByHourOfDayReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByDayOfWeekReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByHourOfDayReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByInjuryLevelReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByInjuryReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByLocationReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByTypeReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByWingReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByWingReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByFloorReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyIncidentByFloorReport.cshtml" />
+    <Content Include="Areas\Administration\Views\Authentication\SignIn.cshtml" />
+    <Content Include="Areas\Administration\Views\Account\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Account\View.cshtml" />
+    <Content Include="Areas\Administration\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Facility\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\Facility\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Facility\View.cshtml" />
+    <Content Include="Areas\Administration\Views\Facility\AccountFacilityList.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemTicket\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemTicket\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemTicket\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemTicket\View.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemTicket\ListForAccount.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemSecureFile\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemSecureFile\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemSecureFile\ListFor.cshtml" />
+    <Content Include="Areas\Administration\Views\FacilityProduct\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\FacilityProduct\ListForFacility.cshtml" />
+    <Content Include="Areas\Administration\Views\FacilityProduct\View.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemContact\Add.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemContact\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemContact\ListFor.cshtml" />
+    <Content Include="Areas\Administration\Views\SystemContact\View.cshtml" />
+    <Content Include="Areas\Reporting\Views\StateWisconsinRealTime\DHSStaffOutbreakCaseLog.cshtml" />
+    <Content Include="Areas\Reporting\Views\StateWisconsinRealTime\DHSStaffOutbreakCaseLog.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\PatientList.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\PatientList.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingComplaint.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingComplaint.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionTrendReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyInfectionTrendReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\Cms802.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\Cms802.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionControlReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionByFacilityReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionAverageReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionAverageReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionByFacilityReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Account\QuarterlyInfectionControlReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\Cms672.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\Cms672.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\CmsNotes.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\CmsNotes.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\AntibioticUtilizationMultipleByMD.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\AntibioticUtilizationMultipleByMD.export.cshtml" />
+    <Content Include="Areas\Administration\Views\Resource\LoadFolder.cshtml" />
+    <Content Include="Areas\Administration\Views\Resource\Index.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingPsychotropic.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingPsychotropic.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LabDailyLineListing.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyPsychotropicControlReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyPsychotropicControlReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingWound.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingWound.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyWoundControlReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintControlReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintControlReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintByWingReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintByFloorReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\OrganismsByYear.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\OrganismsByYear.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintByFloorReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintByWingReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintTrendReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyComplaintTrendReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingCatheter.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingCatheter.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyCatheterControlReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyCatheterControlReport.export.cshtml" />
+    <Content Include="Areas\Administration\Views\WoundMap\Index.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyWoundControlReport.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\IncidentFloorMap.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\IncidentFloorMap.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingVaccine.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\LineListingVaccine.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyWoundByWingReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlyWoundByWingReport.export.cshtml" />
+    <Content Include="Areas\QICast\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\QICast\Views\Facility\Index.cshtml" />
+    <Content Include="Views\Shared\Exi\QICast\FloorMap.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\PatientRepeatFalls.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\PatientRepeatFalls.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\FallsByCNA.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\FallsByCNA.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\FallsByWitnessed.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\FallsByWitnessed.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\WoundFlowSheet.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\WoundFlowSheet.export.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlySCAUTIReport.cshtml" />
+    <Content Include="Areas\Reporting\Views\Facility\QuarterlySCAUTIReport.export.cshtml" />
+    <Content Include="Areas\Configuration\Views\QICast\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\QICast\List.cshtml" />
+    <Content Include="Areas\QICast\Views\Web.config" />
+    <Content Include="Areas\QICast\Views\Note\EditText.cshtml" />
+    <Content Include="Areas\QICast\Views\Note\UploadImage.cshtml" />
+    <Content Include="Areas\Administration\Views\Average\Index.cshtml" />
+    <Content Include="auth.config" />
+    <Content Include="auth.qa.config" />
+    <Content Include="auth.prod.config" />
+    <Content Include="Content\Downloads\13-007attachment-toolkit.pdf" />
+    <Content Include="Content\Downloads\ARO_Guidelines.pdf" />
+    <Content Include="Content\Downloads\CDC_Hand Hygiene.pdf" />
+    <Content Include="Content\Downloads\CDC_Immunization _Recommendations_for_Adults.pdf" />
+    <Content Include="Content\Downloads\CDC_Isolation_Precautions.pdf" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\AntibioticUtilizationByMDStatistics.cshtml" />
+    <Content Include="Areas\Reporting\Views\FacilityRealtime\AntibioticUtilizationByMDStatistics.export.cshtml" />
+    <Content Include="Areas\Administration\Views\Utilization\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Utilization\Index.export.cshtml" />
+    <Content Include="Areas\SignUp\Views\web.config" />
+    <Content Include="Areas\SignUp\Views\Setup\Index.cshtml" />
+    <Content Include="Areas\SignUp\Views\Setup\WaitingForConfirmation.cshtml" />
+    <Content Include="Areas\SignUp\Views\Setup\Approve.cshtml" />
+    <Content Include="Areas\SignUp\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SignUp\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SignUp\Views\Setup\TOS.cshtml" />
+    <None Include="Content\Downloads\Communicable_Diseases_Reporting_Guidelines.pdf" />
+    <Content Include="Content\Downloads\C_Difficile.pdf" />
+    <Content Include="Content\Downloads\UserGuide.pdf" />
+    <Content Include="Content\Downloads\Viral_Gastroenteritis.pdf" />
+    <Content Include="Content\Downloads\WHO_Standard_Precautions.pdf" />
+    <Content Include="Views\Authentication\UserAgreement.cshtml" />
+    <Content Include="Views\Patient\Remove.cshtml" />
+    <Content Include="Views\Export\RenderPrintHeader.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Authentication\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingInfectionRow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingEmployeeInfectionRow.cshtml" />
+    <Content Include="Views\EmployeeInfection\Add.cshtml" />
+    <Content Include="Views\EmployeeInfection\List.cshtml" />
+    <Content Include="Views\EmployeeInfection\Form.cshtml" />
+    <Content Include="Views\EmployeeInfection\Edit.cshtml" />
+    <Content Include="Views\Patient\EditStatus.cshtml" />
+    <Content Include="Views\Shared\_AdministrationLayout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SeriesColumnChart.cshtml" />
+    <Content Include="Views\Incident\EditScripts.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingIncidentRow.cshtml" />
+    <Content Include="Views\Incident\View.cshtml" />
+    <Content Include="Views\Incident\View.export.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuarterlyStatTable.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuarterlyInfectionTable.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuarterlyInfectionTableVertical.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuarterlyStatTableVertical.cshtml" />
+    <Content Include="Areas\Administration\Views\Navigation\AdministrationPanel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
+    <Content Include="Views\SupportCenter\Index.cshtml" />
+    <Content Include="Views\SupportCenter\ViewTickets.cshtml" />
+    <Content Include="Views\SupportCenter\ViewTicket.cshtml" />
+    <Content Include="Views\SupportCenter\RequestSupport.cshtml" />
+    <Content Include="Views\SupportCenter\RequestFeature.cshtml" />
+    <Content Include="Views\SupportCenter\UploadFile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Complaint\Add.cshtml" />
+    <Content Include="Views\Complaint\List.cshtml" />
+    <Content Include="Views\Complaint\Edit.cshtml" />
+    <Content Include="Views\Complaint\Form.cshtml" />
+    <Content Include="Views\Patient\SelectPatient.cshtml" />
+    <Content Include="Views\Patient\SelectPatientSearch.cshtml" />
+    <Content Include="Views\Employee\SelectEmployee.cshtml" />
+    <Content Include="Views\Employee\SelectEmployeeSearch.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingComplaintRow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SeriesLineChart.cshtml" />
+    <Content Include="Views\CmsMatrix\Index.cshtml" />
+    <Content Include="Views\Resource\LoadFolder.cshtml" />
+    <Content Include="Views\Resource\Index.cshtml" />
+    <Content Include="Views\PsychotropicAdministration\PatientPsychotropicAdministrationList.cshtml" />
+    <Content Include="Views\PsychotropicAdministration\Add.cshtml" />
+    <Content Include="Views\PsychotropicAdministration\View.cshtml" />
+    <Content Include="Views\PsychotropicAdministration\Edit.cshtml" />
+    <Content Include="Views\PsychotropicDosage\AdministrationList.cshtml" />
+    <Content Include="Views\PsychotropicDosage\Add.cshtml" />
+    <Content Include="Views\PsychotropicDosage\Edit.cshtml" />
+    <Content Include="Views\Wound\PatientWoundList.cshtml" />
+    <Content Include="Views\Wound\Edit.cshtml" />
+    <Content Include="Views\Wound\EditScripts.cshtml" />
+    <Content Include="Views\Wound\View.cshtml" />
+    <Content Include="Views\WoundAssessment\ReportWoundAssessmentList.cshtml" />
+    <Content Include="Views\WoundAssessment\Edit.cshtml" />
+    <Content Include="Views\PsychotropicAdministrationPRN\Add.cshtml" />
+    <Content Include="Views\PsychotropicAdministrationPRN\AdministrationList.cshtml" />
+    <Content Include="Views\PsychotropicAdministrationPRN\Edit.cshtml" />
+    <Content Include="Views\PsychotropicDosage\DosageForm.cshtml" />
+    <Content Include="Content\Scripts\vaccine-form.js" />
+    <Content Include="packages.config" />
+    <Content Include="Content\Downloads\Wisconsin-ARI-Criteria.pdf" />
+    <Content Include="log4net.config" />
+    <Content Include="log4net.prod.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Properties\PublishProfiles\iqi-qa.pubxml" />
+    <None Include="Properties\PublishProfiles\PreComp.pubxml" />
+    <Content Include="Views\Drug\GetSections.cshtml" />
+    <Content Include="Views\Drug\Index.cshtml" />
+    <Content Include="Views\Drug\SearchNames.cshtml" />
+    <Content Include="Views\Drug\DrugSearchCenter.cshtml" />
+    <Content Include="Views\PsychotropicAdministration\List.cshtml" />
+    <Content Include="Views\WoundAssessment\EditScripts.cshtml" />
+    <Content Include="Views\Wound\List.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingWoundRow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BodyGraph.cshtml" />
+    <Content Include="Views\Audit\ViewAudit.cshtml" />
+    <Content Include="Views\Audit\QuickQAAuditSummary.cshtml" />
+    <Content Include="Views\Catheter\Edit.cshtml" />
+    <Content Include="Views\Catheter\EditScripts.cshtml" />
+    <Content Include="Views\Catheter\List.cshtml" />
+    <Content Include="Views\Catheter\PatientCatheterList.cshtml" />
+    <Content Include="Views\Catheter\View.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingCatheterRow.cshtml" />
+    <Content Include="Views\Wound\GetFacilityPressureUlcerOverview.cshtml" />
+    <Content Include="Views\Vaccine\Edit.cshtml" />
+    <Content Include="Views\Vaccine\EditScripts.cshtml" />
+    <Content Include="Views\Vaccine\List.cshtml" />
+    <Content Include="Views\Vaccine\PatientVaccineList.cshtml" />
+    <Content Include="Views\Vaccine\_VaccineTradeName.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LineListingVaccineRow.cshtml" />
+    <Content Include="Views\CatheterAssessment\Edit.cshtml" />
+    <Content Include="Views\CatheterAssessment\EditScripts.cshtml" />
+    <Content Include="Views\CatheterAssessment\EntryCatheterAssessmentList.cshtml" />
+    <Content Include="Views\Shared\_ScreenLayout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SmartFloorMap.cshtml" />
+    <Content Include="Views\Shared\Exi\QICast\Statistic.cshtml" />
+    <Content Include="Views\Shared\Exi\QICast\WarningCarousel.cshtml" />
+    <Content Include="Views\Shared\Exi\QICast\ComplaintGraph.cshtml" />
+    <Content Include="Views\Timeline\FacilityTimeline.cshtml" />
+    <Content Include="Views\QIDashboard\Index.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Alerts\AlertView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Audits\RecentEntriesList.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Infections\ActiveConfirmedChart.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Wounds\FacilityPressureUlcerOverview.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Incidents\InjuryTrendView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Incidents\InjuryPieView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Incidents\InjuryStatsView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\FloorMap\FloorMapOverview.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Wounds\WoundPieView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICommon\Wounds\WoundStageStatsView.cshtml" />
+    <Content Include="Views\Shared\Exi\QICast\Note.cshtml" />
+    <Content Include="Views\Precaution\PatientList.cshtml" />
+    <Content Include="Views\Precaution\Form.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+    <VSToolsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(Configuration)'=='Release'">
+    <RemoveDir Directories="$(IntermediateOutputPath)" />
+  </Target>
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>62613</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://facility1.iqi.com:8080/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+</Project>

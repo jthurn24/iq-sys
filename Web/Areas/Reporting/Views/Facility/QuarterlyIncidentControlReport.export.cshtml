@@ -1,0 +1,105 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.QuarterlyIncidentControlView
+
+
+<section class="grid_16 box leading" style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Census Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable">
+            <tr>
+                <th>Month</td>
+                <th>@Model.Month1.Name</th>
+                <th>@Model.Month2.Name</th>
+                <th>@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <td>Avg Census</td>
+                <td>@Model.CensusView.Month1.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.CensusView.Month2.AverageCensus.ToString("#0.0")</td>
+                <td>@Model.CensusView.Month3.AverageCensus.ToString("#0.0")</td>
+            </tr>
+             <tr>
+                <td>Time Period</td>
+                <td>@Model.CensusView.Month1.TimePeriod</td>
+                <td>@Model.CensusView.Month2.TimePeriod</td>
+                <td>@Model.CensusView.Month3.TimePeriod</td>
+            </tr>
+            <tr>
+                <td>Patient Days</td>
+                <td>@Model.CensusView.Month1.PatientDays</td>
+                <td>@Model.CensusView.Month2.PatientDays</td>
+                <td>@Model.CensusView.Month3.PatientDays</td>
+            </tr>
+        </table>
+        </div> 
+</section>
+
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incident Types</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.IncidentTypeView, "QuarterlyStatTable")
+        </div>
+</section>
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incident Injuries</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.IncidentInjuryView, "QuarterlyStatTable")
+        </div>
+</section>
+
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incident Injury Severity</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.IncidentInjuryLevelView, "QuarterlyStatTable")
+        </div>
+</section>
+
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incident Locations</h3>
+        <div class="inside">
+            <br />
+            @Html.DisplayFor(m => m.IncidentLocationView, "QuarterlyStatTable")
+        </div>
+</section>
+
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incidents By Day Of Week</h3>
+        <div class="inside">
+        <br />
+        @Html.DisplayFor(m => m.IncidentDayOfWeekView, "QuarterlyStatTable")
+        </div> 
+</section>
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incidents By Hour</h3>
+        <div class="inside">
+        <br />
+        @Html.DisplayFor(m => m.IncidentHourOfDayView, "QuarterlyStatTable")
+        </div> 
+</section>
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incidents By Wing</h3>
+        <div class="inside">
+        <br />
+        @Html.DisplayFor(m => m.IncidentWingView, "QuarterlyStatTable")
+        </div> 
+</section>
+
+<section class="grid_16 box leading"  style="page-break-inside:avoid;width:1300px;" > 
+        <h3>Incidents By Floor</h3>
+        <div class="inside">
+        <br />
+        @Html.DisplayFor(m => m.IncidentFloorView, "QuarterlyStatTable")
+        </div> 
+</section>
+
+<div class="clear"></div>

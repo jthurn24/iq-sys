@@ -1,0 +1,31 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Wound.Facility.LineListingWoundView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Wound Line Listing";
+}
+
+
+<section class="grid_32 box leading"> 
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:200px;">Patient</th>
+                <th style="width:200px;">Type/Stage/Classification</th>
+                <th style="width:150px;">Site</th>
+            </tr>
+        </table>
+            @foreach (var row in Model.Rows)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingWoundRow.cshtml", row, new ViewDataDictionary { { "showLink", "false" } });}
+                </table>
+            }
+        
+            <br />
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+

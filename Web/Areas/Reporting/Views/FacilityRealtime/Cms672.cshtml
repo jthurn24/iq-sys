@@ -1,0 +1,497 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.CmsMatrix.Census672View
+           
+@{
+    ViewBag.Layout_ContentTitle = "CMS-672";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "CMS 672 Census";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = false;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>CMS-672 Census</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+                <table>
+                    <tr>
+                        <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.SelectedWing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                        <td style="padding-left:15px;padding-top:10px;">@Html.SmartSubmit("Refresh")</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        </div> 
+</section>
+
+<section class="grid_16 box"> 
+
+<!-- PAGE 1 -->
+<div style="page-break-inside:avoid;">
+
+<div style="font-size:10px;padding-left:3px;padding-top:5px;">DEPARTMENT OF HEALTH AND HUMAN SERVICES </div>
+<div style="font-size:10px;padding-left:3px;padding-bottom:5px;">CENTERS FOR MEDICARE & MEDICAID SERVICES </div>
+<div style="border-top:solid 1px black;text-align:center;font-size:22px;font-weight:bold;padding-bottom:5px;padding-top:5px;">RESIDENT CENSUS AND CONDITIONS OF RESIDENTS</div>
+
+<table width="100%">
+<tr style="border-top:solid 1px black;border-bottom:solid 1px black;">
+    <td style="vertical-align:top;padding-left:5px;" >
+        <div style="padding-top:3px;font-size:10px;">Provider No.</div>
+    </td>
+    <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;" >
+        <div style="padding-top:3px;font-size:10px;">Medicare</div>
+        <div>@Model.GetTotalByMds3("F75")</div>
+        <div style="text-align:right;font-size:9px;padding-right:5px;">F75</div>
+    </td>
+    <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;" >
+        <div style="padding-top:3px;font-size:10px;">Medicaid</div>
+        <div>@Model.GetTotalByMds3("F76")</div>
+        <div style="text-align:right;font-size:9px;padding-right:5px;">F76</div>
+    </td>
+    <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;" >
+        <div style="padding-top:3px;font-size:10px;">Other</div>
+        <div>@Model.GetTotalByMds3("F77")</div>
+        <div style="text-align:right;font-size:9px;padding-right:5px;">F77</div>
+    </td>
+    <td style="vertical-align:top;border-left:solid 1px black;border-right:solid 1px black;padding-left:5px;" >
+        <div style="padding-top:3px;font-size:10px;">Total Residents</div>
+    </td>
+</tr>
+</table>
+<table width="100%">
+    <tr style="border-top:solid 1px black;">
+        <td style="vertical-align:top;padding-left:5px;"><div style="text-align:center;font-size:14px;font-weight:bold;padding:5px;">ADL</div></td>
+        <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;"><div style="text-align:center;font-size:14px;font-weight:bold;padding:5px;">Independent</div></td>
+        <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;"><div style="text-align:center;font-size:14px;font-weight:bold;padding:5px;">Assist of One or Two Staff</div></td>
+        <td style="vertical-align:top;border-left:solid 1px black;padding-left:5px;"><div style="text-align:center;font-size:14px;font-weight:bold;padding:5px;">Dependent</div></td>
+    </tr>
+    <tr style="border-top:solid 1px black;">
+        <td style="padding-left:5px;"><div style="font-size:12px;padding-top:15px;padding-bottom:15px;">Bathing</div></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F79</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F79")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F80</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F80")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F81</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F81")</span></td>
+    </tr>
+    <tr style="border-top:solid 1px black;">
+        <td style="padding-left:5px;"><div style="font-size:12px;padding-top:15px;padding-bottom:15px;">Dressing</div></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F82</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F82")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F83</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F83")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F84</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F84")</span></td>
+    </tr>
+    <tr style="border-top:solid 1px black;">
+        <td style="padding-left:5px;"><div style="font-size:12px;padding-top:15px;padding-bottom:15px;">Transferring</div></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F85</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F85")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F86</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F86")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F87</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F87")</span></td>
+    </tr>
+    <tr style="border-top:solid 1px black;">
+        <td style="padding-left:5px;"><div style="font-size:12px;padding-top:15px;padding-bottom:15px;">Toilet Use</div></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F88</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F88")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F89</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F89")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F90</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F90")</span></td>
+    </tr>
+    <tr style="border-top:solid 1px black;border-bottom:solid 1px black;">
+        <td style="padding-left:5px;"><div style="font-size:12px;padding-top:15px;padding-bottom:15px;">Eating</div></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F91</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F91")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F92</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F92")</span></td>
+        <td style="border-left:solid 1px black;padding-left:5px;"><span style="font-size:9px;">F93</span>&nbsp;&nbsp;<span style="font-size:14px;">@Model.GetTotalByMds3("F93")</span></td>
+    </tr>
+</table>
+<table width="100%">
+<tr style="border-top:solid 1px black;">
+    <td style="border-right:solid 1px black;vertical-align:top;" width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:18px;">A. Bowel/Bladder Status</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F94</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F94") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">With indwelling or external catheter</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <div style="width:350px;">
+            <span style="font-size:16px;;font-weight:bold;">F95</span>
+            <span style="font-size:16px;">Of the total number of residents with catheters, how many were present on admission</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F95") &nbsp; &nbsp;</span>?
+            </div>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F96</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F96") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Occasionally or frequently incontinent of bladder</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F97</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F97") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Occasionally or frequently incontinent of bowel</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F98</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F98") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">On urinary toileting program</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F99</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F99") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">On bowel toileting program</span>
+        </div>
+    </td>
+    <td style="vertical-align:top;"  width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:18px;">B. Mobility</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F100</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F100") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Bedfast all or most of time</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F101</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F101") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">In a chair all or most of time</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F102</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F102") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Independently ambulatory</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F103</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F103") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Ambulation with assistance or assistive device</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F104</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F104") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Physically restrained</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <div style="width:350px;">
+            <span style="font-size:16px;font-weight:bold;">F105</span>
+            <span style="font-size:16px;">Of the total number of residents with restraints, how many were admitted or readmitted with orders for restraints</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F105") &nbsp; &nbsp;</span>?
+            </div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F106</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F106") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">With contractures</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <div style="width:400px;">
+            <span style="font-size:16px;font-weight:bold;">F107</span>
+            <span style="font-size:16px;">Of the total number of residents with contractures, how many had a contracture(s) on admission</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F107") &nbsp; &nbsp;</span>?
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+<tr style="border-top:solid 1px black;border-bottom:solid 1px black;">
+    <td style="border-right:solid 1px black;vertical-align:top;" width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:5px;font-size:18px;">C. Mental Status</div>
+        <div style="font-weight:bold;padding-top:3px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:12px;">F108-114 – indicate the number of residents with:</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F108</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F108") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Intellectual and/or developmental disability</span>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F109</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F109") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Documented signs and symptoms of depression</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F110</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F110") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:360px;">Documented psychiatric diagnosis (exclude dementias and depression)</div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F111</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F111") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:360px;">Dementia: (e.g., Lewy-Body, vascular or Multi-infarct, mixed, frontotemporal such as Pick’s disease; and dementia related to Parkinson’s or Creutzfeldt- Jakob diseases), or Alzheimer’s Disease</div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F112</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F112") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Behavioral healthcare needs</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <div style="width:350px;">
+            <span style="font-size:16px;font-weight:bold;">F113</span>
+            <span style="font-size:16px;">Of the total number of residents with behavioral healthcare needs, how many have an individualized care plan to support them</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F113") &nbsp; &nbsp;</span>?
+            </div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:50px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F114</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F114") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:360px;">Receiving health rehabilitative services for MI and/or ID/DD</div>
+            <div style="clear:both;"></div>
+        </div>
+    </td>
+    <td style="vertical-align:top;"  width="50%">
+        <div style="font-weight:bold;padding-top:3px;text-align:left;padding-left:10px;padding-bottom:3px;">D. Skin Integrity</div>
+        <div style="font-weight:bold;padding-top:3px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:12px;">F115-118 – indicate the number of residents with:</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F115</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F115") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Pressure ulcers (exclude Stage 1)</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <div style="width:400px;">
+            <span style="font-size:16px;font-weight:bold;">F116</span>
+            <span style="font-size:16px;">Of the total number of residents with pressure ulcers excluding Stage 1, how many residents had pressure ulcers on admission</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F116") &nbsp; &nbsp;</span>?
+            </div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F117</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F117") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Receiving preventive skin care</span>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F118</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F118") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Rashes</span>
+        </div>
+    </td>
+</tr>
+</table>
+<div style="font-size:12px;font-weight:bold;padding-top:3px;">Form CMS-672 (05/12)</div>
+
+
+</div>
+
+
+<!-- PAGE 2 -->
+<div style="page-break-inside:avoid;">
+
+<div style="text-align:center;font-size:22px;font-weight:bold;padding-bottom:15px;padding-top:5px;">RESIDENT CENSUS AND CONDITIONS OF RESIDENTS</div>
+
+<table width="100%">
+<tr style="border-top:solid 1px black;">
+    <td style="border-right:solid 1px black;vertical-align:top;" width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:5px;font-size:18px;">E. Special Care</div>
+        <div style="font-weight:bold;padding-top:3px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:12px;">F119-132 – indicate the number of residents receiving:</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F119</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F119") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Hospice care</span>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F120</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F120") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Radiation therapy</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F121</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F121") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Chemotherapy</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F122</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F122") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Dialysis</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F123</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F123") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:360px;">Intravenous therapy, IV nutrition, and/or blood transfusion</div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F124</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F124") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Respiratory treatment</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F125</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F125") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Tracheostomy care</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F126</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F126") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Ostomy care</span>
+        </div>
+    </td>
+    <td style="vertical-align:top;"  width="50%">
+        <div style="padding-left:10px;padding-bottom:20px;padding-top:30px;">
+            <span style="font-size:16px;font-weight:bold;">F127</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F127") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Suctioning</span>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F128</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F128") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Injections (exclude vitamin B12 injections)</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F129</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F129") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Tube feedings</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F130</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F130") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:360px;">Mechanically altered diets including pureed and all chopped food (not only meat)</div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+                <div style="float:left;width:85px;">
+                <span style="font-size:16px;font-weight:bold;">F131</span>
+                <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F131") &nbsp; &nbsp;</span>
+                </div>
+                <div style="font-size:16px;float:left;width:300px;">Rehabilitative services (Physical therapy, speech- language therapy, occupational therapy, etc.) Exclude health rehabilitation for MI and/or ID/DD</div>
+                <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F132</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F132") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Assistive devices with eating</span>
+        </div>
+    </td>
+</tr>
+
+<tr style="border-top:solid 1px black;border-bottom:solid 1px black;">
+    <td style="border-right:solid 1px black;vertical-align:top;" width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:5px;font-size:18px;">F. Medications</div>
+        <div style="font-weight:bold;padding-top:3px;text-align:left;padding-left:10px;padding-bottom:15px;font-size:12px;">F133-139 – indicate the number of residents receiving:</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F133</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F133") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Any psychoactive medication</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F134</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F134") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Antipsychotic medications</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F135</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F135") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Antianxiety medications</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F136</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F136") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Antidepressant medications</span>
+        </div>
+        <div style="padding-left:40px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F137</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F137") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Hypnotic medications</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F138</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F138") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Antibiotics</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F139</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F139") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">On pain management program</span>
+        </div>
+    </td>
+    <td style="vertical-align:top;"  width="50%">
+        <div style="font-weight:bold;padding-top:6px;text-align:left;padding-left:10px;padding-bottom:5px;font-size:18px;">G. Other</div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F140</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F140") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">With unplanned significant weight loss/gain</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <div style="float:left;width:85px;">
+            <span style="font-size:16px;font-weight:bold;">F141</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F141") &nbsp; &nbsp;</span>
+            </div>
+            <div style="font-size:16px;float:left;width:300px;">Who do not communicate in the dominant language of the facility (include those who use American sign language)</div>
+            <div style="clear:both;"></div>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F142</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F142") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Who use non-oral communication devices</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F143</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F143") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">With advance directives</span>
+        </div>
+        <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F144</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F144") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Received influenza immunization</span>
+        </div>
+       <div style="padding-left:10px;padding-bottom:20px;">
+            <span style="font-size:16px;font-weight:bold;">F145</span>
+            <span style="font-size:16px;text-decoration:underline">&nbsp; &nbsp; @Model.GetTotalByMds3("F145") &nbsp; &nbsp;</span>
+            <span style="font-size:16px;">Received pneumococcal vaccine</span>
+        </div>
+    </td>
+</tr>
+</table>
+<div style="font-weight:bold;font-size:14px;padding-top:20px;padding-bottom:6px;">
+I certify that this information is accurate to the best of my knowledge
+</div>
+<table>
+<tr style="border-top:1px solid black;border-bottom:1px solid black;">
+    <td style="border-right:solid 1px black;vertical-align:top;">
+        <div style="font-size:14px;padding-top:3px;width:500px;padding-bottom:40px;padding-left:5px;">Signature of Person Completing the Form</div>
+    </td>
+    <td style="border-right:solid 1px black;vertical-align:top;">
+        <div style="font-size:14px;padding-top:3px;width:200px;padding-bottom:40px;padding-left:5px;">Title</div>
+    </td>
+    <td style="vertical-align:top;">
+        <div style="font-size:14px;padding-top:3px;width:200px;padding-bottom:40px;padding-left:5px;">Date</div>
+    </td>
+</tr>
+</table>
+<div style="padding-top:15px;font-weight:bold;font-size:18px;padding-bottom:15px;">TO BE COMPLETED BY SURVEY TEAM</div>
+
+<table>
+<tr>
+    <td><div style="width:60px;font-weight:bold;font-size:16px;padding-bottom:10px;">F146</div></td>
+    <td><div style="width:450px;font-size:16px;padding-bottom:10px;">Was ombudsman office notified prior to survey?</div></td>
+    <td><div style="width:200px;font-size:14px;padding-bottom:10px;">___ Yes</div></td>
+    <td><div style="font-size:14px;padding-bottom:10px;">___ No</div></td>
+</tr>
+<tr>
+    <td><div style="width:60px;font-weight:bold;font-size:16px;padding-bottom:10px;">F147</div></td>
+    <td><div style="width:450px;font-size:16px;padding-bottom:10px;">Was ombudsman present during any portion of the survey?</div></td>
+    <td><div style="width:200px;font-size:14px;padding-bottom:10px;">___ Yes</div></td>
+    <td><div style="font-size:14px;padding-bottom:10px;">___ No</div></td>
+</tr>
+<tr>
+    <td><div style="width:60px;font-weight:bold;font-size:16px;padding-bottom:10px;">F148</div></td>
+    <td><div style="width:450px;font-size:16px;padding-bottom:10px;">Medication error rate _______%</div></td>
+    <td><div style="font-size:14px;padding-bottom:10px;">&nbsp;</div></td>
+    <td><div style="font-size:14px;padding-bottom:10px;">&nbsp;</div></td>
+</tr>
+
+</table>
+
+
+<div style="padding-top:270px;">
+<div style="font-size:12px;font-weight:bold;border-top:solid 1px black;">Form CMS-672 (05/12)</div>
+</div>
+
+
+<div style="clear:both;">&nbsp;</div>
+
+</div>
+</section>
+
+
+<div style="clear:both;">&nbsp;</div>

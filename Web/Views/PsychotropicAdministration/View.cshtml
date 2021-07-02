@@ -1,0 +1,82 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicAdministration.PsychotropicAdministrationInfo
+
+@{
+    ViewBag.Layout_ContentTitle = "View Medication";
+}
+
+    <br />
+ <div class="grid_16" id="buttons" align="center">
+        @Html.SmartButton(Url.Action("Detail","Patient",new { id = Model.PatientGuid }),"Return To Patient")
+<span class="clear"></span>
+</div> 
+
+<section class="grid_6 box leading">
+    <h3>Medication Information</h3>
+    <div class="actions">
+        @Html.SmartButton(@Url.Action("Edit", "PsychotropicAdministration", new { id = Model.Id }), "Edit")
+    </div>
+    <div class="inside">
+        <p style="font-size:12x;">
+            Name: <strong>@Model.Name</strong><br />
+            Target: <strong>@Model.TargetBehavior</strong><br />
+            Dosage: <strong>@Model.CurrentDosage</strong><br />
+            Prev Dosage: <strong>@Model.PreviousDosage</strong><br />
+            Drug Type: <strong>@Model.DrugTypeName</strong><br />
+            Start Date: <strong>@Model.StartDate</strong><br />
+            End Date: <strong>@Model.EndDate</strong>
+        </p>
+        <div style="padding-top:5px;font-weight:bold;padding-bottom:10px;font-size:12px;">
+            @Html.Raw(Model.SideEffects.ToStringSafely().Replace(Environment.NewLine,"<br>"))
+        </div>
+        <div class="clear"></div>
+    </div>
+</section>
+
+<section class="grid_10 box leading">
+<h3>Additional Information</h3>
+<ul class="boxtabs">
+        <li><a href="#">Dosage Changes</a></li>
+        <li><a href="#">PRN Administration</a></li>
+</ul>
+<div class="inside panes">
+
+    <div>
+        <br />
+        @{ Html.RenderAction("AdministrationList", new { controller = "PsychotropicDosage", id = Model.Id }); }     
+        <div class="tablenav">
+            <div class="newbtn">
+                <button class="link" data-url="@Url.Action("Add", "PsychotropicDosage", new { id = Model.Id })">Track New Dosage Change</button>
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <div>
+        <br />
+        @{ Html.RenderAction("AdministrationList", new { controller = "PsychotropicAdministrationPRN", id = Model.Id }); }     
+        <div class="tablenav">
+            <div class="newbtn">
+                <button class="link" data-url="@Url.Action("Add", "PsychotropicAdministrationPRN", new { id = Model.Id })">Track PRN</button>
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div>
+
+</section>
+
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    function psychotropicRowSelect(id) {
+        smoothLoad('@Url.Action("Edit","PsychotropicDosage")/?id=' + id);
+    }
+
+
+    function psychotropicPrnRowSelect(id) {
+        smoothLoad('@Url.Action("Edit","PsychotropicAdministrationPRN")/?id=' + id);
+    }
+</script>

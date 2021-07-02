@@ -1,0 +1,202 @@
+﻿@model IQI.Intuition.Web.Models.Home.Dashboard
+@{
+    ViewBag.Layout_ContentTitle = Model.CurrentFacilityName + " QI Dashboard";
+}
+
+
+<div class="grid_10 leading">
+
+@foreach (var message in Model.Messages)
+{
+   <section class="grid_10 box" style="background-color:#ffc;"> 
+   <h3>Message</h3> 
+    <div class="inside"> 
+    <div style="padding:10px;font-size:14px;">@Html.Raw(message)</div>
+    </div>
+   </section>
+}
+
+<section class="grid_10 box"> 
+<h3>Facility Highlights</h3> 
+    <div class="inside">
+    <div style="padding-top:10px;padding-bottom:5px;">
+        <div style="background-image:url('./Content/Images/intuition.jpg');background-repeat:no-repeat;background-position:bottom right;padding-bottom:15px;">
+            @{ int counterCount = 0; int idCount = 1;}
+            @foreach (var counter in Model.Counters)
+            {   
+                <div style="width:130px;float:left;">
+                    <div class="counter">
+                        <div class="counter-number-container" >
+                            <div class="counter-number" id='@string.Concat("counter_", idCount)' style="cursor:pointer;">@counter.Count</div>
+                        </div>
+                        <div class="counter-label-container">
+                            <div class="counter-label">@Html.Raw(counter.Description)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                if (counter.Count > 0)
+                {
+                <script type="text/javascript">
+                    $('@string.Concat("#counter_", idCount)').qtip({
+				                    content: {
+				                        text: '@Html.Raw(counter.ToolTip)', 
+					                    title: {
+					                        text: '@Html.Raw(counter.Description.Replace("<br>", ""))',
+						                    button: true
+					                    }
+						            },
+                                    position: {
+					                    my: 'top left', 
+                                        at: 'bottom center'
+				                    },
+				                    show: 'mousedown',
+				                    hide: false,
+				                    style: {
+				                        classes: 'qtip-shadow qtip-jtools'
+				                    }
+			                    });
+                </script>
+                }
+
+                counterCount++;
+                idCount++;
+
+                if (counterCount > 3)
+                {
+                    counterCount = 0;
+                    <div style="clear:both;">&nbsp;</div>
+                }
+
+            }
+
+            <div style="clear:both;"></div>
+        </div>
+    </div> 
+    </div>
+</section>
+
+
+<section class="grid_10 box"> 
+    <h3>Recent Changes - Last 3 days</h3> 
+    <div class="inside" style="padding:0px;"> 
+        <div style="height:300px;overflow:auto;">
+            <div style="padding-top:5px;padding-left:20px;">
+            @{Html.RenderAction("QuickQAAuditSummary", "Audit", new { days = 3 });}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking))
+{
+    <section class="grid_10 box"> 
+        <h3>Active Infections (Confirmed)</h3> 
+        <div class="inside" style="padding:0px;"> 
+            @Html.DisplayFor(m => m.InfectionChart, new { width = 550, height = 250 })
+        </div>
+    </section>
+}
+
+@if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking))
+{
+    <section class="grid_10 box"> 
+        <h3>Incident Types (Last 30 Days)</h3> 
+        <div class="inside" style="padding:0px;"> 
+            @Html.DisplayFor(m => m.IncidentTypeChart, new { width = 550, height = 250 })
+        </div>
+    </section>
+
+    <section class="grid_10 box"> 
+        <h3>Incident Injuries (Last 30 Days)</h3> 
+        <div class="inside" style="padding:0px;"> 
+            @Html.DisplayFor(m => m.IncidentInjuryChart, new { width = 550, height = 250 })
+        </div>
+    </section>
+}
+
+</div>
+
+
+
+<div class="grid_6">
+
+
+<section class="grid_6 box leading"> 
+    <h3>Latest Alerts/Warnings</h3> 
+@if (Model.RecentWarnings.None())
+{
+    <div class="inside"> 
+        <div style="height:370px;">  
+        <h4>No recent warnings for @Model.CurrentFacilityName</h4>
+        </div>
+    </div>
+}
+else
+{ 
+    <div class="inside warnings recent"> 
+        <div>  
+        <div style="padding-right:10px;height:300px;overflow:auto;">
+        @foreach (var warning in Model.RecentWarnings)
+        {
+            <div class="warningContainer">
+                @if (warning.Recent)
+                {
+                <p style="background-image:url('/Content/images/alert-icon.jpg');background-position:top left;background-repeat:no-repeat;padding-left:30px;padding-right:5px;"> 
+                    <span style="color:#414141;">@warning.Title</span>
+                    <span style="color:#414141;">@warning.TriggeredOn</span> 
+                    <br />
+                    @Html.SmartLink(@Url.Action("View", "Warning", new { id = warning.Id, returnUrl = Url.Action("Index", "Home") }), "View", new { @style = "color:#156796" })
+                    &nbsp;|&nbsp;
+                    @Html.SmartLink(Url.Action("HideWarning", new { id = warning.Id }), "Hide", new { @style = "color:#156796" })
+                </p>  
+                }
+                else
+                {
+                <p style="background-image:url('/Content/images/alert-icon-bw.jpg');background-position:top left;background-repeat:no-repeat;padding-left:30px;padding-right:5px;"> 
+                    <span style="color:#414141;">@warning.Title</span>
+                    <span style="color:#414141;">@warning.TriggeredOn</span> 
+                    <br />
+                    @Html.SmartLink(@Url.Action("View", "Warning", new { id = warning.Id, returnUrl = Url.Action("Index", "Home") }), "View", new { @style = "color:#156796" })
+                    &nbsp;|&nbsp;
+                    @Html.SmartLink(Url.Action("HideWarning", new { id = warning.Id }), "Hide", new { @style = "color:#156796" })
+                </p>  
+                }
+                <img src="/Content/images/alert-divider.jpg" />
+            </div>
+        }
+        </div>
+        </div>  
+        <div style="padding-top:10px;padding-left:10px;"> 
+            @Html.SmartButton("/Warning/List", "View All Alerts/Warnings")
+        </div> 
+     </div>
+}
+     
+</section>
+</div>
+
+@if (ViewContext.HasProduct(IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking))
+{
+<div class="grid_6">
+
+<section class="grid_6 box leading"> 
+    <h3>Active Pressure Ulcers</h3> 
+    <div class="inside"> 
+        <div style="padding-top:5px;">
+            @{Html.RenderAction("GetFacilityPressureUlcerOverview", "Wound");}
+        </div>
+    </div>
+</section>
+</div>
+}
+
+
+
+
+
+
+
+<div style="clear:both;"></div>
+

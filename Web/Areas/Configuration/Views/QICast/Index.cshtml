@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Layout_ContentTitle = "QI Cast Management";
+}
+
+
+<section class="grid_16 box leading">
+    <div style="padding:10px;">
+        <div id="grid">
+
+        </div>
+    </div>
+</section>
+
+@if (ViewContext.SystemUserInRole(IQI.Intuition.Domain.Enumerations.SystemUserRole.Admin))
+{
+    <section class="grid_16 box leading">
+
+    <div style="padding:10px;">
+        <span>Name:</span>
+        <input id="AddScreenName" />
+        <button onclick="addScreen()" id="AddScreen">Add Screen</button>
+    </div>
+
+    </section>
+}
+
+<div style="clear:both;"></div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        var refreshAction = '@Url.Action("List")';
+        var addAction = '@Url.Action("Add")';
+        var inactiveAction = '@Url.Action("SetInactive")';
+        var messageAction = '@Url.Action("SetMessage")';
+        var designAction =  '@Url.Action("Index", new { controller="Facility", area="qicast"})'
+
+
+        $(function () {
+            refreshGrid();
+        })
+
+
+        function refreshGrid() {
+            $('#grid').load(refreshAction);
+        }
+
+        function addScreen() {
+            if ($('#AddScreenName').val() == "") {
+                alert('You must specify a name ');
+            }
+            else {
+                $.get(addAction + '?name=' + $('#AddScreenName').val(), function (data) {
+                    refreshGrid();
+                });
+            }
+        }
+
+        function setInactive(guid, val) {
+            $.get(inactiveAction + '?id=' + guid + '&val=' + val, function (data) {
+                refreshGrid();
+            });
+        }
+
+        function setMessage(guid, src) {
+
+            var message = $(src).parent().find('textarea').val();
+
+            $.get(messageAction + '?id=' + guid + '&message=' + message, function (data) {
+                alert('Message has been set');
+                refreshGrid();
+            });
+        }
+
+        function design(guid) {
+            window.open(designAction + '?id=' + guid + '&designMode=true');
+        }
+
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿@model IQI.Intuition.Reporting.Graphics.PieChart
+ 
+@if (Model == null || Model.HasData() == false)
+{
+    <div style="padding-top:2px;padding-bottom:2px;">
+    <div style="text-align:center;font-weight:bold;color:#2f3a3f;width:@ViewData["width"]px;min-height:@ViewData["height"]px;">
+        <div style="padding-top:15px;padding-bottom:15px;">No Data To Display</div>   
+    </div>
+    </div>
+}
+else
+{
+    <div style="background-image:url('/Content/Images/report-loader.gif');background-repeat:no-repeat;background-position:center center;min-height:200px;">
+    <img src="@Url.Action("RenderPieChart", "Chart", new { area="Reporting", data = Model.SerializeForRender(), noCache = DateTime.Now.Ticks, width = ViewData["width"], height = ViewData["height"] })" />
+    </div>
+}
+

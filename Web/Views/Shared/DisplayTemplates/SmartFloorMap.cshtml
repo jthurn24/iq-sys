@@ -1,0 +1,44 @@
+﻿@model IQI.Intuition.Reporting.Graphics.SmartFloorMap
+ 
+@if (Model == null)
+{
+    <div style="padding-top:100px;padding-bottom:100px;text-align:center;">No Floor Map To Display</div>
+}
+else
+{      
+
+    <div align="center">
+    <div class="SmartFloorMapContainer" id="@Model.GetHashCode().ToString()" style="position:relative;padding:0px;">
+    <img class="SmartFloorMapImage" style="z-index:-5;"src="@Url.Action("RenderSmartMap", "Chart", new { area="Reporting", data = Model.SerializeForRender(), noCache = DateTime.Now.Ticks })" />  
+    </div> 
+    </div>
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var ar = @Model.AutoRotate.ToString().ToLower() ;
+            var resize = @Model.ResizeMultipler ;
+            var ctrl = '@Model.GetHashCode().ToString()';
+
+            var sm = new SmartFloorMap($('#' + ctrl), resize);
+            GLOBAL_FLOORMAPS.push(sm);
+            
+            @foreach(var layer in Model.Layers)
+            {
+                foreach(var icon in layer.Icons)
+                {
+                    var call = string.Format("sm.AddIcon('{0}','{1}',{2},{3});", layer.LayerId, "", icon.X, icon.Y); 
+                    @Html.Raw(call)
+                }
+            }
+
+            if(ar)
+            {
+                sm.AutoRotateLayers(5);
+            }
+
+        });
+
+    </script>    
+}

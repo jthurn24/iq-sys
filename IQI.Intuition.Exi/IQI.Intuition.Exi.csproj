@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C83E1429-4529-49DF-A545-7504968839B2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQI.Intuition.Exi</RootNamespace>
+    <AssemblyName>IQI.Intuition.Exi</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Ioc.StructureMap">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Ioc.StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.ObjectModel">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="RedArrow.Framework.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalDependencies\sCore\RedArrow.Framework.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Exi">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Exi.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Exi.Mvc">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Exi.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SnyderIS.sCore.Persistence">
+      <HintPath>..\ExternalDependencies\sCore\SnyderIS.sCore.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\ExternalDependencies\sCore\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Canvases\QICast\Canvas.cs" />
+    <Compile Include="Canvases\QIDashboard\Canvas.cs" />
+    <Compile Include="Configuration\QICast\WizardBuilder.cs" />
+    <Compile Include="Configuration\QIDashboard\AuditConfig.cs" />
+    <Compile Include="Configuration\QIDashboard\FloorMapConfig.cs" />
+    <Compile Include="Configuration\QIDashboard\IncidentConfig.cs" />
+    <Compile Include="Configuration\QIDashboard\InfectionConfig.cs" />
+    <Compile Include="Configuration\QIDashboard\WarningConfig.cs" />
+    <Compile Include="Configuration\QIDashboard\WizardBuilder.cs" />
+    <Compile Include="Configuration\QIDashboard\WoundConfig.cs" />
+    <Compile Include="DataSources\QICast\Complaints\DataSource.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\IncidentProvider\BaseIncidentType.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\IncidentProvider\BehaviorEpisode.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\IncidentProvider\SelfInflicted.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\IncidentProvider\MedError.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\IncidentProvider\Fall.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\InfectionProvider\BaseInfectionType.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\InfectionProvider\Skin.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\InfectionProvider\Uti.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\InfectionProvider\Respiratory.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\InfectionProvider\Systemic.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\Interfaces\ILayerProvider.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\BaseWoundStage.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\StageSuspectedDeepTissueInjury.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\StageUnstageable.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\Stage4.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\Stage3.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\Stage2.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\WoundProvider\Stage1.cs" />
+    <Compile Include="DataSources\QICast\Note\DataSource.cs" />
+    <Compile Include="DataSources\QICast\Statistics\BaseReportingProvider.cs" />
+    <Compile Include="DataSources\QICast\Statistics\Constants.cs" />
+    <Compile Include="DataSources\QICast\Statistics\DataSource.cs" />
+    <Compile Include="DataSources\QICast\Statistics\InfectionProvider\Respiratory.cs" />
+    <Compile Include="DataSources\QICast\Statistics\InfectionProvider\Systemic.cs" />
+    <Compile Include="DataSources\QICast\Statistics\InfectionProvider\Skin.cs" />
+    <Compile Include="DataSources\QICast\Statistics\InfectionProvider\Uti.cs" />
+    <Compile Include="DataSources\QICast\Statistics\IncidentProvider\MedError.cs" />
+    <Compile Include="DataSources\QICast\Statistics\IncidentProvider\Fall.cs" />
+    <Compile Include="DataSources\QICast\Statistics\Interfaces\IStatProvider.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\SuspectedDeepTissueInjury.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\Unstageable.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\Stage4.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\Stage3.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\Stage2.cs" />
+    <Compile Include="DataSources\QICast\Statistics\WoundProvider\Stage1.cs" />
+    <Compile Include="DataSources\QICast\WarningDataSource.cs" />
+    <Compile Include="DataSources\QICast\FloorMap\DataSource.cs" />
+    <Compile Include="DataSources\NullDataSource.cs" />
+    <Compile Include="DataSources\QIDashboard\Alerts\DataSource.cs" />
+    <Compile Include="DataSources\QIDashboard\Audits\DataSource.cs" />
+    <Compile Include="DataSources\QIDashboard\Incidents\InjuryDataSource.cs" />
+    <Compile Include="DataSources\QIDashboard\Infections\RealtimeDataSource.cs" />
+    <Compile Include="DataSources\QIDashboard\Wounds\WoundRealtime.cs" />
+    <Compile Include="DataSources\QIDashboard\Wounds\WoundStageDataSource.cs" />
+    <Compile Include="Models\QICast\ComplaintGraph.cs" />
+    <Compile Include="Models\QICast\Note.cs" />
+    <Compile Include="Models\QICast\Statistic.cs" />
+    <Compile Include="Models\QICast\Warning.cs" />
+    <Compile Include="Models\QICast\FloorMapView.cs" />
+    <Compile Include="Models\QIDashboard\Alerts\AlertView.cs" />
+    <Compile Include="Models\QIDashboard\Incidents\MonthlyInjuryTotal.cs" />
+    <Compile Include="Models\QIDashboard\Infections\InfectionTotal.cs" />
+    <Compile Include="Models\QIDashboard\Wounds\MonthWoundStageTotal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\QICast\ComplaintGraph.cs" />
+    <Compile Include="Renderers\QICast\FloorMapOverviewLarge.cs" />
+    <Compile Include="Renderers\QICast\NoteView.cs" />
+    <Compile Include="Renderers\QICast\WarningCarousel.cs" />
+    <Compile Include="Renderers\QICast\Statistic.cs" />
+    <Compile Include="Renderers\QICast\FloorMapOverview.cs" />
+    <Compile Include="Renderers\QIDashboard\Alerts\WarningList.cs" />
+    <Compile Include="Renderers\QIDashboard\Audits\RecentEntriesList.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryStats3MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryPieRate3MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryPieRate12MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryPieTotal3MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryPieTotal12MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryTrendRateView.cs" />
+    <Compile Include="Renderers\QIDashboard\Incidents\InjuryTrendTotalView.cs" />
+    <Compile Include="Renderers\QIDashboard\Infections\ActiveConfirmedChart.cs" />
+    <Compile Include="Renderers\QIDashboard\Wounds\FacilityPressureUlcerOverview.cs" />
+    <Compile Include="Renderers\QIDashboard\FloorMap\FloorMapOverview.cs" />
+    <Compile Include="Renderers\QIDashboard\Wounds\StageStats3MonthView.cs" />
+    <Compile Include="Renderers\QIDashboard\Wounds\StagePieRate12MonthView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\IQI.Intuition.Domain.csproj">
+      <Project>{10420ae7-a248-4fd3-b793-ed00378cfbc5}</Project>
+      <Name>IQI.Intuition.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Services\IQI.Intuition.Infrastructure.Services.csproj">
+      <Project>{887ed715-bde1-4e27-8385-3c91847024b9}</Project>
+      <Name>IQI.Intuition.Infrastructure.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\IQI.Intuition.Reporting.csproj">
+      <Project>{0c0765ba-534e-4aac-a292-fc8d22b41554}</Project>
+      <Name>IQI.Intuition.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Models\IQI.Intuition.Web.Models.csproj">
+      <Project>{7207c800-09a5-41b9-a739-724f30425be0}</Project>
+      <Name>IQI.Intuition.Web.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

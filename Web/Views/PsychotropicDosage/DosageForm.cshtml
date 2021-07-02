@@ -1,0 +1,24 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicDosageChange.DosageForm
+
+@{var index = 0;}
+@if(Model.Entries != null)
+{
+    foreach (var entry in Model.Entries)
+    {
+        <div class="field">
+        <span class="label">
+            @entry.Label
+        </span>
+        <span class="controls">
+            <input id="@string.Concat(Model.Prefix, "[",index,"].Description")" name="@string.Concat(Model.Prefix, "[",index,"].Description")" value="@entry.Description" type="text" style="width:80px;" />
+            &nbsp;
+            <span style="font-family:Helvetica, Arial, Verdana, sans-serif;font-size:12px;color:#444;font-weight:bold;">Dosage:</span>
+            &nbsp;
+            <input id="@string.Concat(Model.Prefix, "[",index,"].Dosage")" name="@string.Concat(Model.Prefix, "[",index,"].Dosage")" value="@entry.Dosage" type="text" style="width:50px;" />
+            <input id="@string.Concat(Model.Prefix, "[",index,"].ID")" name="@string.Concat(Model.Prefix, "[", index, "].ID")" value="@entry.ID" type="hidden" style="width:50px;" />
+            <input id="@string.Concat(Model.Prefix, "[", index, "].Label")" name="@string.Concat(Model.Prefix, "[", index, "].Label")" value="@entry.Label" type="hidden" style="width:50px;" />
+        </span>
+        </div>
+        index++;
+    }
+}

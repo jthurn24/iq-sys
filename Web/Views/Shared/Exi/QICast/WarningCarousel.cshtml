@@ -1,0 +1,42 @@
+﻿@model IEnumerable<IQI.Intuition.Exi.Models.QICast.Warning>
+
+<div class="tile quadro bg-darkRed" style="opacity:.9">
+<div class="tile-content" style="padding:5px;">
+
+<div class="carousel bg-darkRed">
+    @foreach (var e in Model)
+    {
+        <div class="slide" style="color:white;font-size:20px;text-shadow: 3px 3px black;">
+        @Html.Raw(e.Title)
+        </div>      
+    }
+</div>
+
+</div>
+
+<div class="brand bg-black">
+<span class="label fg-white">Alerts</span>
+<span class="badge attention bg-red"></span>
+</div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('.carousel').carousel({
+            auto: true,
+            period: 5000,
+            duration: 500,
+            height: 80,
+            effect: 'fade',
+            markers: {
+                type: 'default',
+                position: 'bottom-left',
+                show: false
+            }
+        });
+    });
+
+</script>
+

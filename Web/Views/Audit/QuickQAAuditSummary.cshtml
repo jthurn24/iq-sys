@@ -1,0 +1,77 @@
+﻿@model IEnumerable<IQI.Intuition.Web.Models.Audit.AuditSummaryEntry>
+
+@if (Model.Count() < 1)
+{
+        <h4>No recent changes to display</h4>
+}
+
+@foreach (var entry in Model)
+{
+    <div style="font-size:12px;cursor:pointer;" class="historyAuditContainer">
+        <div style="font-weight:bold;">
+            <img src="@Url.Content("~/Content/Images/audit-entry.png")" style="float:left;" />
+            <div style="width:200px;float:left;padding-top:4px;">@entry.TimespanDescription </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="padding-left:20px;background-color:#ffc;padding-top:3px;padding-bottom:3px;border:1px dotted #ddd">
+            <span style="font-weight:bold;">@entry.PerformedBy</span>
+            &nbsp;
+            @entry.ChangeDescription
+            @if(entry.PatientGuid.HasValue)
+            {
+                <span>for </span>
+                @Html.SmartLink(Url.Action("Detail", "Patient", new { id = @entry.PatientGuid }), entry.PatientName)
+            }
+        </div>
+        <div style="padding-left:10px;padding-bottom:1px;padding-top:10px;">
+            <div style="font-weight:bold;display:none;text-align:right;padding-right:10px;" class="historyAuditLinks">
+                @if (entry.IncidentId.HasValue)
+                {
+                  @Html.SmartButton(Url.Action("Edit", "Incident", new { id = @entry.IncidentId }), "View Incident");
+                  <span>&nbsp;|&nbsp;</span>
+                }
+                @if (entry.InfectionId.HasValue)
+                {
+                   @Html.SmartButton(Url.Action("Edit", "Infection", new { id = @entry.InfectionId }), "View Infection");
+                   <span>&nbsp;|&nbsp;</span>
+                }
+                @if (entry.CatheterId.HasValue)
+                {
+                   @Html.SmartButton(Url.Action("Edit", "Catheter", new { id = @entry.CatheterId }), "View Catheter");
+                   <span>&nbsp;|&nbsp;</span>
+                }
+                @if (entry.WoundId.HasValue)
+                {
+                   @Html.SmartButton(Url.Action("View", "Wound", new { id = @entry.WoundId }), "View Wound");
+                   <span>&nbsp;|&nbsp;</span>
+                }
+                <input type="button"  onclick="showAudit('@Html.Raw(Html.RenderAuditLink(entry.Request))')" value="View Changes" />
+            </div>
+            &nbsp;
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $('.historyAuditContainer').hover(function () {
+
+            $(this).css('border', 'solid 1px #2a3234');
+            $(this).css('background', '#f1f1f1');
+            $(this).find('.historyAuditLinks').show();
+
+
+        }, function () {
+
+            $(this).css('border', 'none');
+            $(this).find('.historyAuditLinks').hide();
+            $(this).css('background', 'none');
+
+        });
+            
+    });
+
+</script>

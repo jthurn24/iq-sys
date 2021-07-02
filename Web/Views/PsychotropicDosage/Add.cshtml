@@ -1,0 +1,62 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicDosageChange.PsychotropicDosageChangeFormAdd
+
+@{
+    ViewBag.Layout_ContentTitle = "Add Dosage Change";
+}
+@using (Html.BeginForm())
+{
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+    <section class="grid_16 box">
+        <h3>Dosage Change</h3>
+        <div class="inside form">
+            <div class="grid_6">
+            <p>
+                <div class="field">@Html.EditorFor(model => model.StartDate)</div>
+                <div class="field">@Html.EditorFor(model => model.Frequency)</div>
+                <div id="Segments">
+                    @{Html.RenderPartial("~/Views/PsychotropicDosage/DosageForm.cshtml", Model.GetSegmentForm());}
+                </div>
+            </p>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+}
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Frequency').change(function () {
+            updateSegments();
+        });
+
+    });
+
+    var segmentAction = '@Url.Action("DosageForm", "PsychotropicDosage")';
+
+    function updateSegments() {
+        $('#Segments').load(segmentAction + '?prefix=Segments&frequencyId=' + $('#Frequency').val());
+    }
+
+</script>

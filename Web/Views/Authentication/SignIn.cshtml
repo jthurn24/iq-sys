@@ -1,0 +1,41 @@
+﻿@model IQI.Intuition.Web.Models.Authentication.SignInForm
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    ViewBag.Layout_PageTitle = "Log In";
+}
+
+@if (ViewContext.HasErrors())
+{
+<div class="loginerrors" align="center">
+@Html.ValidationSummary()
+</div>
+}
+<section class="grid_5">
+&nbsp;
+</section>
+
+<section class="grid_6 box leading">
+    <h3>Please Log In</h3>
+    <div class="form login">
+
+        @using (Html.BeginForm())
+        {
+            <div class="field">
+                <span class="label">Login</span>
+                <span class="controls">
+                    @Html.TextBoxFor(model => model.Login, new { @class="do-tab" })
+                </span>
+            </div>
+            <div class="field">
+                <span class="label">Password</span>
+                <span class="controls">
+                    @Html.PasswordFor(model => model.Password, new { @class="do-submit" })
+                </span>
+             </div>
+            <div class="submit">
+                <input class="link" id="loginbutton" type="button" data-submit="true" value="Log In">
+            </div>
+        }
+    </div>
+</section>
+ 

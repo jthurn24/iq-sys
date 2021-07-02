@@ -1,0 +1,30 @@
+﻿@model IQI.Intuition.Exi.Models.QICast.Statistic
+
+@{ string color = string.Empty;}
+
+@if (Model.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.InfectionTracking) { color = "darkViolet"; }
+@if (Model.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.IncidentTracking) { color = "darkCobalt"; }          
+@if (Model.ProductType == IQI.Intuition.Domain.Enumerations.KnownProductType.WoundTracking) { color = "brown"; }      
+    
+
+
+<div class="tile bg-@color" style="opacity:.95">
+<div class="tile-content" style="padding:5px;">
+<div style="color:white;font-size:18px;text-align:center;text-shadow: 3px 3px black;">
+    
+    @Html.Raw(Model.Description)</div>
+</div>
+<div class="brand bg-black">
+<span class="label fg-white">@Model.Label</span>
+@if (Model.Badge == IQI.Intuition.Exi.Models.QICast.Statistic.BadgeType.Up)
+{
+    <span class="badge bg-darkRed"><img src="@Url.Content("~/Content/Images/up.png")" /></span>
+}
+else if (Model.Badge == IQI.Intuition.Exi.Models.QICast.Statistic.BadgeType.Down)
+{
+    <span class="badge bg-darkGreen"><img src="@Url.Content("~/Content/Images/down.png")" /></span>
+}
+
+
+</div>
+</div>

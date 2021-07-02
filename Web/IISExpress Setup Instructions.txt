@@ -1,0 +1,11 @@
+﻿1) Add the following lines to the local "hosts" file:
+
+127.0.0.1       facility1.iqi.com
+127.0.0.1       facility2.iqi.com
+127.0.0.1       facility3.iqi.com
+ 
+2) Open 'My Documents\IISExpress\config\applicationhost.config' and replace the default binding for the 'IQI.Intuition.Web' site with the following:
+
+<binding protocol="http" bindingInformation="*:8080:facility1.iqi.com" />
+<binding protocol="http" bindingInformation="*:8080:facility2.iqi.com" />
+<binding protocol="http" bindingInformation="*:8080:facility3.iqi.com" />

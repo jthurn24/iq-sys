@@ -1,0 +1,96 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Configuration.FloorMapConfiguration
+
+@{
+    ViewBag.Layout_ContentTitle = "Configure Floor Map";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+
+<section class="grid_16 box leading"> 
+        <h3>Floor Map Configuration</h3>
+        <div class="inside">
+
+            <div style="padding:10px;">
+                @using (Html.BeginForm(null, null, FormMethod.Get))
+                {
+                <table width="100%">
+                    <tr>
+                        <td>Floor Map: @Html.DropDownListFor(m => m.SelectedFloorMap, Model.FloorMapOptions) </td>
+                        <td>
+                            <div align="right">
+                            <input type="submit" value="Refresh" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                }
+                <hr />
+                @using (Html.BeginForm("UploadFloorMap", "Configuration", new { area="Reporting", id = Model.SelectedFloorMap.Value }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div align="right">
+                    <div>Updated <input type="file" name="FileUpload" id="FileUpload" /></div>
+                    <div><input type="submit" value="Upload" /></div>
+                </div>
+               }
+            </div>
+        </div> 
+</section>
+ 
+<section class="grid_16 box leading"> 
+        <h3>Facility Floor Map</h3>
+        <div class="inside">
+            <div id="FloorMapCanvas" onclick="point_it(event)">
+             <img id="FloorMapImage" src="@Url.Action("FloorMapImage", new { id = Model.SelectedFloorMap })" />
+            </div>
+        </div>
+</section>
+
+<div class="clear"></div>
+}
+
+<div style="overflow:auto;width:200px;position:fixed;left:5px;top:200px;height:400px;color:Red;border:solid 1px red;">
+<div style="padding-top:5px;padding-left:10px;">
+@foreach (var room in Model.Points)
+{
+    <div id="@room.ID">
+        <a class="roomlink" style="font-weight:bold;font-size:11px;color:Green;" href="javascript:select('@room.ID')">Room: @room.RoomName</a>
+        <span style="font-weight:bold;font-size:11px;color:Green;">XY: @room.Coordinates</span>
+    </div>
+}
+</div>
+</div>
+
+<script language="JavaScript">
+
+    var ACTIVE_ID = -1;
+
+    function select(id) {
+        ACTIVE_ID = id;
+        $('.roomlink').css('color', 'green');
+        $('#' + id).find('a').css('color', 'blue');
+    }
+
+    function point_it(event) {
+
+        if (ACTIVE_ID < 0) {
+            return;
+        }
+
+        pos_x = event.offsetX ? (event.offsetX) : event.pageX - document.getElementById("FloorMapCanvas").offsetLeft;
+        pos_y = event.offsetY ? (event.offsetY) : event.pageY - document.getElementById("FloorMapCanvas").offsetTop;
+        $('#' + ACTIVE_ID).find('span').html(pos_x + ',' + pos_y);
+
+
+        $.ajax({
+          url: '@Url.Action("FloorMapConfigurationUpdate")/?id=' + ACTIVE_ID + '&coordinates=' + pos_x + ',' + pos_y,
+          cache: false,
+          success: function () {
+              var date = new Date();
+              var link = "@Url.Action("FloorMapImage")" + "?id=" + '@Model.SelectedFloorMap' + "&nocache=" + date.getTime()
+              $('#FloorMapImage').attr("src",link);
+          }
+        });
+
+    }
+</script>

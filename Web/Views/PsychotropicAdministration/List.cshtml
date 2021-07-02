@@ -1,0 +1,21 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicAdministration.PsychotropicAdministrationGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "Patient Psychotropic Medications";
+}
+
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function psychotropicRowSelect(id) {
+            smoothLoad('@Url.Action("View","PsychotropicAdministration")/?id=' + id);
+        }
+
+    </script>
+}

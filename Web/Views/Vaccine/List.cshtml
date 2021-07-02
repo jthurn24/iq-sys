@@ -1,0 +1,20 @@
+﻿@model IQI.Intuition.Web.Models.Vaccine.VaccineGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "View Immunizations";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function vaccineRowSelect(id) {
+            smoothLoad('@Url.Action("Edit","Vaccine")/?id=' + id + '&returnUrl=@Url.Action("List","Vaccine")');
+        }
+
+    </script>
+}

@@ -1,0 +1,52 @@
+
+@model IQI.Intuition.Web.Models.Administration.FacilityProduct.FacilityProductViewForm
+@{
+    ViewBag.Layout_ContentTitle = "View Product";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartButton(Url.Action("View", "Facility", new {  id = Model.Facility.Id }), "Return To Facility", new { @class = "left"  })
+        @Html.SmartButton(Url.Action("Remove", "FacilityProduct", new { id = Model.Id }), "Remove","Are you sure you wish to remove this product?", new { @class = "right"  })
+
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>View FacilityProduct</h3>
+		<div class="inside form">
+		<p>
+            <div class="field">@Html.DisplayFor(model => model.Fee)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.FeeType)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.SystemProduct)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.StartOn)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.Note)</div>
+            <div class="clear"></div>
+			<br />
+		</p>
+	</section>
+	<div class="clear"></div>
+
+}
+<div class="clear"></div>
+
+

@@ -1,0 +1,41 @@
+﻿@model List<IQI.Intuition.Web.Models.Configuration.Warning.WarningRuleDescription>
+@{
+    ViewBag.Layout_ContentTitle = "Configured Warning Rules";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    <div class="inside">
+    <br />
+    <table class="iqitable" style="margin-bottom:0px;">
+    <tr>
+        <th style="width:150px;">Type</th>
+        <th style="width:450px;">Arguments</th>
+    </tr>
+    @foreach (var entry in Model)
+    {
+      <tr>
+        <td style="width:150px;">@entry.RuleType</td>
+        <td style="width:450px;">
+            @foreach (var key in entry.Arguments.Keys)
+            {
+                <div>
+                <span style="font-weight:bold;">@key</span>: @entry.Arguments[key]
+                </div>
+            }
+             <hr />
+             <div style="background-color:#FFC;">
+             <span style="font-weight:bold;">Title</span>: @entry.Title
+             </div>
+             <div style="background-color:#FFC;">
+             <span style="font-weight:bold;">Description</span>: @entry.Description
+             </div>
+        </td>
+      </tr> 
+    }
+    </table>
+    </div>
+    <br />
+
+</section>
+<div class="clear"></div>

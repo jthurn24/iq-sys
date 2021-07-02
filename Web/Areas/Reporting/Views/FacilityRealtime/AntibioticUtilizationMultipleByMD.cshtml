@@ -1,0 +1,76 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.AntibioticUtilizationMultipleByMD
+           
+@{
+    ViewBag.Layout_ContentTitle = "Antibiotic Utilization Multiple By MD";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Multiple Antibiotics By MD";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+    <section class="grid_16 box leading"> 
+            <h3>Antibiotic Utilization</h3>
+            <div class="inside">
+
+                <div style="padding:10px;">
+                    <table width="100%">
+                        <tr>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Start Date:</div> @Html.TextBoxFor(m => m.StartDate, new { type = "datepicker" }) </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">End Date:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker" })   </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Name:</div> @Html.TextBoxFor(m => m.Name)   </td>
+                            <td><div style="font-size:12px;">Type:</div> @Html.DropDownListFor(m => m.InfectionTypeId, Model.InfectionTypeOptions, new { style = "font-size:10px;" }) </td>
+                            <td>@Html.SmartSubmit("Refresh")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div> 
+    </section>
+    
+}
+
+<section class="grid_16 box leading"> 
+        <h3>List</h3>
+        <div class="inside">
+        <br />
+
+            @foreach (var entry in Model.Entries)
+            {
+                <div style="padding-bottom:5px;padding-top:15px;font-size:16px;font-weight:bold;">@entry.PhysicianName</div>
+                <div style="padding-bottom:5px;font-size:12px;font-weight:bold;font-style:italic;">Total Infections: @entry.Total</div>
+                
+                <table class="iqitable" style="margin-bottom:0px;">
+                <tr>
+                    <th style="width:150px;">Initial Administration</th>
+                    <th style="width:150px;">Type</th>
+                    <th style="width:200px;">Patient</th>
+                    <th style="width:500px;">Treatments</th>
+                </tr>
+                @foreach (var infection in entry.Infections)
+                {
+                    <tr>
+                        <td>@infection.InitialAdministrationDate</td>
+                        <td>@infection.InfectionType</td>
+                        <td>@infection.PatientName</td>
+                        <td>
+                            @foreach (var treatments in infection.TreatmentNames)
+                            {
+                                <div>
+                                    <a href="@Url.Action("Edit", "Infection", new { id = @infection.InfectionId, returnUrl = Request.RawUrl, area="" })">
+                                    @treatments
+                                    </a>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                 }
+                 </table>
+            }
+        
+        <br />
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>

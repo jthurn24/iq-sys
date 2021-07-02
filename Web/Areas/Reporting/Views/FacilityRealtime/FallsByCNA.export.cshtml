@@ -1,0 +1,42 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.CNAFallView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Falls By CNA";
+
+}
+
+
+<section class="grid_8 box leading"> 
+        <h3>Fall Totals</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;width:350px;">
+            <tr>
+                <th style="width:200px;">CNA</th>
+                <th style="width:200px;">Total Falls</th>
+            </tr>
+        </table>
+            @foreach (var e in Model.Entries)
+            {
+                <table class="iqitable" style="margin-bottom:0px;width:350px;">
+                    <tr>
+                        <td style="width:200px;">@e.CNA</td>
+                        <td style="width:200px;">@e.Total</td>
+                    </tr>
+                </table>
+            }
+        
+        </div> 
+    <br />
+</section>
+
+
+<section class="grid_8 box leading"> 
+        <h3>CNA %</h3>
+        <div class="inside">
+        <br />
+            @Html.DisplayFor(x => x.CNAChart)
+        </div>
+</section>
+
+<div style="clear:both;">&nbsp;</div>

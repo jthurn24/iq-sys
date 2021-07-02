@@ -1,0 +1,49 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.LineListingInfectionView.InfectionRow
+
+@{
+    ViewBag.Layout_ContentTitle = "View Infection";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+
+    ViewBag.AuditRequest = new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("Infection - ", Model.PatientName),
+        ComponentId = Model.InfectionGuid,
+        PatientId = Model.PatientGuid
+    };
+}
+@using (Html.BeginForm())
+{
+     <h4 class="grid_16 patient">
+        Patient: <strong>@Model.PatientName</strong> 
+        <span class="patientlocation">
+            Type: <strong>@Model.InfectionType</strong>
+        </span>
+    </h4>
+    <div class="grid_16" id="buttons">
+        @Html.SmartSubmit("Exit", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+
+   <section class="grid_16 box leading" style="margin-top:0px;"> 
+        <h3>Infection Details</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:150px;">Date</th>
+                <th style="width:150px;">Patient</th>
+                <th style="width:300px;">Reason/Classification</th>
+                <th style="width:300px;">Info</th>
+            </tr>
+        </table>
+        <table class="iqitable" style="margin-bottom:0px;">
+            @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingInfectionRow.cshtml", Model);}
+        </table>
+        <br />
+        </div> 
+    </section>
+    
+}
+<div class="clear"></div>

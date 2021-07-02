@@ -1,0 +1,124 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.LineListingIncidentView.IncidentRow
+
+<tr>
+    <td style="vertical-align:top;width:150px;">
+        <div>
+        <div style="font-weight:bold;">Occurred:</div> @Model.OccurredOn
+        </div>
+        <div>
+        <div style="font-weight:bold;">Discovered:</div> @Model.DiscoveredOn
+        </div>
+        <div>
+        <span style="font-weight:bold;">Assessment Completed:</span> @Model.AssessmentCompleted
+        </div>
+        <hr />
+        @if(Model.FoundBy.IsNotNullOrEmpty())
+        {
+        <div style="padding-bottom:5px;">
+        <span style="font-weight:bold;">Found By:</span> @Model.FoundBy
+        </div>
+        }
+        @if(Model.CNA.IsNotNullOrEmpty())
+        {
+        <div>
+        <span style="font-weight:bold;">CNA:</span> @Model.CNA
+        </div>
+        }
+
+        @if (Model.Precautions.Count() > 0)
+        {
+            <div style="font-weight:bold;">Preventions:</div>
+            foreach (var precaution in Model.Precautions)
+            {
+                <div>@precaution</div>
+            }
+        }
+
+    </td>
+    <td style="vertical-align:top;width:150px;">
+        <div style="color:Black;font-weight:bold;">@Model.PatientName</div>
+        <div><span style="font-weight:bold;">Room:</span> @Model.Room</div>
+        <div><span style="font-weight:bold;">Wing:</span> @Model.Wing</div>
+        <div><span style="font-weight:bold;">Floor:</span> @Model.Floor</div>
+        <div><span style="font-weight:bold;">Birthdate:</span> @Model.PatientBirthDate</div>
+        <div><span style="font-weight:bold;">Admitted:</span> @Model.AdmissionDate</div>
+    </td>
+    <td style="vertical-align:top;width:300px;">
+        <div style="font-weight:bold;">Type</div> 
+        @if (Convert.ToBoolean(ViewData["showLink"]))
+        {
+            <div style="padding-bottom:5px;font-weight:bold;">
+            <a href="@Url.Action("Edit", new { Controller = "Incident", Area = "", id = Model.ID, returnurl = Request.Url.AbsoluteUri })">
+            @Model.IncidentTypes.ToDelimitedString(",")</a>
+            </div>
+        }
+        else
+        {
+            <div style="padding-bottom:5px;font-weight:bold;">@Model.IncidentTypes.ToDelimitedString(",")</div>
+        }
+        <div style="font-weight:bold;">Injury Severity</div> 
+        <div style="padding-bottom:5px;">@Model.InjuryLevel</div>
+        <div style="font-weight:bold;">Injury & Treatment Description</div>
+        <div style="padding-bottom:5px;">@Model.InjuryAndTreatmentDescription</div>
+        <div style="font-weight:bold;">Injuries</div>
+        <div style="padding-bottom:5px;">@Model.IncidentInjuries.ToDelimitedString(",")</div>
+        <div style="font-weight:bold;padding-top:5px;">Location</div>
+        <div style="padding-bottom:5px;">@Model.IncidentLocation</div>
+
+        @if (@Model.LocationDetails.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">Location Details</div>
+        <div style="padding-bottom:5px;">@Model.LocationDetails</div>
+        }
+
+        @if(@Model.Temperature.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">Temperature: @Model.Temperature</div>
+        }
+
+        @if (@Model.Pulse.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">Pulse: @Model.Pulse</div>
+        }
+
+        @if (@Model.Respiratory.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">Respiratory: @Model.Respiratory</div>
+        }
+
+        @if (@Model.BloodPressureStanding.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">BP (Standing):@Model.BloodPressureStanding</div>
+        }
+
+        @if (@Model.BloodPressureSitting.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">BP (Sitting): @Model.BloodPressureSitting</div>
+        }
+
+        @if (@Model.BloodGlucos.IsNotNullOrEmpty())
+        {
+        <div style="font-weight:bold;padding-top:5px;">Blood Glucose: @Model.BloodGlucos</div>
+        }
+
+        @if (@Model.NeuroCheckCompleted)
+        {
+          <div style="font-weight:bold;padding-top:5px;">** Neuro Check Completed</div>  
+        }
+
+    </td>
+    <td style="vertical-align:top;width:300px;">
+        <div style="font-weight:bold;">Resident Statement</div>
+        <div>@Model.ResidentStatement</div>
+         
+        @foreach (var witness in Model.Witnesses)
+        {
+            <hr />
+            <div style="font-weight:bold;">Witness: @witness.Name</div>
+            <div>Role: @witness.Role</div>
+            <div style="padding-top:3px;">@witness.Statement</div>
+        } 
+                    
+    </td>
+                
+</tr>

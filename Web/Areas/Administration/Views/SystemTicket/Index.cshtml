@@ -1,0 +1,145 @@
+@model IQI.Intuition.Web.Models.Administration.SystemTicket.SystemTicketList
+
+@{
+    ViewBag.Layout_ContentTitle = "Ticket List";
+}
+
+<script type="text/javascript">
+    WebFontConfig = {
+        google: { families: ['Noto+Sans:400,700:latin'] }
+    };
+    (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })(); </script>
+
+<br />
+
+
+<section class="grid_18 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @using (Html.BeginForm("Index", "SystemTicket", FormMethod.Get, new { id = "radioForm" }))
+    {
+    <div class="tablenav">
+    <div class="radio text-left">
+
+        <label>@Html.RadioButton("IncludeClosed", false, true) Open Only</label>
+        <label>@Html.RadioButton("IncludeClosed", true) All</label>
+    </div>
+    <span class="clear"></span>
+    </div>
+    <hr />
+    <div style="padding-left:30px;padding-bottom:10px;">
+    <table style="font-size:12px;width:800px;">
+        <tr>
+            <td style="width:150px;">Page</td>
+            <td>Account</td>
+            <td>User</td>
+            <td>Release</td>
+            <td>Type</td>
+            <td>My Tickets</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <select name="PageNumber">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <option selected>@i</option>
+                        }
+                        else
+                        {
+                            <option>@i</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>@Html.TextBoxFor(x => x.Account, new { style="font-size:10px;width:100px;" })</td>
+            <td>@Html.TextBoxFor(x => x.AccountUser, new { style = "font-size:10px;width:100px;" })</td>
+            <td>@Html.TextBoxFor(x => x.Release, new { style = "font-size:10px;width:100px;" })</td>
+            <td>@Html.DropDownListFor(x => x.SystemTicketType, Model.SystemTicketTypeOptions,  new { style="font-size:10px;width:100px;" })</td>
+            <td>@Html.CheckBoxFor(x => x.MyTickets)</td>
+            <td><input type="submit" style="font-size:10px;float:right;" value="Refresh" /></td>
+        </tr>
+    </table> 
+    </div>  
+    }
+
+    <div>
+        <div class="tablenav">
+            <div style="padding:5px;font-family: 'Noto Sans', sans-serif;float:left;">
+                Results: @Model.TotalResults 
+            </div>
+            <div class="newbtn">
+                <button class="link" data-url="@Url.Action("Add", "SystemTicket")">Add Ticket</button> &nbsp;
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div></div>
+    </div> 
+
+    
+    @foreach (var result in Model.PageValues)
+    {
+        <div style="padding:10px;font-family: 'Noto Sans', sans-serif;width:300px;float:left;">
+            <div style="border:solid 1px #c7c8c8;box-shadow: 5px 5px 5px #888888;">
+                <div style="background-color:@Model.GetHeaderColor(result);border-bottom:1px solid #c7c8c8;font-size:12px;padding:2px;">
+                    <span style="font-weight:bold;"><a href="@Url.Action("View", new { id = result.Id })">@result.Id</a></span>
+                    &nbsp; | &nbsp;
+                    <span style="font-weight:bold;">Status:</span> @result.SystemTicketStatus 
+                    &nbsp; | &nbsp;
+                    <span style="font-weight:bold;">Account:</span> @result.Account 
+                    &nbsp; | &nbsp;
+                    <span style="font-weight:bold;">User:</span> @result.AccountUser 
+                    &nbsp; | &nbsp;
+                    <span style="font-weight:bold;">Assigned:</span> @result.SystemUser 
+                </div>
+                <div style="font-size:12px;height:120px;overflow:auto;background-color:#e6e6e8;">
+                    <div style="padding:10px;">@result.Details</div>
+                </div>
+                <div style="padding:5px;background-color:#e6e6e8;">
+                    @for(int i = 1; i <= 15; i++)
+                    {
+                        if (i > result.Priority)
+                        {
+                            <div onclick="Rate(@i,@result.Id)" style="cursor:pointer;width:16px;height:16px;float:left;background-image:url('/content/images/rating/star.gif');background-position: 1px 1px;" ></div>
+                        }
+                        else
+                        {
+                            <div onclick="Rate(@i,@result.Id)" style="cursor:pointer;width:16px;height:16px;float:left;background-image:url('/content/images/rating/star.gif');background-position: 1px 16px;" ></div>
+                        }
+                    }  
+                    <div style="clear:both;"></div>  
+                </div>
+            </div>
+        </div>
+    }
+
+
+</section>
+
+
+
+<br />
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+
+    function Rate(pri, id) {
+        var action = '@Url.Action("UpdatingRaiting")' + '?id=' + id + '&priority=' + pri;
+        
+        $.ajaxSetup({ cache: false });
+        $.getJSON(action, function (data) {
+            location.reload(true);
+        });
+    }
+
+</script>

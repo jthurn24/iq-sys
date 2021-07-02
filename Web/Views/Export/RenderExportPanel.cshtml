@@ -1,0 +1,32 @@
+﻿<span align="right" style="padding-top:5px;float:right;">
+@if(ViewData["disabledCompositeExport"] == null)
+{
+<a href="#" onclick="addComposite()"><img src="/Content/Images/composite.png" border="0" /></a>
+<span>&nbsp;</span>
+}
+<a class="link" href="#" data-url="@Url.Action("CreatePrintRequest", new { Controller = "Export", Area = "", path = ViewData["path"], landscape = ViewData["landscape"] })"><img src="/Content/Images/export.png" border="0" /></a>
+
+@if (ViewData["disabledEmailExport"] == null)
+{
+<span>&nbsp;</span>
+<a class="link" href="#" data-url="@Url.Action("CreateEmailRequest", new { Controller = "Export", Area = "", path = ViewData["path"], landscape = ViewData["landscape"] })"><img src="/Content/Images/email.png" border="0" /></a>
+}
+</span>
+
+<script type="text/javascript">
+
+    var addCompositeUrl = '@Html.Raw(String.Concat(Url.Action("AddCompositeRequest", new { Controller = "Export", Area = "" }),"?path=",ViewData["path"],"&title=",@ViewData["title"],"&landscape=",@ViewData["landscape"]))'
+
+    function addComposite() {
+
+        $.ajax({
+          url:  addCompositeUrl,
+          success: function(data) {
+            $('.result').html(data);
+            alert('Report has been added.');
+          }
+        });
+    
+    }
+
+</script>

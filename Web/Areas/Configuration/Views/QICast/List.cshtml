@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IQI.Intuition.Reporting.Models.User.QICast>
+
+
+@if(Model.Count() > 0)
+{
+
+<table class="iqitable">
+            <tr>
+                <th>ID/Name</th>
+                <th>Current Message</th>
+                <th>Active</th>
+            </tr>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td style="width:250px;">
+                        <div style="font-size:9px;font-weight:bold;text-align:center;">
+                            @entry.Id
+                        </div>
+                        <div style="padding-top:5px;font-weight:bold;text-align:center;">
+                            @entry.Name
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <textarea style="height:50px;width:400px;">@entry.Message</textarea>   
+                            <br />
+                            <button onclick="setMessage('@entry.Id',this)">Update</button>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">
+                         <div>
+                         @if(entry.Inactive == false)
+                         {
+                           <button  onclick="setInactive('@entry.Id',true)" style="color:green;">Active</button>
+                         }
+                        else
+                        {
+                           <button  onclick="setInactive('@entry.Id',false)" style="color:red;">Inactive</button>  
+                        }
+                        </div>
+                        <div style="padding-top:10px;">
+                            <button onclick="design('@entry.Id')">Design</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+</table>
+}
+else
+{
+ <div style="text-align:center;font-weight:bold;padding-top:25px;padding-bottom:25px;">
+     Your facility currently does not have screens available. Please contact sales for further information on this feature.
+ </div>   
+}

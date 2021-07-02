@@ -1,0 +1,100 @@
+@model IQI.Intuition.Web.Models.Administration.Facility.FacilityViewForm
+@{
+    ViewBag.Layout_ContentTitle = "View Facility";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.AccountId)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Return To Account", new { @class = "left cancel" })
+        @Html.SmartSubmit("Edit", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>View Facility</h3>
+
+        <div class="grid_8">
+		<div class="inside form">
+
+            <div class="field">@Html.DisplayFor(model => model.Guid)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.Name)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.SubDomain)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.State)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.FacilityType)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.DisplayFor(model => model.MaxBeds)</div>
+            <div class="clear"></div>
+            <br>
+        </div>
+        </div>
+        <div class="grid_4">
+            <br />
+            @Html.SmartButton(Url.Action("Login", "Facility", new { id = Model.Id }),"Log into this facility")
+            <br /><br />
+            @Html.SmartButton(Url.Action("ApplyDefaultWarningRules", "Facility", new { id = Model.Id }), "Configure Default Warnings")
+        </div>
+
+        <br />
+        <div class="clear"></div>
+
+	</section>
+	<div class="clear"></div>
+
+}
+
+
+<div class="clear"></div>
+<section class="grid_16 box">
+    <h3>Additional Information</h3>
+    <ul class="boxtabs">
+        <li><a href="#">Products</a></li>
+    </ul>
+    <div class="inside panes">
+            <div>
+                <br />
+                @{ Html.RenderAction("ListForFacility", new { controller = "FacilityProduct", area = "Administration", facilityId = Model.Id }); }
+                <div class="tablenav">
+                    <div class="newbtn">
+                        <button class="link" data-url="@Url.Action("Add", "FacilityProduct", new { facilityId = Model.Id })">Add Product</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> 
+     </div>
+</section>
+
+
+<div style="clear:both;"></div>
+
+<div class="clear"></div>
+
+
+
+<script type="text/javascript">
+
+    function facilityproductRowSelect(id) {
+        smoothLoad('@Url.Action("View", "FacilityProduct")/?id=' + id);
+    }
+
+
+</script>

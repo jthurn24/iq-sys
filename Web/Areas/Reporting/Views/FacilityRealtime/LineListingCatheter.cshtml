@@ -1,0 +1,93 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Catheter.Facility.LineListingCatheterView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Catheter Line Listing";
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Catheter Line Listing";
+    ViewBag.IsExportable = true;
+    ViewBag.LimitedExport = true;
+    ViewBag.ExportLandscape = true;
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Get))
+{
+    <section class="grid_16 box leading"> 
+            <h3>Catheter Line Listing</h3>
+            <div class="inside">
+
+                <div style="padding:10px;">
+                        <table width="100%">
+                        <tr>
+                            <td><div style="font-size:12px;">Wing:</div> @Html.DropDownListFor(m => m.Wing, Model.WingOptions, new { style = "font-size:10px;" }) </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Active From:</div> @Html.TextBoxFor(m => m.StartDate, new { type = "datepicker" }) </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Active To:</div> @Html.TextBoxFor(m => m.EndDate, new { type = "datepicker" })   </td>
+                            <td style="padding-right:15px;"><div style="font-size:12px;">Include Discontinued</div> @Html.CheckBoxFor(m => m.IncludeDiscontinued) </td>
+                            <td>@Html.SmartSubmit("Refresh")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div> 
+    </section>
+    
+
+
+<section class="grid_16 box leading"> 
+        <h3>Catheter List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:200px;">Date</th>
+                <th style="width:300px;">Patient</th>
+                <th style="width:300px;">Description</th>
+            </tr>
+        </table>
+            @foreach (var infection in Model.Catheters)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingCatheterRow.cshtml", infection, new ViewDataDictionary { { "showLink", "true" } });}
+                </table>
+            }
+        
+        </div> 
+</section>
+
+<div style="clear:both;">&nbsp;</div>
+
+}
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+
+        function toggleResolved() {
+            if ($('#IncludeDiscontinued').prop("checked")) {
+                $("#StartDate").removeAttr("disabled");
+                $("#EndDate").removeAttr("disabled");
+            }
+            else {
+                $('#StartDate').val('');
+                $('#EndDate').val('');
+                $("#StartDate").attr("disabled", "disabled");
+                $("#EndDate").attr("disabled", "disabled"); 
+            }
+        }
+
+        $(function () {
+
+            toggleResolved();
+
+            $('#IncludeDiscontinued').change(function () {
+                toggleResolved();
+            });
+
+
+        });
+
+
+
+    </script>
+}

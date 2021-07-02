@@ -1,0 +1,161 @@
+﻿@model IQI.Intuition.Web.Models.Complaint.ComplaintForm
+@Html.HiddenFor(m => m.Id)
+    
+    <section class="grid_16 box">
+        <h3>Employee Information</h3>
+        @if (Model.Id.HasValue)
+        {
+            <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "Complaint", new { id = Model.Id }), "Remove", "Are you sure you want to remove this complaint permanently?")    
+            </div>
+        }
+        <div class="inside form">
+        <div class="grid_6">
+        <p>
+            <div class="field">
+                <span class="label">
+                    Employee #1:
+                </span>
+                <span class="controls">
+                    @Html.HiddenFor(model => model.EmployeeId)
+                    @Html.HiddenFor(model => model.EmployeeName)
+                    <span style="font-size:10px;font-weight:bold;" id="EmployeeNameDisplay">@Model.EmployeeName</span>
+                    &nbsp;
+                   <input type="button" onclick="launchEmployeeSearch('Employee');" style="font-size:10px;" value = "Select" />
+                </span>
+            </div>
+            <div class="field">
+                <span class="label">
+                    Employee #2:
+                </span>
+                <span class="controls">
+                    @Html.HiddenFor(model => model.Employee2Id)
+                    @Html.HiddenFor(model => model.Employee2Name)
+                    <span style="font-size:10px;font-weight:bold;" id="Employee2NameDisplay">@Model.Employee2Name</span>
+                    &nbsp;
+                   <input type="button" onclick="launchEmployeeSearch('Employee2');" style="font-size:10px;" value = "Select" />
+                </span>
+            </div>
+            <div class="field">
+                <span class="label">
+                    Patient #1:
+                </span>
+                <span class="controls">
+                    @Html.HiddenFor(model => model.PatientId)
+                    @Html.HiddenFor(model => model.PatientName)
+                    <span style="font-size:10px;font-weight:bold;" id="PatientNameDisplay">@Model.PatientName</span>
+                    &nbsp;
+                    <input type="button" onclick="launchPatientSearch('Patient');" style="font-size:10px;" value = "Select" />
+                </span>
+            </div>
+            <div class="field">
+                <span class="label">
+                    Patient #2:
+                </span>
+                <span class="controls">
+                    @Html.HiddenFor(model => model.Patient2Id)
+                    @Html.HiddenFor(model => model.Patient2Name)
+                    <span style="font-size:10px;font-weight:bold;" id="Patient2NameDisplay">@Model.Patient2Name</span>
+                    &nbsp;
+                    <input type="button" onclick="launchPatientSearch('Patient2');" style="font-size:10px;" value = "Select" />
+                </span>
+            </div>
+            <div class="field">@Html.EditorFor(model => model.Wing)</div>
+            <div class="field">@Html.EditorFor(model => model.DateOccurred)</div>
+            <div class="field">@Html.EditorFor(model => model.DateReported)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Reported)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Cleared)</div>
+        </p>
+        </div>
+        <div class="grid_8">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.ReportedBy)</div>
+            <div class="field">@Html.EditorFor(model => model.ComplaintType)</div>
+            <div class="clear"></div>
+            <div style="font-size:11px;padding-top:10px;padding-left:110px;padding-right:15px;" id="ComplaintDescription"></div>
+        </p>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+
+    <section class="grid_16 box">
+        <h3>Details</h3>
+        <div style="padding:5px;">
+        <div align="center">
+            @Html.TextAreaFor(model => model.DescriptionText, new { style = "width:900px;height:250px;" })
+        </div>
+        </div>
+    </section>
+
+
+    @{Html.RenderAction("SelectPatient", "Patient");}
+    @{Html.RenderAction("SelectEmployee", "Employee");}
+
+    <script type="text/javascript">
+
+        var currentPatientTarget = '';
+        var currentEmployeeTarget = '';
+
+
+        function launchPatientSearch(target)
+        {
+            currentPatientTarget = target;
+            Ctrl_Show_Patient_Selector();
+        }
+
+        function launchEmployeeSearch(target)
+        {
+            currentEmployeeTarget = target;
+            Ctrl_Show_Employee_Selector();
+        }
+
+        function SelectPatient(id, name) {
+
+            $('#' + currentPatientTarget +'Name').val(name);
+            $('#' + currentPatientTarget +'Id').val(id);
+            $('#' + currentPatientTarget +'NameDisplay').html(name);
+        }
+
+        function SelectEmployee(id, name) {
+
+            $('#' + currentEmployeeTarget + 'Name').val(name);
+            $('#' + currentEmployeeTarget + 'Id').val(id);
+            $('#' + currentEmployeeTarget + 'NameDisplay').html(name);
+        }
+
+
+        function ShowComplaintTypeDescription() {
+
+            var descriptions = @Html.Raw(Json.Encode(Model.ComplaintTypeDescriptions));
+            var selectedType = $('#ComplaintType').val();
+
+            $('#ComplaintDescription').html('');
+
+            for (i=0;i<descriptions.length;i++)
+            {
+                if(descriptions[i]['Id'] == selectedType)
+                {
+                    $('#ComplaintDescription').html(descriptions[i]['Description']);
+                }
+            }
+
+        
+        }
+
+
+        $(function () {
+
+            ShowComplaintTypeDescription();
+
+            $('#ComplaintType').change(function() {
+                ShowComplaintTypeDescription();
+            });
+        });
+    </script>
+
+    

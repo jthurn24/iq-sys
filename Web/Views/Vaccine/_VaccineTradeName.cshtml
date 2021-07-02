@@ -1,0 +1,7 @@
+﻿@model IEnumerable<IQI.Intuition.Domain.Models.VaccineTradeName>
+
+<option value="">Select ...</option>
+@foreach (var name in Model)
+{
+    <option value="@name.Id">@name.Name</option>
+}

@@ -1,0 +1,10 @@
+D:\Dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\bin\Debug\ExternalDependencies.dll
+D:\Dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\bin\Debug\ExternalDependencies.pdb
+D:\Dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.dll
+D:\Dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.pdb
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\bin\Debug\ExternalDependencies.dll
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\bin\Debug\ExternalDependencies.pdb
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.csproj.CoreCompileInputs.cache
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.dll
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.pdb
+C:\dev\WorkSpace\iqi\Intuition\Trunk\ExternalDependencies\obj\Debug\ExternalDependencies.csprojResolveAssemblyReference.cache

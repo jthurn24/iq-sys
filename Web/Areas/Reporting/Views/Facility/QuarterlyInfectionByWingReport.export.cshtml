@@ -1,0 +1,145 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.QuarterlyInfectionByWingView
+
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month1.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month1Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month2.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month2Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>@Model.Month3.Name</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.Month3Chart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<section class="grid_8 box leading" style="page-break-inside:avoid;"> 
+        <h3>Totals</h3>
+        <div class="inside">
+        @Html.DisplayFor(m => m.TotalChart, new { width = 250, height = 160 })
+        </div> 
+</section>
+
+<div class="clear"></div>
+
+<div class="grid_32">
+
+@foreach (var group in Model.Groups)
+{
+ <div style="page-break-inside:avoid;"> 
+        <h3>@group.Description</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="page-break-inside:avoid;margin-bottom:0px;">
+            <tr>
+                <th>&nbsp;</th>
+                <th colspan="3">@Model.Month1.Name</th>
+                <th colspan="3">@Model.Month2.Name</th>
+                <th colspan="3">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <th>Inf#</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+                <th>Inf#</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+                <th>Inf#</th>
+                <th>Inf/1000 PD</th>
+                <th>Change</th>
+            </tr>
+            @foreach (var detail in group.Details)
+            {
+
+                var styleAttribute = string.Empty;
+                if (detail.IsSubCategory)
+                {
+                    styleAttribute = "background-color:#d5e0be;font-weight:bold;";
+                }
+
+                <tr @Html.Raw(styleAttribute) >
+                    <td style="border-right:1px solid black;@Html.Raw(styleAttribute)" >@detail.Description</td>  
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month1Total.Total</td>        
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month1Total.Rate.ToString("#0.00")</td>  
+                    <td style="@Html.Raw(styleAttribute)" >
+                        <div style="width:40px;text-align:right;">
+                        @detail.Month1Total.Change.ToString("#0.00")
+
+                        @if (detail.Month1Total.Change > 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/up.png")" />
+                        }
+                        else if (detail.Month1Total.Change < 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/down.png")" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/images/nochange.png")" />
+                        }
+                        </div>
+                    </td>    
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month2Total.Total</td>        
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month2Total.Rate.ToString("#0.00")</td>  
+                    <td style="@Html.Raw(styleAttribute)" >
+                        <div style="width:40px;text-align:right;">
+                        @detail.Month2Total.Change.ToString("#0.00")
+
+                        @if (detail.Month2Total.Change > 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/up.png")" />
+                        }
+                        else if (detail.Month2Total.Change < 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/down.png")" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/images/nochange.png")" />
+                        }
+                        </div>
+                    </td>
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month3Total.Total</td>        
+                    <td style="@Html.Raw(styleAttribute)" >@detail.Month3Total.Rate.ToString("#0.00")</td>  
+                    <td style="@Html.Raw(styleAttribute)" >
+                        <div style="width:40px;text-align:right;">
+                        @detail.Month3Total.Change.ToString("#0.00")
+
+                        @if (detail.Month3Total.Change > 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/up.png")" />
+                        }
+                        else if (detail.Month3Total.Change < 0)
+                        {
+                            <img src="@Url.Content("~/Content/images/down.png")" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/images/nochange.png")" />
+                        }
+                        </div>
+                    </td>        
+                </tr>
+            }
+            </table>
+    </div>
+</div>   
+}
+
+</div>
+
+
+
+
+<div class="clear"></div>

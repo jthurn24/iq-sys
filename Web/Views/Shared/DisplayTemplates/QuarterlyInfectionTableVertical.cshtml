@@ -1,0 +1,126 @@
+﻿
+<div style="min-height:500px;">
+<table class="iqitable">
+            <tr>
+                <th>&nbsp;</td>
+                <th colspan="4">@Model.Month1.Name</th>
+            </tr>
+            <tr>
+                <th>@Model.CategoryDescription</th>
+                <th>@Model.CountDescription</th>
+                <th>@Model.CountDescription/1000 PD</th>
+                <th>Non-Noso.</th>
+                <th>Change</th>
+            </tr>
+            @foreach (var group in Model.Groups)
+            {
+            <tr>
+                <td style="width:150px;">@group.Description</td>
+                <td style="font-weight:bold;">@group.Month1Total.Count</td>
+                <td>@group.Month1Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month1Total.NonNoso</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month1Total.Change.ToString("#0.00")
+
+                    @if (group.Month1Total.Change > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if(group.Month1Total.Change < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Total</td>
+                <td>@Model.Month1Total.Count</td>
+                <td>@Model.Month1Total.Rate.ToString("#0.00")</td>
+                <td>@Model.Month1Total.NonNoso</td>
+                <td>@Model.Month1Total.Change.ToString("#0.0")</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</td>
+                <th colspan="4">@Model.Month2.Name</th>
+            </tr>
+            @foreach (var group in Model.Groups)
+            {
+            <tr>
+                <td style="width:150px;">@group.Description</td>
+                <td style="font-weight:bold;">@group.Month2Total.Count</td>
+                <td>@group.Month2Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month2Total.NonNoso</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month2Total.Change.ToString("#0.00")
+
+                    @if (group.Month2Total.Change > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if(group.Month2Total.Change < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Total</td>
+                <td>@Model.Month2Total.Count</td>
+                <td>@Model.Month2Total.Rate.ToString("#0.00")</td>
+                <td>@Model.Month2Total.NonNoso</td>
+                <td>@Model.Month2Total.Change.ToString("#0.0")</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</td>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            @foreach (var group in Model.Groups)
+            {
+            <tr>
+                <td style="width:150px;">@group.Description</td>
+                <td style="font-weight:bold;">@group.Month3Total.Count</td>
+                <td>@group.Month3Total.Rate.ToString("#0.00")</td>
+                <td>@group.Month3Total.NonNoso</td>
+                <td>
+                    <div style="width:40px;text-align:right;">
+                    @group.Month3Total.Change.ToString("#0.00")
+
+                    @if (group.Month3Total.Change > 0)
+                    {
+                        <img style="float:right;" src="@Url.Content("~/Content/images/up.png")" />
+                    }
+                    else if(group.Month3Total.Change < 0)
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/down.png")" />
+                    }
+                    else
+                    {
+                        <img style="float:right;"  src="@Url.Content("~/Content/images/nochange.png")" />
+                    }
+                    </div>
+                </td>
+            </tr>
+            }
+            <tr class="total">
+                <td>Total</td>
+                <td>@Model.Month3Total.Count</td>
+                <td>@Model.Month3Total.Rate.ToString("#0.00")</td>
+                <td>@Model.Month3Total.NonNoso</td>
+                <td>@Model.Month3Total.Change.ToString("#0.0")</td>
+            </tr>
+</table>
+</div>

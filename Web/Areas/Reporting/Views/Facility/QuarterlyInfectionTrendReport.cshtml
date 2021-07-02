@@ -1,0 +1,90 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Infection.Facility.QuarterlyInfectionTrendView
+
+@{
+    ViewBag.QuickListAction = "FacilityReportQuickList";
+    ViewBag.QuickListItem = "Quarterly Infections Trends";
+    ViewBag.IsExportable = true;
+    ViewBag.ExportLandscape = true;
+}
+
+<section class="grid_16 box leading"> 
+        <h3>Quarterly Infections Trends</h3>
+        <div class="inside">
+        @using (Html.BeginForm(null, null, FormMethod.Get))
+        {
+            <div style="padding:10px;">
+            @Html.DropDownListFor(m => m.Quarter,Model.QuarterOptions)                                                 
+            @Html.SmartSubmit("Refresh")
+            </div>
+        }
+        </div> 
+        <div style="font-weight:bold;font-size:12px;text-align:center;padding-top:5px;padding-bottom:5px;">Data Last Updated: @ViewContext.LastSynchronized() </div>
+</section>
+
+@if (Model.ChartGroups.Count() < 1)
+{
+    <section class="grid_16 box leading"> 
+     <div class="inside">
+        <div style="text-align:center;color:Red;padding:15px;">
+        No data available
+        </div>
+     </div>
+    </section> 
+}
+
+@foreach (var group in Model.ChartGroups)
+{
+<section class="grid_16 box leading"> 
+    <h3>@group.Description  Inf/1000pd </h3>
+    <div class="inside">
+            @Html.DisplayFor(x => group.Chart)
+
+            <table class="iqitable">
+            <tr>
+                <th>Month</th>
+                <th colspan="4">@Model.Month1.Name</th>
+                <th colspan="4">@Model.Month2.Name</th>
+                <th colspan="4">@Model.Month3.Name</th>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <th>@Model.Year1</th>
+                <th>@Model.Year2</th>
+                <th>Change</th>
+                <th>Variance</th>
+                <th>@Model.Year1</th>
+                <th>@Model.Year2</th>
+                <th>Change</th>
+                <th>Variance</th>
+                <th>@Model.Year1</th>
+                <th>@Model.Year2</th>
+                <th>Change</th>
+                <th>Variance</th>
+            </tr>
+            @foreach (var detail in group.Details)
+            {
+            <tr>
+                <td>@detail.Name</td>
+                <td>@detail.Month1Year1Rate.ToString("#0.00")</td>
+                <td>@detail.Month1Year2Rate.ToString("#0.00")</td>
+                <td>@detail.Month1Change.ToString("#0.00")</td>
+                <td>@detail.Month1VarianceText</td>
+                <td>@detail.Month2Year1Rate.ToString("#0.00")</td>
+                <td>@detail.Month2Year2Rate.ToString("#0.00")</td>
+                <td>@detail.Month2Change.ToString("#0.00")</td>
+                <td>@detail.Month2VarianceText</td>
+                <td>@detail.Month3Year1Rate.ToString("#0.00")</td>
+                <td>@detail.Month3Year2Rate.ToString("#0.00")</td>
+                <td>@detail.Month3Change.ToString("#0.00")</td>
+                <td>@detail.Month3VarianceText</td>
+            </tr>
+            }
+            </table>
+
+    </div> 
+</section>
+}
+
+
+
+<div class="clear"></div>

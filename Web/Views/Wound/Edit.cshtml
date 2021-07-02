@@ -1,0 +1,107 @@
+﻿@model IQI.Intuition.Web.Models.Wound.WoundForm
+@{
+    ViewBag.Layout_ContentTitle = "Track Wound";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.EditorFor(model => model.IsUpdateMode)
+    <h4 class="grid_16 patient">
+        Patient: <strong>@Model.Patient.FullName</strong> 
+    </h4>
+    @Html.HiddenFor(model => model.Patient.Guid)
+    <div class="clear"></div>
+    
+    @Html.HiddenFor(model => model.LocationY)
+    @Html.HiddenFor(model => model.LocationX)
+     
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    <section class="grid_6 box">
+        <h3>General Information</h3>
+        @if(ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveWounds) && Model.IsUpdateMode)
+        {
+        <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "Wound", new { id = Model.WoundReportId }), "Remove", "Are you sure you want to remove this entry?")
+        </div>
+        }
+        <div class="inside">
+
+
+            <p class="indent">
+                @Html.EditorFor(model => model.WoundType)
+            </p>
+
+            <p class="indent">
+                @Html.EditorFor(model => model.FirstNoted)
+            </p>
+
+            <p class="indent">
+                @Html.EditorFor(model => model.Classification)
+            </p>
+
+            <p class="indent">
+                @Html.EditorFor(model => model.AdditionalSiteDetails, new { HtmlAttributes = new { style = "width:250px;height:50px;" } })
+            </p>
+
+            @if(Model.IsUpdateMode)
+            {
+            <p class="indent checktoggle">
+                @Html.EditorFor(model => model.IsResolved,
+                    new { HtmlAttributes = new { @class = "trigger" } }) 
+                <span class="toggle">
+                    @Html.EditorFor(model => model.ResolvedOn)
+                </span>
+            </p>
+            }
+        </div>
+    </section>
+    
+    
+    <section class="grid_10 box">
+        <h3>Site</h3>
+        <div class="grid_6">
+            <div style="text-align:center;font-weight:bold;font-size:14px;padding-top:8px;padding-bottom:3px;color:red;" class="SiteName"></div>
+            @Html.HiddenFor(model => model.Site)
+            <div id="SiteImageCanvas" onclick="point_it(event)" style="cursor:pointer;">
+            <img id="SiteImage" src="@Url.Action("BodyImage", new { x = Model.LocationX, y = Model.LocationY })" />
+            </div>
+            <div style="text-align:center;font-weight:bold;font-size:14px;padding-top:8px;padding-bottom:3px;color:red;" class="SiteName"></div>
+        </div>
+        <div class="grid_3">
+            <div style="padding-top:10px;font-weight:bold;font-size:11px;padding-bottom:5px;">Sites</div>
+            <div style="height:700px;overflow:auto;">
+                @foreach (var item in Model.QuickPickOptions)
+                {
+                    <div style="padding-top:4px;">
+                        <span onclick="select_it(@item.X,@item.Y)" style="color:red;cursor:pointer;font-size:9px;font-weight:bold;">@item.Name</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    
+    
+    <div class="clear"></div>
+
+    
+}
+<div class="clear"></div>
+
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}

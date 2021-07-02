@@ -1,0 +1,27 @@
+﻿@model IEnumerable<int>
+           
+@if (ViewData.ModelMetadata.ShowForEdit)
+{
+    var selectListItems = ViewData.ModelMetadata.AdditionalValues["CheckBoxList.SelectListItems"] as IEnumerable<SelectListItem>;
+    
+    <ul class="checklist">
+    @foreach (var selectListItem in selectListItems)
+    {
+        <li><label>
+            <input 
+                type="checkbox" 
+                name="@ViewData.TemplateInfo.HtmlFieldPrefix" 
+                value="@selectListItem.Value"
+                @if (Model.EmptyIfNull().ToStringArray().Contains(selectListItem.Value))
+                {
+                    @: checked="checked"
+                }
+                @if (ViewData.ModelMetadata.IsReadOnly)
+                {
+                    @: disabled="disabled"
+                }
+                /> @selectListItem.Text
+        </label></li>
+    }
+    </ul>
+}

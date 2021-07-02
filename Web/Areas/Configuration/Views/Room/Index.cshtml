@@ -1,0 +1,90 @@
+﻿@model IQI.Intuition.Web.Models.Configuration.Room.RoomEntryList
+
+@{
+    ViewBag.Layout_ContentTitle = "Facility Rooms";
+}
+
+<br />
+
+@if (ViewContext.HasErrors())
+{
+<section class="grid_16 box">
+    <div class="inside form">
+    @Html.ValidationSummary()
+    </div>
+</section>
+}
+
+
+@using (Html.BeginForm("Add", "Room", new { wingId = Model.WingId }))
+{
+
+    @Html.HiddenFor(model => model.NewRoom.Id)
+    @Html.HiddenFor(model => model.NewRoom.Guid)
+    @Html.HiddenFor(model => model.NewRoom.WingId)  
+
+    <section class="grid_16 box">
+        <h3>New Room</h3>
+        <div class="inside form">
+            <div align="right" style="padding-top:10px;padding-bottom:10px;">
+            @Html.TextBoxFor(x => x.NewRoom.Name)
+            <button type="submit" class="right save">Add Room</button>
+            </div>
+        </div>
+    </section>
+    <div class="clear"></div>
+   
+}
+
+
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle - @Model.WingName</h3>
+    <div class="inside">
+    <div style="padding:10px;">
+    <div class="newbtn" align="right">
+        <button class="link" data-url="@Url.Action("Exit", "Room", new { wingId = Model.WingId })">Back To Wings</button>
+    </div>
+    </div>
+
+    <table class="iqitable">
+        <tr> 
+            <th>Id</th>
+            <th>Name</th>
+            <th>GUID</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    @foreach (var entry in Model.Entries)
+    {
+        <tr>
+            <td>@entry.Id</td>
+            <td>@entry.Name</td>
+            <td>@entry.Guid</td>
+            <td>
+                @Html.ActionLink("Edit","Edit",new { id = entry.Id})  
+            </td>
+            <td>
+                @if (entry.IsInactive == true)
+                {
+                    @Html.ActionLink("Activate", "Activate", new { id = entry.Id })  
+                }
+                else
+                {
+                    @Html.ActionLink("Inactivate", "Inactivate", new { id = entry.Id })  
+                }
+            </td>
+        </tr>
+    }
+    </table>
+
+    </div>
+
+</section>
+
+<div class="clear"></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#NewRoom_Name').focus();
+    });
+</script>

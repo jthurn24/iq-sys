@@ -1,0 +1,80 @@
+
+@model IQI.Intuition.Web.Models.Administration.FacilityProduct.FacilityProductAddForm
+@{
+    ViewBag.Layout_ContentTitle = "Add Product";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+
+
+	<section class="grid_16 box">
+		<h3>Add Product</h3>
+		<div class="inside form">
+		<p>
+            <div class="field">@Html.EditorFor(model => model.Fee)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.FeeType)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.SystemProductId)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.StartOn)</div>
+            <div class="clear"></div>
+            <div class="field">@Html.EditorFor(model => model.Note, new { HtmlAttributes = new { @style = "width:600px;height:55px;" } })</div>
+			<br />
+		</p>
+	</section>
+	<div class="clear"></div>
+
+}
+<div class="clear"></div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        loadProduct();
+
+        $('#SystemProductId').change(function () {
+            loadProduct();
+        });
+    });
+
+    function loadProduct() {
+
+        var id = $('#SystemProductId').val();
+
+        $.ajax({
+            url: '@Url.Action("GetProductDetails")/?id=' + id,
+            context: this,
+            cache: false,
+            success: function (data) {
+                if (data != null) {
+                    $('#FeeType').val(data["FeeType"]);
+                    $('#Fee').val(data["Fee"]);
+                }
+            }
+        });
+
+    }
+
+</script>

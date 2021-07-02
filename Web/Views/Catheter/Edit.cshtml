@@ -1,0 +1,88 @@
+﻿@model IQI.Intuition.Web.Models.Catheter.CatheterForm
+@{
+    ViewBag.Layout_ContentTitle = "Track Catheter  ";
+
+    ViewBag.AuditRequest = Model.IsUpdateMode ? new IQI.Intuition.Web.Models.Audit.AuditRequest()
+    {
+        AuditDescription = string.Concat("Catheter - ", Model.Patient.FullName),
+        ComponentId = Model.Guid,
+        PatientId = Model.Patient.Guid
+    } : null;
+}
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.IsUpdateMode)
+    @Html.EditorFor(model => model.CatheterEntryId)
+    <h4 class="grid_16 patient">
+        Patient: <strong>@Model.Patient.FullName</strong> 
+    </h4>
+    @Html.HiddenFor(model => model.Patient.Guid)
+    @Html.HiddenFor(model => model.Guid)
+    <div class="clear"></div>
+    
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+    if (ViewContext.HasErrors())
+    {
+    <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+    </section>
+    }
+    
+   
+    
+    <section class="grid_8 box">
+        <h3>Location Information</h3>
+        <div class="actions">
+        @if (Model.IsUpdateMode && ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemoveCatheter))
+        {
+            @Html.SmartButton(Url.Action("Remove", "Catheter", new { id = Model.CatheterEntryId }), "Remove", "Are you sure you want to remove this catheter permanently?");
+        }
+        </div>
+        <div class="inside">
+            <p class="indent">@Html.EditorFor(model => model.Floor)</p>
+            <p class="indent">@Html.EditorFor(model => model.Wing)</p>
+            <p class="indent">@Html.EditorFor(model => model.Room)</p>
+        </div>
+    </section>
+    <section class="grid_8 box">
+        <h3>General Information</h3>
+        <div class="inside">
+            <p class="indent">@Html.EditorFor(model => model.StartDate)</p>
+            <p class="indent">@Html.EditorFor(model => model.DiscontinuedDate)</p>
+            <p class="indent">@Html.EditorFor(model => model.Diagnosis)</p>
+        </div>
+    </section>
+    <div class="clear"></div>
+
+    <section class="grid_16 box">
+        <h3>Details</h3>
+        <div class="form inside">     
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Type)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Material)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.Reason)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.PatientEducated)</div>
+            <div style="clear:both;"></div>
+            <div class="field">@Html.EditorFor(model => model.FamilyEducated)</div>
+        </div>
+        <div style="clear:both"></div>
+        <br />
+    </section>
+}
+<div class="clear"></div>
+
+@section Scripts
+{
+    @{ Html.RenderPartial("EditScripts"); }
+}
+

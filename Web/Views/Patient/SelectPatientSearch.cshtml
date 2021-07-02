@@ -1,0 +1,23 @@
+﻿@model IEnumerable<IQI.Intuition.Web.Models.Patient.PatientInfo>
+
+@foreach (var info in Model)
+{
+<table class="iqitable" style="margin:0px;border:0px;">
+<tr>
+    <td style="width:100px;border:0px;">
+        <input type="button" value="Select" style="font-size:10px;" onClick="Ctrl_Patient_Selector_Select(@info.Id,'@info.FullName')">
+    </td>
+    <td style="width:100px;border:0px;">@info.FirstName</td>
+    <td style="width:100px;border:0px;">@info.LastName</td>
+    <td style="width:100px;border:0px;">@info.WingName</td>
+    <td style="width:100px;border:0px;">@info.Status</td>
+</tr>
+</table>
+}
+
+@if (Model.Count() < 1)
+{
+    <div style="text-align:center;color:Red;">
+    No results found
+    </div>
+}

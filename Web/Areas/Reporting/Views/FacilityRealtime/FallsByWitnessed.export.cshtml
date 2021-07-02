@@ -1,0 +1,41 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Incident.Facility.WitnessedFallView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Falls Witnessed/Unwitnessed";
+}
+
+
+<section class="grid_8 box leading"> 
+        <h3>Fall Totals</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;width:350px;">
+            <tr>
+                <th style="width:200px;">CNA</th>
+                <th style="width:200px;">Total Falls</th>
+            </tr>
+        </table>
+            @foreach (var e in Model.Entries)
+            {
+                <table class="iqitable" style="margin-bottom:0px;width:350px;">
+                    <tr>
+                        <td style="width:200px;">@e.Title</td>
+                        <td style="width:200px;">@e.Total</td>
+                    </tr>
+                </table>
+            }
+        
+        </div> 
+    <br />
+</section>
+
+
+<section class="grid_8 box leading"> 
+        <h3>Witnessed/Unwitnessed %</h3>
+        <div class="inside">
+        <br />
+            @Html.DisplayFor(x => x.WitnessedChart)
+        </div>
+</section>
+
+<div style="clear:both;">&nbsp;</div>

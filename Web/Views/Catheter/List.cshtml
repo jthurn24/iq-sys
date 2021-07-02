@@ -1,0 +1,20 @@
+﻿@model IQI.Intuition.Web.Models.Catheter.CatheterGrid
+
+@{
+    ViewBag.Layout_ContentTitle = "View Catheters";
+}
+<br />
+<section class="grid_16 box">
+    <h3>@ViewBag.Layout_ContentTitle</h3>
+    @Html.Trirand().JQGrid(Model.Grid, Model.GetType().Name)
+</section>
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function catheterRowSelect(id) {
+            smoothLoad('@Url.Action("View","Catheter")/?id=' + id + '&returnUrl=@Url.Action("List","Catheter")');
+        }
+
+    </script>
+}

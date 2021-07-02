@@ -1,0 +1,49 @@
+﻿@model IQI.Intuition.Web.Models.PsychotropicAdministrationPRN.PsychotropicAdministrationPRNFormEdit
+
+@{
+    ViewBag.Layout_ContentTitle = "Edit PRN";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    <br />
+    <div class="grid_16" id="buttons">
+        @Html.SmartCancel("Cancel", new { @class = "left cancel" })
+        @Html.SmartSubmit("Save", new { @class = "right save" })
+    <span class="clear"></span>
+    </div> 
+    
+       
+    if (ViewContext.HasErrors())
+    {
+        <section class="grid_16 box">
+        <div class="inside form">
+        @Html.ValidationSummary()
+        </div>
+        </section>
+    }
+    
+
+    <section class="grid_16 box">
+        <h3>PRN</h3>
+        @if(ViewContext.UserHasPermission(IQI.Intuition.Domain.Enumerations.KnownPermision.RemovePsychotropic))
+        {
+        <div class="actions">
+            @Html.SmartButton(Url.Action("Remove", "PsychotropicAdministrationPRN", new { id = Model.Id }), "Remove", "Are you sure you want to remove this entry?")
+        </div>
+        }
+        <div class="inside form">
+        <div class="grid_6">
+        <p>
+            <div class="field">@Html.EditorFor(model => model.GivenOn)</div>
+            <div class="field">@Html.EditorFor(model => model.Dosage)</div>
+        </p>
+        </div>
+        <div class="clear"></div>
+        <br />
+    </section>
+    <div class="clear"></div>
+}
+<div class="clear"></div>

@@ -1,0 +1,68 @@
+﻿@model IQI.Intuition.Web.Models.Precaution.PatientPrecautionFormData
+
+
+<div id="PrecautionForm" style="display:none;">
+    <div style="padding-bottom:5px;">
+        <div class="actions" id="RemovePrecautionSpan" style="background-color:#D5E0BE;padding:2px;text-align:right;width:720px;">
+            <input type="button" value="Remove" id="RemoveButton" />
+        </div>
+    </div>
+    @Html.Hidden("PatientId", Model.PatientId)
+    @Html.Hidden("Guid", "")
+    <table style="width:730px;">
+        <tr>
+            <td valign="top" style="vertical-align:top;width:310px;">
+                <div style="font-weight:bold;padding-bottom:10px;">Precaution</div>
+                <div>
+                    @Html.DropDownList("ProductId", Model.Products)
+                </div>
+                <div style="padding-top:15px;">
+                    @Html.DropDownList("PrecautionTypeId", new List<SelectListItem>())
+                </div>
+            </td>
+            <td valign="top" style="vertical-align:top;">
+                <div style="padding-left:5px;">
+                    <div style="border:1px solid gray;height:280px;background:#e3e2e2;padding-left:10px;">
+                        <div style="font-weight:bold;padding-bottom:10px;padding-top:5px;">Details</div>
+
+                        <div style="padding-bottom:10px;padding-top:10px;">Additional Details</div>
+                        <div>@Html.TextArea("AdditionalDescription", new { style = "width:390px;height:100px;" })</div>
+                        <div style="clear:both;padding-bottom:10px;"></div>
+
+                        <div style="width:65px;float:left;">Start Date</div>
+                        <div>@Html.TextBox("StartDate", "", new { @type = "datepicker" })</div>
+                        <div style="clear:both;padding-bottom:10px;"></div>
+
+                        <div style="width:45px;float:left;">Ended</div>
+                        <div>
+                            <input type="checkbox" name="Ended" id="Ended" />
+                            <span id="EndDateSpan" style="display:none;">on @Html.TextBox("EndDate", "", new { @type = "datepicker" })</span>
+                        </div>
+                        <div style="clear:both;padding-bottom:10px;"></div>
+
+                        <div style="text-align:right;padding-top:5px;padding-right:5px;">
+                            <input type="button" value="Save" id="SaveButton" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+@Html.Script("/scripts/moment.js")
+@Html.Script("/scripts/precaution-form.js?nocache=99898")
+
+
+<script type="text/javascript">
+    var precautionForm = new PrecautionFormModel(@Html.Raw(Json.Encode(@Model.Types))
+        ,'#PrecautionForm'
+        ,'@Url.Action("Update")'
+        ,'@Url.Action("Delete")'
+        ,'@Url.Action("Get")');
+</script>
+

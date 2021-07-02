@@ -1,0 +1,30 @@
+﻿@model IQI.Intuition.Web.Models.Reporting.Complaint.Facility.LineListingComplaintView
+           
+@{
+    ViewBag.Layout_ContentTitle = "Complaint Line Listing";
+}
+
+
+<section class="grid_16 box leading"> 
+        <h3>Complaint List</h3>
+        <div class="inside">
+        <br />
+        <table class="iqitable" style="margin-bottom:0px;">
+            <tr>
+                <th style="width:250px;">Date</th>
+                <th style="width:180px;">Details</th>
+                <th style="width:370px;">Description</th>
+            </tr>
+        </table>
+            @foreach (var complaint in Model.Complaints)
+            {
+                <table class="iqitable" style="margin-bottom:0px;">
+                    @{Html.RenderPartial("~/Views/Shared/DisplayTemplates/LineListingComplaintRow.cshtml", complaint);}
+                </table>
+            }
+        
+        </div> 
+        <br />
+</section>
+
+<div style="clear:both;">&nbsp;</div>
